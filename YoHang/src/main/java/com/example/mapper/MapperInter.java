@@ -21,7 +21,7 @@ public interface MapperInter {
 ////////////// 회원가입 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void signUpMember(MemberTO to);
 	
-	@Insert ( "insert into members values( 0, #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_phone}, #{m_birth}, now(), #{m_gender} ) " )
+	@Insert ( "insert into members values( #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_phone}, #{m_birth}, now(), #{m_gender}, NULL)" )
 	int signupMember_ok(MemberTO to);
 	// 중복체크
 	@Select ( "select m_id from members where m_id=#{m_id}" )
