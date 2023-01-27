@@ -4,7 +4,7 @@
 ### MacOS
 ```
 # STEP 1 : 프로젝트 디렉토리로 이동
-$ cd saeedenyouth
+$ cd YoHangFront
 
 # STEP 2 : node package manager 설치
 $ npm install
