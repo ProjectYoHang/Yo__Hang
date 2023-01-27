@@ -36,11 +36,13 @@ public class MemberController {
 		
 		if ( to != null) {
 			session.setAttribute( "to", to );
+			return "home";
 		}else {
 			session.setAttribute( "to", null );
+			return "login";
 		}
 		
-		return "login_ok";
+		
 	}
 	
 	@RequestMapping ("logout.do")
@@ -64,9 +66,10 @@ public class MemberController {
 		to.setM_name( request.getParameter( "name" ) );
 		to.setM_pw( request.getParameter( "password" ) );
 		to.setM_phone( request.getParameter( "phone") );
-		to.setM_email( request.getParameter( "mail1" ) + "@" + request.getParameter( "email" ) );
+		to.setM_email( request.getParameter( "mail1" ) + "@" + request.getParameter( "mail2" ) );
 		to.setM_birth( request.getParameter( "birth" ) );
 		to.setM_gender( request.getParameter( "gender" ) );
+		//to.setM_kakao_id( request.getParameter( "NULL" ));
 		
 		int flag = dao.signup_ok( to );
 		

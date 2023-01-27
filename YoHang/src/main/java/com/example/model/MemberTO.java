@@ -11,4 +11,5 @@ public class MemberTO {
 	private String m_phone;
 	private String m_birth;
 	private String m_gender;
+	private String m_kakao_id;
 }

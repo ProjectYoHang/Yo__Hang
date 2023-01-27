@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<form action='./login_ok.do' method='post'>
-ID<input type='text' name='id' /> <br />
-password <input type='password' name='password' />
-<input type="submit" value="로그인" />
-
-<br /><hr />
 <ul>
 	<li onclick="kakaoLogin();">
       <a href="javascript:void(0)">
@@ -29,8 +15,6 @@ password <input type='password' name='password' />
 	</li>
 </ul>
 
-<br /><hr />
-<input type="button" value="회원가입" onclick="location.href='./signup.do'" />
 <script>	
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
@@ -41,16 +25,24 @@ function kakaoLogin() {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  console.log(response)
+        	  console.log(response);
+        	  console.log(response[0]);
         	  if(response.id) {
+        		  // ToDo
+        		  
         		  // 소셜 로그인 검증 진행
         		  // 검증되면 로그인 진행 -> 세션에 로그인 정보 등록
         		  // 우리 홈페이지에 카카오아이디 없으면 -> 회원가입진행
         		  //location.href = '/kakao/test?id=' + response.id + '&birth=' + response.birth;
+        		  console.log(response.id);
+        		  // 가져온 정보 Json으로 꺼내오기
+        		  
         	  } 
         	  else {
         		 // 카카오로그인 실패
         	  }
+        	  
+        	  
           },
           fail: function (error) {
         	  //실패
@@ -63,7 +55,6 @@ function kakaoLogin() {
       },
     })
   }
-  
 //카카오로그아웃  
 function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {
@@ -79,7 +70,13 @@ function kakaoLogout() {
       Kakao.Auth.setAccessToken(undefined)
     }
   }  
-
 </script>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
 </body>
 </html>
