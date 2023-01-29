@@ -32,10 +32,11 @@ public class MemberDAO {
 		
 	}
 	
-	public void checkID(MemberTO to) {
-		MemberTO checkTO = mapper.CheckID(to);
+	public int checkID(MemberTO to) {
+		int result = mapper.checkID(to);
 		
-		System.out.println( checkTO.getM_id());
+		System.out.println( result );
+		return result;
 	}
 	
 	public int signup_ok(MemberTO to) {

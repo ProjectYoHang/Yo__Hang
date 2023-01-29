@@ -5,7 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -31,18 +34,19 @@ public class MemberController {
 		to.setM_pw( request.getParameter( "password" ) );
 		
 		to = dao.login(to);
+		int flag = 2;
 		
 		HttpSession session = request.getSession();
-		
 		if ( to != null) {
 			session.setAttribute( "to", to );
-			return "home";
+			flag = 0;
 		}else {
 			session.setAttribute( "to", null );
-			return "login";
+			flag = 1;
 		}
 		
-		
+		request.setAttribute("flag", flag);
+		return "login_ok";
 	}
 	
 	@RequestMapping ("logout.do")
@@ -50,13 +54,25 @@ public class MemberController {
 		session.invalidate();
 		System.out.println( "session연결 종료");
 		return "home";
+		
 	}
 
 	@RequestMapping ("signup.do")
 	public String signup(HttpServletRequest request) {
-		
-		
 		return "signup";
+	}
+	
+	@RequestMapping ("check_id.do")
+	@ResponseBody // 결과 값을 리턴할 때 사용?
+	public int check_id(@RequestParam("id") String id) {
+		MemberTO to = new MemberTO();
+		to.setM_id( id );
+		
+		int result = dao.checkID( to );
+		
+		System.out.println( result );
+		
+		return result;
 	}
 	
 	@RequestMapping( "signup_ok.do" )
@@ -65,8 +81,11 @@ public class MemberController {
 		to.setM_id( request.getParameter( "id" ) );
 		to.setM_name( request.getParameter( "name" ) );
 		to.setM_pw( request.getParameter( "password" ) );
-		to.setM_phone( request.getParameter( "phone") );
-		to.setM_email( request.getParameter( "mail1" ) + "@" + request.getParameter( "mail2" ) );
+		String phone = request.getParameter( "phone");
+		phone = phone.replace("-","");
+		System.out.println(phone.trim());
+		to.setM_phone( phone.trim() );
+		to.setM_email( request.getParameter( "mail" ) );
 		to.setM_birth( request.getParameter( "birth" ) );
 		to.setM_gender( request.getParameter( "gender" ) );
 		//to.setM_kakao_id( request.getParameter( "NULL" ));

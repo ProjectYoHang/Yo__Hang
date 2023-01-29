@@ -24,8 +24,8 @@ public interface MapperInter {
 	@Insert ( "insert into members values( #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_phone}, #{m_birth}, now(), #{m_gender}, NULL)" )
 	int signupMember_ok(MemberTO to);
 	// 중복체크
-	@Select ( "select m_id from members where m_id=#{m_id}" )
-	MemberTO CheckID(MemberTO to);
+	@Select ( "select count(m_id) from members where m_id=#{m_id}" )
+	int checkID(MemberTO to);
 	
 ////////////// 회원탈퇴/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Delete ( "delete from members where m_id=#{m_id} and m_pw=#{m_pw}" )

@@ -3,18 +3,94 @@
 
 <!DOCTYPE html>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
 <html>
-<head>
+<head include-html="/static/html/common/head.html">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>Login</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+
+<header id="header" class="site-header" include-html="static/html/common/header.html"></header>
+
+<!--
+// contents --------------------------------------->
+
+<!-- hero-wrap -->
+<div class="hero-wrap" style="background-image: url('/static/images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+      <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+        <div class="text">
+          <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>Login</span></p>
+          <h1 class="mb-4 bread">Login</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- content -->
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row d-flex justify-content-center ftco-animate">      
+      <div class="col-lg-6">
+        <form action="./login_ok.do" class="bg-white" method="post" style="padding: 50px;">
+          <div class="form-group">
+            <input type="text" class="form-control" name="id" placeholder="ID">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
+          <br />
+          <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary w-100 py-3 px-5">
+          </div>
+          
+          <div class="form-group mb-0 text-center" onclick="kakaoLogin();" >
+		    	<a href="javascript:void(0)" class="btn w-100 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;" >
+		          <span>카카오 로그인</span>
+		      	</a>
+          </div>
+          
+        </form>
+        
+        <!--  <div class="form-group">
+            <input type="submit" value="Kakao Login" class="btn w-100 py-3 px-5" onclick="kakaoLogin()" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;">
+          </div> -->
+          
+          
+           <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
+		    	<a href="javascript:void(0)">
+		          <span>카카오 로그아웃</span>
+		      	</a>
+          </div>
+          
+          <div class="form-group mb-0 text-center">
+            <a href="./signup.do">회원가입</a>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--
+// footer --------------------------------------->
+<footer id="footer" class="site-footer" include-html="/static/html/common/footer.html"></footer>
+
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
+<!-- 
 <form action='./login_ok.do' method='post'>
 ID<input type='text' name='id' /> <br />
 password <input type='password' name='password' />
 <input type="submit" value="로그인" />
-
+ 
 <br /><hr />
 <ul>
 	<li onclick="kakaoLogin();">
@@ -30,9 +106,11 @@ password <input type='password' name='password' />
 </ul>
 
 <br /><hr />
+
 <input type="button" value="회원가입" onclick="location.href='./signup.do'" />
+-->
 <script>	
-Kakao.init('107544815e4e8a304fea6cafb9766ba8'); //발급받은 키 중 javascript키를 사용해준다.
+Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
 function kakaoLogin() {
@@ -41,7 +119,8 @@ function kakaoLogin() {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  console.log(response)
+        	  console.log(response);
+        	  console.log(response.id)
         	  if(response.id) {
         		  // 소셜 로그인 검증 진행
         		  // 검증되면 로그인 진행 -> 세션에 로그인 정보 등록
@@ -63,7 +142,6 @@ function kakaoLogin() {
       },
     })
   }
-  
 //카카오로그아웃  
 function kakaoLogout() {
     if (Kakao.Auth.getAccessToken()) {
@@ -71,7 +149,7 @@ function kakaoLogout() {
         url: '/v1/user/unlink',
         success: function (response) {
         	console.log(response)
-        },
+        },	
         fail: function (error) {
           console.log(error)
         },
@@ -79,7 +157,7 @@ function kakaoLogout() {
       Kakao.Auth.setAccessToken(undefined)
     }
   }  
-
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
