@@ -22,6 +22,11 @@ public class MemberController {
 		return "home";
 	}
 	
+	@RequestMapping ( "layout.do")
+	public String layout() {
+		return "layout";
+	}
+	
 	@RequestMapping ( "login.do" )
 	public String login() {
 		return "login";
