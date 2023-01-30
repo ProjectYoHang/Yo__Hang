@@ -8031,3 +8031,45 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+.table-board-list {
+  text-align: center;
+  border-top: 2px solid #555555; }
+  .table-board-list thead th {
+    color: #222;
+    font-weight: bold;
+    border-bottom: 1px solid #aaa; }
+  .table-board-list .board-list-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    max-width: 200px; }
+  .table-board-list tbody tr:nth-last-child(1) td {
+    border-bottom: 1px solid #aaaaaa; }
+
+.toolbar-board-group {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px; }
+  .toolbar-board-group .board-page-info {
+    width: 40%; }
+    .toolbar-board-group .board-page-info b {
+      color: #222222; }
+    .toolbar-board-group .board-page-info .current-page {
+      position: relative;
+      padding-left: 0.5rem;
+      margin-left: 0.4rem; }
+      .toolbar-board-group .board-page-info .current-page::before {
+        content: '';
+        display: block;
+        background-color: #ddd;
+        width: 1px;
+        height: 0.7rem;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%); }
+  .toolbar-board-group .board-search-box {
+    width: 60%; }

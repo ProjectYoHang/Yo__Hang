@@ -1,0 +1,62 @@
+@import 'style';
+
+.table-board-list {
+  text-align: center;
+  border-top: 2px solid #555555;
+
+  thead th {
+    color: #222;
+    font-weight: bold;
+    border-bottom: 1px solid #aaa;
+  }
+  .board-list-title {
+    @include text-truncate;
+    text-align: left;
+    max-width: 200px;
+  }
+  tbody {
+    tr:nth-last-child(1) td {
+      border-bottom: 1px solid #aaaaaa;
+    }
+  }
+}
+
+.toolbar-board-group {
+  display: flex;
+  width: 100%;
+  margin-bottom: 15px;
+
+  .board-page-info,
+  .board-search-box {
+  }
+
+  .board-page-info {
+    width: 40%;
+
+    b {
+      color: #222222;
+    }
+
+    .current-page{
+      position: relative;
+      padding-left: 0.5rem;
+      margin-left: 0.4rem;
+
+      &::before {
+        content: '';
+        display: block;
+        background-color: #ddd;
+        width: 1px;
+        height: 0.7rem;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+    }
+  }
+  .board-search-box {
+    width: 60%;
+  }
+}
