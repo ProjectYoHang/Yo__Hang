@@ -15,12 +15,10 @@
 	window.onload = function() {
 		document.getElementById( 'signupbtn' ).onclick = function() {
 			let frm = document.signupfrm;
-			debugger;
 			if( frm.id.value.trim() == '' ) {
 				alert( '아이디를 입력하세요.' );
 				return false;
-			}
-			if( frm.id_ok.value != 'Y'){
+			}else if( frm.id_ok.value != 'Y'){
 				alert( '사용할 수 없는 아이디입니다.' );
 				return false;
 			}
@@ -31,28 +29,25 @@
 			if( frm.password.value.trim() == '' ) {
 				alert( '비밀번호를 입력하세요.' );
 				return false;
-			}
-			if( frm.pw_rule_ok.value != 'Y' ) {
+			} else if( frm.pw_rule_ok.value != 'Y' ) {
 				alert( '허용되지 않는 비밀번호입니다.' );
 				return false;
-			}
-			if( frm.password_check.value.trim() != document.signupfrm.password.value.trim() ) {
-				alert( '비밀번호를 다시 확인해주세요.' );
+			} else if( frm.password_check.value.trim() != frm.password.value.trim() ) {
+				alert( '비밀번호가 일치하지 않습니다.' );
 				return false;
 			}
 			
 			if( frm.phone.value.trim() == '' ) {
 				alert( '전화번호를 입력하세요.' );
 				return false;
-			}
+			} else if ( frm.phone_rule_ok.value != 'Y' ) {
+				alert( '전화번호의 형식을 확인해주세요');
+				return false;
+			} 
 			if( frm.mail.value.trim() == '' ) {
 				alert( '메일을 입력하세요.' );
 				return false;
 			}
-			/* if( frm.mail2.value.trim() == '' ) {
-				alert( '메일을 입력하세요.' );
-				return false;
-			} */
 			document.signupfrm.submit();
 		}
 		//document.getElementById( 'idcheckbtn' ).onclick = function() {
@@ -89,13 +84,13 @@
         
           <div class="form-group">
             <input type="text" class="form-control" name="id" id="id" placeholder="ID">
-				<input type="hidden" name="id_ok" id="id_ok" value=""  />
+				<input type="hidden" name="id_ok" id="id_ok" value="N"  />
 				<span id ="id_check_feedback"></span><br />
           </div>
           
           <div class="form-group">
             <input type="password" class="form-control"   name="password" id="password" placeholder="Password">
-            <input type="hidden" name="pw_rule_ok" id="pw_rule_ok" value=""  />
+            <input type="hidden" name="pw_rule_ok" id="pw_rule_ok" value="N"  />
 			<span id ="password_rule_feedback"></span><br />
           </div>
           
@@ -114,6 +109,7 @@
           
           <div class="form-group">
             <input type="text" class="form-control"  id="phone" name="phone" placeholder="PhoneNumber 000-0000-0000">
+            <input type="hidden" name="phone_rule_ok" id="phone_rule_ok" value="N"  />
             <span id ="phone_check_feedback"></span><br />
           </div>
           
@@ -219,11 +215,11 @@
 	<script type="text/javascript">
 	
 	$('#password').focusout(function(){
-	      let password1 = $("#password").val();
+	      let password = $("#password").val();
 	      // 최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자	
 	      let password_rule = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 	      
-	      if( !password_rule.test(password1) || password1.length < 8) {
+	      if( !password_rule.test(password) || password.length < 8) {
 	    	  $("#password_rule_feedback").html( '영대소문자,숫자로 구성된 8글자 이상으로 조합하세요.' );
 	    	  $("#password_rule_feedback").css('color', 'red');
 	    	  $( "#pw_rule_ok" ).val('N')
@@ -231,7 +227,6 @@
 	    	  $("#password_rule_feedback").html( ' ' );
 	    	  $( "#pw_rule_ok" ).val('Y')
 	      }
-	      
 	   });
 	// 비밀번호 확인
 	$('#password_check').focusout(function(){
@@ -242,12 +237,12 @@
          if (password1 == password2) {
             $("#password_check_feedback").html('비밀번호가 일치합니다.');
             $("#password_check_feedback").css('color', 'green');
-            $("#pw_ok").val('Y');
+            $("#pw_rule_ok").val('Y');
             
          } else {
             $("#password_check_feedback").html('비밀번호가 불일치합니다.');
             $("#password_check_feedback").css('color', 'red');
-            $("#pw_ok").val('N');
+            $("#pw_rule_ok").val('N');
          }
       }
    });
@@ -260,8 +255,10 @@
 		if( !phone_rule.test( phone_input ) ) {
 			$("#phone_check_feedback").html('전화번호 형식이 맞지않습니다.')
 			$("#phone_check_feedback").css('color', 'red');
+			$("#phone_rule_ok").val('N');
 		} else {
 			$("#phone_check_feedback").html('')
+			$("#phone_rule_ok").val('Y');
 		}
 	});
 	
@@ -271,7 +268,7 @@
 		let m_id = $('#id').val();
 		let id_rule = /^[a-z0-9]+$/ ;
 		
-	    if (!id_rule.test(m_id) || m_id.length<6) {
+	    if (!id_rule.test(m_id) || m_id.length < 6 || m_id.length > 10) {
 	    	$("#id_check_feedback").html('아이디는 영소문자,숫자로 구성된 6 ~ 10 글자로 조합하세요')
 			$("#id_check_feedback").css('color', 'red');
 	    } else{

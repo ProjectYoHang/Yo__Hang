@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <html>
-<head include-html="/static/html/common/head.html">
+<head include-jsp="./common/head.jsp">
 <meta charset="UTF-8">
 
 <title>Login</title>
@@ -12,7 +12,8 @@
 </head>
 <body>
 
-<header id="header" class="site-header" include-html="static/html/common/header.html"></header>
+<!-- <header id="header" class="site-header" include-html="/static/html/common/header.html"></header> -->
+<header id="header" class="site-header" include-jsp="./common/header.jsp"></header>
 
 <!--
 // contents --------------------------------------->
@@ -66,6 +67,10 @@
 		    	<a href="javascript:void(0)">
 		          <span>카카오 로그아웃</span>
 		      	</a>
+          </div>
+          
+          <div class="form-group mb-0 text-center">
+            <a href="" onclick="findInfo()">아이디 / 비밀번호 찾기</a>
           </div>
           
           <div class="form-group mb-0 text-center">
