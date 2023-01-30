@@ -125,12 +125,15 @@ function kakaoLogin() {
           url: '/v2/user/me',
           success: function (response) {
         	  console.log(response);
-        	  console.log(response.id)
         	  if(response.id) {
         		  // 소셜 로그인 검증 진행
         		  // 검증되면 로그인 진행 -> 세션에 로그인 정보 등록
         		  // 우리 홈페이지에 카카오아이디 없으면 -> 회원가입진행
-        		  //location.href = '/kakao/test?id=' + response.id + '&birth=' + response.birth;
+        		  let kakao_id = response.id;
+        		  console.log( kakao_id );
+        		  location.href='./kakao_login.do?id=' + kakao_id ;
+        		  
+        		  
         	  } 
         	  else {
         		 // 카카오로그인 실패

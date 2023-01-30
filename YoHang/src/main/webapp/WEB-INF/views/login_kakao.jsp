@@ -26,7 +26,6 @@ function kakaoLogin() {
           url: '/v2/user/me',
           success: function (response) {
         	  console.log(response);
-        	  console.log(response[0]);
         	  if(response.id) {
         		  // ToDo
         		  
@@ -41,7 +40,6 @@ function kakaoLogin() {
         	  else {
         		 // 카카오로그인 실패
         	  }
-        	  
         	  
           },
           fail: function (error) {

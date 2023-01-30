@@ -83,5 +83,9 @@ public class MemberDAO {
 		}
 		return flag;
 	}
-
+	
+	public MemberTO checkKakaoId(MemberTO to) {
+			
+		return to;
+	}
 }

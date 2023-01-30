@@ -45,5 +45,15 @@ public interface MapperInter {
 	@Delete ( "delete from members where m_id=#{m_id}" )
 	int signoutMember(MemberTO to);
 	
+////////////// 카카오로 로그인한 아이디가 회원 목록에 저장된 정보중에서 있는지 확인
+	
+	 /// 필요한거 정해서 가져오기
+	@Select ( "select * from members where m_kakao_id=#{m_kakao_id}" )
+	MemberTO checkKakaoId(MemberTO to);
+	
+	
+	
+	
+	
 
 }

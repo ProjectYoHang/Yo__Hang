@@ -61,6 +61,7 @@ public class MemberController {
 		
 	}
 
+	
 ////////////////회원가입 /////////////////////////	
 	@RequestMapping ("signup.do")
 	public String signup(HttpServletRequest request) {
@@ -139,6 +140,17 @@ public class MemberController {
 		session.invalidate();
 		return "./member/member_signout_ok";
 	}
-	
+/////////////////// 카카오 ///
+	@RequestMapping ("kakao_login.do")
+	public String kakao_login(HttpServletRequest request) {
+		
+		System.out.println( request.getParameter( "id" ) );
+		
+		MemberTO to = new MemberTO();
+		to.setM_kakao_id( request.getParameter( "id" ) );
+		////////// 정보있으면 뭐든하기
+		
+		return "kakao_login_ok";
+	}
 	
 }
