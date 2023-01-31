@@ -4449,7 +4449,7 @@ button.bg-dark:focus {
 @media (min-width: 768px) {
   .d-md-none {
     display: none !important; }
-  .d-md-inline {
+  .d-md-inline, .board-info-group li {
     display: inline !important; }
   .d-md-inline-block {
     display: inline-block !important; }
@@ -6103,7 +6103,7 @@ button.bg-dark:focus {
     text-align: left !important; }
   .text-md-right {
     text-align: right !important; }
-  .text-md-center {
+  .text-md-center, .board-info-group {
     text-align: center !important; } }
 
 @media (min-width: 992px) {
@@ -8120,3 +8120,33 @@ textarea.form-control {
     margin-top: 0.25rem;
     color: #777;
     margin-left: -6px; }
+
+.board-info-group {
+  padding: 0.9rem;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  list-style: none; }
+  @media (min-width: 768px) {
+    .board-info-group li ~ li {
+      position: relative;
+      padding-left: 14px;
+      margin-left: 10px; }
+      .board-info-group li ~ li:before {
+        content: '';
+        display: block;
+        background-color: #ddd;
+        width: 1px;
+        height: 0.6rem;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%); } }
+
+.board-view-title {
+  text-align: center; }
+
+.board-content {
+  padding: 30px 20px;
+  border-bottom: 1px solid #ddd;
+  min-height: 300px; }
