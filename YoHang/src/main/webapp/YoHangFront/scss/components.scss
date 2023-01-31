@@ -140,10 +140,10 @@
   border: 1px solid #ddd;  
   background-color: #f8f9fa;
   list-style: none;
+  margin-top: 20px;
 
   li {
     @extend .d-md-inline;  
-    
   }
   @media (min-width: 768px) {
    li ~ li {
@@ -171,8 +171,14 @@
   text-align: center;
 }
 
-.board-content {
+.board-view-content {
   padding: 30px 20px;
   border-bottom: 1px solid #ddd; 
   min-height: 300px;
+}
+
+.board-view-file {
+  ul {
+    list-style: none;
+  }
 }
