@@ -13,9 +13,9 @@ public class MemberDAO {
 	@Autowired
 	private MapperInter mapper;
 	
+	// test
 	public void select() {
 		MemberTO to = mapper.select();
-		
 		System.out.println(to.getM_id());
 	}
 	
@@ -51,5 +51,41 @@ public class MemberDAO {
 		
 		return flag;
 	}
-
+	
+	public MemberTO memberInfo(MemberTO to) {
+		to = mapper.memberInfo();
+		
+		return to;
+	}
+	
+	public int memberInfo_modify_ok(MemberTO to) {
+		int result = mapper.memberInfoModify_ok(to);
+		
+		int flag = 2;
+		
+		if(result == 1){
+			flag = 0;
+		}else {
+			flag = 1;
+		}
+		return flag;
+	}
+	
+	public int signout_ok(MemberTO to) {
+		int result = mapper.signoutMember(to);
+		
+		int flag = 2;
+		
+		if(result == 1){
+			flag = 0;
+		}else {
+			flag = 1;
+		}
+		return flag;
+	}
+	
+	public MemberTO checkKakaoId(MemberTO to) {
+			
+		return to;
+	}
 }
