@@ -1,0 +1,16 @@
+{
+  "name": "web-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "concat": "^1.0.3",
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "concat": "concat -o build/vendors/yohang-vendors-bundle.js build/vendors/jquery.min.js build/vendors/jquery-migrate-3.0.1.min.js build/vendors/popper.min.js build/vendors/bootstrap.min.js build/vendors/jquery.easing.1.3.js build/vendors/jquery.waypoints.min.js build/vendors/jquery.stellar.min.js build/vendors/owl.carousel.min.js build/vendors/jquery.magnific-popup.min.js build/vendors/aos.js build/vendors/jquery.animateNumber.min.js build/vendors/bootstrap-datepicker.js build/vendors/scrollax.min.js build/vendors/main.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
