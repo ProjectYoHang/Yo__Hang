@@ -1,18 +1,31 @@
 @import 'style';
 
+
+//  table 
+// ------------------------------------- //
 .table-board-list {
   text-align: center;
   border-top: 2px solid #555555;
+  margin-bottom: 30px;
 
   thead th {
     color: #222;
     font-weight: bold;
+    white-space: nowrap;
     border-bottom: 1px solid #aaa;
   }
   .board-list-title {
     @include text-truncate;
     text-align: left;
     max-width: 200px;
+
+    a {
+      color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
   tbody {
     tr:nth-last-child(1) td {
@@ -21,9 +34,10 @@
   }
 }
 
+//  table - toolbar 
+// ------------------------------------- //
+
 .toolbar-board-group {
-  display: flex;
-  width: 100%;
   margin-bottom: 15px;
 
   .board-page-info,
@@ -31,8 +45,6 @@
   }
 
   .board-page-info {
-    width: 40%;
-
     b {
       color: #222222;
     }
@@ -57,6 +69,66 @@
     }
   }
   .board-search-box {
-    width: 60%;
+  }
+}
+
+
+//  table - navigation 
+// ------------------------------------- //
+
+.pagination {
+  .page-item {
+    &:first-child,
+    &:last-child {
+      .page-link {
+        border-radius: 50%;
+      }
+    }
+    &.active .page-link {
+      background-color: #232323;
+      border-color: #232323;
+    }
+  }
+  .first {
+    .xi-angle-left-min::after {
+      content: "\e93c";
+      font-family: "xeicon";
+      margin-left: -0.8rem;
+    }
+  }
+  .last {
+    .xi-angle-right-min::after {
+      content: "\e93f";
+      font-family: "xeicon";
+      margin-left: -0.8rem;
+    }
+  }
+  
+  .page-link {
+    padding: 0.5rem 0.75rem;
+    margin-left: 0;
+    line-height: 1.7;
+    border: 0;
+
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    background-color: transparent;
+    color: #999;
+    border: 1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: .8rem;
+    padding-top: 0.25rem;
+    margin: 0 2px;
+    text-decoration: none;
+
+    i {
+      font-size: 1rem;
+      margin-top: 0.25rem;
+      color: #777;
+      margin-left: -6px;
+    }
   }
 }
