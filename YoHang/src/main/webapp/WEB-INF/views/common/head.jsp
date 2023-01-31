@@ -24,8 +24,7 @@
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
 
 <!-- icons -->
-<!-- <link rel="stylesheet" href="../../YoHangFront/build/vendors/css/icomoon.css">
-<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/ionicons.min.css"> -->
+<link rel="stylesheet" href="../../YoHangFront/build/fonts/xeicon/xeicon.css">
 
 <!-- vendors style -->
 <link rel="stylesheet" href="../../YoHangFront/build/vendors/css/animate.css">
