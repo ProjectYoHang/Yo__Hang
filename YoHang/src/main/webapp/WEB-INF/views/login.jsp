@@ -118,12 +118,14 @@ password <input type='password' name='password' />
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
+
 function kakaoLogin() {
     Kakao.Auth.login({
       success: function (response) {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
+        	  debugger;
         	  console.log(response);
         	  if(response.id) {
         		  // 소셜 로그인 검증 진행
@@ -131,9 +133,7 @@ function kakaoLogin() {
         		  // 우리 홈페이지에 카카오아이디 없으면 -> 회원가입진행
         		  let kakao_id = response.id;
         		  console.log( kakao_id );
-        		  location.href='./kakao_login.do?id=' + kakao_id ;
-        		  
-        		  
+        		  location.href='./kakao_login.do?kakao_id=' + kakao_id ;
         	  } 
         	  else {
         		 // 카카오로그인 실패

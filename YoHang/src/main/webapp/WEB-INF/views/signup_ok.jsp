@@ -6,7 +6,7 @@
 	out.println( "<script type='text/javascript'>" );
 	if ( flag == 0 ) {
 		out.println( "alert( '회원가입 완료');" );
-		out.println( "location.href='./home.do';");
+		out.println( "location.href='./login.do';");
 	}else {
 		out.println( "alert( '회원가입 실패');" );
 		out.println( "history.back();" );

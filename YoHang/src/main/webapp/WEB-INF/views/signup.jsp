@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+	String kakao_id = "";
+	if( request.getAttribute( "kakao_id") != null) {
+		kakao_id = (String)request.getAttribute( "kakao_id" );	
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head include-html="/static/html/common/head.html">
@@ -81,6 +86,7 @@
     <div class="row d-flex justify-content-center ftco-animate">      
       <div class="col-lg-6">
         <form action="./signup_ok.do" class="bg-white" name="signupfrm" method="post" style="padding: 50px;">
+        	<input type="hidden" name="kakao_id" value="<%=kakao_id%>"/>
         
           <div class="form-group">
             <input type="text" class="form-control" name="id" id="id" placeholder="ID">
@@ -142,8 +148,6 @@
     </div>
   </div>
 </section>
-
-
 <!--
 // footer --------------------------------------->
 <footer id="footer" class="site-footer" include-html="/static/html/common/footer.html"></footer>
@@ -152,9 +156,7 @@
 // script --------------------------------------->
 <script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
-
 														<!-- 여기까지 -->
-
 <!-- 
 
 	<div>
@@ -224,7 +226,7 @@
 	    	  $("#password_rule_feedback").css('color', 'red');
 	    	  $( "#pw_rule_ok" ).val('N')
 	      } else {
-	    	  $("#password_rule_feedback").html( ' ' );
+	    	  $("#password_rule_feedback").html( '' );
 	    	  $( "#pw_rule_ok" ).val('Y')
 	      }
 	   });

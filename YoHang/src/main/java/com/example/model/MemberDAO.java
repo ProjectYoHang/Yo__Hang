@@ -85,7 +85,20 @@ public class MemberDAO {
 	}
 	
 	public MemberTO checkKakaoId(MemberTO to) {
-			
+		to = mapper.checkKakaoId(to);
 		return to;
+	}
+	
+	public int signup_kakaoMember_ok(MemberTO to) {
+		 int result = mapper.signupKakaoMember_ok(to);
+		 
+		 int flag = 2;
+			System.out.println(result);
+			if(result == 1){
+				flag = 0;
+			}else {
+				flag = 1;
+			}
+			return flag;
 	}
 }
