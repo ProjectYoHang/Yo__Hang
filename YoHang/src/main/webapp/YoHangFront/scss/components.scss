@@ -40,10 +40,6 @@
 .toolbar-board-group {
   margin-bottom: 15px;
 
-  .board-page-info,
-  .board-search-box {
-  }
-
   .board-page-info {
     b {
       color: #222222;
@@ -67,8 +63,6 @@
         transform: translateY(-50%);
       }
     }
-  }
-  .board-search-box {
   }
 }
 
@@ -102,6 +96,12 @@
       font-family: "xeicon";
       margin-left: -0.8rem;
     }
+  }
+  .prev {
+    margin-right: 15px;
+  }
+  .next {
+    margin-left: 15px;
   }
   
   .page-link {

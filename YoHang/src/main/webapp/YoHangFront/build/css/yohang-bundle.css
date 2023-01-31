@@ -8091,6 +8091,12 @@ textarea.form-control {
   font-family: "xeicon";
   margin-left: -0.8rem; }
 
+.pagination .prev {
+  margin-right: 15px; }
+
+.pagination .next {
+  margin-left: 15px; }
+
 .pagination .page-link {
   padding: 0.5rem 0.75rem;
   margin-left: 0;
