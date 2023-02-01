@@ -156,65 +156,7 @@
 // script --------------------------------------->
 <script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
-														<!-- 여기까지 -->
-<!-- 
-
-	<div>
-		<form action="./signup_ok.do" method="post" name="signupfrm" >
-			<div>
-				<label>아이디</label>
-				<input type="text" name="id" id="id" value=""  /> <br/>
-				<input type="hidden" name="id_ok" id="id_ok" value=""  />
-				<span id ="id_check_feedback"></span><br />
-			</div>
-				
-			<div>
-				<label>이름</label>
-				<input type="text" name="name" value="" /> 
-			</div>
-			
-			<div>
-				<lable>비밀번호</lable>
-				<input type="password" name="password" id="password" value="" /><br />
-				<input type="hidden" name="pw_rule_ok" id="pw_rule_ok" value=""  />
-				<span id ="password_rule_feedback"></span><br />
-			</div>
-			
-			<div>
-				<lable>비밀번호확인</lable>
-				<input type="password" name="password_check" id="password_check" value="" /> <br />
-				<span id ="password_check_feedback"></span><br />
-			</div>
-			
-			<div>
-				<lable>생년월일</lable>
-				<input type="text" name="birth" value="" />
-			</div>
-			
-			<div>
-				<lable>전화번호</lable>
-				<input type="text" name="phone" value="" />
-			</div>
-			
-			<div>
-				<lable>메일</lable>
-				<input type="text" name="mail1" value="" /> @ <input type="text" name="mail2" value="" /> 
-			</div>
-			
-			<div>
-				<lable>성별</lable>
-				여성<input type="radio" name="gender" value="F" checked /> 
-				남성<input type="radio" name="gender" value="M" />
-			</div>
-			
-			<div>
-				<input type="button"  id="signupbtn" value="완료" />
-			</div>
-		</form>
-	</div>
-	 -->
-
-	<script type="text/javascript">
+<script type="text/javascript">
 	
 	$('#password').focusout(function(){
 	      let password = $("#password").val();
