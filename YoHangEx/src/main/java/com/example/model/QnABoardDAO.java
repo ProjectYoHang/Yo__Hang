@@ -45,14 +45,7 @@ public class QnABoardDAO {
 		
 		ArrayList<QnABoardTO> qnaLists = new ArrayList<QnABoardTO>();
 		
-		
 		// 페이징도 해야 함(몇개단위로 페이지를 끊을까...)
-		
-		
-		
-		
-		
-		
 		
 		try {
 			conn = this.dataSource.getConnection();
@@ -85,6 +78,22 @@ public class QnABoardDAO {
 		*/
 	}
 	
+	public QnABoardListTO qnaList(QnABoardListTO listTo) {
+		
+		ArrayList<QnABoardTO> qnaLists = mapper.qnaList();
+		
+		int cpage = listTo.getCpage();
+		int recordPerPage = listTo.getRecordPerPage();
+		int blockPerPage = listTo.getBlockPerPage();
+		
+		
+		
+		
+		
+		return null;
+	}
+	
+	
 	public QnABoardTO qnaView(QnABoardTO to) {
 		
 		mapper.qnaViewHit(to);
@@ -96,9 +105,7 @@ public class QnABoardDAO {
 		
 		
 		
-		
-		
-		
+	
 		return to;
 	}
 	

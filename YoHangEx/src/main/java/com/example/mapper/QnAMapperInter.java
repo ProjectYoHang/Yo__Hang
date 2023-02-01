@@ -17,7 +17,9 @@ public interface QnAMapperInter {
 	// 사용자 Q%A
 	
 	// list
-	@Select("select qna_seq, qna_id, qna_subject, date_format(qna_date, '%Y-%m-%d') qna_date, qna_hit, qna_reply, datediff(now(), qna_date) wgap from qna_board order by qna_seq desc")
+	@Select("select qna_seq, qna_id, qna_subject, date_format(qna_date, '%Y-%m-%d') qna_date, qna_hit, qna_reply, datediff(now(), qna_date) wgap "
+			+ "from qna_board order by qna_seq desc"
+			+ "limit (#{startNum}, #{recordPerPage})")
 	public abstract ArrayList<QnABoardTO> qnaList();
 	
 	// view

@@ -27,12 +27,22 @@ public class QnAController {
 	}
 	
 	// 다른 게시판들도 있으니까 구분을 위해 qna 경로를 추가해줌
+	/*
 	@RequestMapping("/qna/list.do")
 	public ModelAndView list(ModelAndView modelAndView) {
 		ArrayList<QnABoardTO> qnaLists = dao.qnaList();
 		
 		modelAndView.setViewName("qna/qna_list");
 		modelAndView.addObject("qnaLists", qnaLists);
+		return modelAndView;
+	}
+	*/
+	
+	@RequestMapping("/qna/list.do") 
+	public ModelAndView list(ModelAndView modelAndView) {
+		
+		
+		modelAndView.setViewName("qna/qna_list");
 		return modelAndView;
 	}
 	

@@ -5,7 +5,7 @@
 <%
 	ArrayList<QnABoardTO> qnaLists = (ArrayList<QnABoardTO>)request.getAttribute("qnaLists");
 	
-	int totalRecord = qnaLists.size();
+	//int totalRecord = qnaLists.size();
 
 	StringBuilder sbHtml = new StringBuilder();
 
