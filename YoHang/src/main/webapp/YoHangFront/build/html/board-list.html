@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head include-html="/static/html/common/head.html"></head>
+<body>
+<!--
+// header --------------------------------------->
+<header id="header" class="site-header" include-html="/static/html/common/header.html"></header>
+
+<!--
+// contents --------------------------------------->
+
+<!-- hero-wrap -->
+<div class="hero-wrap" style="background-image: url('/static/images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
+      <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
+        <div class="text">
+          <p class="breadcrumbs mb-2"><span class="mr-2"><a href="home.html">Home</a></span> <span>Board</span></p>
+          <h1 class="mb-4 bread">Q&A</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- content -->
+<section class="ftco-section">
+  <div class="container">
+    <div class="row toolbar-board-group">
+      <div class="col-md-6 d-flex align-items-center board-page-info">
+        <span class="total-page">전체 <b>0건</b> </span> 
+        <span class="current-page">현재 페이지 <b>1</b>/<b>1</b></span>
+      </div>
+      <div class="col-md-6 board-search-box">
+        <div class="form-row">
+          <div class="col-4">
+            <select class="form-control">
+              <option>제목</option>
+              <option>내용</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-2">
+            <input type="submit" class="btn btn-primary btn-lg" value="검색">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-board-list">
+            <caption class="sr-only">게시판글</caption>
+            <colgroup>
+              <col style="width:5%;">
+              <col style="width:45%;"> 
+              <col style="width:15%;">  
+              <col style="width:15%;">  
+              <col style="width:10%;">  
+              <col style="width:10%;">  
+            </colgroup>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성일</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>답변여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td class="board-list-title"><a href="/static/html/board-view.html">테스트 글입니다. 테스트 글입니다. 테스트 글입니다. 테스트 글입니다. 테스트 글입니다.</a></td>
+                <td>2023-01-30</td>
+                <td>sider0124</td>
+                <td>0</td>
+                <td>답변완료</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td class="board-list-title"><a href="">테스트 글입니다. 테스트 글입니다. 테스트 글입니다. 테스트 글입니다. 테스트 글입니다.</a></td>
+                <td>2023-01-30</td>
+                <td>fdsge3451</td>
+                <td>10</td>
+                <td>답변대기</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- table -->
+        <div class="table-responsive">
+          <table class="table table-board-list">
+            <caption class="sr-only">게시판글</caption>
+            <colgroup>
+              <col style="width:5%;">
+              <col style="width:45%;"> 
+              <col style="width:15%;">  
+              <col style="width:15%;">  
+              <col style="width:10%;">  
+              <col style="width:10%;">  
+            </colgroup>
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th class="text-center">제목</th>
+                <th>작성일</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>답변여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6" class="text-center" style="padding: 20px;">해당 내용이 없습니다.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- navigation -->
+        <nav class="w-100">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled first"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
+            <li class="page-item disabled prev"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item disabled next"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
+            <li class="page-item disabled last"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+// instagram --------------------------------------->
+<section class="instagram pt-5">
+  <div class="container-fluid">
+    <div class="row no-gutters justify-content-center pb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <h2><span>Instagram</span></h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="/static/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-1.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="/static/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-2.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="/static/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-3.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="/static/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-4.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="/static/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-5.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+// footer --------------------------------------->
+<footer id="footer" class="site-footer" include-html="/static/html/common/footer.html"></footer>
+
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
+
+</body>
+</html>

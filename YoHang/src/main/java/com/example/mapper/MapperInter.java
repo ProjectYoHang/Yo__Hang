@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.model.MemberTO;
 
@@ -13,23 +14,45 @@ public interface MapperInter {
 	@Select ( "select * from members")
 	MemberTO select();
 	
-////////////// 로그인 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////// 로그인 
 	
 	@Select ( "select m_id, m_name, m_email, m_phone, m_birth  from members where m_id=#{m_id} and m_pw=#{m_pw}" )
 	MemberTO login(MemberTO to);
 	
-////////////// 회원가입 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	void signUpMember(MemberTO to);
+////////////// 회원가입 
+	void signupMember(MemberTO to);
 	
 	@Insert ( "insert into members values( #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_phone}, #{m_birth}, now(), #{m_gender}, NULL)" )
 	int signupMember_ok(MemberTO to);
-	// 중복체크
+	
+/////////////// 중복체크
 	@Select ( "select count(m_id) from members where m_id=#{m_id}" )
 	int checkID(MemberTO to);
 	
-////////////// 회원탈퇴/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@Delete ( "delete from members where m_id=#{m_id} and m_pw=#{m_pw}" )
-	void signoutMember(MemberTO to);
+///////////////  마이페이지 - 계정정보 불러오기	
+	
+	@Select ( "select m_id, m_name, m_email, m_phone, m_birth from members where m_id=#{m_id}" )
+	MemberTO memberInfo();
+
+//////////////	마이페이지 - 계정정보 수정	
+
+	@Update ( "update members set m_email=#{m_email}, m_phone=#{m_phone}, m_pw =#{m_pw} where m_id=#{m_id}" )
+	int memberInfoModify_ok(MemberTO to);
+
+
+////////////// 마이페이지 - 회원탈퇴 
+
+	@Delete ( "delete from members where m_id=#{m_id}" )
+	int signoutMember(MemberTO to);
+	
+////////////// 카카오로 로그인한 아이디가 회원 목록에 저장된 정보중에서 있는지 확인
+	
+	 /// 필요한거 정해서 가져오기
+	@Select ( "select * from members where m_kakao_id=#{m_kakao_id}" )
+	MemberTO checkKakaoId(MemberTO to);
+	
+	
+	
 	
 	
 
