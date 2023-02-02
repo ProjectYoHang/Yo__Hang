@@ -29,15 +29,6 @@ public class QnABoardDAO {
 		return flag;
 	}
 	
-	//
-	/*
-	public ArrayList<QnABoardTO> qnaList() {
-		
-		ArrayList<QnABoardTO> qnaLists = mapper.qnaList();
-		return qnaLists;
-	}
-	*/
-	
 	// paging한 list 페이지
 	public Map<String, Object> qnaList(QnABoardListTO listTo) {
 		
@@ -54,13 +45,9 @@ public class QnABoardDAO {
 		listTo.setStartPageNum(1);
 		int startPageNum = listTo.getStartPageNum();
 		
-		//startPageNum = cpage - (cpage - 1) % recordPerPage + recordPerPage - 1;
-		
 		listTo.setLastPageNum(recordPerPage);
 		// 한 페이지에 보여줄 마지막 페이지번호
 		int lastPageNum = listTo.getLastPageNum();
-		
-		//lastPageNum = cpage - (cpage - 1) % recordPerPage + recordPerPage - 1;
 		
 		int startRow = (cpage - 1) * recordPerPage;
 		
@@ -69,23 +56,8 @@ public class QnABoardDAO {
 		
 		ArrayList<QnABoardTO> qnaLists = mapper.qnaList(listTo);
 		
-		/*
-		if(cpage > (recordPerPage / 2)) {
-			startPageNum = cpage - ((lastPageNum / 2) - 1);
-			
-			lastPageNum += (startPageNum - 1);
-		}
-		
-		*/
-		
 		// 마지막 페이지번호 = lastPage
 		int lastPage = (int)(Math.ceil(totalRecord / recordPerPage)) + 1;
-		
-		/*
-		if(cpage >= (lastPage - 4)) {
-			lastPageNum = lastPage;
-		}
-		*/
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("qnaLists", qnaLists);
@@ -98,7 +70,6 @@ public class QnABoardDAO {
 		
 		return resultMap;
 	}
-	
 	
 	public QnABoardTO qnaView(QnABoardTO to) {
 		

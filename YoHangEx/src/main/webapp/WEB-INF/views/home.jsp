@@ -1,29 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Home</title>
-	</head>
-	<body>
-		<c:if test="${to == null}">
-			<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
-		</c:if>
-		<c:if test="${to != null}">
-			<input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
-			<table border='1' width='100'>
-				<tr>
-					<td>${to.m_id}</td>
-					<td>${to.m_name}</td>
-					<td>${to.m_email}</td>
-					<td>${to.m_phone}</td>
-					<td>${to.m_birth}</td>
-				</tr>
-			</table>
-		</c:if>
-	
-	</body>
+<html lang="ko">
+<jsp:include page="common/head.jsp" flush="false"/>
+<body>
+<!-- 
+// header --------------------------------------->
+<jsp:include page="common/header.jsp" flush="false"/>
+
+<!-- hero-wrap -->
+<jsp:include page="common/hero.jsp" flush="false"/>
+
+<!-- content -->
+<section class="ftco-section bg-light">
+  <div class="container">
+    <div class="row">
+      
+      
+      
+      
+      
+    </div>
+  </div>
+</section>
+
+<!--
+// instagram --------------------------------------->
+<section class="instagram pt-5">
+  <div class="container-fluid">
+    <div class="row no-gutters justify-content-center pb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <h2><span>Instagram</span></h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../YoHangFront/build/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(../../YoHangFront/build/images/insta-1.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../YoHangFront/build/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(../../YoHangFront/build/images/insta-2.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../YoHangFront/build/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(../../YoHangFront/build/images/insta-3.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../YoHangFront/build/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(../../YoHangFront/build/images/insta-4.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../YoHangFront/build/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(../../YoHangFront/build/images/insta-5.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+// footer --------------------------------------->
+<jsp:include page="common/footer.jsp" flush="false"/>
+
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+
+</body>
 </html>

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <title>yo-hang</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,29 +17,24 @@
 <!-- <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630"> -->
 
-<!-- icons -->
-<link rel="stylesheet" href="/static/fonts/xeicon/xeicon.css">
+<!-- fonts -->
+<link rel="stylesheet" href="../../YoHangFront/build/fonts/notosanskr/notosanskr.css">
 
 <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i" rel="stylesheet">
 
+<!-- icons -->
+<link rel="stylesheet" href="../../YoHangFront/build/fonts/xeicon/xeicon.css">
+
 <!-- vendors style -->
-<!-- <link rel="stylesheet" href="/static/vendors/css/open-iconic-bootstrap.min.css"> -->
-<link rel="stylesheet" href="/static/vendors/css/animate.css">
-
-<!-- <link rel="stylesheet" href="/static/vendors/css/owl.carousel.min.css">
-<link rel="stylesheet" href="/static/vendors/css/owl.theme.default.min.css"> -->
-<link rel="stylesheet" href="/static/vendors/css/magnific-popup.css">
-
-<!-- <link rel="stylesheet" href="/static/vendors/css/aos.css">
-<link rel="stylesheet" href="/static/vendors/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="/static/vendors/css/jquery.timepicker.css">
--->
-
-<link rel="stylesheet" href="/static/vendors/css/style.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/animate.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/magnific-popup.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/style.css">
 
 <!-- Custom app style -->
-<link rel="stylesheet" href="/static/css/yohang-bundle.css">
+<link rel="stylesheet" href="../../YoHangFront/build/css/yohang-bundle.css">
+
+<!-- favicon -->
 <!-- <link rel="shortcut icon" href="../images/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon-96x96.png">

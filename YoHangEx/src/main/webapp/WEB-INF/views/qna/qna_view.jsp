@@ -1,8 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.example.model.QnAReplyTO"%>
 <%@page import="com.example.model.QnABoardTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 	
 <%
 	QnABoardTO to = (QnABoardTO)request.getAttribute("to");
@@ -39,14 +40,13 @@
 
 %>
 
+
 <!DOCTYPE html>
 <html lang="ko">
+<jsp:include page="../common/head.jsp" flush="false"/>
+
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="./css/board.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js">
 $(document).ready(function() {
 	showReplys();
@@ -84,68 +84,126 @@ function showReplys() {
 };
 
 </script>
+
 </head>
 
 <body>
-<!-- 상단 디자인 -->
-<div class="con_title">
-	<h3>게시판</h3>
-	<p>HOME &gt; 게시판 &gt; <strong>게시판</strong></p>
-</div>
-<div class="con_txt">
-	<div class="contents_sub">
-		<!--게시판-->
-		<div class="board_view">
-			<table>
-			<tr>
-				<th width="10%">제목</th>
-				<td width="60%"><%= qna_subject %></td>
-				<th width="10%">등록일</th>
-				<td width="20%"><%= qna_date %></td>
-			</tr>
-			<tr>
-				<th>글쓴이</th>
-				<td><%= qna_id %></td>
-				<th>조회</th>
-				<td><%= qna_hit %></td>
-			</tr>
-			<tr>
-				<td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%"><%= qna_content %></td>
-			</tr>
-			</table>
-		</div>
-		
-		
-	<!-- Comments Form -->
-		<div class="card my-4">
-			<h5 class="card-header">Leave a Comment:</h5>
-			<div class="card-body">
-				<form name="comment-form" action="./reply_write.do?qna_seq=<%= qna_seq %>&qrpl_id=admin1234" method="post" autocomplete="off">
-					<div class="form-group">
-						<input type="hidden" name="qna_seq" value=<%= qna_seq %> />
-						<input type="hidden" name="qrpl_id" value="admin1234" />
-						<textarea name="qrpl_content" class="form-control" rows="3"></textarea>
-					</div>
-					<button type="submit" class="btn btn-primary">댓글쓰기</button>
-				</form>
-			</div>
-		</div>
-		
+<!--
+// header --------------------------------------->
+<jsp:include page="../common/header.jsp" flush="false"/>
 
-		<div class="btn_area">
-			<div class="align_left">
-				<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./list.do?cpage=<%= cpage %>'" />
-			</div>
-			<div class="align_right">
-				<input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./modify.do?qna_seq=<%= qna_seq %>'" />
-				<input type="button" value="삭제" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./delete.do?qna_seq=<%= qna_seq %>'" />
-				<input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='./write.do'" />
-			</div>
-		</div>	
-		<!--//게시판-->
-	</div>
-</div>
-<!-- 하단 디자인 -->
+<!--
+// contents --------------------------------------->
+
+<!-- hero-wrap -->
+<jsp:include page="../common/hero.jsp" flush="false"/>
+
+
+<!-- content -->
+<section class="ftco-section">
+  <div class="container">
+    <h3 class="board-view-title"><%= qna_subject %></h3>
+    <ul class="board-info-group">
+      <li class="d-md-inline board-view-writer">
+        <strong>작성자</strong>
+        <span>&nbsp;<%= qna_id %></span>
+      </li>
+      <li class="board-view-writer">
+        <strong>작성일</strong>
+        <span>&nbsp;<%= qna_date %></span>
+      </li>
+      <li class="board-view-hit">
+        <strong>조회수</strong>
+        <span>&nbsp;<%= qna_hit %></span>
+      </li>
+    </ul>
+
+    <div class="board-view-content">
+      <%= qna_content %>
+    </div>
+
+<!-- 
+    <div class="row pt-4 board-view-file">
+      <div class="col-md-2">
+        <h4 class="h5">첨부파일</h4>
+      </div>
+      <div class="col-md-10">
+        <ul class="p-md-0 mb-0">
+          <li><a href="#" download><i class="xi-file-text-o"></i> 주방위생 및 개인위생.ppt (5.64MB)</a></li>
+          <li><a href="#" download><i class="xi-file-text-o"></i> 메뉴.ppt (2.97MB)</a</li>
+          <li><a href="#" download><i class="xi-file-text-o"></i> 위해요소중점관리기준(HACCP).ppt (917.5KB)</a></li>
+        </ul>
+      </div>
+    </div>
+ -->
+
+    <div class="text-center mt-4 pt-5 border-top">
+      <a href="./modify.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-primary btn-lg">수정</a>
+      <a href="./delete.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
+      <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
+    </div>
+
+  </div>
+</section>
+
+<!--
+// instagram --------------------------------------->
+<section class="instagram pt-5">
+  <div class="container-fluid">
+    <div class="row no-gutters justify-content-center pb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <h2><span>Instagram</span></h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(/../../../YoHangFront/build/images/insta-1.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(/../../../YoHangFront/build/images/insta-2.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(/../../../YoHangFront/build/images/insta-3.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(/../../../YoHangFront/build/images/insta-4.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(/../../../YoHangFront/build/images/insta-5.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+// footer --------------------------------------->
+<jsp:include page="../common/footer.jsp" flush="false"/>
+
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 </body>
 </html>
+
