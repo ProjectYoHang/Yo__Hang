@@ -6,10 +6,13 @@
 <html lang="ko">
 <jsp:include page="common/head.jsp" flush="false"/>
 <body>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <!-- 
 // header --------------------------------------->
 <jsp:include page="common/header.jsp" flush="false"/>
-
 <!-- hero-wrap -->
 <jsp:include page="common/hero.jsp" flush="false"/>
 
@@ -20,10 +23,10 @@
       <div class="col-lg-6">
         <form action="./login_ok.do" class="bg-white" method="post" style="padding: 50px;">
           <div class="form-group">
-            <input type="text" class="form-control" name="id" placeholder="ID">
+            <input type="text" class="form-control" id="id" name="id" placeholder="ID">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
           </div>
           <br />
           <div class="form-group">
@@ -45,7 +48,7 @@
           </div>
           
           <div class="form-group mb-0 text-center">
-            <a href="" onclick="findInfo()">아이디 / 비밀번호 찾기</a>
+              <a href="javascript:void(0)" id="findInfoBtn" >아이디 / 비밀번호 찾기</a> 
           </div>
           
           <div class="form-group mb-0 text-center">
@@ -56,43 +59,53 @@
   </div>
 </section>
 
+
+
 <!-- 아이디 비밀번호 찾기 다이얼로그 -->
+
 <div id="findInfo_form" title="아이디 / 비밀번호 찾기">
  	<form>
 		<fieldset>
 			<label for="f_name">Name</label>
-			<input type="text" id="m_seq" class="text ui-widget-content ui-corner-all" readonly="readonly">
+			<input type="text" id="f_name" class="text ui-widget-content ui-corner-all" readonly="readonly">
 			<label for="f_mail">Mail</label>
-			<input type="text" id="m_name" class="text ui-widget-content ui-corner-all" readonly="readonly">
+			<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all" readonly="readonly">
 			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 		</fieldset>
 	</form>
 </div>
 
-
 <script>
-
-$( '#findeInfo_form' ).dialog({
-	autoOpen: false,
-	modal: true,
-	width: 350,
-	height: 400,
-	resizable: false,
-	buttons: {
-		'취소': function() {
-			$( this ).dialog( 'close' );
-		},
-		'확인': function() {
-			$( this ).dialog( 'close' );
+	$('#password').focusout(function() {
+		$('#id').val('111');
+	})
+	
+	
+	$('#findInfoBtn').button();
+	$( '#findInfo_form' ).dialog({
+		autoOpen: false,
+		modal: true,
+		width: 350,
+		height: 400,
+		resizable: false,
+		buttons: {
+			'취소': function() {
+				$( this ).dialog( 'close' );
+			},
+			'확인': function() {
+				$( this ).dialog( 'close' );
+			}
 		}
-	}
-});
-
-
-function findInfo() {
-	$( '#findInfo_form' ).dialog( 'open' );
-}
-
+	});
+	
+	const findInfoBtn = function(){
+		console.log('findInfo 들어옴');
+		$( '#findInfo_form' ).dialog( 'open' );
+	};
+	$('#findInfoBtn').click(function () {
+		console.log('findInfo 들어옴');
+		$( '#findInfo_form' ).dialog( 'open' );		
+	})
 
 
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
@@ -105,7 +118,6 @@ function kakaoLogin() {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  debugger;
         	  console.log(response);
         	  if(response.id) {
         		  // 소셜 로그인 검증 진행
