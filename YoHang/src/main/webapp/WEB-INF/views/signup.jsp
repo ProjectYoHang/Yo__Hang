@@ -224,6 +224,7 @@
 	$('#id').focusout(function(){
 		// 아이디 정규식 검사
 		let m_id = $('#id').val();
+		// 영어와 숫자를 합친 아이디
 		let id_rule = /^[a-z0-9]+$/ ;
 		
 	    if (!id_rule.test(m_id) || m_id.length < 6 || m_id.length > 10) {
@@ -250,7 +251,6 @@
 		   	});
 	    }
 	});
-	// TODO( 메일, 전화번호 정규식 넣기?)
 	</script>
 	// footer --------------------------------------->
 <jsp:include page="common/footer.jsp" flush="false"/>

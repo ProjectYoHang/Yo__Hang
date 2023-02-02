@@ -88,9 +88,7 @@
 				$( "#phone_rule_ok" ).val('Y')
 			}
 		});
-
 </script>
-
 </body>
 </html>
 
