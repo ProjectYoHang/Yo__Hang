@@ -7,6 +7,8 @@
 <%
 	QnABoardTO to = (QnABoardTO)request.getAttribute("to");
 	
+	int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
+
 	String qna_seq = (String)request.getAttribute("qna_seq");	
 
 	String qna_subject = to.getQna_subject();
@@ -132,7 +134,7 @@ function showReplys() {
 
 		<div class="btn_area">
 			<div class="align_left">
-				<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./list.do'" />
+				<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./list.do?cpage=<%= cpage %>'" />
 			</div>
 			<div class="align_right">
 				<input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./modify.do?qna_seq=<%= qna_seq %>'" />

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.example.model.QnABoardListTO;
 import com.example.model.QnABoardTO;
 import com.example.model.QnAReplyTO;
 
@@ -18,9 +19,13 @@ public interface QnAMapperInter {
 	
 	// list
 	@Select("select qna_seq, qna_id, qna_subject, date_format(qna_date, '%Y-%m-%d') qna_date, qna_hit, qna_reply, datediff(now(), qna_date) wgap "
-			+ "from qna_board order by qna_seq desc"
-			+ "limit (#{startNum}, #{recordPerPage})")
-	public abstract ArrayList<QnABoardTO> qnaList();
+			+ "from qna_board order by qna_seq desc "
+			+ "limit #{startRow}, #{recordPerPage}")
+	public abstract ArrayList<QnABoardTO> qnaList(QnABoardListTO listTo);
+	
+	// 게시글 총 갯수
+	@Select("select count(*) from qna_board")
+	int qnaAllCount();
 	
 	// view
 	@Update("update qna_board set qna_hit=qna_hit+1 where qna_seq=#{qna_seq}")

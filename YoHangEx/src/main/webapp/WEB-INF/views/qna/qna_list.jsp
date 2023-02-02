@@ -5,8 +5,19 @@
 <%
 	ArrayList<QnABoardTO> qnaLists = (ArrayList<QnABoardTO>)request.getAttribute("qnaLists");
 	
-	//int totalRecord = qnaLists.size();
+	int totalRecord = (Integer)request.getAttribute("totalRecord");
 
+	int cpage = (Integer)request.getAttribute("cpage");
+	int lastPage = (Integer)request.getAttribute("lastPage");
+	
+	int startPageNum = (Integer)request.getAttribute("startPageNum");
+	int lastPageNum = (Integer)request.getAttribute("lastPageNum");
+	
+	int recordPerPage = (Integer)request.getAttribute("recordPerPage");
+	
+	int totalPage = ((totalRecord - 1) / recordPerPage) + 1;
+	
+	//
 	StringBuilder sbHtml = new StringBuilder();
 
 	for(QnABoardTO to : qnaLists) {
@@ -22,7 +33,7 @@
 		sbHtml.append("<td>&nbsp;</td>");
 		sbHtml.append("<td>" + qna_seq + "</td>");
 		sbHtml.append("<td class='left'>");
-		sbHtml.append("<a href='./view.do?qna_seq=" + qna_seq + "'>" + qna_subject + "</a>&nbsp;");
+		sbHtml.append("<a href='./view.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "'>" + qna_subject + "</a>&nbsp;");
 		if(wgap == 0) {
 			sbHtml.append("<img src='./images/icon_new.gif' alt='NEW'>");
 		}
@@ -81,6 +92,83 @@
 			</div>
 		</div>
 		<!--//게시판-->
+		
+		
+		
+		
+		
+		
+		<!--페이지넘버-->
+		<div class="paginate_regular">
+			<div align="absmiddle">
+	
+	
+<%
+	startPageNum = cpage - (cpage - 1) % recordPerPage;
+	lastPageNum = cpage - (cpage - 1) % recordPerPage + recordPerPage - 1;
+	if(lastPageNum >= totalPage) {
+		lastPageNum = totalPage;
+	}
+
+	// 왼쪽 겹꺽쇄
+	if(startPageNum == 1) {
+		out.println("<span><a>&lt;&lt;</a></span>");
+	} else {
+		out.println("<span><a href='./list.do?cpage=" + (startPageNum - recordPerPage ) + "'>&lt;&lt;</a></span>");
+	}
+	
+	out.println("&nbsp;");
+
+				
+	// 하단의 왼쪽 꺽쇄 클릭하면 이전 페이지로 이동하는 코드 / 1페이지에서는 이동x
+	if(cpage == 1) {
+		out.println("<span><a>&lt;</a></span>");
+	} else {
+		out.println("<span><a href='./list.do?cpage=" + (cpage - 1) + "'>&lt;</a></span>");
+	}
+	
+	out.println("&nbsp;&nbsp;");
+
+	//
+	for(int i = startPageNum ; i <= lastPageNum; i++) {
+		
+		// 현재페이지 번호만 각괄호로 표현
+		if( i == cpage) {
+			out.println("<span><a>[ " + i + " ]</a></span>");
+		} else {
+			out.println("<span><a href='./list.do?cpage=" + i + "'>" + i + "</a></span>");
+		}
+	}
+	
+	out.println("&nbsp;&nbsp;");
+	
+	// 하단의 오른쪽 꺽쇄 클릭하면 다음 페이지로 이동 / 마지막 페이지에서는 이동x
+	if(cpage == totalPage) {
+		out.println("<span><a>&gt;</a></span>");
+	} else {
+		out.println("<span><a href='./list.do?cpage=" + (cpage + 1) + "'>&gt;</a></span>");
+	}
+	
+	out.println("&nbsp;");
+	
+	// 오른쪽 겹꺽쇄 클릭하면 다음 페이지 번호묶음으로 이동
+	if(startPageNum == totalPage) {
+		out.println("<span><a>&gt;&gt;</a></span>");
+	} else {
+		out.println("<span><a href='./list.do?cpage=" + (recordPerPage + 1 ) + "'>&gt;&gt;</a></span>");
+	}
+
+%>				
+					
+					 
+				</div>
+			</div>
+			<!--//페이지넘버-->
+
+		
+		
+	
+		
 	</div>
 </div>
 <!--//하단 디자인 -->
