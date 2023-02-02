@@ -37,7 +37,7 @@
           </div>
           
         </form>
-          
+          <!--  추후 내정보 페이지로 이동해야함  -->
            <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
 		    	<a href="javascript:void(0)">
 		          <span>카카오 로그아웃</span>
@@ -56,7 +56,45 @@
   </div>
 </section>
 
-<script>	
+<!-- 아이디 비밀번호 찾기 다이얼로그 -->
+<div id="findInfo_form" title="아이디 / 비밀번호 찾기">
+ 	<form>
+		<fieldset>
+			<label for="f_name">Name</label>
+			<input type="text" id="m_seq" class="text ui-widget-content ui-corner-all" readonly="readonly">
+			<label for="f_mail">Mail</label>
+			<input type="text" id="m_name" class="text ui-widget-content ui-corner-all" readonly="readonly">
+			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		</fieldset>
+	</form>
+</div>
+
+
+<script>
+
+$( '#findeInfo_form' ).dialog({
+	autoOpen: false,
+	modal: true,
+	width: 350,
+	height: 400,
+	resizable: false,
+	buttons: {
+		'취소': function() {
+			$( this ).dialog( 'close' );
+		},
+		'확인': function() {
+			$( this ).dialog( 'close' );
+		}
+	}
+});
+
+
+function findInfo() {
+	$( '#findInfo_form' ).dialog( 'open' );
+}
+
+
+
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
@@ -72,7 +110,7 @@ function kakaoLogin() {
         	  if(response.id) {
         		  // 소셜 로그인 검증 진행
         		  // 검증되면 로그인 진행 -> 세션에 로그인 정보 등록
-        		  // 우리 홈페이지에 카카오아이디 없으면 -> 회원가입진행
+        		  // 홈페이지에 해당 카카오아이디 등록된 회원이 없으면 -> 회원가입진행
         		  let kakao_id = response.id;
         		  console.log( kakao_id );
         		  location.href='./kakao_login.do?kakao_id=' + kakao_id ;

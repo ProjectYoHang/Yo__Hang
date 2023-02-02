@@ -137,19 +137,15 @@
             <input type="submit" id="signupbtn" value="Signup" class="btn btn-primary w-100 py-3 px-5">
           </div>
           <div class="form-group">
-            <input type="submit" id="kakao_signupbtn" value="Kakao Signup" class="btn w-100 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;">
+            <!--  <input type="submit" id="kakao_signupbtn" value="Kakao Signup" class="btn w-100 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;"> -->
           </div>
         </form>
       </div>
     </div>
   </div>
 </section>
-<!--
-// footer --------------------------------------->
-<footer id="footer" class="site-footer" include-html="/static/html/common/footer.html"></footer>
 
-<!--
-// script --------------------------------------->
+<!-- script --------------------------------------->
 <script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
 <script type="text/javascript">
@@ -252,10 +248,8 @@
 	    }
 	});
 	</script>
-	// footer --------------------------------------->
 <jsp:include page="common/footer.jsp" flush="false"/>
-<!--
-// script --------------------------------------->
+<!-- script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 

@@ -37,14 +37,16 @@ public class MemberController {
 		loginMember.setM_id( request.getParameter( "id" ) );
 		loginMember.setM_pw( request.getParameter( "password" ) );
 		
+		/// 입력된 정보를 토대로 테이블에서 정보 가져오기
 		loginMember = dao.login(loginMember);
 		int flag = 2;
 		
 		HttpSession session = request.getSession();
-		if ( loginMember != null) {
+		
+		if ( loginMember != null) { // 가져온 정보가 있다면 세션에 등록?
 			session.setAttribute( "loginMember", loginMember );
 			flag = 0;
-		}else {
+		}else {	// 가져온 정보가 없다면..
 			session.setAttribute( "loginMember", null );
 			flag = 1;
 		}
@@ -53,6 +55,7 @@ public class MemberController {
 		return "login_ok";
 	}
 ////////////////로그아웃 /////////////////////////
+	
 	@RequestMapping ("logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -60,7 +63,6 @@ public class MemberController {
 		return "home";
 		
 	}
-
 	
 ////////////////회원가입 /////////////////////////	
 	@RequestMapping ("signup.do")
@@ -74,7 +76,7 @@ public class MemberController {
 		System.out.println("kakoid : " + kakao_id);
 		MemberTO to = new MemberTO();
 		int flag = 2;
-		if( kakao_id != "" ) {
+		if( kakao_id != "" ) {// 카카오 로그인 사용자 회원가입
 			
 			to.setM_id( request.getParameter( "id" ) );
 			to.setM_name( request.getParameter( "name" ) );
@@ -89,7 +91,7 @@ public class MemberController {
 			to.setM_kakao_id(kakao_id);
 			flag = dao.signup_kakaoMember_ok(to);
 			
-		} else {
+		} else {// 일반 회원가입
 			to.setM_id( request.getParameter( "id" ) );
 			to.setM_name( request.getParameter( "name" ) );
 			to.setM_pw( request.getParameter( "password" ) );
@@ -159,14 +161,13 @@ public class MemberController {
 /////////////////// 카카오 ///
 	@RequestMapping ("kakao_login.do")
 	public String kakao_login(HttpServletRequest request, @RequestParam String kakao_id) {
-		
 		System.out.println( kakao_id );
 		
 		MemberTO to = new MemberTO();
 		to.setM_kakao_id( kakao_id );
 		
 		System.out.println( " to.kakao_id :" + to.getM_kakao_id());
-		
+		// 로그인된 카카오 아이디를 가져와서 멤버테이블에 확인..
 		to = dao.checkKakaoId(to);
 		
 		//해당 카카오 아이디가 등록된 회원이
