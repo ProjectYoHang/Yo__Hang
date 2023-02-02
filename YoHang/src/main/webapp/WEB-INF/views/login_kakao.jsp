@@ -27,20 +27,11 @@ function kakaoLogin() {
           success: function (response) {
         	  console.log(response);
         	  if(response.id) {
-        		  // ToDo
-        		  
-        		  // 소셜 로그인 검증 진행
-        		  // 검증되면 로그인 진행 -> 세션에 로그인 정보 등록
-        		  // 우리 홈페이지에 카카오아이디 없으면 -> 회원가입진행
-        		  //location.href = '/kakao/test?id=' + response.id + '&birth=' + response.birth;
         		  console.log(response.id);
-        		  // 가져온 정보 Json으로 꺼내오기
-        		  
         	  } 
         	  else {
         		 // 카카오로그인 실패
         	  }
-        	  
           },
           fail: function (error) {
         	  //실패

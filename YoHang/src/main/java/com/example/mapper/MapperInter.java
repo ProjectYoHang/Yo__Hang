@@ -45,11 +45,25 @@ public interface MapperInter {
 	@Delete ( "delete from members where m_id=#{m_id}" )
 	int signoutMember(MemberTO to);
 	
-////////////// 카카오로 로그인한 아이디가 회원 목록에 저장된 정보중에서 있는지 확인
+////////////// 카카오로 로그인한 아이디가 회원 목록에 저장된 정보중에서 있는지 확인 하는..
 	
-	 /// 필요한거 정해서 가져오기
-	@Select ( "select * from members where m_kakao_id=#{m_kakao_id}" )
+	@Select ( "select m_id, m_name, m_email, m_phone, m_birth from members where m_kakao_id=#{m_kakao_id}" )
 	MemberTO checkKakaoId(MemberTO to);
+	
+///////////// 카카오 로그인으로 가져온 카카오 아이디가 회원 목록에 없는경우 회원가입 진행..
+	
+	@Insert ( "insert into members values( #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_phone}, #{m_birth}, now(), #{m_gender}, #{m_kakao_id} )" )
+	int signupKakaoMember_ok(MemberTO to);
+	
+//////////// 카카오 로그인으로 가져온 카카오 아이디가 회원 목록에
+	
+	
+///////////// 로그인 상태에서 카카오 연동하기?
+	
+	@Update ( "update members set m_kakao_id=#{m_kakao_id}" )
+	MemberTO insertKakaoId(MemberTO to);
+	
+	
 	
 	
 	

@@ -68,6 +68,44 @@ public class MemberController {
 		return "signup";
 	}
 	
+	@RequestMapping( "signup_ok.do" )
+	public String signup_ok(HttpServletRequest request) {
+		String kakao_id = request.getParameter("kakao_id");
+		System.out.println("kakoid : " + kakao_id);
+		MemberTO to = new MemberTO();
+		int flag = 2;
+		if( kakao_id != "" ) {
+			
+			to.setM_id( request.getParameter( "id" ) );
+			to.setM_name( request.getParameter( "name" ) );
+			to.setM_pw( request.getParameter( "password" ) );
+			String phone = request.getParameter( "phone");
+			phone = phone.replace("-","");
+			System.out.println(phone.trim());
+			to.setM_phone( phone.trim() );
+			to.setM_email( request.getParameter( "mail" ) );
+			to.setM_birth( request.getParameter( "birth" ) );
+			to.setM_gender( request.getParameter( "gender" ) );
+			to.setM_kakao_id(kakao_id);
+			flag = dao.signup_kakaoMember_ok(to);
+			
+		} else {
+			to.setM_id( request.getParameter( "id" ) );
+			to.setM_name( request.getParameter( "name" ) );
+			to.setM_pw( request.getParameter( "password" ) );
+			String phone = request.getParameter( "phone");
+			phone = phone.replace("-","");
+			System.out.println(phone.trim());
+			to.setM_phone( phone.trim() );
+			to.setM_email( request.getParameter( "mail" ) );
+			to.setM_birth( request.getParameter( "birth" ) );
+			to.setM_gender( request.getParameter( "gender" ) );
+			flag = dao.signup_ok( to );
+		}
+		request.setAttribute( "flag", flag );
+		return "signup_ok";
+	}
+	
 	@RequestMapping ("check_id.do")
 	@ResponseBody // 결과 값을 리턴할 때 사용?
 	public int check_id(@RequestParam("id") String id) {
@@ -79,28 +117,6 @@ public class MemberController {
 		System.out.println( result );
 		
 		return result;
-	}
-	
-	@RequestMapping( "signup_ok.do" )
-	public String signup_ok(HttpServletRequest request) {
-		MemberTO to = new MemberTO();
-		to.setM_id( request.getParameter( "id" ) );
-		to.setM_name( request.getParameter( "name" ) );
-		to.setM_pw( request.getParameter( "password" ) );
-		String phone = request.getParameter( "phone");
-		phone = phone.replace("-","");
-		System.out.println(phone.trim());
-		to.setM_phone( phone.trim() );
-		to.setM_email( request.getParameter( "mail" ) );
-		to.setM_birth( request.getParameter( "birth" ) );
-		to.setM_gender( request.getParameter( "gender" ) );
-		//to.setM_kakao_id( request.getParameter( "NULL" ));
-		
-		int flag = dao.signup_ok( to );
-		
-		request.setAttribute( "flag", flag );
-		
-		return "signup_ok";
 	}
 	
 	@RequestMapping( "login_kakao.do" )
@@ -142,15 +158,28 @@ public class MemberController {
 	}
 /////////////////// 카카오 ///
 	@RequestMapping ("kakao_login.do")
-	public String kakao_login(HttpServletRequest request) {
+	public String kakao_login(HttpServletRequest request, @RequestParam String kakao_id) {
 		
-		System.out.println( request.getParameter( "id" ) );
+		System.out.println( kakao_id );
 		
 		MemberTO to = new MemberTO();
-		to.setM_kakao_id( request.getParameter( "id" ) );
-		////////// 정보있으면 뭐든하기
+		to.setM_kakao_id( kakao_id );
 		
-		return "kakao_login_ok";
+		System.out.println( " to.kakao_id :" + to.getM_kakao_id());
+		
+		to = dao.checkKakaoId(to);
+		
+		//해당 카카오 아이디가 등록된 회원이
+		if( to != null ) {
+			// 있다면 해당 정보로  세션 로그인처리? 
+			HttpSession session = request.getSession();
+			session.setAttribute( "loginMember", to );
+			return "home";
+			//return "login_ok";
+		} else {
+			//없다면 kakao_id가지고 회원가입...
+			request.setAttribute("kakao_id", kakao_id);
+			return "signup";
+		}
 	}
-	
 }

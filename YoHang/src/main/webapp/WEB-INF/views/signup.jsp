@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+	String kakao_id = "";
+	if( request.getAttribute( "kakao_id") != null) {
+		kakao_id = (String)request.getAttribute( "kakao_id" );	
+	}
+%>
 <!DOCTYPE html>
-<html>
-<head include-html="/static/html/common/head.html">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>회원 가입</title>
+<html lang="ko">
+<jsp:include page="common/head.jsp" flush="false"/>
+<body>
+<!-- 
+// header --------------------------------------->
+<jsp:include page="common/header.jsp" flush="false"/>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<!-- hero-wrap -->
+<jsp:include page="common/hero.jsp" flush="false"/>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -47,33 +54,25 @@
 			if( frm.mail.value.trim() == '' ) {
 				alert( '메일을 입력하세요.' );
 				return false;
+			} else if ( frm.mail_rule_ok.value != 'Y' ) {
+				alert( '메일 형식을 확인해주세요.' );
+				return false;
 			}
+			if( frm.birth.value.trim() == '') {
+				alert( '생년월일을 입력하세요')
+				return false;
+			}else if ( frm.birth.value.trim().length != 8 ) {
+				alert( '생년월일은 8자리로 입력해주세요' );
+				return false;
+			}
+			
 			document.signupfrm.submit();
 		}
-		//document.getElementById( 'idcheckbtn' ).onclick = function() {
-		//	}
 	}
 </script>
 	<title>회원가입</title>
 </head>
-
 <body>
-<!-- ---------------------------------------------------------------여기부터 부트스트랩 뜯어옴--------------------------------------------------------------- -->
-<header id="header" class="site-header" include-html="/static/html/common/header.html"></header>
-
-<div class="hero-wrap" style="background-image: url('../static/images/bg_1.jpg');">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row no-gutters slider-text d-flex align-itemd-end justify-content-center">
-      <div class="col-md-9 ftco-animate text-center d-flex align-items-end justify-content-center">
-        <div class="text">
-          <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home</a></span> <span>Signup</span></p>
-          <h1 class="mb-4 bread">Signup</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- content -->
 <section class="ftco-section bg-light">
@@ -81,6 +80,7 @@
     <div class="row d-flex justify-content-center ftco-animate">      
       <div class="col-lg-6">
         <form action="./signup_ok.do" class="bg-white" name="signupfrm" method="post" style="padding: 50px;">
+        	<input type="hidden" name="kakao_id" value="<%=kakao_id%>"/>
         
           <div class="form-group">
             <input type="text" class="form-control" name="id" id="id" placeholder="ID">
@@ -103,8 +103,10 @@
             <input type="text" class="form-control" name="name" placeholder="Name"><br />
           </div>
           
-          <div class="form-group">
-            <input type="text" class="form-control" name="mail" placeholder="Email"> <br />
+          <div class="form-group"  >
+          	<input type="text" class="form-control" name="mail" id="mail" placeholder="Email">
+          	<input type="hidden" name="mail_rule_ok" id="mail_rule_ok" value="N"  />
+          	<span id ="mail_check_feedback"></span><br />
           </div>
           
           <div class="form-group">
@@ -142,8 +144,6 @@
     </div>
   </div>
 </section>
-
-
 <!--
 // footer --------------------------------------->
 <footer id="footer" class="site-footer" include-html="/static/html/common/footer.html"></footer>
@@ -152,67 +152,7 @@
 // script --------------------------------------->
 <script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
-
-														<!-- 여기까지 -->
-
-<!-- 
-
-	<div>
-		<form action="./signup_ok.do" method="post" name="signupfrm" >
-			<div>
-				<label>아이디</label>
-				<input type="text" name="id" id="id" value=""  /> <br/>
-				<input type="hidden" name="id_ok" id="id_ok" value=""  />
-				<span id ="id_check_feedback"></span><br />
-			</div>
-				
-			<div>
-				<label>이름</label>
-				<input type="text" name="name" value="" /> 
-			</div>
-			
-			<div>
-				<lable>비밀번호</lable>
-				<input type="password" name="password" id="password" value="" /><br />
-				<input type="hidden" name="pw_rule_ok" id="pw_rule_ok" value=""  />
-				<span id ="password_rule_feedback"></span><br />
-			</div>
-			
-			<div>
-				<lable>비밀번호확인</lable>
-				<input type="password" name="password_check" id="password_check" value="" /> <br />
-				<span id ="password_check_feedback"></span><br />
-			</div>
-			
-			<div>
-				<lable>생년월일</lable>
-				<input type="text" name="birth" value="" />
-			</div>
-			
-			<div>
-				<lable>전화번호</lable>
-				<input type="text" name="phone" value="" />
-			</div>
-			
-			<div>
-				<lable>메일</lable>
-				<input type="text" name="mail1" value="" /> @ <input type="text" name="mail2" value="" /> 
-			</div>
-			
-			<div>
-				<lable>성별</lable>
-				여성<input type="radio" name="gender" value="F" checked /> 
-				남성<input type="radio" name="gender" value="M" />
-			</div>
-			
-			<div>
-				<input type="button"  id="signupbtn" value="완료" />
-			</div>
-		</form>
-	</div>
-	 -->
-
-	<script type="text/javascript">
+<script type="text/javascript">
 	
 	$('#password').focusout(function(){
 	      let password = $("#password").val();
@@ -220,11 +160,11 @@
 	      let password_rule = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 	      
 	      if( !password_rule.test(password) || password.length < 8) {
-	    	  $("#password_rule_feedback").html( '영대소문자,숫자로 구성된 8글자 이상으로 조합하세요.' );
+	    	  $("#password_rule_feedback").html( '특수문자, 영문자, 숫자로 구성된 8글자 이상으로 조합하세요.' );
 	    	  $("#password_rule_feedback").css('color', 'red');
 	    	  $( "#pw_rule_ok" ).val('N')
 	      } else {
-	    	  $("#password_rule_feedback").html( ' ' );
+	    	  $("#password_rule_feedback").html( '' );
 	    	  $( "#pw_rule_ok" ).val('Y')
 	      }
 	   });
@@ -247,6 +187,24 @@
       }
    });
 	
+	/// 메일정규식 확인
+	$('#mail').focusout(function(){
+      let mail = $("#mail").val();
+      // 메일 정규식 xxx@xxx.
+      let mail_rule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      console.log($("#mail_rule_ok").val());
+      if (!mail_rule.test(mail)){
+          $("#mail_check_feedback").html('메일의 형식이 올바르지 않습니다.');
+          $("#mail_check_feedback").css('color', 'red');
+          console.log($("#mail_rule_ok").val());
+           
+      } else {
+          $("#mail_check_feedback").html('');
+          $("#mail_rule_ok").val('Y');
+          console.log($("#mail_rule_ok").val());
+      }
+   });
+	
 	$('#phone').focusout(function() {
 		//	앞자리가 01이며 (0,1,6,7,8,9) 이며 중간에 3~4자리, 세번째는 4자리인 전화번호
 		let phone_rule = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -266,6 +224,7 @@
 	$('#id').focusout(function(){
 		// 아이디 정규식 검사
 		let m_id = $('#id').val();
+		// 영어와 숫자를 합친 아이디
 		let id_rule = /^[a-z0-9]+$/ ;
 		
 	    if (!id_rule.test(m_id) || m_id.length < 6 || m_id.length > 10) {
@@ -292,8 +251,13 @@
 		   	});
 	    }
 	});
-	// TODO( 메일, 전화번호 정규식 넣기?)
 	</script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+	// footer --------------------------------------->
+<jsp:include page="common/footer.jsp" flush="false"/>
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+
 </body>
 </html>
