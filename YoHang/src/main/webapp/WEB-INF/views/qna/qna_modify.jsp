@@ -36,6 +36,7 @@
   <div class="container">
     <form action="./modify_ok.do" class="bg-white p-5" name="mfrm">
     <input type="hidden" name="qna_seq" value="<%= qna_seq %>">
+    <input type="hidden" name="cpage" value="<%= cpage %>">
       <div class="form-group">
         <input type="text" class="form-control" name="qna_subject" title="Title" value="<%= qna_subject %>">
       </div>
@@ -46,7 +47,7 @@
         <input type="text" class="form-control" name="qna_id" title="Title" value="<%= qna_id %>" readonly>
       </div>
       <div class="form-group">
-        <textarea type="text" class="form-control"  name="qna_content" title="content" value="<%= qna_content %>" rows="10"></textarea>
+        <textarea type="text" class="form-control"  name="qna_content" title="content" rows="10"><%= qna_content %></textarea>
       </div>
 <!-- 
       <div class="form-group">
