@@ -16,7 +16,7 @@
 	String qna_id = to.getQna_id();
 	String qna_date = to.getQna_date();
 	int qna_hit = to.getQna_hit();
-	String qna_content = to.getQna_content();
+	String qna_content = to.getQna_content().replaceAll("\n", "<br>");
 	/*
 	ArrayList<QnAReplyTO> qnaReplys = (ArrayList)request.getAttribute("qnaReplys");
 	
