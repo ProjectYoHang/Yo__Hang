@@ -141,6 +141,7 @@ public class QnAController {
 		modelAndView.setViewName("qna/qna_delete");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	

@@ -57,7 +57,7 @@
       <div class="form-group text-center mt-5">
         <input type="button" id="mbtn" value="수정" class="btn btn-primary py-3 px-5">
         <a href="./view.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-secondary py-3 px-5">보기</a>
-        <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
+        <a href="./list.do?cpage=<%= cpage %>" class="btn btn-secondary py-3 px-5">목록</a>
       </div>
     </form>
   </div>
