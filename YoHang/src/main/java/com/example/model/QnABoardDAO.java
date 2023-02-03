@@ -1,6 +1,8 @@
 package com.example.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,9 +12,6 @@ import com.example.mapper.QnAMapperInter;
 @Repository
 public class QnABoardDAO {
 
-	//@Autowired
-	//private DataSource dataSource;
-	
 	@Autowired
 	private QnAMapperInter mapper;
 	
@@ -30,59 +29,46 @@ public class QnABoardDAO {
 		return flag;
 	}
 	
-	public ArrayList<QnABoardTO> qnaList() {
+	// paging한 list 페이지
+	public Map<String, Object> qnaList(QnABoardListTO listTo) {
 		
-		ArrayList<QnABoardTO> qnaLists = mapper.qnaList();
-		return qnaLists;
+		listTo.setTotalRecord(mapper.qnaAllCount());
+		int totalRecord = listTo.getTotalRecord();
 		
-		// 페이징도 해야 함(몇개단위로 페이지를 끊을까...)
+		// 현재 페이지
+		int cpage = listTo.getCpage();
 		
+		// 한 페이지에 보여줄 데이터 갯수 = 10
+		int recordPerPage = listTo.getRecordPerPage();
 		
-		/*
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		// 처음 보여줄 첫번째 페이지 번호
+		listTo.setStartPageNum(1);
+		int startPageNum = listTo.getStartPageNum();
 		
-		ArrayList<QnABoardTO> qnaLists = new ArrayList<QnABoardTO>();
+		listTo.setLastPageNum(recordPerPage);
+		// 한 페이지에 보여줄 마지막 페이지번호
+		int lastPageNum = listTo.getLastPageNum();
 		
+		int startRow = (cpage - 1) * recordPerPage;
 		
-		// 페이징도 해야 함(몇개단위로 페이지를 끊을까...)
+		listTo.setStartRow(startRow);
+		listTo.setRecordPerPage(recordPerPage);
 		
+		ArrayList<QnABoardTO> qnaLists = mapper.qnaList(listTo);
 		
+		// 마지막 페이지번호 = lastPage
+		int lastPage = (int)(Math.ceil(totalRecord / recordPerPage)) + 1;
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("qnaLists", qnaLists);
+		resultMap.put("cpage", cpage);
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("lastPageNum", lastPageNum);
+		resultMap.put("totalRecord", totalRecord);
+		resultMap.put("recordPerPage", recordPerPage);
 		
-		
-		
-		
-		
-		try {
-			conn = this.dataSource.getConnection();
-			
-			String sql = "select qna_seq, qna_id, qna_subject, date_format(qna_date, '%Y-%m-%d') qna_date, qna_hit, qna_reply, datediff(now(), qna_date) wgap from qna_board";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				QnABoardTO to = new QnABoardTO();
-				to.setQna_seq(rs.getString("qna_seq"));
-				to.setQna_id(rs.getString("qna_id"));
-				to.setQna_subject(rs.getString("qna_subject"));
-				to.setQna_date(rs.getString("qna_date"));
-				to.setQna_hit(rs.getInt("qna_hit"));
-				to.setQna_reply(rs.getInt("qna_reply"));
-				to.setWgap(rs.getInt("wgap"));
-				
-				qnaLists.add(to);
-			}
-		} catch(SQLException e) {
-			System.out.println("[에러] : " +e.getMessage());
-		} finally {
-			if(rs != null) try {rs.close();} catch(SQLException e) {}
-			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
-			if(conn != null) try {conn.close();} catch(SQLException e) {}
-		}
-		
-		return qnaLists;
-		*/
+		return resultMap;
 	}
 	
 	public QnABoardTO qnaView(QnABoardTO to) {
@@ -93,10 +79,6 @@ public class QnABoardDAO {
 		
 		// Q&A에 대한 관리자의 답댓글도 viewpage에 보여야함
 		// 따라서, qna_reply 테이블 데이터도 select 해와야 함
-		
-		
-		
-		
 		
 		
 		return to;

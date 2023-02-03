@@ -1,15 +1,18 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.QnABoardDAO;
+import com.example.model.QnABoardListTO;
 import com.example.model.QnABoardTO;
 import com.example.model.QnAReplyTO;
 
@@ -27,18 +30,33 @@ public class QnAController {
 	}
 	
 	// 다른 게시판들도 있으니까 구분을 위해 qna 경로를 추가해줌
+	// 처음 qna/list.do 요청 받았을 때 cpage 값이 없으니까 default값으로 1을 받게 설정함
 	@RequestMapping("/qna/list.do")
-	public ModelAndView list(ModelAndView modelAndView) {
-		ArrayList<QnABoardTO> qnaLists = dao.qnaList();
+	public ModelAndView list(ModelAndView modelAndView, @RequestParam(value="cpage", required=false, defaultValue="1") int cpage) {
+		QnABoardListTO listTo = new QnABoardListTO();
+		
+		listTo.setCpage(cpage);
+		
+		Map<String, Object> map = dao.qnaList(listTo);
 		
 		modelAndView.setViewName("qna/qna_list");
-		modelAndView.addObject("qnaLists", qnaLists);
+		
+		modelAndView.addObject("qnaLists", map.get("qnaLists"));
+		modelAndView.addObject("cpage", map.get("cpage"));
+		modelAndView.addObject("lastPage", map.get("lastPage"));
+		modelAndView.addObject("startPageNum", map.get("startPageNum"));
+		modelAndView.addObject("lastPageNum", map.get("lastPageNum"));
+		modelAndView.addObject("totalRecord", map.get("totalRecord"));
+		modelAndView.addObject("recordPerPage", map.get("recordPerPage"));
+		
 		return modelAndView;
 	}
 	
 	@RequestMapping("/qna/write.do")
-	public String write() {
-		return "qna/qna_write";
+	public ModelAndView write() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("qna/qna_write");
+		return modelAndView;
 	}
 	
 	@RequestMapping("/qna/write_ok.do")
@@ -75,6 +93,7 @@ public class QnAController {
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("qnaReplys", qnaReplys);
 		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	

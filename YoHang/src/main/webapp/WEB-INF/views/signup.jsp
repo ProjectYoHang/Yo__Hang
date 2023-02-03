@@ -253,7 +253,7 @@
 	});
 	</script>
 	// footer --------------------------------------->
-<jsp:include page="common/footer.jsp" flush="false"/>
+<jsp:include page="./common/footer.jsp" flush="false"/>
 <!--
 // script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>

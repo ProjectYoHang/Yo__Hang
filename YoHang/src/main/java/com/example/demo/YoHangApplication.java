@@ -13,4 +13,5 @@ public class YoHangApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(YoHangApplication.class, args);
 	}
+
 }
