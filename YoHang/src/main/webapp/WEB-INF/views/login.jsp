@@ -4,14 +4,13 @@
 <!DOCTYPE html>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <html lang="ko">
+
+
 <jsp:include page="common/head.jsp" flush="false"/>
+
 <body>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<!-- 
-// header --------------------------------------->
+
+<!-- header --------------------------------------->
 <jsp:include page="common/header.jsp" flush="false"/>
 <!-- hero-wrap -->
 <jsp:include page="common/hero.jsp" flush="false"/>
@@ -59,30 +58,25 @@
   </div>
 </section>
 
-
-
 <!-- 아이디 비밀번호 찾기 다이얼로그 -->
-
+  
 <div id="findInfo_form" title="아이디 / 비밀번호 찾기">
  	<form>
 		<fieldset>
 			<label for="f_name">Name</label>
-			<input type="text" id="f_name" class="text ui-widget-content ui-corner-all" readonly="readonly">
+			<input type="text" id="f_name" class="text ui-widget-content ui-corner-all">
 			<label for="f_mail">Mail</label>
-			<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all" readonly="readonly">
+			<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all">
 			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 		</fieldset>
 	</form>
 </div>
 
 <script>
-	$('#password').focusout(function() {
-		$('#id').val('111');
-	})
-	
-	
-	$('#findInfoBtn').button();
-	$( '#findInfo_form' ).dialog({
+$(document).ready(function(){
+	console.log( 'test' );
+		
+	$( "#findInfo_form" ).dialog({
 		autoOpen: false,
 		modal: true,
 		width: 350,
@@ -98,16 +92,23 @@
 		}
 	});
 	
+	$('#findInfoBtn').button().click(function () {
+		console.log('findInfo_Btn 들어옴');
+		findInfoBtn();
+		//$( '#findInfo_form' ).dialog( 'open' );		
+	})
+
+});
+
+/*
+	$('#findInfoBtn').button();
+
 	const findInfoBtn = function(){
 		console.log('findInfo 들어옴');
 		$( '#findInfo_form' ).dialog( 'open' );
 	};
-	$('#findInfoBtn').click(function () {
-		console.log('findInfo 들어옴');
-		$( '#findInfo_form' ).dialog( 'open' );		
-	})
-
-
+*/	
+	
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인

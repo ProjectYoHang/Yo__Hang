@@ -17,13 +17,9 @@
     <div class="row">
       
       
-      
-      
-      
     </div>
   </div>
 </section>
-
 <!--
 // instagram --------------------------------------->
 <section class="instagram pt-5">
@@ -72,11 +68,9 @@
     </div>
   </div>
 </section>
-
 <!-- 
 // footer --------------------------------------->
 <jsp:include page="common/footer.jsp" flush="false"/>
-
 <!--
 // script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
