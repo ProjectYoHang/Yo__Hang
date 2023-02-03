@@ -27,7 +27,8 @@
         <input type="password" class="form-control" name="qna_pw" title="Password" placeholder="글 비밀번호를 입력해주세요.">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="qna_id" title="Title" placeholder="Writer" readonly>
+      	<!-- 아이디는 로그인상태에서 받아서 placeholder 속성값으로 넣어줘야 함 / value 속성은 로그인상태 처리되면 필요없음 -->
+        <input type="text" class="form-control" name="qna_id" title="Title" value="test1234" readonly>
       </div>
       <div class="form-group">
         <textarea type="text" class="form-control"  name="qna_content" title="content" placeholder="내용을 입력해주세요." rows="10"></textarea>
