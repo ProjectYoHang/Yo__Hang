@@ -17,6 +17,7 @@
 	String qna_date = to.getQna_date();
 	int qna_hit = to.getQna_hit();
 	String qna_content = to.getQna_content().replaceAll("\n", "<br>");
+	
 	/*
 	ArrayList<QnAReplyTO> qnaReplys = (ArrayList)request.getAttribute("qnaReplys");
 	
@@ -40,52 +41,9 @@
 
 %>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
-
-
-<head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js">
-$(document).ready(function() {
-	showReplys();
-});
-
-function showReplys() {
-	
-	let url = "${pageContext.request.contextPath}/qna/view.do";
-	let paramData = {"qnaReplys": "${qnaReplys}"}
-	
-	$.ajax({
-		type: 'get',
-		url: url,
-		data: paramData,
-		dataType : 'json',
-		success: function(result) {
-			let htmls = "";
-			if(result.length >= 1) {
-				$(result).each(function() {
-					html.append("<div>");
-					html.append("<tr>");
-					html.append("<td><댓글></td>" + "<br>");
-					html.append("<td>" + this.qrpl_id + "</td>" + "<br>");
-					html.append("<td>" + this.qrpl_content + "</td>" + "<br>");
-					html.append("<td>" + this.qrpl_date + "</td>");
-					html.append("</tr>");
-					html.append("</div>");
-				})
-			}
-		},
-		error: function(err) {
-			console.log('[에러] : ' + err.message);
-		}
-	})
-};
-
-</script>
-
-</head>
 
 <body>
 <!--
@@ -203,6 +161,44 @@ function showReplys() {
 // script --------------------------------------->
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js">
+$(document).ready(function() {
+	showReplys();
+});
+
+function showReplys() {
+	
+	let url = "${pageContext.request.contextPath}/qna/view.do";
+	let paramData = {"qnaReplys": "${qnaReplys}"}
+	
+	$.ajax({
+		type: 'get',
+		url: url,
+		data: paramData,
+		dataType : 'json',
+		success: function(result) {
+			let htmls = "";
+			if(result.length >= 1) {
+				$(result).each(function() {
+					html.append("<div>");
+					html.append("<tr>");
+					html.append("<td><댓글></td>" + "<br>");
+					html.append("<td>" + this.qrpl_id + "</td>" + "<br>");
+					html.append("<td>" + this.qrpl_content + "</td>" + "<br>");
+					html.append("<td>" + this.qrpl_date + "</td>");
+					html.append("</tr>");
+					html.append("</div>");
+				})
+			}
+		},
+		error: function(err) {
+			console.log('[에러] : ' + err.message);
+		}
+	})
+};
+
+</script>
 
 </body>
 </html>

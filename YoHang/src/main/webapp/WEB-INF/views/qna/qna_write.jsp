@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
@@ -107,11 +106,6 @@
 <script type="text/javascript">
 	window.onload = function() {
 		document.getElementById('wbtn').onclick = function() { 
-			// 필수 입력항목 검사
-			//if(document.wfrm.qna_id.value.trim() == '') {
-			//	alert('글쓴이를 입력하셔야 합니다.');
-			//	return false;
-			//}
 			if(document.wfrm.qna_subject.value.trim() == '') { 
 				alert('제목을 입력하셔야 합니다.');
 				return false;
@@ -124,8 +118,6 @@
 				alert('내용을 입력하셔야 합니다.');
 				return false;
 			}
-			
-			// 위의 검사가 다 끝나면 submit해서 다음 페이지로 넘어가라는 의미
 			document.wfrm.submit();
 		};
 	}

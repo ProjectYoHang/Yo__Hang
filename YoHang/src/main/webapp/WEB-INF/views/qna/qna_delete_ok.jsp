@@ -7,7 +7,7 @@
 	out.println("<script type='text/javascript'>");
 	if(flag == 0) {
 		out.println("alert('글삭제에 성공했습니다.');");
-		out.println("location.href='./list.do?cpage=1';");
+		out.println("location.href='./list.do';");
 	} else if(flag == 1) {
 		out.println("alert('비밀번호가 잘못 입력되었습니다.');");
 		out.println("history.back();");

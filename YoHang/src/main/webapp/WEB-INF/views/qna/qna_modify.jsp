@@ -132,6 +132,10 @@
 					alert('제목을 입력해야 합니다.');
 					return false;
 				}
+				if(document.mfrm.qna_content.value.trim() == '') {
+					alert('내용을 입력해야 합니다.');
+					return false;
+				}
 				document.mfrm.submit();
 			}
 		}
