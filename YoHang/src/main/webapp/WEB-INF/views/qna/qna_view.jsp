@@ -70,7 +70,7 @@
 			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
 		</c:if>
 		<c:if test="${loginMember != null}">
-			<li class="nav-item"><a href="home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
+			<li class="nav-item"><a href="/home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
 		</c:if>
         
       </ul>

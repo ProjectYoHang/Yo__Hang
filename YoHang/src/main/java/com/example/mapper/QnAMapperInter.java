@@ -15,7 +15,7 @@ import com.example.model.QnAReplyTO;
 @Mapper
 public interface QnAMapperInter {
 
-	// 사용자 Q%A
+	// 사용자 Q&A
 	
 	// list
 	@Select("select qna_seq, qna_id, qna_subject, date_format(qna_date, '%Y-%m-%d') qna_date, qna_hit, qna_reply, datediff(now(), qna_date) wgap "
@@ -55,6 +55,10 @@ public interface QnAMapperInter {
 	int qnaDeleteOk(QnABoardTO to);
 	
 	// 관리자 - 답댓글
+	
+	// reply_list : 사용자의 qna list가 보일 것
+	@Select("select qna_seq, qna_id, qna_subject, date_format(qna_date, '%Y-%m-%d') qna_date from qna_board order by qna_seq desc")
+	ArrayList<QnABoardTO> qnaReplyList();
 	
 	// reply_view
 	@Select("select qrpl_id, qrpl_content, qrpl_date from qna_reply where qna_seq=#{qna_seq}")

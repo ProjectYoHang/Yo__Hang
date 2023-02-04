@@ -159,8 +159,22 @@ public class QnAController {
 		return modelAndView;
 	}
 	
+
+	
+	// 관리자측 qna 목록
+	@RequestMapping("/qna_admin/reply_list.do")
+	public ModelAndView reply_list(HttpServletRequest request, ModelAndView modelAndView) {
+		ArrayList<QnABoardTO> qnaLists = dao.qnaReplyList();
+		
+		modelAndView.setViewName("qna_admin/qna_admin_list");
+		modelAndView.addObject("qnaLists", qnaLists);
+		
+		return modelAndView;
+	}
+	
+	
 	// 답댓글 쓰기
-	@RequestMapping("/qna/reply_write.do")
+	@RequestMapping("/qna_admin/reply_write.do")
 	public ModelAndView reply_write(HttpServletRequest request, ModelAndView modelAndView) {
 		QnAReplyTO to = new QnAReplyTO();
 		QnABoardTO bto = new QnABoardTO();

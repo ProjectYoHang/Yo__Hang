@@ -131,6 +131,14 @@ public class QnABoardDAO {
 	
 	// Q&A 답댓글 메서드
 	
+	// 관리자측 qna list
+	public ArrayList<QnABoardTO> qnaReplyList() {
+		ArrayList<QnABoardTO> qnaLists = mapper.qnaReplyList();
+		
+		return qnaLists;
+	}
+	
+	
 	// qna 답댓글 view
 	public ArrayList<QnAReplyTO> qnaReplyView(QnAReplyTO to) {
 		ArrayList<QnAReplyTO> qnaReplys = mapper.qnaReplyView(to);
