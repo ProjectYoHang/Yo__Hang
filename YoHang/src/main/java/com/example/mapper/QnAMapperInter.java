@@ -60,9 +60,13 @@ public interface QnAMapperInter {
 	@Select("select qna_seq, qna_id, qna_subject, date_format(qna_date, '%Y-%m-%d') qna_date from qna_board order by qna_seq desc")
 	ArrayList<QnABoardTO> qnaReplyList();
 	
-	// reply_view
+	// reply_view에서 사용자이 qna
+	@Select("select qna_seq, qna_id, qna_subject, qna_content, date_format(qna_date, '%Y-%m-%d') qna_date from qna_board where qna_seq=#{qna_seq}")
+	QnABoardTO qnaReplyView1(QnABoardTO to);
+	
+	// reply_view에서 관리자의 답댓글
 	@Select("select qrpl_id, qrpl_content, qrpl_date from qna_reply where qna_seq=#{qna_seq}")
-	ArrayList<QnAReplyTO> qnaReplyView(QnAReplyTO to);
+	QnAReplyTO qnaReplyView2(QnAReplyTO to);
 	
 	// reply_write
 	@Insert("insert into qna_reply values (0, #{qna_seq}, #{qrpl_id}, #{qrpl_content}, now())")

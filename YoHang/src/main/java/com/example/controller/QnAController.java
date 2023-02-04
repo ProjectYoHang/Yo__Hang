@@ -87,7 +87,7 @@ public class QnAController {
 		QnAReplyTO rplTo = new QnAReplyTO();
 		rplTo.setQna_seq(request.getParameter("qna_seq"));
 		
-		ArrayList<QnAReplyTO> qnaReplys = dao.qnaReplyView(rplTo);
+		QnAReplyTO qnaReplys = dao.qnaReplyView2(rplTo);
 				
 		modelAndView.setViewName("qna/qna_view");
 		modelAndView.addObject("to", to);
@@ -174,23 +174,32 @@ public class QnAController {
 	
 	
 	// 답댓글 쓰기
-	@RequestMapping("/qna_admin/reply_write.do")
+	@RequestMapping("/qna_admin/reply_view.do")
 	public ModelAndView reply_write(HttpServletRequest request, ModelAndView modelAndView) {
 		QnAReplyTO to = new QnAReplyTO();
-		QnABoardTO bto = new QnABoardTO();
-		
 		to.setQna_seq(request.getParameter("qna_seq"));
-		to.setQrpl_id(request.getParameter("qrpl_id"));
-		to.setQrpl_content(request.getParameter("qrpl_content"));
+		QnABoardTO bto = new QnABoardTO();
+		bto.setQna_seq(request.getParameter("qna_seq"));
 		
+		QnABoardTO qna = dao.qnaReplyView1(bto);
+		QnAReplyTO qnaReplys = dao.qnaReplyView2(to);
+		
+		//to.setQna_seq(request.getParameter("qna_seq"));
+		//to.setQrpl_id(request.getParameter("qrpl_id"));
+		//to.setQrpl_content(request.getParameter("qrpl_content"));
+		
+		/*
 		bto.setQna_seq(request.getParameter("qna_seq"));
 				
 		int flag = dao.qnaReplyWriteOk(to, bto);
+		*/
 		
 		String qna_seq = request.getParameter("qna_seq");
 		
-		modelAndView.setViewName("qna_master/qna_master_reply_write");
-		modelAndView.addObject("flag", flag);
+		modelAndView.setViewName("qna_admin/qna_admin_view");
+		modelAndView.addObject("qna", qna);
+		modelAndView.addObject("qnaReplys", qnaReplys);
+		//modelAndView.addObject("flag", flag);
 		modelAndView.addObject("qna_seq", qna_seq);
 		
 		return modelAndView;

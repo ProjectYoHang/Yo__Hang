@@ -20,7 +20,7 @@
 		html.append("</td>" + qna_id + "&nbsp;&nbsp;&nbsp;</td>");
 		html.append("</td>" + qna_subject + "&nbsp;&nbsp;&nbsp;</td>");
 		html.append("</td>" + qna_date + "&nbsp;</td>");
-		html.append("<input type='button' name='btn' value='상세보기' onClick='location.href='./qna_admin/qna_admin_view.do?qna_seq='" + qna_seq + "' />");
+		html.append("<input type='button' name='btn' value='상세보기' onClick='location.href=\"./reply_view.do?qna_seq=" + qna_seq + "\"' />");
 		html.append("</tr>");
 		html.append("</table>");
 	};

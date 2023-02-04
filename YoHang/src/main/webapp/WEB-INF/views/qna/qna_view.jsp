@@ -19,15 +19,16 @@
 	String qna_content = to.getQna_content().replaceAll("\n", "<br>");
 	
 	// 글 내용 하단의 관리자의 답댓글
-	ArrayList<QnAReplyTO> qnaReplys = (ArrayList)request.getAttribute("qnaReplys");
+	QnAReplyTO qnaReplys = (QnAReplyTO)request.getAttribute("qnaReplys");
 	
 	StringBuilder html = new StringBuilder();
-	for(QnAReplyTO rplTo : qnaReplys) {
 		
-		String qrpl_id = rplTo.getQrpl_id();
+	if(qnaReplys != null) {
+		
+		String qrpl_id = qnaReplys.getQrpl_id();
 		qrpl_id = "관리자";
-		String qrpl_content = rplTo.getQrpl_content();
-		String qrpl_date = rplTo.getQrpl_date();
+		String qrpl_content = qnaReplys.getQrpl_content();
+		String qrpl_date = qnaReplys.getQrpl_date();
 		
 		html.append("<div>");
 		html.append("<tr>");
@@ -37,9 +38,10 @@
 		html.append("<td>" + qrpl_content + "</td>" + "<br>");
 		html.append("</tr>");
 		html.append("</div>");
+		
 	}
 	
-
+	
 %>
 
 <!DOCTYPE html>

@@ -138,10 +138,19 @@ public class QnABoardDAO {
 		return qnaLists;
 	}
 	
+	// qna 답댓글 view에서 사용자의 qna 부분
+	public QnABoardTO qnaReplyView1(QnABoardTO to) {
+		
+		QnABoardTO qna = mapper.qnaReplyView1(to);
+		
+		return qna;
+	}
 	
-	// qna 답댓글 view
-	public ArrayList<QnAReplyTO> qnaReplyView(QnAReplyTO to) {
-		ArrayList<QnAReplyTO> qnaReplys = mapper.qnaReplyView(to);
+	
+	// qna 답댓글 view에서 답댓글 부분
+	public QnAReplyTO qnaReplyView2(QnAReplyTO to) {
+		
+		QnAReplyTO qnaReplys = mapper.qnaReplyView2(to);
 		
 		return qnaReplys;
 	}
