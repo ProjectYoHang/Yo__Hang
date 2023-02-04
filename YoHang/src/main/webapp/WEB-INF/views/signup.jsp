@@ -17,7 +17,7 @@
 <!-- hero-wrap -->
 <jsp:include page="common/hero.jsp" flush="false"/>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
 	window.onload = function() {
 		document.getElementById( 'signupbtn' ).onclick = function() {
@@ -146,8 +146,7 @@
 </section>
 
 <!-- script --------------------------------------->
-<script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
-<script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
+
 <script type="text/javascript">
 	
 	$('#password').focusout(function(){
@@ -233,6 +232,9 @@
 		    	data : {id : m_id },
 		    	type : "post",
 		    	success : function( result ){
+		    		
+		    	
+		    	debugger;
 		    		console.log("id 전송 성공");
 		    		if( result == 0 ) {
 		    			$("#id_check_feedback").html('사용할 수 있는 아이디입니다.')
@@ -252,6 +254,7 @@
 <!-- script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+
 
 </body>
 </html>

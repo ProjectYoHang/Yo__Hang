@@ -1,5 +1,7 @@
 package com.example.mapper;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -54,20 +56,17 @@ public interface MapperInter {
 	
 	@Insert ( "insert into members values( #{m_id}, #{m_pw}, #{m_name}, #{m_email}, #{m_phone}, #{m_birth}, now(), #{m_gender}, #{m_kakao_id} )" )
 	int signupKakaoMember_ok(MemberTO to);
-	
-//////////// 카카오 로그인으로 가져온 카카오 아이디가 회원 목록에
-	
+		
 	
 ///////////// 로그인 상태에서 카카오 연동하기?
 	
 	@Update ( "update members set m_kakao_id=#{m_kakao_id}" )
 	MemberTO insertKakaoId(MemberTO to);
+
+//////////// 멤버 목록 가져오기
 	
-	
-	
-	
-	
-	
+	@Select ( "select m_id, m_name, m_email, m_phone, m_join_date from members order by  m_join_date desc" )
+	ArrayList<MemberTO> list_member();
 	
 
 }

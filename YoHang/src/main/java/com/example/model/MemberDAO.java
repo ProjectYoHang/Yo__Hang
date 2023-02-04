@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -100,5 +102,19 @@ public class MemberDAO {
 				flag = 1;
 			}
 			return flag;
+	}
+	
+	
+	////////////////////////// 회원 관리////////////////
+	
+	public ArrayList<MemberTO>list_member() {
+		ArrayList<MemberTO> memberList = mapper.list_member();
+		
+		System.out.println( "memberDAO에서 확인하는 중");
+		for(MemberTO to : memberList) {
+			System.out.println("m_id : " + to.getM_id());
+		}
+		System.out.println( "memberDAO에서 확인 끝 ");
+		return memberList;
 	}
 }

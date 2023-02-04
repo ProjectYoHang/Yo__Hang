@@ -1,11 +1,14 @@
 package com.example.model;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +19,11 @@ public class MemberController {
 	
 	@Autowired
 	private MemberDAO dao;
+	
+	@RequestMapping ( "test.do" )
+	public String test() {
+		return "test";
+	}
 	
 	@RequestMapping ( "layout.do")
 	public String layout() {
@@ -120,12 +128,7 @@ public class MemberController {
 		
 		return result;
 	}
-	
-	@RequestMapping( "login_kakao.do" )
-	public String login_kakao() {
-		
-		return "login_kakao";
-	}
+
 //////////////// 회원정보 /////////////////////////
 	@RequestMapping( "member_info.do")
 	public String member_info(HttpServletRequest request) {
@@ -182,5 +185,19 @@ public class MemberController {
 			request.setAttribute("kakao_id", kakao_id);
 			return "signup";
 		}
+	}
+	
+////////// 회원관리  -  리스트  불러오기 ////////
+	@RequestMapping ( "loadList.do" )
+	@ResponseBody
+	public ArrayList<MemberTO> members_loadList(){
+		ArrayList<MemberTO> memberList = dao.list_member();
+		return memberList;
+	}
+	
+//////// 회원관리 리스트페이지 ///////
+	@RequestMapping ( "members_list.do" )
+	public String member_list() {
+		return "/admin/members_list";
 	}
 }

@@ -71,43 +71,7 @@
 		</fieldset>
 	</form>
 </div>
-
 <script>
-$(document).ready(function(){
-	console.log( 'test' );
-		
-	$( "#findInfo_form" ).dialog({
-		autoOpen: false,
-		modal: true,
-		width: 350,
-		height: 400,
-		resizable: false,
-		buttons: {
-			'취소': function() {
-				$( this ).dialog( 'close' );
-			},
-			'확인': function() {
-				$( this ).dialog( 'close' );
-			}
-		}
-	});
-	
-	$('#findInfoBtn').button().click(function () {
-		console.log('findInfo_Btn 들어옴');
-		findInfoBtn();
-		//$( '#findInfo_form' ).dialog( 'open' );		
-	})
-
-});
-
-/*
-	$('#findInfoBtn').button();
-
-	const findInfoBtn = function(){
-		console.log('findInfo 들어옴');
-		$( '#findInfo_form' ).dialog( 'open' );
-	};
-*/	
 	
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
