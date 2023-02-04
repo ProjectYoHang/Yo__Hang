@@ -21,7 +21,15 @@
         <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
         <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        <li class="nav-item"><a href="/qna/list.do" class="nav-link">Board</a></li>
+        
+        <!-- 로그인상태 아니면 Q&A 게시판에 접근못하게 아예 게시판자체를 막아버림 / 로그인페이지로 이동 -->
+        <c:if test="${loginMember == null }">
+        	<li class="nav-item"><a href="login.do" class="nav-link">Board</a></li>
+        </c:if>
+        <c:if test="${loginMember != null }">
+        	<li class="nav-item"><a href="/qna/list.do" class="nav-link">Board</a></li>
+        </c:if>
+        
         <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
         <c:if test="${loginMember == null}">
 			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>

@@ -18,26 +18,27 @@
 	int qna_hit = to.getQna_hit();
 	String qna_content = to.getQna_content().replaceAll("\n", "<br>");
 	
-	/*
+	// 글 내용 하단의 관리자의 답댓글
 	ArrayList<QnAReplyTO> qnaReplys = (ArrayList)request.getAttribute("qnaReplys");
 	
 	StringBuilder html = new StringBuilder();
 	for(QnAReplyTO rplTo : qnaReplys) {
 		
 		String qrpl_id = rplTo.getQrpl_id();
+		qrpl_id = "관리자";
 		String qrpl_content = rplTo.getQrpl_content();
 		String qrpl_date = rplTo.getQrpl_date();
 		
 		html.append("<div>");
 		html.append("<tr>");
+		html.append("<td></td>" + "<br>");		
 		html.append("<td><댓글></td>" + "<br>");
-		html.append("<td>" + qrpl_id + "</td>" + "<br>");
+		html.append("<td>" + qrpl_id + " / " + qrpl_date + "</td>" + "<br>");
 		html.append("<td>" + qrpl_content + "</td>" + "<br>");
-		html.append("<td>" + qrpl_date + "</td>");
 		html.append("</tr>");
 		html.append("</div>");
 	}
-	*/
+	
 
 %>
 
@@ -122,6 +123,8 @@
     </div>
  -->
 
+<%= html.toString() %>
+
     <div class="text-center mt-4 pt-5 border-top">
       <a href="./modify.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-primary btn-lg">수정</a>
       <a href="./delete.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
@@ -189,43 +192,6 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js">
-$(document).ready(function() {
-	showReplys();
-});
-
-function showReplys() {
-	
-	let url = "${pageContext.request.contextPath}/qna/view.do";
-	let paramData = {"qnaReplys": "${qnaReplys}"}
-	
-	$.ajax({
-		type: 'get',
-		url: url,
-		data: paramData,
-		dataType : 'json',
-		success: function(result) {
-			let htmls = "";
-			if(result.length >= 1) {
-				$(result).each(function() {
-					html.append("<div>");
-					html.append("<tr>");
-					html.append("<td><댓글></td>" + "<br>");
-					html.append("<td>" + this.qrpl_id + "</td>" + "<br>");
-					html.append("<td>" + this.qrpl_content + "</td>" + "<br>");
-					html.append("<td>" + this.qrpl_date + "</td>");
-					html.append("</tr>");
-					html.append("</div>");
-				})
-			}
-		},
-		error: function(err) {
-			console.log('[에러] : ' + err.message);
-		}
-	})
-};
-
-</script>
 
 </body>
 </html>
