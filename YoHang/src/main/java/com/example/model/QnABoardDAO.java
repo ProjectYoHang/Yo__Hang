@@ -113,9 +113,14 @@ public class QnABoardDAO {
 		return to;
 	}
 	
-	public int qnaDeleteOk(QnABoardTO to) {
+	public int qnaDeleteOk(QnABoardTO to, QnAReplyTO rto) {
 		
 		int flag = 2;
+		
+		// 답댓글이 달려있는 상태의 글을 삭제하는 경우 답댓글이 먼저 삭제되어야 함
+		if(mapper.qnaReplyNum(to) == 1) {
+			mapper.qnaReplyDeleteOk(rto);
+		}
 		
 		int result = mapper.qnaDeleteOk(to);
 		

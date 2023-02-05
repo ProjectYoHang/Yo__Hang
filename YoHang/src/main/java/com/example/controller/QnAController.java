@@ -148,11 +148,15 @@ public class QnAController {
 	@RequestMapping("/qna/delete_ok.do")
 	public ModelAndView delete_ok(HttpServletRequest request, ModelAndView modelAndView) {
 		QnABoardTO to = new QnABoardTO();
+		QnAReplyTO rto = new QnAReplyTO();
+		
+		rto.setQna_seq(request.getParameter("qna_seq"));
+		//rto.setQrpl_content(request.getParameter("qrpl_content"));
 		
 		to.setQna_seq(request.getParameter("qna_seq"));
 		to.setQna_pw(request.getParameter("qna_pw"));
 		
-		int flag = dao.qnaDeleteOk(to);
+		int flag = dao.qnaDeleteOk(to, rto);
 		
 		modelAndView.setViewName("qna/qna_delete_ok");
 		modelAndView.addObject("flag", flag);
