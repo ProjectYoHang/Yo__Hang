@@ -33,7 +33,7 @@ public class MemberDAO {
 	public void signup() {
 		
 	}
-	
+	//// 아이디 중복 확
 	public int checkID(MemberTO to) {
 		int result = mapper.checkID(to);
 		
@@ -53,7 +53,7 @@ public class MemberDAO {
 		
 		return flag;
 	}
-	
+	/// 내 정보 보기 
 	public MemberTO memberInfo(MemberTO to) {
 		to = mapper.memberInfo();
 		
@@ -85,6 +85,13 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+	
+	////// 아이디로 메일찾아서  가져오기  
+	public MemberTO pullMail(MemberTO to) {
+		to = mapper.pullMail(to);
+		return to;
+	}
+	
 	
 	public MemberTO checkKakaoId(MemberTO to) {
 		to = mapper.checkKakaoId(to);

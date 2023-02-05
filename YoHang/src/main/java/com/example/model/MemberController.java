@@ -186,6 +186,16 @@ public class MemberController {
 			return "signup";
 		}
 	}
+////////// 아이디로 메일  가져오기
+	@ResponseBody
+	@RequestMapping ( "pull_mail.do") 
+	public MemberTO pull_mail(MemberTO to) {
+		to = dao.pullMail(to);
+		return to;
+	}
+	
+	
+	
 	
 ////////// 회원관리  -  리스트  불러오기 ////////
 	@RequestMapping ( "loadList.do" )
@@ -194,13 +204,11 @@ public class MemberController {
 		ArrayList<MemberTO> memberList = dao.list_member();
 		return memberList;
 	}
-	
 //////// 회원관리 리스트페이지 ///////
 	@RequestMapping ( "members_list.do" )
 	public String member_list() {
 		return "/admin/members_list";
 	}
-	
 	
 /////// 회원관리 회원삭제 //////
 	
@@ -214,13 +222,6 @@ public class MemberController {
 		
 		return flag;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

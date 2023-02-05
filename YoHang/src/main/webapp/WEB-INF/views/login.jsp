@@ -5,7 +5,6 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <html lang="ko">
 
-
 <jsp:include page="common/head.jsp" flush="false"/>
 
 <body>
@@ -27,7 +26,9 @@
           <div class="form-group">
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
           </div>
+          
           <br />
+          
           <div class="form-group">
             <input type="submit" value="Login" class="btn btn-primary w-100 py-3 px-5">
           </div>
@@ -38,30 +39,53 @@
 		      	</a>
           </div>
           
-        </form>
-          <!--  추후 내정보 페이지로 이동해야함  -->
-           <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
-		    	<a href="javascript:void(0)">
-		          <span>카카오 로그아웃</span>
-		      	</a>
-          </div>
+          <br />
           
+           <!-- Button trigger modal -->
           <div class="form-group mb-0 text-center">
-              <a href="javascript:void(0)" id="findInfoBtn" >아이디 / 비밀번호 찾기</a> 
+			<button type="button" class="btn btn-primary w-30 py-3 px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				  아이디 / 비밀번호 찾기 
+			</button>
           </div>
-          
+        
+          <br />
+        
           <div class="form-group mb-0 text-center">
-            <a href="./signup.do">회원가입</a>
+            <a class="btn btn-primary w-30 py-3 px-5" href="./signup.do">회원가입</a>
           </div>
+       </form>
+       
       </div>
     </div>
   </div>
 </section>
+   <!--  추후 내정보 페이지로 이동해야함  -->
+        <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
+		    <a  href="javascript:void(0)">
+		        <span>카카오 로그아웃</span>
+		    </a>
+        </div>
 
-<!-- 아이디 비밀번호 찾기 다이얼로그 -->
-  
-<div id="findInfo_form" title="아이디 / 비밀번호 찾기">
- 	<form>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-3" id="exampleModalLabel">아이디 / 비밀번호 찾기 </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+		<fieldset>
+			<label for="f_name">Name</label>
+			<input type="text" id="f_name" class="text ui-widget-content ui-corner-all">
+			<label for="f_mail">Mail</label>
+			<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all">
+			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		</fieldset>
+		</form>
+		
+		<form>
 		<fieldset>
 			<label for="f_name">Name</label>
 			<input type="text" id="f_name" class="text ui-widget-content ui-corner-all">
@@ -70,7 +94,15 @@
 			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 		</fieldset>
 	</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 <script>
 	
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
@@ -128,6 +160,6 @@ function kakaoLogout() {
 <!-- script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
-
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
