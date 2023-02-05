@@ -8154,3 +8154,15 @@ textarea.form-control {
 
 .board-view-file ul {
   list-style: none; }
+
+.nav-admin-group {
+  background-color: #8d703b; }
+
+.nav-admin-item.active {
+  background-color: #796031; }
+
+.nav-admin-item a {
+  display: block;
+  text-align: center;
+  color: #ffffff;
+  padding: 10px; }
