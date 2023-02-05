@@ -173,7 +173,7 @@ public class QnAController {
 	}
 	
 	
-	// 답댓글 쓰기
+	// qna 보기 & 관리자 답댓글 보기 or 작성
 	@RequestMapping("/qna_admin/reply_view.do")
 	public ModelAndView reply_write(HttpServletRequest request, ModelAndView modelAndView) {
 		QnAReplyTO to = new QnAReplyTO();
@@ -199,10 +199,32 @@ public class QnAController {
 		modelAndView.setViewName("qna_admin/qna_admin_view");
 		modelAndView.addObject("qna", qna);
 		modelAndView.addObject("qnaReplys", qnaReplys);
-		//modelAndView.addObject("flag", flag);
 		modelAndView.addObject("qna_seq", qna_seq);
 		
 		return modelAndView;
-				
 	}
+	
+	@RequestMapping("/qna_admin/qna_admin_write_ok.do")
+	public ModelAndView replyWriteOk(HttpServletRequest request, ModelAndView modelAndView) {
+		
+		QnAReplyTO to = new QnAReplyTO();
+		QnABoardTO bto = new QnABoardTO();
+		
+		bto.setQna_seq(request.getParameter("qna_seq"));
+		
+		to.setQna_seq(request.getParameter("qna_seq"));
+		to.setQrpl_id(request.getParameter("qrpl_id"));
+		to.setQrpl_content(request.getParameter("qrpl_content"));
+		
+		int flag = dao.qnaReplyWriteOk(to, bto);
+		
+		modelAndView.setViewName("qna_admin/qna_admin_reply_write_ok");
+		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		
+		return modelAndView;
+	}
+	
+	
+	
 }

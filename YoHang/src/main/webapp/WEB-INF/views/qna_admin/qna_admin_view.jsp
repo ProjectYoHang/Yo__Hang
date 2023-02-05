@@ -9,6 +9,8 @@
 	// 사용자의 qna 데이터
 	QnABoardTO qna = (QnABoardTO)request.getAttribute("qna");
 
+	String qna_seq = (String)request.getAttribute("qna_seq");
+
 	String qna_id = qna.getQna_id();
 	String qna_subject = qna.getQna_subject();
 	String qna_content = qna.getQna_content();
@@ -17,6 +19,9 @@
 	// 혹 이미 답변이 있다면 보여줄 답댓글 데이터
 	QnAReplyTO qnaReplys = (QnAReplyTO)request.getAttribute("qnaReplys");
 
+	// 로그인상태가 아니므로 관리자 아이디값을 임시로 지정함
+	String qrpl_id = "admin1234";
+	
 	StringBuilder html = new StringBuilder();
 	
 	if(qnaReplys != null) {
@@ -36,9 +41,11 @@
 		
 	} else {
 		
-		html.append("<form action='./qna_admin_write_ok.do' method='get'>");
+		html.append("<form action='./qna_admin_write_ok.do' method='post'>");
+		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
+		html.append("<input type='hidden' name='qrpl_id' value='" + qrpl_id + "' />");
 		html.append("답댓글 작성<br><br>");
-		html.append("<input type='text' name='reply' />");
+		html.append("<input type='text' name='qrpl_content' />");
 		html.append("<input type='submit' value='답댓글 쓰기' />");
 		html.append("</form>");
 		
