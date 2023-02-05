@@ -41,12 +41,12 @@
 		
 	} else {
 		
-		html.append("<form action='./qna_admin_write_ok.do' method='post'>");
+		html.append("<form action='./qna_admin_write_ok.do' name='wfrm' method='post'>");
 		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
 		html.append("<input type='hidden' name='qrpl_id' value='" + qrpl_id + "' />");
 		html.append("답댓글 작성<br><br>");
 		html.append("<input type='text' name='qrpl_content' />");
-		html.append("<input type='submit' value='답댓글 쓰기' />");
+		html.append("<input type='button' id='wbtn' value='답댓글 쓰기' />");
 		html.append("</form>");
 		
 	}
@@ -58,6 +58,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById('wbtn').onclick = function() { 
+			if(document.wfrm.qrpl_content.value.trim() == '') { 
+				alert('댓글 내용을 입력하셔야 합니다.');
+				return false;
+			}
+			document.wfrm.submit();
+		};
+	}
+	
+</script>
+
+
 </head>
 <body>
 
