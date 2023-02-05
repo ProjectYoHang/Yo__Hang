@@ -8032,6 +8032,22 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
 
+.navbar-nav .nav-item.board .dropdown .dropdown-toggle, .navbar-nav .nav-item.account .dropdown .dropdown-toggle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  background-color: transparent;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 20px; }
+  .navbar-nav .nav-item.board .dropdown .dropdown-toggle:hover, .navbar-nav .nav-item.account .dropdown .dropdown-toggle:hover {
+    color: white; }
+  @media (max-width: 991px) {
+    .navbar-nav .nav-item.board .dropdown .dropdown-toggle, .navbar-nav .nav-item.account .dropdown .dropdown-toggle {
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0.9rem;
+      padding-bottom: 0.9rem; } }
+
 .table-board-list {
   text-align: center;
   border-top: 2px solid #555555;
