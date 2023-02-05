@@ -34,8 +34,8 @@
 		html.append("</tr>");
 		html.append("<tr>");
 		html.append("<td>" + qrpl_content + "&nbsp;&nbsp;&nbsp;</td>");
-		html.append("<td><input type='button' value='수정'></td>");
-		html.append("<td><input type='button' value='삭제'></td>");
+		html.append("<td><input type='button' value='수정' /></td>");
+		html.append("<td><input type='button' value='삭제' onclick='location.href=\"./reply_delete.do\"' /></td>");
 		html.append("</tr>");
 		html.append("</table>");
 		
