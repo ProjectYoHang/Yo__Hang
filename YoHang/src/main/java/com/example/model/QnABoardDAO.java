@@ -162,7 +162,7 @@ public class QnABoardDAO {
 		
 	// qna 답댓글 작성
 	public int qnaReplyWriteOk(QnAReplyTO to, QnABoardTO bto) {
-		mapper.qnaReplyyn(bto);
+		mapper.qnaReplyy(bto);
 		
 		int flag = 1;
 		
@@ -174,7 +174,23 @@ public class QnABoardDAO {
 		return flag;
 	}
 	
-	
+	// qna 답댓글 삭제
+	public int qnaReplyDeleteOk(QnAReplyTO rto, QnABoardTO to) {
+		int flag = 1;
+		
+		int result = mapper.qnaReplyDeleteOk(rto);
+		
+		if(result == 0) {
+			flag = 1;
+		} else if(result == 1) {
+			flag = 0;
+			
+			// 답댓글 삭제되면 사용자 게시판에 다시 답변대기 상태로 변경
+			mapper.qnaReplyn(to);
+		}
+		
+		return flag;
+	}
 	
 	
 	

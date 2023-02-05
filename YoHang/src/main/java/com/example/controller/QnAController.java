@@ -229,6 +229,22 @@ public class QnAController {
 		return modelAndView;
 	}
 	
-	
+	// 답댓글 삭제
+	@RequestMapping("/qna_admin/qna_admin_delete_ok.do")
+	public ModelAndView replyDeleteOk(HttpServletRequest request, ModelAndView modelAndView) {
+		QnAReplyTO rto = new QnAReplyTO();
+		QnABoardTO to = new QnABoardTO();
+				
+		rto.setQna_seq(request.getParameter("qna_seq"));
+		to.setQna_seq(request.getParameter("qna_seq"));
+		
+		int flag = dao.qnaReplyDeleteOk(rto, to);
+		
+		modelAndView.setViewName("qna_admin/qna_admin_reply_delete_ok");
+		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		
+		return modelAndView;
+	}
 	
 }

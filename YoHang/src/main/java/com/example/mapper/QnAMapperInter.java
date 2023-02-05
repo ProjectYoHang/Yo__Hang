@@ -74,11 +74,15 @@ public interface QnAMapperInter {
 	
 	// 답변여부
 	@Update("update qna_board set qna_reply=1 where qna_seq=#{qna_seq}")
-	void qnaReplyyn(QnABoardTO to);
+	void qnaReplyy(QnABoardTO to);
+	
+	// 답변여부
+	@Update("update qna_board set qna_reply=0 where qna_seq=#{qna_seq}")
+	void qnaReplyn(QnABoardTO to);
 	
 	// 답댓글 삭제
 	@Delete("delete from qna_reply where qna_seq=#{qna_seq}")
-	void qnaReplyDeleteOk(QnAReplyTO to);
+	int qnaReplyDeleteOk(QnAReplyTO to);
 	
 	// 답댓글이 있는 경우를 조건으로 먼저 답댓글이 삭제된 다음 본 게시글이 삭제되게 만들어야 함
 	@Select("select qna_reply from qna_board where qna_seq=#{qna_seq}")
