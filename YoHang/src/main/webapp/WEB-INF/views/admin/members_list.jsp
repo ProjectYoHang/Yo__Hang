@@ -11,6 +11,7 @@
 <!-- hero-wrap -->
 <jsp:include page="../common/hero.jsp" flush="false"/>
 
+
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
@@ -79,33 +80,60 @@
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 <script type="text/javascript">
+
 $(document).ready(function(){
-	
-	
-	const memberList = function() {
-		$.ajax({
-			url : "loadList.do",
-			type : "post",
-			success : function ( resData ) {
-				$.each( resData.data, function ( index, item) {
-					let html =  '<tr>';
-					html += 	'<td>' + item.m_id + '</td>';
-					html += 	'<td>' + item.m_name + '</td>';
-					html += 	'<td>' + item.m_email + '</td>';
-					html += 	'<td>' + item.m_join_date + '</td>';
-					html +='<button m_id="' + item.m_id + '" action="delete" class="action">삭제</button>';
-					
-					html += '</tr>';
-					
-					$('#board').html(html);
-				});
-			}
-		});	
-	}
 	memberList();
-	
 });
 
+
+const memberDelete = function( m_id ) {
+	$.ajax({
+		url  : "memberDelete.do",
+		type : "post",
+		data :  {
+			m_id : m_id.trim()
+		},
+		success : function( resData ) {
+			
+			console.log( ' 회원삭제 성공' );
+			memberList();
+				
+		},
+		error: function( err ) {
+			alert( '에러 ' + err.status);
+		}
+	});
+}
+
+const memberList = function() {
+	$.ajax({
+		url : "loadList.do",
+		type : "post",
+		success : function ( resData ) {
+			let html = '<table border="1" >';
+			$.each( resData, function ( index, item ) {
+				console.log( item.m_id );
+				
+				html +=  '<tr>';
+				html += 	'<td>' + item.m_id + '</td>';
+				html += 	'<td>' + item.m_name + '</td>';
+				html += 	'<td>' + item.m_email + '</td>';
+				html += 	'<td>' + item.m_join_date + '</td>';
+				html += 	'<td><button onclick="memberDelete(\''+ item.m_id +'\');" >삭제</button> </td>';
+				html += 	'<td><button m_id="' + item.m_id + '" action="delete" class="action">메일 전송</button> </td>';
+				html += '</tr>';
+			});
+			html += '</table>';
+			$('#board').html(html);
+		},
+		error: function( err ) {
+			alert( '에러 ' + err.status);
+			
+		}
+	});	
+}
+
 </script>
+
 </body>
 </html>

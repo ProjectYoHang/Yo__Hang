@@ -200,4 +200,27 @@ public class MemberController {
 	public String member_list() {
 		return "/admin/members_list";
 	}
+	
+	
+/////// 회원관리 회원삭제 //////
+	
+	@RequestMapping ( "memberDelete.do" )
+	@ResponseBody
+	public int member_delete(@RequestParam String m_id) {
+		MemberTO to = new MemberTO();
+		to.setM_id(m_id);
+		
+		int flag = dao.signout_ok(to);
+		
+		return flag;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
