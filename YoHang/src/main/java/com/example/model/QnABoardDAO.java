@@ -192,10 +192,20 @@ public class QnABoardDAO {
 		return flag;
 	}
 	
-	
-	
-	
-	
+	// qna 답댓글 수정
+	public int qnaReplyModifyOk(QnAReplyTO to) {
+		int flag = 1;
+		
+		int result = mapper.qnaReplyModifyOk(to);
+		
+		if(result == 0) {
+			flag = 1;
+		} else if(result == 1) {
+			flag = 0;
+		}
+		
+		return flag;
+	} 
 	
 	
 	

@@ -88,5 +88,9 @@ public interface QnAMapperInter {
 	@Select("select qna_reply from qna_board where qna_seq=#{qna_seq}")
 	int qnaReplyNum(QnABoardTO to);
 	
+	// 답댓글 수정
+	@Update("update qna_reply set qrpl_content=#{qrpl_content} where qna_seq=#{qna_seq}")
+	int qnaReplyModifyOk(QnAReplyTO to);
+	
 	
 }

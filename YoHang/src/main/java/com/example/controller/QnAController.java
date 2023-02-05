@@ -247,4 +247,20 @@ public class QnAController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/qna_admin/qna_admin_modify_ok.do")
+	public ModelAndView replyModifyOk(HttpServletRequest request, ModelAndView modelAndView) {
+		QnAReplyTO to = new QnAReplyTO();
+		
+		to.setQna_seq(request.getParameter("qna_seq"));
+		to.setQrpl_content(request.getParameter("qrpl_content"));
+		
+		int flag = dao.qnaReplyModifyOk(to);
+		
+		modelAndView.setViewName("qna_admin/qna_admin_reply_modify_ok");
+		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		
+		return modelAndView;
+	}
+	
 }

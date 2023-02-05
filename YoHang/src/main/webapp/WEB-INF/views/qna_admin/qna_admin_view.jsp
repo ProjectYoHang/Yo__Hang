@@ -33,9 +33,15 @@
 		html.append("<td><댓글></td>");
 		html.append("</tr>");
 		html.append("<tr>");
-		html.append("<td>" + qrpl_content + "&nbsp;&nbsp;&nbsp;</td>");
-		html.append("<td><input type='button' value='수정' /></td>");
+		html.append("<form action='./qna_admin_modify_ok.do' name='mfrm' method='post'>");
+		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
+		html.append("<td><input type='text' name='qrpl_content' value='" + qrpl_content + "' />&nbsp;&nbsp;&nbsp;</td>");
+		html.append("<td><input type='button' id='mbtn' value='수정' /></td>");
 		html.append("<td><input type='button' value='삭제' onclick='location.href=\"./qna_admin_delete_ok.do?qna_seq=" + qna_seq + "\"' /></td>");
+		html.append("</form>");
+		html.append("</tr>");
+		html.append("<tr>");
+		html.append("<td><input type='button' value='목록' onclick='location.href=\"./reply_list.do\"' /></td>");
 		html.append("</tr>");
 		html.append("</table>");
 		
@@ -47,7 +53,8 @@
 		html.append("답댓글 작성<br><br>");
 		html.append("<input type='text' name='qrpl_content' />");
 		html.append("<input type='button' id='wbtn' value='답댓글 쓰기' />");
-		html.append("</form>");
+		html.append("</form><br>");
+		html.append("<input type='button' value='목록' onclick='location.href=\"./reply_list.do\"' />");
 		
 	}
 	
@@ -68,7 +75,17 @@
 			}
 			document.wfrm.submit();
 		};
-	}
+	};
+	
+	window.onload = function() {
+		document.getElementById('mbtn').onclick = function() { 
+			if(document.mfrm.qrpl_content.value.trim() == '') { 
+				alert('댓글 내용을 입력하셔야 합니다.');
+				return false;
+			}
+			document.mfrm.submit();
+		};
+	};
 	
 </script>
 
