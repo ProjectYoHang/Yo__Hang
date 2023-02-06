@@ -49,9 +49,13 @@ public interface MapperInter {
 	MembersTO memberInfo();
 
 ////////////// 마이페이지 - 계정정보 수정	
-
-	@Update ( "update members set m_email=#{m_email}, m_phone=#{m_phone}, m_pw =#{m_pw} where m_id=#{m_id}" )
+	/////// 비밀번호 변경 x
+	@Update ( "update members set m_email=#{m_email}, m_phone=#{m_phone} where m_id=#{m_id}" )
 	int memberInfoModify_ok(MembersTO to);
+	
+	/////// 비밀번호 변경 o  
+	@Update ( "update members set m_email=#{m_email}, m_phone=#{m_phone}, m_pw =#{m_pw} where m_id=#{m_id}" )
+	int memberInfoModify_ok_withPassword(MembersTO to);
 
 
 ////////////// 마이페이지 - 회원탈퇴 

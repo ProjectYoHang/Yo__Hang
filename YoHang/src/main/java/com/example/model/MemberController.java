@@ -141,11 +141,23 @@ public class MemberController {
 	@RequestMapping( "member_info_modify_ok.do" )
 	public String member_info_modify_ok(HttpServletRequest request) {
 			MembersTO to = new MembersTO();
-			to.setM_id( request.getParameter( "id" ) );
-			to.setM_pw( request.getParameter( "pw" ) );
-			to.setM_email( request.getParameter( "email" ) );
-			to.setM_phone( request.getParameter( "phone" ) );
-			int flag = dao.memberInfo_modify_ok(to);
+			int flag = 2;
+			if( request.getParameter( "pw" ) == "" || request.getParameter( "pw" ) == null  ) {
+				to.setM_id( request.getParameter( "id" ) );
+				to.setM_email( request.getParameter( "email" ) );
+				to.setM_phone( request.getParameter( "phone" ) );
+				
+				System.out.println( "1번 들어왔음  : " + request.getParameter( "pw") );
+				flag = dao.memberInfo_modify_ok(to);
+			} else {
+				to.setM_id( request.getParameter( "id" ) );
+				to.setM_pw( request.getParameter( "pw" ) );
+				to.setM_email( request.getParameter( "email" ) );
+				to.setM_phone( request.getParameter( "phone" ) );
+				System.out.println( "2번 들어왔음  : " + request.getParameter( "pw") );
+				flag = dao.memberInfo_modify_ok_withPassword(to);
+			}
+			
 			request.setAttribute( "flag", flag );
 			
 		return "./member/member_info_modify_ok";

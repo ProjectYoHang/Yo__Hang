@@ -59,9 +59,22 @@ public class MembersDAO {
 		
 		return to;
 	}
-	
+	// 정보 변경 
 	public int memberInfo_modify_ok(MembersTO to) {
 		int result = mapper.memberInfoModify_ok(to);
+		
+		int flag = 2;
+		
+		if(result == 1){
+			flag = 0;
+		}else {
+			flag = 1;
+		}
+		return flag;
+	}
+	///// 비밀번호도 함께 정보 변경 
+	public int memberInfo_modify_ok_withPassword(MembersTO to) {
+		int result = mapper.memberInfoModify_ok_withPassword(to);
 		
 		int flag = 2;
 		

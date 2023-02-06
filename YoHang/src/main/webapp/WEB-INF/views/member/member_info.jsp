@@ -15,6 +15,7 @@
 	window.onload = function() {
 		document.getElementById( 'mimBtn' ).onclick = function() {
 			let frm = document.modifyFrm;
+			}
 			if( frm.pw_rule_ok.value != 'Y' ) {
 				alert( '허용되지 않는 비밀번호입니다.' );
 				return false;
