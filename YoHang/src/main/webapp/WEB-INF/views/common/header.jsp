@@ -26,12 +26,21 @@
             </div>
           </div>
         </li>
-        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
         <c:if test="${loginMember == null}">
 			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
 		</c:if>
 		<c:if test="${loginMember != null}">
-			<li class="nav-item"><a href="home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
+		<li class="nav-item board">
+			<div class="dropdown">
+			    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+	              ${loginMember.m_name} 님
+	            </button>
+	            <div class="dropdown-menu">
+	              <a class="dropdown-item" href="./member_info.do">마이페이지</a>
+	              <a class="dropdown-item" href="./logout.do">로그아웃</a>
+	            </div>
+            </div>
+		</li>
 		</c:if>
         
       </ul>
@@ -39,29 +48,3 @@
   </div>
 </nav>
 
-<!--  
-
-<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
- <input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
- <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Home</title>
-	</head>
-	<body>
-		<c:if test="${loginMember == null}">
-			<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
-			<table border='1' width='100'>
-				<tr>
-					
-				</tr>
-			</table>
-		</c:if>
-	
-	</body>
-</html> 
--->

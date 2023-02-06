@@ -19,7 +19,7 @@ public class MailController {
 	private JavaMailSender javaMailSender;
 	
 	@RequestMapping ("/sendMail.do")
-	public String sendMail(MemberTO to , HttpServletRequest request) {
+	public String sendMail(MembersTO to , HttpServletRequest request) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo( request.getParameter( "mail_to" ) );
 		message.setText( request.getParameter( "mail_content" ) );
@@ -32,12 +32,16 @@ public class MailController {
 	
 	@ResponseBody
 	@RequestMapping( "sendPw.do" )
-	public void sendPw(@RequestParam String mail) {
+	public void sendPw(@RequestParam String mail, String tempPassword) {
 		SimpleMailMessage message = new SimpleMailMessage();
+		//String tempPassword = getTempPassword();
+		
 		message.setTo( mail );
-		message.setText( "111" );
-		message.setSubject( "YoHang에서.." );
+		message.setSubject( "YoHang 임시비밀번호 안내 메일입니다." );
+		message.setText( "YoHang 임시비밀번호 안내 메일입니다.\n 귀하의 임시비밀번호는[ " + tempPassword + " ]입니다.\n 로그인 후 변경해 주세요." );
+		
 		javaMailSender.send( message );
 
 	}
+	
 }

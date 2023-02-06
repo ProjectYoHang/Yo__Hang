@@ -10,23 +10,23 @@ import com.example.mapper.MapperInter;
 
 @Repository
 @MapperScan ("com.example.mapper")
-public class MemberDAO {	
+public class MembersDAO {	
 	
 	@Autowired
 	private MapperInter mapper;
 	
 	// test
 	public void select() {
-		MemberTO to = mapper.select();
+		MembersTO to = mapper.select();
 		System.out.println(to.getM_id());
 	}
 	
-	public MemberTO login(MemberTO to) {
+	public MembersTO login(MembersTO to) {
 		to = mapper.login(to);
 		return to;
 	}
 	
-	public MemberTO login_ok() {
+	public MembersTO login_ok() {
 		return null;
 	}
 	
@@ -34,14 +34,14 @@ public class MemberDAO {
 		
 	}
 	//// 아이디 중복 확
-	public int checkID(MemberTO to) {
+	public int checkID(MembersTO to) {
 		int result = mapper.checkID(to);
 		
 		System.out.println( result );
 		return result;
 	}
 	
-	public int signup_ok(MemberTO to) {
+	public int signup_ok(MembersTO to) {
 		int result = mapper.signupMember_ok(to);
 		int flag = 2;
 		System.out.println(result);
@@ -54,13 +54,13 @@ public class MemberDAO {
 		return flag;
 	}
 	/// 내 정보 보기 
-	public MemberTO memberInfo(MemberTO to) {
+	public MembersTO memberInfo(MembersTO to) {
 		to = mapper.memberInfo();
 		
 		return to;
 	}
 	
-	public int memberInfo_modify_ok(MemberTO to) {
+	public int memberInfo_modify_ok(MembersTO to) {
 		int result = mapper.memberInfoModify_ok(to);
 		
 		int flag = 2;
@@ -73,7 +73,7 @@ public class MemberDAO {
 		return flag;
 	}
 	
-	public int signout_ok(MemberTO to) {
+	public int signout_ok(MembersTO to) {
 		int result = mapper.signoutMember(to);
 		
 		int flag = 2;
@@ -87,22 +87,37 @@ public class MemberDAO {
 	}
 	
 	////// 아이디로 메일  가져오기  
-	public MemberTO pullMail(MemberTO to) {
+	public MembersTO pullMail(MembersTO to) {
 		to = mapper.pullMail(to);
 		return to;
 	}
+	
+	///// 임시비밀번호로 변경
+	public int modifyPassword(MembersTO to) {
+		int result = mapper.modifyPassword(to);
+		
+		int flag = 2;
+		if(result == 1){
+			flag = 0;
+		}else {
+			flag = 1;
+		}
+		return flag;
+	}
+	
+	
 	////// 이름으로 아이디 가져오기 
-	public ArrayList<MemberTO> pullId(MemberTO to) {
-		ArrayList<MemberTO> idList = mapper.pullId(to);
+	public ArrayList<MembersTO> pullId(MembersTO to) {
+		ArrayList<MembersTO> idList = mapper.pullId(to);
 		return idList;
 	}
 	
-	public MemberTO checkKakaoId(MemberTO to) {
+	public MembersTO checkKakaoId(MembersTO to) {
 		to = mapper.checkKakaoId(to);
 		return to;
 	}
 	
-	public int signup_kakaoMember_ok(MemberTO to) {
+	public int signup_kakaoMember_ok(MembersTO to) {
 		 int result = mapper.signupKakaoMember_ok(to);
 		 
 		 int flag = 2;
@@ -118,11 +133,11 @@ public class MemberDAO {
 	
 	////////////////////////// 회원 관리////////////////
 	
-	public ArrayList<MemberTO>list_member() {
-		ArrayList<MemberTO> memberList = mapper.list_member();
+	public ArrayList<MembersTO>list_member() {
+		ArrayList<MembersTO> memberList = mapper.list_member();
 		
 		System.out.println( "memberDAO에서 확인하는 중");
-		for(MemberTO to : memberList) {
+		for(MembersTO to : memberList) {
 			System.out.println("m_id : " + to.getM_id());
 		}
 		System.out.println( "memberDAO에서 확인 끝 ");

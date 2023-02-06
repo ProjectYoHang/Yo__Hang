@@ -163,10 +163,11 @@
 								url : '/sendPw.do',
 								type: 'post',
 								data: {
-									mail : resData.m_email
+									mail : resData.m_email,
+									tempPassword : resData.m_pw
 								},
 								success : function( result ) {
-									alert( '메일 발송 완' );
+									alert( '메일 발송 성공' );
 								},
 								error : function ( err ) {
 									alert( err.status );

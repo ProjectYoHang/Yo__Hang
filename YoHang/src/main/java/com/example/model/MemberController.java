@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MemberController {
 	
 	@Autowired
-	private MemberDAO dao;
+	private MembersDAO dao;
 	
 	@RequestMapping ( "test.do" )
 	public String test() {
@@ -41,7 +41,7 @@ public class MemberController {
 	}
 	@RequestMapping ("login_ok.do" )
 	public String login_ok(HttpServletRequest request) {
-		MemberTO loginMember = new MemberTO(); 
+		MembersTO loginMember = new MembersTO(); 
 		loginMember.setM_id( request.getParameter( "id" ) );
 		loginMember.setM_pw( request.getParameter( "password" ) );
 		
@@ -82,7 +82,7 @@ public class MemberController {
 	public String signup_ok(HttpServletRequest request) {
 		String kakao_id = request.getParameter("kakao_id");
 		System.out.println("kakoid : " + kakao_id);
-		MemberTO to = new MemberTO();
+		MembersTO to = new MembersTO();
 		int flag = 2;
 		if( kakao_id != "" ) {// 카카오 로그인 사용자 회원가입
 			
@@ -119,7 +119,7 @@ public class MemberController {
 	@RequestMapping ("check_id.do")
 	@ResponseBody // 결과 값을 리턴할 때 사용?
 	public int check_id(@RequestParam("id") String id) {
-		MemberTO to = new MemberTO();
+		MembersTO to = new MembersTO();
 		to.setM_id( id );
 		
 		int result = dao.checkID( to );
@@ -132,7 +132,7 @@ public class MemberController {
 //////////////// 회원정보 /////////////////////////
 	@RequestMapping( "member_info.do")
 	public String member_info(HttpServletRequest request) {
-		MemberTO to = new MemberTO();
+		MembersTO to = new MembersTO();
 		to = dao.memberInfo(to);
 		request.setAttribute("to", to);
 		return "./member/member_info";
@@ -140,7 +140,7 @@ public class MemberController {
 //////////////// 정보수정 /////////////////////////	
 	@RequestMapping( "member_info_modify_ok.do" )
 	public String member_info_modify_ok(HttpServletRequest request) {
-			MemberTO to = new MemberTO();
+			MembersTO to = new MembersTO();
 			to.setM_id( request.getParameter( "id" ) );
 			to.setM_pw( request.getParameter( "pw" ) );
 			to.setM_email( request.getParameter( "email" ) );
@@ -153,7 +153,7 @@ public class MemberController {
 //////////////// 탈퇴 /////////////////////////
 	@RequestMapping( "member_signout_ok.do")
 	public String member_signout_ok( HttpServletRequest request, HttpSession session ) {
-		MemberTO to = new MemberTO();
+		MembersTO to = new MembersTO();
 		to.setM_id( request.getParameter( "id" ) );
 		int flag = dao.signout_ok(to);
 		
@@ -166,7 +166,7 @@ public class MemberController {
 	public String kakao_login(HttpServletRequest request, @RequestParam String kakao_id) {
 		System.out.println( kakao_id );
 		
-		MemberTO to = new MemberTO();
+		MembersTO to = new MembersTO();
 		to.setM_kakao_id( kakao_id );
 		
 		System.out.println( " to.kakao_id :" + to.getM_kakao_id());
@@ -191,21 +191,30 @@ public class MemberController {
 ////////// 아이디로 메일  가져오기
 	@ResponseBody
 	@RequestMapping ( "find_pw.do" ) // 찾으려는 아이디에 해당하는 메일은 하나
-	public MemberTO pull_mail(@RequestParam String id) {
-		MemberTO to = new MemberTO();
+	public MembersTO pull_mail(@RequestParam String id) {
+		MembersTO to = new MembersTO();
 		to.setM_id(id);
 		to = dao.pullMail(to);
+
+		// 임시 비밀번호 생성 
+		String tempPassword = getTempPassword();
+		// 임시 비밀번호도 같이 넣어어 보내준다.
+		to.setM_pw(tempPassword);
+		to.setM_id(id);
+		// 임시 비밀번호로 변경 
+		dao.modifyPassword(to);
+		
 		return to;
 	}
 	
 //////// 이름으로 id 가져오기 
 	@ResponseBody
 	@RequestMapping ( "find_id.do" ) //같은 이름으로 되어있는 아이디가 여럿일 수 있다.
-	public ArrayList<MemberTO> pull_id(@RequestParam String name) {
-		MemberTO to = new MemberTO();
+	public ArrayList<MembersTO> pull_id(@RequestParam String name) {
+		MembersTO to = new MembersTO();
 		to.setM_name(name);
 		
-		ArrayList<MemberTO> idList = dao.pullId(to);
+		ArrayList<MembersTO> idList = dao.pullId(to);
 		
 		return idList;
 	}
@@ -213,8 +222,8 @@ public class MemberController {
 ////////// 회원관리  -  리스트  불러오기 ////////
 	@RequestMapping ( "loadList.do" )
 	@ResponseBody
-	public ArrayList<MemberTO> members_loadList(){
-		ArrayList<MemberTO> memberList = dao.list_member();
+	public ArrayList<MembersTO> members_loadList(){
+		ArrayList<MembersTO> memberList = dao.list_member();
 		return memberList;
 	}
 //////// 회원관리 리스트페이지 ///////
@@ -228,11 +237,28 @@ public class MemberController {
 	@RequestMapping ( "memberDelete.do" )
 	@ResponseBody
 	public int member_delete(@RequestParam String m_id) {
-		MemberTO to = new MemberTO();
+		MembersTO to = new MembersTO();
 		to.setM_id(m_id);
 		
 		int flag = dao.signout_ok(to);
 		
 		return flag;
 	}
+	
+////////////////////////////// 임시비밀번호 생성 ///////////////
+	  public String getTempPassword(){
+	      char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+	              'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+	              '!', '@', '#', '$', '%'};
+
+	      String str = "";
+
+	      // 문자 배열 길이의 값을 랜덤으로 10개를 뽑아 구문을 작성함
+	      int idx = 0;
+	      for (int i = 0; i < 10; i++) {
+	          idx = (int) (charSet.length * Math.random());
+	          str += charSet[idx];
+	       }
+	       return str;
+	   }
 }
