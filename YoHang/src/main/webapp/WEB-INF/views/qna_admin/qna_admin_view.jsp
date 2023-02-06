@@ -68,27 +68,26 @@
 
 <script type="text/javascript">
 	window.onload = function() {
-		document.getElementById('wbtn').onclick = function() { 
-			if(document.wfrm.qrpl_content.value.trim() == '') { 
-				alert('댓글 내용을 입력하셔야 합니다.');
-				return false;
-			}
-			document.wfrm.submit();
-		};
-	};
-	
-	window.onload = function() {
-		document.getElementById('mbtn').onclick = function() { 
-			if(document.mfrm.qrpl_content.value.trim() == '') { 
-				alert('댓글 내용을 입력하셔야 합니다.');
-				return false;
-			}
-			document.mfrm.submit();
-		};
+		if(document.getElementById('wbtn')) {
+			document.getElementById('wbtn').onclick = function() { 
+				if(document.wfrm.qrpl_content.value.trim() == '') { 
+					alert('댓글 내용을 입력하셔야 합니다.');
+					return false;
+				}
+				document.wfrm.submit();
+			};
+		} else if(document.getElementById('mbtn')) {
+			document.getElementById('mbtn').onclick = function() { 
+				if(document.mfrm.qrpl_content.value.trim() == '') { 
+					alert('댓글 내용을 입력하셔야 합니다.');
+					return false;
+				}
+				document.mfrm.submit();
+			};
+		}
 	};
 	
 </script>
-
 
 </head>
 <body>
