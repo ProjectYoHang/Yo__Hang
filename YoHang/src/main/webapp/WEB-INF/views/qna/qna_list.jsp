@@ -38,9 +38,9 @@
 		sbHtml.append("<td>" + qna_hit + "</td>");	
 		
 		if(qna_reply == 1) {
-			sbHtml.append("<td>답변완료</td>");
+			sbHtml.append("<td><font color='blue'>답변완료</font></td>");
 		} else {
-			sbHtml.append("<td>답변대기</td>");
+			sbHtml.append("<td><font color='red'>답변대기</font></td>");
 		}
 		
 		sbHtml.append("</tr>");	

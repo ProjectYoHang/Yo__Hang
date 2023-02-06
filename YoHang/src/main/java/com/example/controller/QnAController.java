@@ -164,18 +164,29 @@ public class QnAController {
 	}
 	
 
+	// 관리자
 	
 	// 관리자측 qna 목록
 	@RequestMapping("/qna_admin/reply_list.do")
-	public ModelAndView reply_list(HttpServletRequest request, ModelAndView modelAndView) {
-		ArrayList<QnABoardTO> qnaLists = dao.qnaReplyList();
+	public ModelAndView reply_list(ModelAndView modelAndView, @RequestParam(value="cpage", required=false, defaultValue="1") int cpage) {
+		QnABoardListTO listTo = new QnABoardListTO();
+		
+		listTo.setCpage(cpage);
+		
+		Map<String, Object> map = dao.qnaReplyList(listTo);
 		
 		modelAndView.setViewName("qna_admin/qna_admin_list");
-		modelAndView.addObject("qnaLists", qnaLists);
+		
+		modelAndView.addObject("qnaLists", map.get("qnaLists"));
+		modelAndView.addObject("cpage", map.get("cpage"));
+		modelAndView.addObject("lastPage", map.get("lastPage"));
+		modelAndView.addObject("startPageNum", map.get("startPageNum"));
+		modelAndView.addObject("lastPageNum", map.get("lastPageNum"));
+		modelAndView.addObject("totalRecord", map.get("totalRecord"));
+		modelAndView.addObject("recordPerPage", map.get("recordPerPage"));
 		
 		return modelAndView;
 	}
-	
 	
 	// qna 보기 & 관리자 답댓글 보기 or 작성
 	@RequestMapping("/qna_admin/reply_view.do")

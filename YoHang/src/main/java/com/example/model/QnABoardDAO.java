@@ -137,12 +137,42 @@ public class QnABoardDAO {
 	// Q&A 답댓글 메서드
 	
 	// 관리자측 qna list
-	public ArrayList<QnABoardTO> qnaReplyList() {
-		ArrayList<QnABoardTO> qnaLists = mapper.qnaReplyList();
+	public Map<String, Object> qnaReplyList(QnABoardListTO listTo) {
+		listTo.setTotalRecord(mapper.qnaAllCount());
+		int totalRecord = listTo.getTotalRecord();
 		
-		return qnaLists;
+		int cpage = listTo.getCpage();
+		
+		int recordPerPage = listTo.getRecordPerPage();
+		
+		listTo.setStartPageNum(1);
+		int startPageNum = listTo.getStartPageNum();
+		
+		listTo.setLastPageNum(recordPerPage);
+		int lastPageNum = listTo.getLastPageNum();
+		
+		int startRow = (cpage - 1) * recordPerPage;
+		
+		listTo.setStartRow(startRow);
+		listTo.setRecordPerPage(recordPerPage);
+		
+		ArrayList<QnABoardTO> qnaLists = mapper.qnaList(listTo);
+		
+		int lastPage = (int)(Math.ceil(totalRecord / recordPerPage)) + 1;
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("qnaLists", qnaLists);
+		resultMap.put("cpage", cpage);
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("lastPageNum", lastPageNum);
+		resultMap.put("totalRecord", totalRecord);
+		resultMap.put("recordPerPage", recordPerPage);
+		
+		return resultMap;
 	}
 	
+
 	// qna 답댓글 view에서 사용자의 qna 부분
 	public QnABoardTO qnaReplyView1(QnABoardTO to) {
 		
@@ -150,7 +180,6 @@ public class QnABoardDAO {
 		
 		return qna;
 	}
-	
 	
 	// qna 답댓글 view에서 답댓글 부분
 	public QnAReplyTO qnaReplyView2(QnAReplyTO to) {
