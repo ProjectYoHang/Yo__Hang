@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	String kakao_id = "";
@@ -232,10 +232,6 @@
 		    	data : {id : m_id },
 		    	type : "post",
 		    	success : function( result ){
-		    		
-		    	
-		    	debugger;
-		    		console.log("id 전송 성공");
 		    		if( result == 0 ) {
 		    			$("#id_check_feedback").html('사용할 수 있는 아이디입니다.')
 		    			$("#id_check_feedback").css('color', 'green');

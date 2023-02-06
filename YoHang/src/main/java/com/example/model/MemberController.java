@@ -186,16 +186,29 @@ public class MemberController {
 			return "signup";
 		}
 	}
+	
+	/// 아이디 / 비밀번호 찾기 ///
 ////////// 아이디로 메일  가져오기
 	@ResponseBody
-	@RequestMapping ( "pull_mail.do") 
-	public MemberTO pull_mail(MemberTO to) {
+	@RequestMapping ( "find_pw.do" ) // 찾으려는 아이디에 해당하는 메일은 하나
+	public MemberTO pull_mail(@RequestParam String id) {
+		MemberTO to = new MemberTO();
+		to.setM_id(id);
 		to = dao.pullMail(to);
 		return to;
 	}
 	
-	
-	
+//////// 이름으로 id 가져오기 
+	@ResponseBody
+	@RequestMapping ( "find_id.do" ) //같은 이름으로 되어있는 아이디가 여럿일 수 있다.
+	public ArrayList<MemberTO> pull_id(@RequestParam String name) {
+		MemberTO to = new MemberTO();
+		to.setM_name(name);
+		
+		ArrayList<MemberTO> idList = dao.pullId(to);
+		
+		return idList;
+	}
 	
 ////////// 회원관리  -  리스트  불러오기 ////////
 	@RequestMapping ( "loadList.do" )
@@ -222,6 +235,4 @@ public class MemberController {
 		
 		return flag;
 	}
-	
-	
 }

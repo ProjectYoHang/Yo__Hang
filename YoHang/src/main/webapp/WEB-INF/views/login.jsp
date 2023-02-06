@@ -68,32 +68,28 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-3" id="exampleModalLabel">아이디 / 비밀번호 찾기 </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="modalBoard" >
         <form>
 		<fieldset>
-			<label for="f_name">Name</label>
-			<input type="text" id="f_name" class="text ui-widget-content ui-corner-all">
-			<label for="f_mail">Mail</label>
-			<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all">
-			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+				<label for="f_name"  >Name</label>
+				<input type="text" id="f_name" class="text ui-widget-content ui-corner-all">
+				<!-- <label for="f_mail">Mail</label>
+				<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all"> -->
+				<button type="button" class="btn btn-info" data-bs-dismiss="modal" onclick="findId()" >아이디 찾기</button>
 		</fieldset>
-		</form>
-		
-		<form>
+		<hr>
 		<fieldset>
-			<label for="f_name">Name</label>
-			<input type="text" id="f_name" class="text ui-widget-content ui-corner-all">
-			<label for="f_mail">Mail</label>
-			<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all">
-			<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+				<label for="f_id"  >Id</label>
+				<input type="text" id="f_id"  class="text ui-widget-content ui-corner-all">
+				<button type="button" class="btn btn-info" data-bs-dismiss="modal" onclick="findPw()" >비밀번호 찾기</button>
 		</fieldset>
-	</form>
+	  </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -104,7 +100,90 @@
 
 
 <script>
+
+	const findId =  function() {
+		let name = $('#f_name').val();
+		let idList = '<table>';
+		
+		if( name == null || name == "" ) {
+			alert( '이름을 입력하세요' );
+		}else {
+			$.ajax({
+				url  : '/find_id.do',
+				type : 'post',
+				data : {
+					name : name
+				},
+				success : function ( resData ) {
+					console.log( 'findId 통신 성공 ');
+					if( resData.length <= 0  ) {
+						alert( '등록되지 않은 이름입니다.' );	
+					} else {
+						$.each(resData, function(index, item) {
+							console.log( item.m_id );
+							idList += '<tr>';
+							idList += '<td>' +  item.m_id + '</td>';
+							idList += '</tr>';
+						})
+						idList += '</table>';
+						alert( idList );
+						//$('#modalBoard').html(nameList);	
+					}
+				},
+				error : function ( err ) {
+					alert( err.status );
+				}
+			});	
+		}
+		
+	}
 	
+	const findPw =  function( ) {
+		let id = $('#f_id').val();
+		
+		if( id == null || id == "" ) {
+			alert( '아이디를  입력하세요' );
+		}else {
+			$.ajax({
+				url  : '/find_pw.do',
+				type : 'post',
+				data : {
+					id : id
+				},
+				success : function ( resData ) {
+					console.log( 'findPw 통신 성공 ');
+					if( !resData ) {
+						alert( '등록되지 않은 아이디 입니다.');
+					}else {
+						console.log( resData.m_email );
+						if( confirm( "아래의 메일로 임시 비밀번호를 보낼까요?\n" + resData.m_email ) ){
+							alert( '확인' );
+							
+							$.ajax({
+								url : '/sendPw.do',
+								type: 'post',
+								data: {
+									mail : resData.m_email
+								},
+								success : function( result ) {
+									alert( '메일 발송 완' );
+								},
+								error : function ( err ) {
+									alert( err.status );
+								}
+							})
+						} else {
+							alert( '취소' );
+						}
+					}
+					
+				},
+				error : function ( err ) {
+					alert( err.status );
+				}
+			});	
+		}
+	}	
 Kakao.init('107544815e4e8a304fea6cafb9766ba8'); 
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인

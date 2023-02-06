@@ -31,9 +31,13 @@ public interface MapperInter {
 	@Select ( "select count(m_id) from members where m_id=#{m_id}" )
 	int checkID(MemberTO to);
 	
-////////////// 비밀번호 찾기 - 아이디로 메일찾아서 가져오 ///
+////////////// 비밀번호 찾기 - 아이디로 메일찾아서 가져오기   ///
 	@Select ( "select m_email from members where m_id=#{m_id}" )
 	MemberTO pullMail(MemberTO to);
+	
+///////////// 아이디 찾기 - 이름으로 아이디 가져오기 ///
+	@Select ( "select m_id from members where m_name=#{m_name}")
+	ArrayList<MemberTO> pullId(MemberTO to);
 	
 ///////////////  마이페이지 - 계정정보 불러오기	
 	

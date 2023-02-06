@@ -86,12 +86,16 @@ public class MemberDAO {
 		return flag;
 	}
 	
-	////// 아이디로 메일찾아서  가져오기  
+	////// 아이디로 메일  가져오기  
 	public MemberTO pullMail(MemberTO to) {
 		to = mapper.pullMail(to);
 		return to;
 	}
-	
+	////// 이름으로 아이디 가져오기 
+	public ArrayList<MemberTO> pullId(MemberTO to) {
+		ArrayList<MemberTO> idList = mapper.pullId(to);
+		return idList;
+	}
 	
 	public MemberTO checkKakaoId(MemberTO to) {
 		to = mapper.checkKakaoId(to);

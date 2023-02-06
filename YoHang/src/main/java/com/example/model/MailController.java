@@ -6,6 +6,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.AllArgsConstructor;
 
@@ -25,5 +27,17 @@ public class MailController {
 		javaMailSender.send( message );
 		
 		return "home";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping( "sendPw.do" )
+	public void sendPw(@RequestParam String mail) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo( mail );
+		message.setText( "111" );
+		message.setSubject( "YoHang에서.." );
+		javaMailSender.send( message );
+
 	}
 }
