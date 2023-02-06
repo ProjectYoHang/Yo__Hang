@@ -72,7 +72,6 @@
         <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
         <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        
         <li class="nav-item board">
           <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">

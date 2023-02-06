@@ -215,6 +215,7 @@ public class QnAController {
 		modelAndView.addObject("qna", qna);
 		modelAndView.addObject("qnaReplys", qnaReplys);
 		modelAndView.addObject("qna_seq", qna_seq);
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		
 		return modelAndView;
 	}
@@ -236,6 +237,7 @@ public class QnAController {
 		modelAndView.setViewName("qna_admin/qna_admin_reply_write_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		
 		return modelAndView;
 	}
@@ -254,6 +256,7 @@ public class QnAController {
 		modelAndView.setViewName("qna_admin/qna_admin_reply_delete_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		
 		return modelAndView;
 	}
@@ -270,6 +273,7 @@ public class QnAController {
 		modelAndView.setViewName("qna_admin/qna_admin_reply_modify_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("qna_seq", request.getParameter("qna_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		
 		return modelAndView;
 	}

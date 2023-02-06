@@ -4,11 +4,12 @@
 <%
 	int flag = (Integer)request.getAttribute("flag");
 	String qna_seq = (String)request.getAttribute("qna_seq");
+	int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
 	
 	out.println("<script type='text/javascript'>");
 	if(flag == 0) {
 		//out.println("alert('답댓글 수정에 성공했습니다.');");
-		out.println("location.href='./reply_view.do?qna_seq=" + qna_seq + "';");
+		out.println("location.href='./reply_view.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "';");
 	} else {
 		out.println("alert('답댓글 수정에 실패했습니다.');");
 		out.println("history.back();");
