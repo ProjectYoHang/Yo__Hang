@@ -38,7 +38,18 @@
         <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
         <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        <li class="nav-item"><a href="/qna/list.do" class="nav-link">Board</a></li>
+        <li class="nav-item board">
+          <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+              Board
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/qna/list.do">Q&A</a>
+              <a class="dropdown-item" href="#">FAQ</a>
+              <a class="dropdown-item" href="#">공지사항</a>
+            </div>
+          </div>
+        </li>
         <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
         <c:if test="${loginMember == null}">
 			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
