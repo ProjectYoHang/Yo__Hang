@@ -5,9 +5,9 @@
 
 <%
 	RvBoardTO to = (RvBoardTO)request.getAttribute("to");		
-
+	//String cpage = (String)request.getAttribute("cpage");
+	int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
 	String rv_seq = (String)request.getAttribute("rv_seq");
-	String cpage = (String)request.getAttribute("cpage");
 	String rv_subject = to.getRv_subject();
 	String rv_id = to.getRv_id();
 %>
@@ -28,42 +28,30 @@
 
 <!-- content -->
 <section class="ftco-section bg-light">
-<div class="con_title">
-	<h3>게시판</h3>
-	<p>HOME &gt; 게시판 &gt; <strong>게시판</strong></p>
-</div>
-<div class="con_txt">
-	<!-- name을 설정한다는 의미는 자바스크립트에서 뭔가 검사할 것이 있구나 라고 생각해야 함 -->
-	<form action="./delete_ok.do" method="post" name="dfrm">
-	<!-- seq를 숨겨서 ok페이지로 보내기 위해서 input 추가 -->
-	<input type="hidden" name="rv_seq" value="<%= rv_seq %>">
-		<div class="contents_sub">	
-			<!--게시판-->
-			<div class="board_write">
-				<table>
-				<tr>
-					<th class="top">글쓴이</th>
-					<td class="top"><input type="text" name="rv_id" value="<%= rv_id %>" class="board_view_input_mail" maxlength="5" readonly/></td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="rv_subject" value="<%= rv_subject %>" class="board_view_input" readonly/></td>
-				</tr>
-				</table>
-			</div>
-			
-			<div class="btn_area">
-				<div class="align_left">
-					<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./list.do'" />
-					<input type="button" value="보기" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./view.do?rv_seq=<%= rv_seq %>'" />
-				</div>
-				<div class="align_right">
-					<input type="button" id="dbtn" value="삭제" class="btn_write btn_txt01" style="cursor: pointer;" />
-				</div>
-			</div>
-			<!--//게시판-->
-		</div>
+  <div class="container">
+    <form action="./delete_ok.do" class="bg-white p-5" name="dfrm">
+    <input type="hidden" name="rv_seq" value="<%= rv_seq %>" />
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_id" title="Title" value="<%= rv_id %>" readonly>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="qna_subject" title="Title" value="<%= rv_subject %>" readonly>
+      </div>
+
+<!-- 
+      <div class="form-group">
+        <input type="file" id="file" name="file" class="form-control">
+      </div>
+-->
+      <div class="form-group text-center mt-5">
+        <input type="button" id="dbtn" value="삭제" class="btn btn-primary py-3 px-5">
+        <a href="./view.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-secondary py-3 px-5">보기</a>
+        <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
+      </div>
+    </form>
+  </div>
 </section>
+
 
 <!--
 // instagram --------------------------------------->

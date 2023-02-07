@@ -54,7 +54,7 @@ public class RvController {
 	}
 
 	@RequestMapping("/view.do")
-	public ModelAndView view(HttpServletRequest request, ModelAndView modelAndView) {
+	public ModelAndView view(HttpServletRequest request, ModelAndView modelAndView ) {
 
 		RvBoardTO to = new RvBoardTO();
 
@@ -65,6 +65,7 @@ public class RvController {
 		modelAndView.setViewName("/review/board_view1");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 
@@ -119,6 +120,7 @@ public class RvController {
 		modelAndView.setViewName("/review/board_delete1");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	
@@ -132,6 +134,7 @@ public class RvController {
 		
 		modelAndView.setViewName("/review/board_delete1_ok");
 		modelAndView.addObject("flag", flag);
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	@RequestMapping("/modify.do")
@@ -145,6 +148,7 @@ public class RvController {
 		modelAndView.setViewName("/review/board_modify1");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	
@@ -178,6 +182,7 @@ public class RvController {
 		modelAndView.setViewName("/review/board_modify1_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 		
 	}
@@ -185,7 +190,7 @@ public class RvController {
 	@GetMapping("/kakao.do")
 	public ModelAndView kakao(HttpServletRequest request, ModelAndView modelAndView) {
 		
-	modelAndView.setViewName("/review/kakao2");
+	modelAndView.setViewName("/review/kakao3");
 	return modelAndView;
 	}
 	

@@ -46,7 +46,7 @@
 		if( rv_seq.equals( "" ) ) {
 			sbHtml.append( "						<img src='../../images/noimage.jpg' border='0' width='200' />" );
 		} else {
-			sbHtml.append( "						<a href='./view.do?rv_seq=" + rv_seq + "'><img src='../upload/" + rv_img_name + "' border='0' width='200' /></a>" );
+			sbHtml.append( "						<a href='./view.do?cpage=" + cpage + "&rv_seq=" + rv_seq + "'><img src='../upload/" + rv_img_name + "' border='0' width='200' /></a>" );
 		}
 		sbHtml.append( "					</div>" );
 		sbHtml.append( "				</td>" );

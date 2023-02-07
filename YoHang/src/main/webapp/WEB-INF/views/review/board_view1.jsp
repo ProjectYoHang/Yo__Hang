@@ -6,7 +6,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
-
+	
+    //int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
+    
+	String cpage = (String)request.getAttribute("cpage");
 	String rv_seq = (String)request.getAttribute("rv_seq");
 	
 	String rv_subject = to.getRv_subject();
@@ -28,54 +31,41 @@
 <jsp:include page="../common/hero.jsp" flush="false"/>
 
 <!-- content -->
-<section class="ftco-section bg-light">
-<div class="contents1"> 
-	<div class="con_title"> 
-		<p style="margin: 0px; text-align: right">
-			<img style="vertical-align: middle" alt="" src="./images/home_icon.gif" /> &gt; 커뮤니티 &gt; <strong>객실 리뷰</strong>
-		</p>
-	</div>
+<section class="ftco-section">
+  <div class="container">
+    <h3 class="board-view-title"><%= rv_subject %> </h3>
+    <ul class="board-info-group">
+      <li class="d-md-inline board-view-writer">
+        <strong>작성자</strong>
+        <span>관리자</span>
+      </li>
+      <li class="board-view-writer">
+        <strong>작성일</strong>
+        <span>2023-01-30</span>
+      </li>
+      <li class="board-view-hit">
+        <strong>조회수</strong>
+        <span>10</span>
+      </li>
+    </ul>
 
-	<div class="contents_sub">	
-	<!--게시판-->
-		<div class="board_view">
-			<table>
-			<tr>
-				<th width="10%">제목</th>
-				<td width="60%"><%= rv_subject %></td>
-				<th width="10%">등록일</th>
-				<td width="20%"><%= rv_date %></td>
-			</tr>
-			<tr>
-				<th>글쓴이</th>
-				<td><%= rv_id %></td>
-			</tr>	
-			<tr>
-				<td colspan="4" height="200" valign="top" style="padding:20px; line-height:160%">
-					<div id="bbs_file_wrap">
-						<div>
-							<img src="../upload/<%= rv_img_name %>" width="400" onerror="" /><br />
-						</div>
-					</div>
-					<%= rv_content %>
-				</td>
-			</tr>			
-			</table>
-			
-
-
-			<form action="" method="post" name="cfrm">
-			</form>
-		</div>
-		<div class="btn_area">
-			<div class="align_left">			
-				<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./list.do'" />
+    <div class="board-view-content">
+   		<div id="bbs_file_wrap">
+			<div>
+				<img src="../upload/<%= rv_img_name %>" width="400" onerror="" /><br />
 			</div>
-			<div class="align_right">
-				<input type="button" value="수정" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./modify.do?rv_seq=<%= rv_seq %>'" />
-				<input type="button" value="삭제" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./delete.do?rv_seq=<%= rv_seq %>'" />
-				<input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='./write.do'" />
-			</div>
+		</div> 
+      <div class="form-group">
+        <textarea type="text" class="form-control"  name="rv_content"  rows="10"><%= rv_content %></textarea>
+      </div>
+    </div>
+
+
+    <div class="text-center mt-4 pt-5 border-top">
+      <a href="./modify.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-primary btn-lg">수정</a>
+      <a href="./delete.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
+      <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
+    </div>
 		</div>
 		<!--//게시판-->
 	</div>
