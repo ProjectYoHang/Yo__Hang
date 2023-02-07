@@ -5,9 +5,21 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
+	// jsp hero parameters
 	String menuName = "Board";
 	String title = "Q&A";
-
+	
+	// jsp header parameters
+	String home = "/home.do";
+	String aboutus = "/aboutus.do";
+	String findus = "/findus.do";
+	String qna = "/qna/list.do";
+	String faq = "/faq/list.do";
+	String notice = "/notice/list.do";
+	String login = "/login.do";
+	String logout = "/logout.do";
+	String mypage = "/mypage/list.do";
+	
 	ArrayList<QnABoardTO> qnaLists = (ArrayList<QnABoardTO>)request.getAttribute("qnaLists");
 	
 	int totalRecord = (Integer)request.getAttribute("totalRecord");
@@ -56,8 +68,20 @@
 <body>
 <!--
 // header --------------------------------------->
-<!-- header.jsp 참조 코드 있던 자리 -->
+<jsp:include page="../common/header.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= login %>" name="login"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+	<jsp:param value="<%= mypage %>" name="mypage"/>
+</jsp:include>
 
+<!--
+<%-- 
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -96,11 +120,15 @@
     </div>
   </div>
 </nav>
+ --%>
+ -->
+
 
 <!-- hero-wrap -->
 <jsp:include page="../common/hero.jsp" flush="false">
 	<jsp:param value="<%= menuName %>" name="menuName"/>
 	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
 <!--
