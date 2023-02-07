@@ -6,6 +6,21 @@
 <%@page import="com.example.model.QnABoardTO"%>
 	
 <%
+	//jsp hero parameters
+	String menuName = "Board";
+	String title = "Q&A";
+	
+	// jsp header parameters
+	String home = "/home.do";
+	String aboutus = "/aboutus.do";
+	String findus = "/findus.do";
+	String qna = "/qna/list.do";
+	String faq = "/faq/list.do";
+	String notice = "/notice/list.do";
+	String login = "/login.do";
+	String logout = "/logout.do";
+	String mypage = "/mypage/list.do";
+	
 	QnABoardTO to = (QnABoardTO)request.getAttribute("to");
 	
 	int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
@@ -40,8 +55,6 @@
 		html.append("</div>");
 		
 	}
-	
-	
 %>
 
 <!DOCTYPE html>
@@ -51,54 +64,27 @@
 <body>
 <!--
 // header --------------------------------------->
+<jsp:include page="../common/header.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= login %>" name="login"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+	<jsp:param value="<%= mypage %>" name="mypage"/>
+</jsp:include>
 
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/home.do">YoHang</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="oi oi-menu"></span> Menu
-    </button>
-
-    <div class="collapse navbar-collapse" id="ftco-nav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
-        <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        
-        <li class="nav-item board">
-          <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-              Board
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/qna/list.do">Q&A</a>
-              <a class="dropdown-item" href="#">FAQ</a>
-              <a class="dropdown-item" href="#">공지사항</a>
-            </div>
-          </div>
-        </li>
-                
-        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
-        <c:if test="${loginMember == null}">
-			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<li class="nav-item"><a href="/home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
-		</c:if>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
+<!-- hero-wrap -->
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!--
 // contents --------------------------------------->
-
-<!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
-
 
 <!-- content -->
 <section class="ftco-section">
@@ -122,21 +108,6 @@
     <div class="board-view-content">
       <%= qna_content %>
     </div>
-
-<!-- 
-    <div class="row pt-4 board-view-file">
-      <div class="col-md-2">
-        <h4 class="h5">첨부파일</h4>
-      </div>
-      <div class="col-md-10">
-        <ul class="p-md-0 mb-0">
-          <li><a href="#" download><i class="xi-file-text-o"></i> 주방위생 및 개인위생.ppt (5.64MB)</a></li>
-          <li><a href="#" download><i class="xi-file-text-o"></i> 메뉴.ppt (2.97MB)</a</li>
-          <li><a href="#" download><i class="xi-file-text-o"></i> 위해요소중점관리기준(HACCP).ppt (917.5KB)</a></li>
-        </ul>
-      </div>
-    </div>
- -->
 
 <%= html.toString() %>
 

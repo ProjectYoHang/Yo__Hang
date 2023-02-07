@@ -19,7 +19,7 @@
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
-	
+		
 	ArrayList<QnABoardTO> qnaLists = (ArrayList<QnABoardTO>)request.getAttribute("qnaLists");
 	
 	int totalRecord = (Integer)request.getAttribute("totalRecord");
@@ -79,50 +79,6 @@
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>
 </jsp:include>
-
-<!--
-<%-- 
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/home.do">YoHang</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="oi oi-menu"></span> Menu
-    </button>
-
-    <div class="collapse navbar-collapse" id="ftco-nav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
-        <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        <li class="nav-item board">
-          <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-              Board
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/qna/list.do">Q&A</a>
-              <a class="dropdown-item" href="#">FAQ</a>
-              <a class="dropdown-item" href="#">공지사항</a>
-            </div>
-          </div>
-        </li>
-        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
-        <c:if test="${loginMember == null}">
-			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<li class="nav-item"><a href="/home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
-		</c:if>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
- --%>
- -->
-
 
 <!-- hero-wrap -->
 <jsp:include page="../common/hero.jsp" flush="false">
@@ -196,16 +152,6 @@
         <nav class="w-100">
           <ul class="pagination justify-content-center">
           
-          <!-- 
-            <li class="page-item disabled first"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
-            <li class="page-item disabled prev"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item disabled next"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
-            <li class="page-item disabled last"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
-           -->
-
 <%
 	startPageNum = cpage - (cpage - 1) % recordPerPage;
 	lastPageNum = cpage - (cpage - 1) % recordPerPage + recordPerPage - 1;

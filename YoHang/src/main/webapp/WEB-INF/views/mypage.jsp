@@ -15,6 +15,7 @@
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
+	
 %>
 
 <!DOCTYPE html>

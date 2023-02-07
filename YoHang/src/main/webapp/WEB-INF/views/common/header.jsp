@@ -55,7 +55,7 @@
 			<li class="nav-item account">
 		         <div class="dropdown">
 		           <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-		            	HongGilDong 님
+		            	HONG GIL DONG 님
 		           </button>
 		           <div class="dropdown-menu">
 		             <a class="dropdown-item" href="<%= mypage %>">마이페이지</a>
