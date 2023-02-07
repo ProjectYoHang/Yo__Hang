@@ -21,7 +21,7 @@ public class RvBoardListTO {
 	
 	public RvBoardListTO() {
 		this.cpage = 1;
-		this.recordPerPage = 5;
+		this.recordPerPage = 6;
 		this.totalPage = 1;
 		this.totalRecord = 0;
 	}

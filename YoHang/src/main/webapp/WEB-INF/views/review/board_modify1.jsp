@@ -6,7 +6,7 @@
 
 <%
 	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
-	
+	String cpage = (String)request.getAttribute("cpage");
 	String rv_seq = (String)request.getAttribute("rv_seq");
 	
 	String rv_subject = to.getRv_subject();
@@ -17,44 +17,19 @@
 	long rv_img_size = to.getRv_img_size();
 %>
 
-
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="./css/board.css">
-	<script type="text/javascript">
-		window.onload = function() {
-				document.getElementById('mbtn').onclick = function() {
-					if(document.mfrm.rv_content.value.trim() == '') {
-						alert('내용을 입력해야 합니다.');
-						return false;
-					}
-					if(document.mfrm.rv_subject.value.trim() == '') {
-						alert('제목을 입력해야 합니다.');
-						return false;
-					}
-					if( document.mfrm.upload.value.trim() != '' ) {
-						
-						const extension = document.mfrm.upload.value.split( '.' ).pop();
-						if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF' ) {
-							alert( '이미지 파일을 입력하셔야 합니다.' );	
-							return false;
-						}
-					}
-					document.mfrm.submit();
-				}
-			}
-		
-	</script>
-
-</head>
-
+<jsp:include page="../common/head.jsp" flush="false"/>
 <body>
-<!-- 상단 디자인 -->
+<!-- 
+// header --------------------------------------->
+<jsp:include page="../common/header.jsp" flush="false"/>
+
+<!-- hero-wrap -->
+<jsp:include page="../common/hero.jsp" flush="false"/>
+
+<!-- content -->
+<section class="ftco-section bg-light">
 <div class="con_title">
 	<h3>게시판</h3>
 	<p>HOME &gt; 게시판 &gt; <strong>게시판</strong></p>
@@ -106,9 +81,38 @@
 			</div>
 			<!--//게시판-->
 		</div>
-	</form>
-</div>
-<!-- 하단 디자인 -->
+</section>
 
+<!-- 
+// footer --------------------------------------->
+<jsp:include page="../common/footer.jsp" flush="false"/>
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+				document.getElementById('mbtn').onclick = function() {
+					if(document.mfrm.rv_content.value.trim() == '') {
+						alert('내용을 입력해야 합니다.');
+						return false;
+					}
+					if(document.mfrm.rv_subject.value.trim() == '') {
+						alert('제목을 입력해야 합니다.');
+						return false;
+					}
+					if( document.mfrm.upload.value.trim() != '' ) {
+						
+						const extension = document.mfrm.upload.value.split( '.' ).pop();
+						if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF' ) {
+							alert( '이미지 파일을 입력하셔야 합니다.' );	
+							return false;
+						}
+					}
+					document.mfrm.submit();
+				}
+			}
+		
+	</script>
 </body>
 </html>

@@ -94,46 +94,104 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="./css/board_list.css">
-<style type="text/css">
-<!--
-	.board_pagetab { text-align: center; }
-	.board_pagetab a { text-decoration: none; font: 12px verdana; color: #000; padding: 0 3px 0 3px; }
-	.board_pagetab a:hover { text-decoration: underline; background-color:#f2f2f2; }
-	.on a { font-weight: bold; }
--->
-</style>
-</head>
-
+<jsp:include page="../common/head.jsp" flush="false"/>
 <body>
-<!-- 상단 디자인 -->
-<div class="contents1"> 
-	<div class="con_title"> 
-		<p style="margin: 0px; text-align: right">
-			<img style="vertical-align: middle" alt="" src="./images/home_icon.gif" /> &gt; 커뮤니티 &gt; <strong>여행지리뷰</strong>
-		</p>
-	</div> 
-	<div class="contents_sub">	
-		<div class="board_top">
-			<div class="bold">
-				<p>총 <span class="txt_orange"><%= totalRecord %></span>건</p>
-			</div>
-		</div>	
-		
-		<!--게시판-->
-		<table class="board_list">
-		<%=sbHtml %>
-		</table>
-		
-		
-		 <!-- navigation -->
+<!--
+// header --------------------------------------->
+<!-- header.jsp 참조 코드 있던 자리 -->
+
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/home.do">YoHang</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
+        <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
+        <li class="nav-item"><a href="/qna/list.do" class="nav-link">Board</a></li>
+        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
+        <c:if test="${loginMember == null}">
+			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
+		</c:if>
+		<c:if test="${loginMember != null}">
+			<li class="nav-item"><a href="/home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
+		</c:if>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- hero-wrap -->
+<jsp:include page="../common/hero.jsp" flush="false"/>
+
+<!--
+// contents --------------------------------------->
+
+<!-- content -->
+<section class="ftco-section">
+  <div class="container">
+    <div class="row toolbar-board-group">
+      <div class="col-md-6 d-flex align-items-center board-page-info">
+        <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
+        <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span>
+      </div>
+      <div class="col-md-6 board-search-box">
+        <div class="form-row">
+          <div class="col-4">
+            <select class="form-control">
+              <option>제목</option>
+              <option>내용</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-2">
+            <input type="submit" class="btn btn-primary btn-lg" value="검색">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-board-list">
+            <caption class="sr-only">게시판글</caption>
+            <thead>
+              <tr>
+                <th class="text-center">review</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+
+<%= sbHtml.toString() %>
+             
+            </tbody>
+          </table>
+        </div>
+
+        <!-- navigation -->
         <nav class="w-100">
           <ul class="pagination justify-content-center">
+          
+          <!-- 
+            <li class="page-item disabled first"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
+            <li class="page-item disabled prev"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item disabled next"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
+            <li class="page-item disabled last"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
+           -->
 		
 <%
 	startPageNum = cpage - (cpage - 1) % recordPerPage;
@@ -143,69 +201,113 @@
 	}
 	// 왼쪽 겹꺽쇄
 	if(startPageNum == 1) {
-		out.println("<span><a>&lt;&lt;</a></span>");
+		out.println("<li class='page-item disabled first'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<span><a href='./list.do?cpage=" + (startPageNum - recordPerPage ) + "'>&lt;&lt;</a></span>");
+		out.println("<li class='page-item first'><a class='page-link' href='./list.do?cpage=" + (startPageNum - recordPerPage ) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	}
 	
-	out.println("&nbsp;");
-				
 	// 하단의 왼쪽 꺽쇄 클릭하면 이전 페이지로 이동하는 코드 / 1페이지에서는 이동x
 	if(cpage == 1) {
-		out.println("<span><a>&lt;</a></span>");
+		out.println("<li class='page-item disabled prev'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<span><a href='./list.do?cpage=" + (cpage - 1) + "'>&lt;</a></span>");
+		out.println("<li class='page-item prev'><a class='page-link' href='./list.do?cpage=" + (cpage -1) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	}
-	
-	out.println("&nbsp;&nbsp;");
 	//
 	for(int i = startPageNum ; i <= lastPageNum; i++) {
 		
 		// 현재페이지 번호만 각괄호로 표현
 		if( i == cpage) {
-			out.println("<span><a>[ " + i + " ]</a></span>");
+			out.println("<li class='page-item active'><a class='page-link'>" + i + "</a></li>");
 		} else {
-			out.println("<span><a href='./list.do?cpage=" + i + "'>" + i + "</a></span>");
+			out.println("<li class='page-item'><a class='page-link' href='./list.do?cpage=" + i + "'>" + i + "</a></li>");
 		}
 	}
 	
-	out.println("&nbsp;&nbsp;");
-	
 	// 하단의 오른쪽 꺽쇄 클릭하면 다음 페이지로 이동 / 마지막 페이지에서는 이동x
 	if(cpage == totalPage) {
-		out.println("<span><a>&gt;</a></span>");
+		out.println("<li class='page-item disabled next'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<span><a href='./list.do?cpage=" + (cpage + 1) + "'>&gt;</a></span>");
+		out.println("<li class='page-item next'><a class='page-link' href='./list.do?cpage=" + (cpage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	}
-	
-	out.println("&nbsp;");
 	
 	// 오른쪽 겹꺽쇄 클릭하면 다음 페이지 번호묶음으로 이동
 	if(startPageNum == totalPage) {
-		out.println("<span><a>&gt;&gt;</a></span>");
+		out.println("<li class='page-item disabled last'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<span><a href='./list.do?cpage=" + (recordPerPage + 1 ) + "'>&gt;&gt;</a></span>");
+		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + (recordPerPage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	}
-%>
+%>				
 
 			</ul>
-        </nav>		
+        </nav>
+
+		<!-- 글쓰기 버튼 -->        
+        <div class="text-center mt-5">
+			<a href="./write.do" class="btn btn-secondary btn-lg">글쓰기</a>
+		</div>
         
+      </div>
+    </div>
+  </div>
+</section>
 
-		
-		<div class="align_right">		
-			<button type="button" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='./write.do'">쓰기</button>
-		</div>
-		<!-- 페이지 -->
-		<div class="paginate_regular">
-			<div class="board_pagetab" align="middle">
+<!--
+// instagram --------------------------------------->
+<section class="instagram pt-5">
+  <div class="container-fluid">
+    <div class="row no-gutters justify-content-center pb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <h2><span>Instagram</span></h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-1.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-2.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-3.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-4.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-5.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-			</div>
-		</div>
-		<!-- //페이지 -->
-	</div>
-</div>
-<!--//하단 디자인 -->
+<!--
+// footer --------------------------------------->
+<jsp:include page="../common/footer.jsp" flush="false"/>
+
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 </body>
 </html>

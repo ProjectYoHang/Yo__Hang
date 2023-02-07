@@ -2,12 +2,159 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="./css/board.css">
+<jsp:include page="../common/head.jsp" flush="false"/>
+
+<body>
+<!--
+// header --------------------------------------->
+
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="ko">
+<jsp:include page="../common/head.jsp" flush="false"/>
+<body>
+<!--
+// header --------------------------------------->
+<!-- header.jsp 참조 코드 있던 자리 -->
+
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/home.do">YoHang</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
+        <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
+        <li class="nav-item"><a href="/qna/list.do" class="nav-link">Board</a></li>
+        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
+        <c:if test="${loginMember == null}">
+			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
+		</c:if>
+		<c:if test="${loginMember != null}">
+			<li class="nav-item"><a href="/home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
+		</c:if>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- hero-wrap -->
+<jsp:include page="../common/hero.jsp" flush="false"/>
+
+<!-- content -->
+<section class="ftco-section bg-light">
+  <div class="container">
+    <form action="./write_ok.do" class="bg-white p-5" name="wfrm">
+      <div class="form-group">
+      	<!-- 아이디는 로그인상태에서 받아서 placeholder 속성값으로 넣어줘야 함 / value 속성은 로그인상태 처리되면 필요없음 -->
+      <input type="text" class="form-control" name="rv_id" title="Title" value="test1234" readonly>
+      </div>   
+      <div class="form-group">
+        <input type="text" class="form-control" name="qna_subject" title="Title" placeholder="제목을 입력해주세요.">
+      </div>
+      <div class="form-group">
+        <textarea type="text" class="form-control"  name="rv_content" title="content" placeholder="내용을 입력해주세요." rows="10"></textarea>
+      </div>
+		<tr>
+			<th>이미지</th>
+			<td colspan="3">
+			<!-- 파일 업로드 input type=file -->
+				<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
+			</td>
+		</tr>             
+		<tr>
+			<th>방번호</th>
+			<td><textarea name="rv_room_seq" class="board_editor_area"></textarea></td>
+		</tr>
+		<tr>
+			<th>예약번호</th>
+			<td><textarea name="rv_book_num" class="board_editor_area"></textarea></td>
+		</tr>
+		<tr>
+			<th>별점</th>
+			<td><textarea name="rv_stars" class="board_editor_area"></textarea></td>
+		</tr>
+		<tr>
+			<th>좋아요</th>
+			<td><textarea name="rv_like" class="board_editor_area"></textarea></td>
+		</tr>	
+<!-- 
+      <div class="form-group">
+        <input type="file" id="file" name="file" class="form-control">
+      </div>
+-->
+      <div class="form-group text-center mt-5">
+        <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
+        <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!--
+// instagram --------------------------------------->
+<section class="instagram pt-5">
+  <div class="container-fluid">
+    <div class="row no-gutters justify-content-center pb-5">
+      <div class="col-md-7 text-center heading-section ftco-animate">
+        <h2><span>Instagram</span></h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-1.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-2.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-3.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-4.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-12 col-md ftco-animate">
+        <a href="../../../YoHangFront/build/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-5.jpg);">
+          <div class="icon d-flex justify-content-center">
+            <span class="icon-instagram align-self-center"></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+// footer --------------------------------------->
+<jsp:include page="../common/footer.jsp" flush="false"/>
+
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
 		document.getElementById('wbtn').onclick = function() {
@@ -41,94 +188,6 @@
 	}
 	
 </script>
-</head>
-
-<body>
-<!-- 상단 디자인 -->
-<div class="con_title">
-	<h3>게시판</h3>
-	<p>HOME &gt; 게시판 &gt; <strong>게시판</strong></p>
-</div>
-<div class="con_menu"></div>
-<div class="con_txt">
-	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
-
-		<div class="contents_sub">	
-			<!--게시판-->
-			<div class="board_write">
-				<table>
-				<tr>
-					<th class="top">글쓴이</th>
-					<td class="top"><input type="text" name="rv_id" value="" class="board_view_input_mail" maxlength="10" /></td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="rv_subject" value="" class="board_view_input" /></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea name="rv_content" class="board_editor_area"></textarea></td>
-				</tr>
-				<tr>
-					<th>방번호</th>
-					<td><textarea name="rv_room_seq" class="board_editor_area"></textarea></td>
-				</tr>
-				<tr>
-					<th>예약번호</th>
-					<td><textarea name="rv_book_num" class="board_editor_area"></textarea></td>
-				</tr>
-				<tr>
-					<th>별점</th>
-					<td><textarea name="rv_stars" class="board_editor_area"></textarea></td>
-				</tr>
-				<tr>
-					<th>좋아요</th>
-					<td><textarea name="rv_like" class="board_editor_area"></textarea></td>
-				</tr>	
-				
-				<tr>
-					<th>이미지</th>
-					<td colspan="3">
-					<!-- 파일 업로드 input type=file -->
-						<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
-					</td>
-				</tr>
-																			
-				</table>
-				
-				<table>
-				<tr>
-					<td style="text-align:left;border:1px solid #e0e0e0;background-color:f9f9f9;padding:5px">
-						<div style="padding-top:7px;padding-bottom:5px;font-weight:bold;padding-left:7px;font-family: Gulim,Tahoma,verdana;">※ 개인정보 수집 및 이용에 관한 안내</div>
-						<div style="padding-left:10px;">
-							<div style="width:97%;height:95px;font-size:11px;letter-spacing: -0.1em;border:1px solid #c5c5c5;background-color:#fff;padding-left:14px;padding-top:7px;">
-								1. 수집 개인정보 항목 : 회사명, 담당자명, 메일 주소, 전화번호, 홈페이지 주소, 팩스번호, 주소 <br />
-								2. 개인정보의 수집 및 이용목적 : 제휴신청에 따른 본인확인 및 원활한 의사소통 경로 확보 <br />
-								3. 개인정보의 이용기간 : 모든 검토가 완료된 후 3개월간 이용자의 조회를 위하여 보관하며, 이후 해당정보를 지체 없이 파기합니다. <br />
-								4. 그 밖의 사항은 개인정보취급방침을 준수합니다.
-							</div>
-						</div>
-						<div style="padding-top:7px;padding-left:5px;padding-bottom:7px;font-family: Gulim,Tahoma,verdana;">
-							<input type="checkbox" name="info" value="1" class="input_radio"> 개인정보 수집 및 이용에 대해 동의합니다.
-						</div>
-					</td>
-				</tr>
-				</table>
-			</div>
-			
-			<div class="btn_area">
-				<div class="align_left">
-					<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./list.do'" />
-				</div>
-				<div class="align_right">
-					<input type="button" id="wbtn" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" />
-				</div>
-			</div>
-			<!--//게시판-->
-		</div>
-	</form>
-</div>
-<!-- 하단 디자인 -->
 
 </body>
 </html>
