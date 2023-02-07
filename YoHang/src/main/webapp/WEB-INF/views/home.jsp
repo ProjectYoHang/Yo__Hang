@@ -1,15 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	// include한 jsp에 필요한 parameters
+	String menuName = "search";
+	String title = "Home";
+	
+	String home = "/home.do";
+	String aboutus = "/aboutus.do";
+	String findus = "/findus.do";
+	String qna = "/qna/list.do";
+	String faq = "/faq/list.do";
+	String notice = "/notice/list.do";
+	String login = "/login.do";
+	String logout = "/logout.do";
+	String mypage = "/mypage/list.do";
+	
+%>    
+
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="common/head.jsp" flush="false"/>
 <body>
 <!-- 
 // header --------------------------------------->
-<jsp:include page="common/header.jsp" flush="false"/>
+<jsp:include page="common/header.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= login %>" name="login"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+	<jsp:param value="<%= mypage %>" name="mypage"/>
+</jsp:include>
+
 
 <!-- hero-wrap -->
-<jsp:include page="common/hero.jsp" flush="false"/>
+<jsp:include page="common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!-- content -->
 <section class="ftco-section bg-light">

@@ -34,6 +34,13 @@ public class MemberController {
 	public String home() {
 		return "home";
 	}
+	
+	@RequestMapping ( "/Admin/home.do")
+	public String admin_home() {
+		return "home_admin";
+	}
+	
+	
 ////////////////// 로그인 /////////////////////////	
 	@RequestMapping ( "login.do" )
 	public String login() {
@@ -129,7 +136,7 @@ public class MemberController {
 	}
 
 //////////////// 회원정보 /////////////////////////
-	@RequestMapping( "member_info.do")
+	@RequestMapping( "mypage/list.do")
 	public String member_info(HttpServletRequest request) {
 		MembersTO to = new MembersTO();
 		to = dao.memberInfo(to);
@@ -137,7 +144,7 @@ public class MemberController {
 		return "./member/member_info";
 	}
 //////////////// 정보수정 /////////////////////////	
-	@RequestMapping( "member_info_modify_ok.do" )
+	@RequestMapping("/mypage/member_info_modify_ok.do" )
 	public String member_info_modify_ok(HttpServletRequest request) {
 			MembersTO to = new MembersTO();
 			int flag = 2;
@@ -162,7 +169,7 @@ public class MemberController {
 		return "./member/member_info_modify_ok";
 	}
 //////////////// 탈퇴 /////////////////////////
-	@RequestMapping( "member_signout_ok.do")
+	@RequestMapping( "mypage/member_signout_ok.do")
 	public String member_signout_ok( HttpServletRequest request, HttpSession session ) {
 		MembersTO to = new MembersTO();
 		to.setM_id( request.getParameter( "id" ) );

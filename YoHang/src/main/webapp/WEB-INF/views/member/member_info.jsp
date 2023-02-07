@@ -2,6 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="com.example.model.MembersTO"%>
+<%
+	// include한 jsp에 필요한 parameters
+	String menuName = "MyPage";
+	String title = "내 정보";
+	
+	String home = "/home.do";
+	String aboutus = "/aboutus.do";
+	String findus = "/findus.do";
+	String qna = "/qna/list.do";
+	String faq = "/faq/list.do";
+	String notice = "/notice/list.do";
+	String login = "/login.do";
+	String logout = "/logout.do";
+	String mypage = "/mypage/list.do";
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
@@ -30,12 +46,28 @@
 	</script>
 </head>
 <body>
-<!-- 
+ <!-- 
 // header --------------------------------------->
-<jsp:include page="../common/header.jsp" flush="false"/>
+<jsp:include page="../common/header.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= login %>" name="login"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+	<jsp:param value="<%= mypage %>" name="mypage"/>
+</jsp:include>
+ 
 
 <!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
+
 
 <!-- content -->
 <section class="ftco-section bg-light">
@@ -65,11 +97,11 @@
 				<div class="form-group">
 					<input type="submit" id="mimBtn" value="정보 변경" class="btn btn-primary" />
 				</div>
-				<form action="./member_signout_ok.do" method="post">
-					<input type="hidden" name="id" value="${loginMember.m_id}" />
-					<input type="submit" name="msoBtn" value="회원 탈퇴" class="btn btn-primary" />
-				</form>
 				 
+			</form>
+			<form action="./member_signout_ok.do" method="post">
+				<input type="hidden" name="id" value="${loginMember.m_id}" />
+				<input type="submit" name="msoBtn" value="회원 탈퇴" class="btn btn-primary" />
 			</form>
 	<!--  					
 		  카카오 연동시 회원 테이블에 정보 추가   / 연동 해제시 테이블에서 정보 삭제 해야 	
