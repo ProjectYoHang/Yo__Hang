@@ -26,6 +26,13 @@ public class MemberController {
 	public String home() {
 		return "home";
 	}
+	
+	@RequestMapping ( "/Admin/home.do")
+	public String admin_home() {
+		return "home_admin";
+	}
+	
+	
 ////////////////// 로그인 /////////////////////////	
 	@RequestMapping ( "login.do" )
 	public String login() {

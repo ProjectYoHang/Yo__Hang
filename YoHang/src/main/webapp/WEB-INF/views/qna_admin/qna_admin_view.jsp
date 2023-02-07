@@ -6,17 +6,31 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
+	//jsp hero parameters
+	String menuName = "게시판관리";
+	String title = "Q&A";
+	
+	// jsp header parameters
+	String home = "/Admin/home.do";
+	String member = "/Admin/member/list.do";
+	String book = "/Admin/book/list.do";
+	String room = "/Admin/room/list.do";
+	String qna = "/Admin/qna/list.do";
+	String faq = "/Admin/faq/list.do";
+	String notice = "/Admin/notice/list.do";
+	String logout = "/Admin/logout.do";
+
 	// 사용자의 qna 데이터
-	QnABoardTO qna = (QnABoardTO)request.getAttribute("qna");
+	QnABoardTO qnaData = (QnABoardTO)request.getAttribute("qna");
 
 	int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
 
 	String qna_seq = (String)request.getAttribute("qna_seq");
 
-	String qna_id = qna.getQna_id();
-	String qna_subject = qna.getQna_subject();
-	String qna_content = qna.getQna_content();
-	String qna_date = qna.getQna_date();
+	String qna_id = qnaData.getQna_id();
+	String qna_subject = qnaData.getQna_subject();
+	String qna_content = qnaData.getQna_content();
+	String qna_date = qnaData.getQna_date();
 	
 	// 혹 이미 답변이 있다면 보여줄 답댓글 데이터
 	QnAReplyTO qnaReplys = (QnAReplyTO)request.getAttribute("qnaReplys");
@@ -30,7 +44,7 @@
 		
 		String qrpl_content = qnaReplys.getQrpl_content();
 		
-		html.append("<form action='./qna_admin_modify_ok.do' name='mfrm' method='post'>");
+		html.append("<form action='./modify_ok.do' name='mfrm' method='post'>");
 		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
 		html.append("<input type='hidden' name='cpage' value='" + cpage + "' />");
 		html.append("<div class='form-group'>");
@@ -38,13 +52,13 @@
 		html.append("<textarea type='text' class='form-control'  name='qrpl_content' title='content' rows='10'>" + qrpl_content + "</textarea>");
 		html.append("<br>");
 		html.append("<input type='button' id='mbtn' value='수정' class='btn btn-secondary' />&nbsp;");
-		html.append("<input type='button' class='btn btn-secondary' value='삭제' onclick='location.href=\"./qna_admin_delete_ok.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "\"' />");
+		html.append("<input type='button' class='btn btn-secondary' value='삭제' onclick='location.href=\"./delete_ok.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "\"' />");
 		html.append("</div>");
 		html.append("</form>");
 		
 	} else {
 		
-		html.append("<form action='./qna_admin_write_ok.do' name='wfrm' method='post'>");
+		html.append("<form action='./write_ok.do' name='wfrm' method='post'>");
 		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
 		html.append("<input type='hidden' name='cpage' value='" + cpage + "' />");
 		html.append("<input type='hidden' name='qrpl_id' value='" + qrpl_id + "' />");
@@ -69,54 +83,27 @@
 <body>
 <!--
 // header --------------------------------------->
+<jsp:include page="../common/header_admin.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= member %>" name="member"/>
+	<jsp:param value="<%= book %>" name="book"/>
+	<jsp:param value="<%= room %>" name="room"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+</jsp:include>
 
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/home.do">YoHang</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="oi oi-menu"></span> Menu
-    </button>
 
-    <div class="collapse navbar-collapse" id="ftco-nav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
-        <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        
-        <li class="nav-item board">
-          <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-              Board
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="/qna/list.do">Q&A</a>
-              <a class="dropdown-item" href="#">FAQ</a>
-              <a class="dropdown-item" href="#">공지사항</a>
-            </div>
-          </div>
-        </li>
-                
-        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
-        <c:if test="${loginMember == null}">
-			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<li class="nav-item"><a href="/home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
-		</c:if>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
+<!-- hero-wrap -->
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!--
 // contents --------------------------------------->
-
-<!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
-
 
 <!-- content -->
 <section class="ftco-section">
@@ -144,11 +131,7 @@
 <%= html.toString() %>
 
     <div class="text-center mt-4 pt-5 border-top">
-    <!-- 
-      <a href="./modify.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-primary btn-lg">수정</a>
-      <a href="./delete.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
-       -->
-      <a href="./reply_list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
+      <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
     </div>
 
   </div>

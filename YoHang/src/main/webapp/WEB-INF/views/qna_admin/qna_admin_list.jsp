@@ -4,6 +4,23 @@
 <%@page import="com.example.model.QnABoardTO"%>
 <%@page import="java.util.ArrayList"%>
 
+<%
+	//jsp hero parameters
+	String menuName = "게시판관리";
+	String title = "Q&A";
+	
+	// jsp header parameters
+	String home = "/Admin/home.do";
+	String member = "/Admin/member/list.do";
+	String book = "/Admin/book/list.do";
+	String room = "/Admin/room/list.do";
+	String qna = "/Admin/qna/list.do";
+	String faq = "/Admin/faq/list.do";
+	String notice = "/Admin/notice/list.do";
+	String logout = "/Admin/logout.do";
+	
+%>
+
 <% 
 	ArrayList<QnABoardTO> qnaLists = (ArrayList<QnABoardTO>)request.getAttribute("qnaLists");
 
@@ -31,7 +48,7 @@
 		int qna_reply = to.getQna_reply();
 		
 		html.append("<td>" + qna_seq + "</td>");
-		html.append("<td class='board-list-title'><a href='./reply_view.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "'>" + qna_subject + "</a></td>");	
+		html.append("<td class='board-list-title'><a href='./view.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "'>" + qna_subject + "</a></td>");	
 		html.append("<td>" + qna_date + "</td>");
 		html.append("<td>" + qna_id + "</td>");
 		html.append("<td>" + qna_hit + "</td>");	
@@ -49,82 +66,27 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
+
 <body>
 <!-- 
 // header --------------------------------------->
-
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="home.do">YoHang</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="oi oi-menu"></span> Menu
-    </button>
-
-    <div class="collapse navbar-collapse" id="ftco-nav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="home.do" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
-        <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        <li class="nav-item board">
-          <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-              Board
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="./reply_list.do">Q&A</a>
-              <a class="dropdown-item" href="#">FAQ</a>
-              <a class="dropdown-item" href="#">공지사항</a>
-            </div>
-          </div>
-        </li>
-        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
-        <c:if test="${loginMember == null}">
-			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<li class="nav-item"><a href="home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
-		</c:if>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!--  
-
-<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
- <input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
- <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Home</title>
-	</head>
-	<body>
-		<c:if test="${loginMember == null}">
-			<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
-			<table border='1' width='100'>
-				<tr>
-					
-				</tr>
-			</table>
-		</c:if>
-	
-	</body>
-</html> 
--->
-
+<jsp:include page="../common/header_admin.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= member %>" name="member"/>
+	<jsp:param value="<%= book %>" name="book"/>
+	<jsp:param value="<%= room %>" name="room"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+</jsp:include>
 
 <!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
-
-<!-- admin -->
-<jsp:include page="../common/admin_menu.jsp" flush="false"/>
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!-- content -->
 <section class="ftco-section">
@@ -191,16 +153,6 @@
         <nav class="w-100">
           <ul class="pagination justify-content-center">
           
-          <!-- 
-            <li class="page-item disabled first"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
-            <li class="page-item disabled prev"><a class="page-link"><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item disabled next"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
-            <li class="page-item disabled last"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>
-           -->
-
 <%
 	startPageNum = cpage - (cpage - 1) % recordPerPage;
 	lastPageNum = cpage - (cpage - 1) % recordPerPage + recordPerPage - 1;
@@ -212,14 +164,14 @@
 	if(startPageNum == 1) {
 		out.println("<li class='page-item disabled first'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<li class='page-item first'><a class='page-link' href='./reply_list.do?cpage=" + (startPageNum - recordPerPage ) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+		out.println("<li class='page-item first'><a class='page-link' href='./list.do?cpage=" + (startPageNum - recordPerPage ) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	}
 	
 	// 하단의 왼쪽 꺽쇄 클릭하면 이전 페이지로 이동하는 코드 / 1페이지에서는 이동x
 	if(cpage == 1) {
 		out.println("<li class='page-item disabled prev'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<li class='page-item prev'><a class='page-link' href='./reply_list.do?cpage=" + (cpage -1) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+		out.println("<li class='page-item prev'><a class='page-link' href='./list.do?cpage=" + (cpage -1) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
 	}
 
 	//
@@ -229,7 +181,7 @@
 		if( i == cpage) {
 			out.println("<li class='page-item active'><a class='page-link'>" + i + "</a></li>");
 		} else {
-			out.println("<li class='page-item'><a class='page-link' href='./reply_list.do?cpage=" + i + "'>" + i + "</a></li>");
+			out.println("<li class='page-item'><a class='page-link' href='./list.do?cpage=" + i + "'>" + i + "</a></li>");
 		}
 	}
 	
@@ -237,14 +189,14 @@
 	if(cpage == totalPage) {
 		out.println("<li class='page-item disabled next'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<li class='page-item next'><a class='page-link' href='./reply_list.do?cpage=" + (cpage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+		out.println("<li class='page-item next'><a class='page-link' href='./list.do?cpage=" + (cpage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	}
 	
 	// 오른쪽 겹꺽쇄 클릭하면 다음 페이지 번호묶음으로 이동
 	if(startPageNum == totalPage) {
 		out.println("<li class='page-item disabled last'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	} else {
-		out.println("<li class='page-item last'><a class='page-link' href='./reply_list.do?cpage=" + (recordPerPage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + (recordPerPage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	}
 
 %>				

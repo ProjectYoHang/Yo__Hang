@@ -167,7 +167,7 @@ public class QnAController {
 	// 관리자
 	
 	// 관리자측 qna 목록
-	@RequestMapping("/qna_admin/reply_list.do")
+	@RequestMapping("/Admin/qna/list.do")
 	public ModelAndView reply_list(ModelAndView modelAndView, @RequestParam(value="cpage", required=false, defaultValue="1") int cpage) {
 		QnABoardListTO listTo = new QnABoardListTO();
 		
@@ -189,7 +189,7 @@ public class QnAController {
 	}
 	
 	// qna 보기 & 관리자 답댓글 보기 or 작성
-	@RequestMapping("/qna_admin/reply_view.do")
+	@RequestMapping("/Admin/qna/view.do")
 	public ModelAndView reply_write(HttpServletRequest request, ModelAndView modelAndView) {
 		QnAReplyTO to = new QnAReplyTO();
 		to.setQna_seq(request.getParameter("qna_seq"));
@@ -198,16 +198,6 @@ public class QnAController {
 		
 		QnABoardTO qna = dao.qnaReplyView1(bto);
 		QnAReplyTO qnaReplys = dao.qnaReplyView2(to);
-		
-		//to.setQna_seq(request.getParameter("qna_seq"));
-		//to.setQrpl_id(request.getParameter("qrpl_id"));
-		//to.setQrpl_content(request.getParameter("qrpl_content"));
-		
-		/*
-		bto.setQna_seq(request.getParameter("qna_seq"));
-				
-		int flag = dao.qnaReplyWriteOk(to, bto);
-		*/
 		
 		String qna_seq = request.getParameter("qna_seq");
 		
@@ -220,7 +210,7 @@ public class QnAController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/qna_admin/qna_admin_write_ok.do")
+	@RequestMapping("/Admin/qna/write_ok.do")
 	public ModelAndView replyWriteOk(HttpServletRequest request, ModelAndView modelAndView) {
 		
 		QnAReplyTO to = new QnAReplyTO();
@@ -243,7 +233,7 @@ public class QnAController {
 	}
 	
 	// 답댓글 삭제
-	@RequestMapping("/qna_admin/qna_admin_delete_ok.do")
+	@RequestMapping("/Admin/qna/delete_ok.do")
 	public ModelAndView replyDeleteOk(HttpServletRequest request, ModelAndView modelAndView) {
 		QnAReplyTO rto = new QnAReplyTO();
 		QnABoardTO to = new QnABoardTO();
@@ -261,7 +251,7 @@ public class QnAController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/qna_admin/qna_admin_modify_ok.do")
+	@RequestMapping("/Admin/qna/modify_ok.do")
 	public ModelAndView replyModifyOk(HttpServletRequest request, ModelAndView modelAndView) {
 		QnAReplyTO to = new QnAReplyTO();
 		
