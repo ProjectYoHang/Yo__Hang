@@ -27,8 +27,15 @@
 <link rel="stylesheet" href="../../YoHangFront/build/fonts/xeicon/xeicon.css">
 
 <!-- vendors style -->
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="../../YoHangFront/build/vendors/css/animate.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/owl.carousel.min.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="../../YoHangFront/build/vendors/css/magnific-popup.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/aos.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/ionicons.min.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="../../YoHangFront/build/vendors/css/jquery.timepicker.css">
 <link rel="stylesheet" href="../../YoHangFront/build/vendors/css/style.css">
 
 <!-- Custom app style -->
