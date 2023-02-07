@@ -69,7 +69,6 @@ public class MemberController {
 		session.invalidate();
 		System.out.println( "session연결 종료");
 		return "home";
-		
 	}
 	
 ////////////////회원가입 /////////////////////////	
@@ -81,7 +80,7 @@ public class MemberController {
 	@RequestMapping( "signup_ok.do" )
 	public String signup_ok(HttpServletRequest request) {
 		String kakao_id = request.getParameter("kakao_id");
-		System.out.println("kakoid : " + kakao_id);
+		System.out.println("kakaoid : " + kakao_id);
 		MembersTO to = new MembersTO();
 		int flag = 2;
 		if( kakao_id != "" ) {// 카카오 로그인 사용자 회원가입
@@ -198,6 +197,21 @@ public class MemberController {
 			return "signup";
 		}
 	}
+	
+///// 마이페이지 - 카카오 연동 버튼 클릭
+	@RequestMapping( "kakao_connect.do" )
+	public String kakao_connect(@RequestParam String kakao_id, String m_id) {
+		MembersTO to = new MembersTO();
+		to.setM_id(m_id);
+		to.setM_kakao_id(kakao_id);
+		int flag = dao.insert_Kakao(to);
+		
+		if( flag == 0) {
+		} else if ( flag == 1 ) {
+		}
+		return "member/member_info";
+	}
+
 	
 	/// 아이디 / 비밀번호 찾기 ///
 ////////// 아이디로 메일  가져오기

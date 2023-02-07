@@ -46,4 +46,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.13.2/jquery-ui.min.js"></script>
 
+<!--  kakao -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 

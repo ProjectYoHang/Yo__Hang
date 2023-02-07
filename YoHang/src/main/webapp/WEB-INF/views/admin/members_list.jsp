@@ -15,8 +15,8 @@
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
-    <div class="row">
-      	<div id="board"></div>
+    <div class="row" id="board" >
+      
     </div>
   </div>
 </section>

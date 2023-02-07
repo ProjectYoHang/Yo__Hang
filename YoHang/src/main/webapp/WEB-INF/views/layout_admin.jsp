@@ -12,7 +12,7 @@
 <jsp:include page="common/hero.jsp" flush="false"/>
 
 <!-- admin -->
-<jsp:include page="common/admin-menu.jsp" flush="false"/>
+<jsp:include page="common/admin_menu.jsp" flush="false"/>
 
 <!-- content -->
 <section class="ftco-section bg-light">

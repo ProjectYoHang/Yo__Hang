@@ -53,10 +53,23 @@ public class MembersDAO {
 		
 		return flag;
 	}
+	
+	// 마이페이지 - 카카오 연동 
+	public int insert_Kakao(MembersTO to) {
+		int result = mapper.insertKakaoId(to);
+		
+		int flag  = 2;
+		if(result == 1){
+			flag = 0;
+		}else {
+			flag = 1;
+		}
+		return flag;
+	}
+	
 	/// 내 정보 보기 
 	public MembersTO memberInfo(MembersTO to) {
 		to = mapper.memberInfo();
-		
 		return to;
 	}
 	// 정보 변경 

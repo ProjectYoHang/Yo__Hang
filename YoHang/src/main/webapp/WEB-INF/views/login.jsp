@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 <html lang="ko">
 
 <jsp:include page="common/head.jsp" flush="false"/>
@@ -59,12 +59,6 @@
     </div>
   </div>
 </section>
-   <!--  추후 내정보 페이지로 이동해야함  -->
-        <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
-		    <a  href="javascript:void(0)">
-		        <span>카카오 로그아웃</span>
-		    </a>
-        </div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -79,8 +73,6 @@
 		<fieldset>
 				<label for="f_name"  >Name</label>
 				<input type="text" id="f_name" class="text ui-widget-content ui-corner-all">
-				<!-- <label for="f_mail">Mail</label>
-				<input type="text" id="f_mail" class="text ui-widget-content ui-corner-all"> -->
 				<button type="button" class="btn btn-info" data-bs-dismiss="modal" onclick="findId()" >아이디 찾기</button>
 		</fieldset>
 		<hr>
@@ -97,8 +89,6 @@
     </div>
   </div>
 </div>
-
-
 <script>
 
 	const findId =  function() {
@@ -201,7 +191,6 @@ function kakaoLogin() {
         		  // 검증되면 로그인 진행 -> 세션에 로그인 정보 등록
         		  // 홈페이지에 해당 카카오아이디 등록된 회원이 없으면 -> 회원가입진행
         		  let kakao_id = response.id;
-        		  console.log( kakao_id );
         		  location.href='./kakao_login.do?kakao_id=' + kakao_id ;
         	  } 
         	  else {
@@ -219,21 +208,7 @@ function kakaoLogin() {
       },
     })
   }
-//카카오로그아웃  
-function kakaoLogout() {
-    if (Kakao.Auth.getAccessToken()) {
-      Kakao.API.request({
-        url: '/v1/user/unlink',
-        success: function (response) {
-        	console.log(response)
-        },	
-        fail: function (error) {
-          console.log(error)
-        },
-      })
-      Kakao.Auth.setAccessToken(undefined)
-    }
-  }  
+
 </script>
 <jsp:include page="common/footer.jsp" flush="false"/>
 

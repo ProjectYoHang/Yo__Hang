@@ -74,10 +74,10 @@ public interface MapperInter {
 	int signupKakaoMember_ok(MembersTO to);
 		
 	
-////////////// 로그인 상태에서 카카오 연동하기?
+////////////// 로그인 상태에서 카카오 연동하기 
 	
-	@Update ( "update members set m_kakao_id=#{m_kakao_id}" )
-	MembersTO insertKakaoId(MembersTO to);
+	@Update ( "update members set m_kakao_id=#{m_kakao_id} where m_id=#{m_id}" )
+	int insertKakaoId(MembersTO to);
 
 ////////////// 멤버 목록 가져오기
 	
