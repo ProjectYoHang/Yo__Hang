@@ -7,15 +7,15 @@
 <!-- 
 // header --------------------------------------->
 <jsp:include page="common/header_admin.jsp" flush="false">
-	<jsp:param value="<%= home %>" name="home"/>
-	<jsp:param value="<%= aboutus %>" name="aboutus"/>
-	<jsp:param value="<%= findus %>" name="findus"/>
-	<jsp:param value="<%= qna %>" name="qna"/>
-	<jsp:param value="<%= faq %>" name="faq"/>
-	<jsp:param value="<%= notice %>" name="notice"/>
-	<jsp:param value="<%= login %>" name="login"/>
-	<jsp:param value="<%= logout %>" name="logout"/>
-	<jsp:param value="<%= mypage %>" name="mypage"/>
+	<jsp:param value="<%= //home %>" name="home"/>
+	<jsp:param value="<%= //aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= //findus %>" name="findus"/>
+	<jsp:param value="<%= //qna %>" name="qna"/>
+	<jsp:param value="<%= //faq %>" name="faq"/>
+	<jsp:param value="<%= //notice %>" name="notice"/>
+	<jsp:param value="<%= //login %>" name="login"/>
+	<jsp:param value="<%= //logout %>" name="logout"/>
+	<jsp:param value="<%= //mypage %>" name="mypage"/>
 </jsp:include>
 
 <!-- hero-wrap -->

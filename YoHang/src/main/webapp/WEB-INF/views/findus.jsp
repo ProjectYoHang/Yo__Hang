@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%
 	// include한 jsp에 필요한 parameters
-	String menuName = "search";
-	String title = "검색";
+	String menuName = "How to find us";
+	String title = "오시는 길";
 	
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
@@ -47,7 +47,7 @@
 <section class="ftco-section bg-light">
   <div class="container">
     <div class="row">
-      
+      findus
     </div>
   </div>
 </section>

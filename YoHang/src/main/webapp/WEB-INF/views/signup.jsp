@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	//include한 jsp에 필요한 parameters
@@ -15,8 +15,6 @@
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
 
-	
-	
 	String kakao_id = "";
 	if( request.getAttribute( "kakao_id") != null) {
 		kakao_id = (String)request.getAttribute( "kakao_id" );	
@@ -47,7 +45,7 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
 	window.onload = function() {
 		document.getElementById( 'signupbtn' ).onclick = function() {
@@ -167,21 +165,16 @@
             <input type="submit" id="signupbtn" value="Signup" class="btn btn-primary w-100 py-3 px-5">
           </div>
           <div class="form-group">
-            <input type="submit" id="kakao_signupbtn" value="Kakao Signup" class="btn w-100 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;">
+            <!--  <input type="submit" id="kakao_signupbtn" value="Kakao Signup" class="btn w-100 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;"> -->
           </div>
         </form>
       </div>
     </div>
   </div>
 </section>
-<!--
-// footer --------------------------------------->
-<footer id="footer" class="site-footer" include-html="/static/html/common/footer.html"></footer>
 
-<!--
-// script --------------------------------------->
-<script type="text/javascript" src="/static/js/yohang-bundle.js"></script>
-<script type="text/javascript" src="/static/vendors/yohang-vendors-bundle.js"></script>
+<!-- script --------------------------------------->
+
 <script type="text/javascript">
 	
 	$('#password').focusout(function(){
@@ -267,7 +260,6 @@
 		    	data : {id : m_id },
 		    	type : "post",
 		    	success : function( result ){
-		    		console.log("id 전송 성공");
 		    		if( result == 0 ) {
 		    			$("#id_check_feedback").html('사용할 수 있는 아이디입니다.')
 		    			$("#id_check_feedback").css('color', 'green');
@@ -282,7 +274,6 @@
 	    }
 	});
 	</script>
-	// footer --------------------------------------->
 <jsp:include page="./common/footer.jsp" flush="false"/>
 <!--
 // script --------------------------------------->

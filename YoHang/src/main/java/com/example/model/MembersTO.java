@@ -1,5 +1,6 @@
 package com.example.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,4 +15,5 @@ public class MembersTO {
 	private String m_birth;
 	private String m_join_date;
 	private String m_gender;
+	private String m_kakao_id;
 }

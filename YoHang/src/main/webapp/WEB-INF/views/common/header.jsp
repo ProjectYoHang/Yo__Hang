@@ -46,53 +46,24 @@
             </div>
           </div>
         </li>
-        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
         <c:if test="${loginMember == null}">
-			<li class="nav-item"><a href="<%= login %>" class="nav-link" onclick="href">Login</a></li>
+			<li class="nav-item"><a href="<%= login %>" class="nav-link" >Login</a></li>
 		</c:if>
 		<c:if test="${loginMember != null}">
-			<!-- <li class="nav-item"><a href="<%= logout %>" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>  -->
-			<li class="nav-item account">
-		         <div class="dropdown">
-		           <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-		            	HONG GIL DONG 님
-		           </button>
-		           <div class="dropdown-menu">
-		             <a class="dropdown-item" href="<%= mypage %>">마이페이지</a>
-		             <a class="dropdown-item" href="<%= logout %>">로그아웃</a>
-		           </div>
-		         </div>
-        	</li>
+		<li class="nav-item account">
+			<div class="dropdown">
+			    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+	              ${loginMember.m_name} 님
+	            </button>
+	            <div class="dropdown-menu">
+	              <a class="dropdown-item" href="<%= mypage %>">마이페이지</a>
+	              <a class="dropdown-item" href="<%= logout %>">로그아웃</a>
+	            </div>
+            </div>
+		</li>
 		</c:if>
-        
       </ul>
     </div>
   </div>
 </nav>
 
-<!--  
-
-<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
- <input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
- <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Home</title>
-	</head>
-	<body>
-		<c:if test="${loginMember == null}">
-			<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
-			<table border='1' width='100'>
-				<tr>
-					
-				</tr>
-			</table>
-		</c:if>
-	
-	</body>
-</html> 
--->
