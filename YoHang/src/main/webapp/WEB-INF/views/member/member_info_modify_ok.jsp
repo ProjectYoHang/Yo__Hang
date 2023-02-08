@@ -6,7 +6,7 @@
 	out.println( "<script type='text/javascript'>" );
 	if ( flag == 0 ) {
 		out.println( "alert( '정보수정 완료');" );
-		out.println( "location.href='./home.do?';");
+		out.println( "location.href='/home.do';");
 	}else {
 		out.println( "alert( '정보수정 실패');" );
 		out.println( "history.back();" );
