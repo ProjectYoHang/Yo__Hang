@@ -1,70 +1,92 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	//jsp hero parameters
+	String menuName = "Board";
+	String title = "Review";
+	
+	// jsp header parameters
+	String home = "/home.do";
+	String aboutus = "/aboutus.do";
+	String findus = "/findus.do";
+	String review = "/review/list.do";
+	String faq = "/faq/list.do";
+	String notice = "/notice/list.do";
+	String login = "/login.do";
+	String logout = "/logout.do";
+	String mypage = "/mypage/list.do";
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
+
 <body>
-<!-- 
+<!--
 // header --------------------------------------->
-<jsp:include page="../common/header.jsp" flush="false"/>
+
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<jsp:include page="../common/header.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= review %>" name="review"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= login %>" name="login"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+	<jsp:param value="<%= mypage %>" name="mypage"/>
+</jsp:include>
 
 <!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <section class="ftco-section bg-light">
   <div class="container">
-    <form action="./write_ok.do"  name="wfrm" enctype="multipart/form-data">
-      <div class="form-group">
-        <input type="text" class="form-control" name="rv_id" title="글쓴이" placeholder="글쓴이">     
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="rv_subject" placeholder="제목">
-      </div>      
-      <div class="form-group">
-        <textarea type="text" class="form-control"  name="rv_content" placeholder="내용" rows="10"></textarea>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="rv_room_seq" placeholder="방번호">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="rv_room_num"placeholder="예약번호">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="rv_stars" placeholder="별점">
-        <link href="/assets/css/star.css" rel="stylesheet"/>
+	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
 
- 		<form class="mb-3" name="myform" id="myform" method="post">
-		<fieldset>
-		<span class="text-bold">별점을 선택해주세요</span>
-		<input type="radio" name="reviewStar" value="5" id="rate1"><label
-			for="rate1">1</label>
-		<input type="radio" name="reviewStar" value="4" id="rate2"><label
-			for="rate2">2</label>
-		<input type="radio" name="reviewStar" value="3" id="rate3"><label
-			for="rate3">3</label>
-		<input type="radio" name="reviewStar" value="2" id="rate4"><label
-			for="rate4">4</label>
-		<input type="radio" name="reviewStar" value="1" id="rate5"><label
-			for="rate5">5</label>
-	</fieldset>
-      </div>    
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_like" placeholder="좋아요">
-      </div>                            
+        <input type="text" class="form-control" name="rv_id"  placeholder="글쓴이">     
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_subject"  placeholder="제목">     
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_content" maxlength="10" placeholder="내용 ">     
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_room_seq"  placeholder="방번호">     
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_book_num"  placeholder="예약번호">     
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_stars"  placeholder="별점">     
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_like"  placeholder="좋아요">     
+      </div> 	
+				
 	<tr>
-		<th>이미지 선택</th>
-		<td colspan="3">
+		<th>이미지</th>
+			<td colspan="3">
 			<!-- 파일 업로드 input type=file -->
 			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
 		</td>
-	</tr>	
-		
+	</tr>
+																						
       <div class="form-group text-center mt-5">
         <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
         <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
-      </div>
-    </form>
-  </div>
+      </div>   
+	</form>
+</div>
 </section>
 <!--
 // instagram --------------------------------------->
@@ -77,35 +99,35 @@
     </div>
     <div class="row no-gutters">
       <div class="col-sm-12 col-md ftco-animate">
-        <a href="/static/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-1.jpg);">
+        <a href="../../../YoHangFront/build/images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-1.jpg);">
           <div class="icon d-flex justify-content-center">
             <span class="icon-instagram align-self-center"></span>
           </div>
         </a>
       </div>
       <div class="col-sm-12 col-md ftco-animate">
-        <a href="/static/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-2.jpg);">
+        <a href="../../../YoHangFront/build/images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-2.jpg);">
           <div class="icon d-flex justify-content-center">
             <span class="icon-instagram align-self-center"></span>
           </div>
         </a>
       </div>
       <div class="col-sm-12 col-md ftco-animate">
-        <a href="/static/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-3.jpg);">
+        <a href="../../../YoHangFront/build/images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-3.jpg);">
           <div class="icon d-flex justify-content-center">
             <span class="icon-instagram align-self-center"></span>
           </div>
         </a>
       </div>
       <div class="col-sm-12 col-md ftco-animate">
-        <a href="/static/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-4.jpg);">
+        <a href="../../../YoHangFront/build/images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-4.jpg);">
           <div class="icon d-flex justify-content-center">
             <span class="icon-instagram align-self-center"></span>
           </div>
         </a>
       </div>
       <div class="col-sm-12 col-md ftco-animate">
-        <a href="/static/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(/static/images/insta-5.jpg);">
+        <a href="../../../YoHangFront/build/images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(../../../YoHangFront/build/images/insta-5.jpg);">
           <div class="icon d-flex justify-content-center">
             <span class="icon-instagram align-self-center"></span>
           </div>
@@ -115,17 +137,22 @@
   </div>
 </section>
 
+<!--
+// footer --------------------------------------->
+<jsp:include page="../common/footer.jsp" flush="false"/>
 
-<!-- 하단 디자인 -->
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+
+
+
 <script type="text/javascript">
 	window.onload = function() {
 		document.getElementById('wbtn').onclick = function() {
 			// alert('click');
 			// 필수 입력항목 검사
-			if(document.wfrm.info.checked == false) {
-				alert('동의하셔야 합니다.');
-				return false;
-			}
 			if(document.wfrm.rv_id.value.trim() == '') {
 				alert('글쓴이를 입력하셔야 합니다.');
 				return false;

@@ -13,7 +13,7 @@ import com.example.mapper.RvMapperinter;
 @Repository
 public class RvBoardDAO {
 
-	private String uploadPath = "C:/Users/USER/Desktop/YoHang-reviews/src/main/webapp/upload";
+	private String uploadPath = "C:/Users/KITCOOP/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
 	
 	@Autowired
 	private RvMapperinter mapper;

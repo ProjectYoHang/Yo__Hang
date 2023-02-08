@@ -3,8 +3,22 @@
 	pageEncoding="UTF-8"%>
 	
 
-
 <%
+	//jsp hero parameters
+	String menuName = "Board";
+	String title = "review";
+	
+	// jsp header parameters
+	String home = "/home.do";
+	String aboutus = "/aboutus.do";
+	String findus = "/findus.do";
+	String qna = "/review/list.do";
+	String faq = "/faq/list.do";
+	String notice = "/notice/list.do";
+	String login = "/login.do";
+	String logout = "/logout.do";
+	String mypage = "/mypage/list.do";
+	
 	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
 	//int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
 	String cpage = (String)request.getAttribute("cpage");
@@ -20,18 +34,31 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
+
 <body>
-<!-- 
-// header --------------------------------------->
-<jsp:include page="../common/header.jsp" flush="false"/>
+<jsp:include page="../common/header.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= login %>" name="login"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+	<jsp:param value="<%= mypage %>" name="mypage"/>
+</jsp:include>
 
 <!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!--
 // contents --------------------------------------->
 
-
+<!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
     <form action="./modify_ok.do" class="bg-white p-5" name="mfrm" method="post" enctype="multipart/form-data">

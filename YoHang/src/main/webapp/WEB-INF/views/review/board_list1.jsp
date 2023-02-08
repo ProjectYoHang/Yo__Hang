@@ -6,6 +6,23 @@
 <%@ page import="java.util.ArrayList" %>
 
 <%	
+	// jsp hero parameters
+	String menuName = "Board";
+	String title = "review";
+
+	// jsp header parameters
+	String home = "/home.do";
+	String aboutus = "/aboutus.do";
+	String findus = "/findus.do";
+	String review = "/review/list.do";
+	String faq = "/faq/list.do";
+	String notice = "/notice/list.do";
+	String login = "/login.do";
+	String logout = "/logout.do";
+	String mypage = "/mypage/list.do";
+
+
+
 	ArrayList<RvBoardTO> rvLists = (ArrayList<RvBoardTO>)request.getAttribute("rvLists");
 
 	int totalRecord = (Integer)request.getAttribute("totalRecord");
@@ -46,7 +63,7 @@
 		if( rv_seq.equals( "" ) ) {
 			sbHtml.append( "						<img src='../../images/noimage.jpg' border='0' width='200' />" );
 		} else {
-			sbHtml.append( "						<a href='./view.do?cpage=" + cpage + "&rv_seq=" + rv_seq + "'><img src='../upload/" + rv_img_name + "' border='0' width='200' /></a>" );
+			sbHtml.append( "						<a href='./view.do?cpage=" + cpage + "&rv_seq=" + rv_seq + "'><img src='../upload/reviews/" + rv_img_name + "' border='0' width='200' /></a>" );
 		}
 		sbHtml.append( "					</div>" );
 		sbHtml.append( "				</td>" );
@@ -59,9 +76,7 @@
 			sbHtml.append( "						<span class='coment_number'></span>" );
 		} else {
 			sbHtml.append( "						<strong>" + rv_subject +"</strong>" );
-			if( wgap <= 1 ) {
-				sbHtml.append( "						<img src='../../images/icon_new.gif' alt='NEW'>") ;
-			}
+
 		}
 		sbHtml.append( "					</div>" );
 		sbHtml.append( "				</td>" );
@@ -98,38 +113,24 @@
 <body>
 <!--
 // header --------------------------------------->
-<!-- header.jsp 참조 코드 있던 자리 -->
-
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/home.do">YoHang</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="oi oi-menu"></span> Menu
-    </button>
-
-    <div class="collapse navbar-collapse" id="ftco-nav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="/home.do" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="aboutus.do" class="nav-link">About us</a></li>
-        <li class="nav-item"><a href=">findus.do" class="nav-link">How to find us</a></li>
-        <li class="nav-item"><a href="/qna/list.do" class="nav-link">Board</a></li>
-        <!-- <li class="nav-item"><a href="login.html" class="nav-link" onclick="href">Login</a></li>	-->
-        <c:if test="${loginMember == null}">
-			<li class="nav-item"><a href="login.do" class="nav-link" onclick="href">Login</a></li>
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<li class="nav-item"><a href="/home.do" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li>
-		</c:if>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
+<jsp:include page="../common/header.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= aboutus %>" name="aboutus"/>
+	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= review %>" name="review"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= login %>" name="login"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+	<jsp:param value="<%= mypage %>" name="mypage"/>
+</jsp:include>
 
 <!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!--
 // contents --------------------------------------->
