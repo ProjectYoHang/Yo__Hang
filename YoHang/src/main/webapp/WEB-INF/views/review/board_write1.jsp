@@ -31,22 +31,6 @@
       </div>
       <div class="form-group">
         <input type="text" class="form-control" name="rv_stars" placeholder="별점">
-        <link href="/assets/css/star.css" rel="stylesheet"/>
-
- 		<form class="mb-3" name="myform" id="myform" method="post">
-		<fieldset>
-		<span class="text-bold">별점을 선택해주세요</span>
-		<input type="radio" name="reviewStar" value="5" id="rate1"><label
-			for="rate1">1</label>
-		<input type="radio" name="reviewStar" value="4" id="rate2"><label
-			for="rate2">2</label>
-		<input type="radio" name="reviewStar" value="3" id="rate3"><label
-			for="rate3">3</label>
-		<input type="radio" name="reviewStar" value="2" id="rate4"><label
-			for="rate4">4</label>
-		<input type="radio" name="reviewStar" value="1" id="rate5"><label
-			for="rate5">5</label>
-	</fieldset>
       </div>    
       <div class="form-group">
         <input type="text" class="form-control" name="rv_like" placeholder="좋아요">
