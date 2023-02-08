@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%
 	// include한 jsp에 필요한 parameters
 	String menuName = "How to find us";
