@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,12 +25,6 @@ public class RvController {
 	@Autowired
 	private RvBoardDAO dao;
 
-	@RequestMapping("/")
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("../../index");
-		return modelAndView;
-	}
 
 	@RequestMapping("/list.do")
 	public ModelAndView list(ModelAndView modelAndView, @RequestParam(value="cpage", required=false, defaultValue="1") int cpage) {
