@@ -26,7 +26,7 @@
 	String qna_seq = (String)request.getAttribute("qna_seq");
 
 	String qna_subject = to.getQna_subject();
-	String qna_id = to.getQna_id();
+	//String qna_id = to.getQna_id();
 	String qna_content = to.getQna_content();
 
 %>
@@ -73,7 +73,7 @@
         <input type="password" class="form-control" name="qna_pw" title="Password" placeholder="글 비밀번호를 입력해주세요.">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="qna_id" title="Title" value="<%= qna_id %>" readonly>
+        <input type="text" class="form-control" name="qna_id" title="Title" value="${loginMember.m_id}" readonly>
       </div>
       <div class="form-group">
         <textarea type="text" class="form-control"  name="qna_content" title="content" rows="10"><%= qna_content %></textarea>

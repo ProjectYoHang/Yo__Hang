@@ -25,7 +25,7 @@
 	String qna_seq = (String)request.getAttribute("qna_seq");
 
 	String qna_subject = to.getQna_subject();
-	String qna_id = to.getQna_id();
+	//String qna_id = to.getQna_id();
 
 %>
 
@@ -64,7 +64,7 @@
     <form action="./delete_ok.do" class="bg-white p-5" name="dfrm">
     <input type="hidden" name="qna_seq" value="<%= qna_seq %>" />
       <div class="form-group">
-        <input type="text" class="form-control" name="qna_id" title="Title" value="<%= qna_id %>" readonly>
+        <input type="text" class="form-control" name="qna_id" title="Title" value="${loginMember.m_id}" readonly>
       </div>
       <div class="form-group">
         <input type="text" class="form-control" name="qna_subject" title="Title" value="<%= qna_subject %>" readonly>

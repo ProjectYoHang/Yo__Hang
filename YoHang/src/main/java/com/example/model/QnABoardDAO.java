@@ -76,11 +76,7 @@ public class QnABoardDAO {
 		mapper.qnaViewHit(to);
 		
 		to = mapper.qnaView(to);
-		
-		// Q&A에 대한 관리자의 답댓글도 viewpage에 보여야함
-		// 따라서, qna_reply 테이블 데이터도 select 해와야 함
-		
-		
+	
 		return to;
 	}
 	
