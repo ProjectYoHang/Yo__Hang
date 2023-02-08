@@ -25,13 +25,6 @@ public class RvController {
 	@Autowired
 	private RvBoardDAO dao;
 
-	@RequestMapping("/")
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("../../index");
-		return modelAndView;
-	}
-
 	@RequestMapping("/list.do")
 	public ModelAndView list(ModelAndView modelAndView, @RequestParam(value="cpage", required=false, defaultValue="1") int cpage) {
 		RvBoardListTO listTo = new RvBoardListTO();
