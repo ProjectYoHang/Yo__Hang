@@ -13,7 +13,8 @@ import javax.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Service;
 
 @Service
-@ServerEndpoint("/book")
+//@ServerEndpoint("/book")
+@ServerEndpoint("/book2")
 public class WebSocketBook {
 	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 

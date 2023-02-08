@@ -11,10 +11,30 @@
 
 <div id='chatt'>
 	<h1>WebSocket booking</h1>
-	<div id='rooms'>
+	
 		<input type='text' id='mid' value='홍길동'>
 		<input type='button' value='로그인' id='btnLogin'>
 		<br>
+		
+		
+		
+		<div id='rooms'>
+			<form id='room'>
+	  			<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="checkbox" id="one" value="1">
+				  <label class="form-check-label" for="inlineCheckbox1">1</label>
+				</div>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="checkbox" id="two" value="2">
+				  <label class="form-check-label" for="inlineCheckbox2">2</label>
+				</div>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="checkbox" id="three" value="3" disabled>
+				  <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+				</div>
+			</form>
+		</div>
+		
 		<input type="button" id="one" value="1" />
 		<input type="button" id="two" value="2" />
 		<input type="button" id="three" value="3" />
@@ -33,6 +53,9 @@
 	
 </div>
 <script src='./book.js'></script>
+<script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+
 
 </body>
 </html>

@@ -18,21 +18,21 @@ btnLogin.onclick = function(){
 		let data = JSON.parse(one.data);
 		let css;
 		
-		if(data.one == '1') {
-			css = 'class=checked';
-		} else {
-			css = 'class=no';
-		}
+		
 		
 		let item = `<div>
 		                <span><b>${data.mid}</b></span> [ ${data.date} ]<br/>
                       <span>${data.one}</span>
 						</div>`;
 		
-		rooms.one.setAttribute(disabled);
-		talk.innerHTML += item;
+		
+		talk.innerHTML += '<div>야호</div>';
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 	}
+}
+
+if($('#one').is(':checked')) {
+	send();
 }
 
 
