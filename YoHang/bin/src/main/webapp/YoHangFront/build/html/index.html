@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Only for responsive web -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Layout</title>
+
+  <!-- Custom app style -->
+  <link rel="stylesheet" href="/static/css/yohang-bundle.css">
+
+
+  <style media="screen">
+    .done {
+      background: #ccc;
+    }
+    .doing {
+      color: #ffffff;
+      background: #00a2ed;
+    }
+    .h3 {
+      font-size: 24px;
+      margin: 40px 0 10px;
+    }
+    .btn + .btn {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="site-wrap" id="wrap">
+  <!-- content -->
+  <div class="container">
+    <h2 class="h2" style="margin: 50px 0 30px;">메뉴목록</h2>
+    <a href="/static/html/layout.html" class="btn btn-outline-secondary done">layout</a>
+    <a href="/static/html/home.html" class="btn btn-outline-secondary doing">Home</a>
+
+    <h3 class="h3">Board</h3>
+    <a href="/static/html/board-list.html" class="btn btn-outline-secondary doing">게시판 목록</a>
+    <a href="/static/html/board-write.html" class="btn btn-outline-secondary">게시판 글작성</a>
+    <a href="/static/html/board-modify.html" class="btn btn-outline-secondary">게시판 글수정</a>
+
+  </div>
+</div>
+<!-- <script type="text/javascript" src="/static/vendors/jquery-3.5.1.slim.min.js"></script>
+<script type="text/javascript" src="/static/vendors/bootstrap-4.4.1/dist/js/bootstrap.min.js"></script> -->
+</body>
+</html>
