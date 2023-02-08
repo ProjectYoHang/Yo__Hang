@@ -34,6 +34,14 @@ public class MemberController {
 	public String home() {
 		return "home";
 	}
+	@RequestMapping ( "aboutus.do")
+	public String aboutus() {
+		return "aboutus";
+	}
+	@RequestMapping ( "findus.do")
+	public String findus() {
+		return "findus";
+	}
 	
 	@RequestMapping ( "/Admin/home.do")
 	public String admin_home() {
