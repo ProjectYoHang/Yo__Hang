@@ -48,82 +48,70 @@
   <div class="container">
     <div class="row">
       
-      <div id='chatt'>
+      <div id="book">
 	<h1>WebSocket booking</h1>
 	
-		<input type='text' id='mid' value='홍길동'>
-		<input type='button' value='로그인' id='btnLogin'>
-		<br>
-		
-		
-		
-		<div id='rooms'>
+		<div id="rooms">
 			
 				<div>
 		  			<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="one" value="1">
+					  <input class="form-check-input" type="checkbox" id="id1" value="1">
 					  <label class="form-check-label" for="inlineCheckbox1">1</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="two" value="2">
+					  <input class="form-check-input" type="checkbox" id="id2" value="2">
 					  <label class="form-check-label" for="inlineCheckbox2">2</label>
 					</div>
+					<!-- 
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="three" value="3" disabled>
+					  <input class="form-check-input" type="checkbox" id="id3" value="3" disabled>
 					  <label class="form-check-label" for="inlineCheckbox3">3 (disabled</label>
 					</div>
+					 -->
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="four" value="4">
+					  <input class="form-check-input" type="checkbox" id="id4" value="4">
 					  <label class="form-check-label" for="inlineCheckbox1">4</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="five" value="5">
+					  <input class="form-check-input" type="checkbox" id="id5" value="5">
 					  <label class="form-check-label" for="inlineCheckbox2">5</label>
 					</div>
 				</div>
 				<div>
 		  			<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="six" value="6">
+					  <input class="form-check-input" type="checkbox" id="id6" value="6">
 					  <label class="form-check-label" for="inlineCheckbox1">6</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="seven" value="7">
+					  <input class="form-check-input" type="checkbox" id="id7" value="7">
 					  <label class="form-check-label" for="inlineCheckbox2">7</label>
 					</div>
+					<!-- 
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="eight" value="8" disabled>
+					  <input class="form-check-input" type="checkbox" id="id8" value="8" disabled>
 					  <label class="form-check-label" for="inlineCheckbox3">8 (disabled</label>
 					</div>
+					 -->
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="nine" value="9">
+					  <input class="form-check-input" type="checkbox" id="id9" value="9">
 					  <label class="form-check-label" for="inlineCheckbox1">9</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="ten" value="10">
+					  <input class="form-check-input" type="checkbox" id="id10" value="10">
 					  <label class="form-check-label" for="inlineCheckbox2">10</label>
 					</div>
 				</div>
+				<div>
+					<button id="btnreset">선택초기화</button>
+				</div>
+			
 			
 		</div>
-		
-		<!-- 
-		<input type="button" id="one" value="1" />
-		<input type="button" id="two" value="2" />
-		<input type="button" id="three" value="3" />
-		<input type="button" name="four" value="4" />
-		<input type="button" name="5" value="5" /><br>
-		<input type="button" name="6" value="6" />
-		<input type="button" name="7" value="7" />
-		<input type="button" name="8" value="8" />
-		<input type="button" name="9" value="9" />
-		<input type="button" name="10" value="10" /><br><br>
-		 -->
-		 
 	</div>
 	
-	<input type='button' value='예약하기' id='bookbtn'>
+	<input type="button" value="예약하기" id="bookbtn">
 	<br/>
-	<div id='talk'></div>
+	<div id="talk"></div>
 	
 </div>
       
@@ -191,73 +179,100 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
+
 <script type="text/javascript">
 
-//$(document).ready(function() {
-	
-	//console.log('hello');
+$(document).ready(function() {
 	
 	let data = {};//전송 데이터(JSON)
-	
 	
 	function getId(id){
 		return document.getElementById(id);
 	}
 
-	let ws ;
-	let mid = getId('mid');
-	let btnLogin = getId('btnLogin');
+	//let ws ;
+	//let mid = getId('mid');
+	//let btnLogin = getId('btnLogin');
 	let talk = getId('talk');
-	let one = getId('one');
-	let rooms = getId('rooms');
+	//let one = getId('one');
+	//let two = getId('two');
 	
-	//let mid = $('mid');
-
-	btnLogin.onclick = function(){
-		ws = new WebSocket("ws://" + location.host + "/book2");
+	let rooms = document.getElementsByClassName('form-check-input');
+	
+	ws = new WebSocket("ws://" + location.host + "/book2");
+	
+	ws.onmessage = function(rooms){
+		let data = JSON.parse(rooms.data);
 		
-		ws.onmessage = function(one){
-			let data = JSON.parse(one.data);
-			let css;
+		let item = '<div>선택된 객실번호는 ' + rooms.data + ' 입니다</div>';
+		
+		talk.innerHTML += item;
+		//talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+		
+		// 선택된 객실번호
+		if(Object.keys(data) == 'checked') {
+		
+			let roomNum = data.checked;
+			
+			$('#id'+roomNum).prop('disabled', true);
+			//$('#id'+roomNum).attr('checked', true);
 			
 			
+		// 선택 해제된 객실번호
+		} else if(Object.keys(data) == 'unchecked') {
+
+			//let roomdata = JSON.parse(rooms.data);
+			let roomNum = data.unchecked;
 			
-			let item = `<div>
-			                <span><b>${data.mid}</b></span> [ ${data.date} ]<br/>
-	                      <span>${data.one}</span>
-							</div>`;
-			
-			
-			talk.innerHTML += item;
-			talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
+			$('#id'+roomNum).prop('checked', false);
+			$('#id'+roomNum).prop('disabled', false);
 		}
-	}
-
-	let checked = $('#one').is(':checked');
-	
-	if(checked) {
-		send();
-	}
-
-	bookbtn.onclick = function(){
-		send();
-	}
-
-	function send(){
-		if(one.value.trim() != ''){
-			data.mid = getId('mid').value;
-			data.one = one.value;
-			data.date = new Date().toLocaleString();
-			let temp = JSON.stringify(data);
-			ws.send(temp);
+		
+		
+		
+		function bookreset() {
+			
+			$('#btnreset').on('click', function(data) {
+				
+				let roomNum = data.checked;
+				
+				//console.log(roomNum);
+				
+				if($('#id'+roomNum).prop('checked', true) && $('#id'+roomNum).prop('disabled', true)) {
+					$('#id'+roomNum).prop('disabled', false);
+					$('#id'+roomNum).prop('checked', false);
+				}
+				
+				let unchecked = '{"unchecked":' +roomNum + '}';
+				ws.send(unchecked);
+			})
 		}
-		one.value ='';
+		
+		
+		// 내 브라우저에서는 checked 상태로 / 타 브라우저에서는 disabled 상태로 속성
+		bookreset();
 	}
-
 	
-//})
-
-
+	$('.form-check-input').click(function() {
+		
+		// 데이터를 체크상태와 아닌 상태의 데이터를 구분하기 위해 데이터를 json형태로 만들어서 서버에 보냄
+		if($(this).is(':checked')) {
+			
+			if(confirm('해당 객실을 선택하시겠습니까?')) {
+				let checked = '{"checked":' + $(this).val() + '}';
+				ws.send(checked);
+			}
+			
+		} else {
+			alert('선택을 취소하시겠습니까?');
+			
+			let unchecked = '{"unchecked":' + $(this).val() + '}';
+			ws.send(unchecked);
+		}
+	})
+	
+	
+})
 
 
 </script>

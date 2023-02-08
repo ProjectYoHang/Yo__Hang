@@ -11,8 +11,12 @@ let talk = getId('talk');
 let one = getId('one');
 let rooms = getId('rooms');
 
-btnLogin.onclick = function(){
-	ws = new WebSocket("ws://" + location.host + "/book");
+
+
+ws = new WebSocket("ws://" + location.host + "/book");
+	
+
+
 	
 	ws.onmessage = function(one){
 		let data = JSON.parse(one.data);
@@ -29,7 +33,7 @@ btnLogin.onclick = function(){
 		talk.innerHTML += '<div>야호</div>';
 		talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
 	}
-}
+
 
 if($('#one').is(':checked')) {
 	send();
