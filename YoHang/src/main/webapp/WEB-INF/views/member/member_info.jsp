@@ -23,25 +23,11 @@
 <jsp:include page="../common/head.jsp" flush="false"/>
 
 <head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <meta charset="UTF-8">
 <title>내 정보</title>
 	<script>
-	Kakao.init('107544815e4e8a304fea6cafb9766ba8');
 	
-	window.onload = function() {
-		document.getElementById( 'mimBtn' ).onclick = function() {
-			let frm = document.modifyFrm;
-			if( frm.pw_rule_ok.value != 'Y' ) {
-				alert( '허용되지 않는 비밀번호입니다.' );
-				return false;
-			}
-			if( frm.phone_rule_ok.value != 'Y') {
-				alert( '전화번호 형식이 맞지않습니다.')
-				return false;	
-			}
-		}
-	}
 	
 	</script>
 </head>
@@ -60,7 +46,6 @@
 	<jsp:param value="<%= mypage %>" name="mypage"/>
 </jsp:include>
  
-
 <!-- hero-wrap -->
 <jsp:include page="../common/hero.jsp" flush="false">
 	<jsp:param value="<%= menuName %>" name="menuName"/>
@@ -104,25 +89,25 @@
 				<input type="submit" name="msoBtn" value="회원 탈퇴" class="btn btn-primary" />
 			</form>
 	<!--  					
-		  카카오 연동시 회원 테이블에 정보 추가   / 연동 해제시 테이블에서 정보 삭제 해야 	
-		<c:if test="${loginMember.m_kakao_id == null}">
-			<div class="form-group mb-0 text-center" onclick="kakaoLogin();" >
-		    	<a href="javascript:void(0)" class="btn w-30 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;" >
-		          <span>카카오 연동</span>
-		      	</a>
-          </div>
-		</c:if>
-		<c:if test="${loginMember.m_kakao_id != null}">
-			<div class="dropdown">
-			    <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
-			    	<a  href="javascript:void(0)">
-			        <span>카카오 연동해제</span>
-			    	</a>
-	        	</div>
-            </div>
-		</c:if>
-	-->
-			
+		  카카오 연동시 회원 테이블에 정보 추가   / 연동 해제시 테이블에서 정보 삭제 해야
+		   	
+			<c:if test="${loginMember.m_kakao_id == null}">
+				<div class="form-group mb-0 text-center" onclick="kakaoLogin();" >
+			    	<a href="javascript:void(0)" class="btn w-30 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;" >
+			          <span>카카오 연동</span>
+			      	</a>
+	          </div>
+			</c:if>
+			<c:if test="${loginMember.m_kakao_id != null}">
+				<div class="dropdown">
+				    <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
+				    	<a  href="javascript:void(0)">
+				        <span>카카오 연동해제</span>
+				    	</a>
+		        	</div>
+	            </div>
+			</c:if>
+			-->
 		</div>
      </div>
   </div>
@@ -185,8 +170,27 @@
 // script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--  kakao -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <script type="text/javascript">
+
+	Kakao.init('107544815e4e8a304fea6cafb9766ba8');
+	window.onload = function() {
+		document.getElementById( 'mimBtn' ).onclick = function() {
+			let frm = document.modifyFrm;
+			if( frm.pw_rule_ok.value != 'Y' ) {
+				alert( '허용되지 않는 비밀번호입니다.' );
+				return false;
+			}
+			if( frm.phone_rule_ok.value != 'Y') {
+				alert( '전화번호 형식이 맞지않습니다.')
+				return false;	
+			}
+		}
+	}
+
 		$('#pw').focusout(function(){
 		    let password = $("#pw").val();
 		    // 최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자	
@@ -228,7 +232,6 @@
 	            	  console.log(response);
 	            	  if(response.id) {
 	            		  let kakao_id = response.id;
-	            		  //location.href='./kakao_login.do?kakao_id=' + kakao_id;
 	            		  location.href='./kakao_connect.do?kakao_id=' + kakao_id;
 	            	  } 
 	            	  else {

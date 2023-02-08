@@ -53,7 +53,7 @@
 		<li class="nav-item account">
 			<div class="dropdown">
 			    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-	              ${loginMember.m_name} 님
+	              ${loginMember.m_id} 님
 	            </button>
 	            <div class="dropdown-menu">
 	              <a class="dropdown-item" href="<%= mypage %>">마이페이지</a>

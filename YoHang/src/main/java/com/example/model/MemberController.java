@@ -40,7 +40,6 @@ public class MemberController {
 		return "home_admin";
 	}
 	
-	
 ////////////////// 로그인 /////////////////////////	
 	@RequestMapping ( "login.do" )
 	public String login() {
@@ -75,7 +74,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		System.out.println( "session연결 종료");
-		return "home";
+		return "logout_ok";
 	}
 	
 ////////////////회원가입 /////////////////////////	
@@ -206,19 +205,21 @@ public class MemberController {
 	}
 	
 ///// 마이페이지 - 카카오 연동 버튼 클릭
-	@RequestMapping( "kakao_connect.do" )
-	public String kakao_connect(@RequestParam String kakao_id, String m_id) {
+	@RequestMapping( "mypage/kakao_connect.do" )
+	public String kakao_connect(@RequestParam String kakao_id,@RequestParam String m_id) {
 		MembersTO to = new MembersTO();
 		to.setM_id(m_id);
 		to.setM_kakao_id(kakao_id);
+		System.out.println(to.getM_kakao_id() );
+		System.out.println(to.getM_id() );
 		int flag = dao.insert_Kakao(to);
 		
-		if( flag == 0) {
-		} else if ( flag == 1 ) {
+		if( flag != 0) {
+			System.out.println( "연동실패" );
+			return "/member/member_info";
 		}
-		return "member/member_info";
+		return "/member/member_info";
 	}
-
 	
 	/// 아이디 / 비밀번호 찾기 ///
 ////////// 아이디로 메일  가져오기
@@ -277,6 +278,8 @@ public class MemberController {
 		
 		return flag;
 	}
+	
+
 	
 ////////////////////////////// 임시비밀번호 생성 ///////////////
 	  public String getTempPassword(){
