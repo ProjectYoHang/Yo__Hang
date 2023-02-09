@@ -190,25 +190,22 @@ $(document).ready(function() {
 		return document.getElementById(id);
 	}
 
-	//let ws ;
-	//let mid = getId('mid');
-	//let btnLogin = getId('btnLogin');
-	let talk = getId('talk');
-	//let one = getId('one');
-	//let two = getId('two');
+	// 세션에 저장되어있는 로그인한 사용자 아이디
+	let username = '${loginMember.m_id}';
+	console.log(username);
 	
 	let rooms = document.getElementsByClassName('form-check-input');
 	
 	ws = new WebSocket("ws://" + location.host + "/book2");
 	
-	ws.onmessage = function(rooms){
-		let data = JSON.parse(rooms.data);
+	ws.onmessage = function(msg){
+		let data = JSON.parse(msg.data);
 		
-		let item = '<div>선택된 객실번호는 ' + rooms.data + ' 입니다</div>';
+		console.log(data);
 		
-		talk.innerHTML += item;
-		//talk.scrollTop=talk.scrollHeight;//스크롤바 하단으로 이동
-		
+		let username = '${loginMember.m_id}';
+	
+		/*
 		// 선택된 객실번호
 		if(Object.keys(data) == 'checked') {
 		
@@ -226,8 +223,23 @@ $(document).ready(function() {
 			
 			$('#id'+roomNum).prop('checked', false);
 			$('#id'+roomNum).prop('disabled', false);
+		} else if(Object.keys(data) == 'disabled') {
+			let roomNum = data.disabled;
+			
+			$('#id'+roomNum).prop('disabled', true);
 		}
+		*/
 		
+		if(data.hasOwnProperty('checked') == true) {
+			let roomNum = data.checked;
+			
+			$('#id'+roomNum).prop('disabled', true);
+		} else if(data.hasOwnProperty('unchecked') == true) {
+			let roomNum = data.unchecked;
+			console.log(roomNum);
+			
+			$('#id'+roomNum).prop('disabled', false);
+		}
 		
 		
 		function bookreset() {
@@ -243,8 +255,8 @@ $(document).ready(function() {
 					$('#id'+roomNum).prop('checked', false);
 				}
 				
-				let unchecked = '{"unchecked":' +roomNum + '}';
-				ws.send(unchecked);
+				//let unchecked = '{"unchecked":' +roomNum + '}';
+				//ws.send(unchecked);
 			})
 		}
 		
@@ -253,22 +265,37 @@ $(document).ready(function() {
 		bookreset();
 	}
 	
-	$('.form-check-input').click(function() {
+	$('.form-check-input').change(function() {
 		
+		let username = '${loginMember.m_id}';
+		
+	
 		// 데이터를 체크상태와 아닌 상태의 데이터를 구분하기 위해 데이터를 json형태로 만들어서 서버에 보냄
 		if($(this).is(':checked')) {
 			
-			if(confirm('해당 객실을 선택하시겠습니까?')) {
-				let checked = '{"checked":' + $(this).val() + '}';
-				ws.send(checked);
-			}
+			//if(confirm('해당 객실을 선택하시겠습니까?') == true) {
+				//$(this).prop('checked', true);
+				
+				//let checked = '{"username": "' + username + '" ,"checked" : ' + $(this).val() + ' }';
+				//ws.send(checked);
+			//} 
+			
+			let checked = '{"username": "' + username + '" ,"checked" : ' + $(this).val() + ' }';
+			ws.send(checked);
+		
 			
 		} else {
-			alert('선택을 취소하시겠습니까?');
 			
-			let unchecked = '{"unchecked":' + $(this).val() + '}';
-			ws.send(unchecked);
+			//if(confirm('선택을 취소하시겠습니까?') == true) {
+				//$(this).prop('checked', false);
+				
+				let unchecked = '{"username": "' + username + '" ,"unchecked" : ' + $(this).val() + ' }';
+				ws.send(unchecked);
+			//}
 		}
+		
+		
+		
 	})
 	
 	
