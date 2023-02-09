@@ -1,6 +1,8 @@
 package com.example.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -262,17 +264,25 @@ public class MemberController {
 	}
 	
 ////////// 회원관리  -  리스트  불러오기 ////////
+	
+//// 페이징.....
 	@RequestMapping ( "loadList.do" )
 	@ResponseBody
-	public ArrayList<MembersTO> members_loadList(){
-		ArrayList<MembersTO> memberList = dao.list_member();
-		return memberList;
+	public Map<String, Object> members_loadList1(@RequestParam(value="cpage", required=false, defaultValue="1") int cpage){
+		MemberListTO listTo = new MemberListTO();
+		listTo.setCpage(cpage);
+		Map<String, Object> result = dao.list_member(listTo);
+		
+		return result;
 	}
+	
 //////// 회원관리 리스트페이지 ///////
 	@RequestMapping ( "members_list.do" )
 	public String member_list() {
 		return "/admin/members_list";
 	}
+	
+	
 	
 /////// 회원관리 회원삭제 //////
 	
@@ -287,8 +297,6 @@ public class MemberController {
 		return flag;
 	}
 	
-
-	
 ////////////////////////////// 임시비밀번호 생성 ///////////////
 	  public String getTempPassword(){
 	      char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
@@ -297,7 +305,7 @@ public class MemberController {
 
 	      String str = "";
 
-	      // 문자 배열 길이의 값을 랜덤으로 10개를 뽑아 구문을 작성함
+	      // 문자 배열 길이만큼  랜덤으로 10개의 값을  뽑아 구문을 작성함
 	      int idx = 0;
 	      for (int i = 0; i < 10; i++) {
 	          idx = (int) (charSet.length * Math.random());

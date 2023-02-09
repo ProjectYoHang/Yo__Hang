@@ -188,7 +188,6 @@
 					}else {
 						console.log( resData.m_email );
 						if( confirm( "아래의 메일로 임시 비밀번호를 보낼까요?\n" + resData.m_email ) ){
-							alert( '확인' );
 							
 							$.ajax({
 								url : '/sendPw.do',

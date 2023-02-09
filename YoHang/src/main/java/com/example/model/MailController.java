@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 public class MailController {
 	
 	private JavaMailSender javaMailSender;
-	
+	/// 관리자가 회원에게 보내는 메일 
 	@RequestMapping ("/sendMail.do")
 	public String sendMail( HttpServletRequest request) {
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -33,9 +33,9 @@ public class MailController {
 		
 		javaMailSender.send( message );
 		
-		return "/admin/members_list";
+		return "/admin/mail_write";
 	}
-	
+	////////// 비밀번호 찾기 메일 
 	@ResponseBody
 	@RequestMapping( "sendPw.do" )
 	public void sendPw(@RequestParam String mail, String tempPassword) {
