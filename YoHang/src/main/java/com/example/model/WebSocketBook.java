@@ -1,10 +1,9 @@
 package com.example.model;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -16,19 +15,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 //@ServerEndpoint("/book")
+// serverEndpoint 어노테이션으로 웹소켓 요청을 받는 endpoint로 만듬
 @ServerEndpoint("/book2")
 public class WebSocketBook {
-	// 접속된 클라이언트 websocket session을 관리하는 set
-	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
-
-	//private Pattern pattern = Pattern.compile("{}");
+	// 접속된 클라이언트 websocket session을 관리하는 List
+	private static List<Session> clients = Collections.synchronizedList(new ArrayList<>());
 	
 	// 웹소켓으로 브라우저가 접속하면 실행되는 메서드
 	@OnOpen
 	public void onOpen(Session userSession) {
 		System.out.println("open session : " + userSession.toString());
 		if(!clients.contains(userSession)) {
-			// 클라이언트가 접속하면 websocket 세션을 set에 저장
+			// 클라이언트가 접속하면 websocket 세션을 List에 저장
 			clients.add(userSession);
 			System.out.println("session open : " + userSession);
 		} else {
@@ -40,29 +38,26 @@ public class WebSocketBook {
 	@OnMessage
 	public void onMessage(String msg, Session userSession) throws Exception {
 		System.out.println("클라이언트로부터 받은 메세지 : " + msg);
-		/*
-		for(Session s : clients) {
-			System.out.println("모든 클라이언트한테 보내는 메세지 : " + msg);
-			s.getBasicRemote().sendText(msg);
-		}
-		*/
+		
 		String[] result = msg.split(" ", 6);
 		
 		String username = result[1].substring(1, result[1].length()-1);
 		String roomNum = result[4];
 		
-		// 브라우저로부터 메세지를 받으면 보낸 클라이언트가 같은 경우에는 checked 메세지 / 그외의 클라이언트들에게는 disabled 메세지 전송
-		for(Session session : clients) {
-			
+		// 메세지를 보낸 클라이언트한테는 아무것도 안보냄 / 그외의 클라이언트들에게는 전송받은 데이터에 따라 구분해서 데이터 보냄
+		//for(Session session : clients) {
+		clients.forEach(session -> {	
+		
 			if(session == userSession) {
 				//session.getBasicRemote().sendText("{\"username\":\"" + username + "\",\"checked\":\"" + roomNum + "\"}");
 				return;
-			} else {
+			} 
+			else {
 				try {
 					// json 형태로 다시 클라이언트로 보냄
 					if(msg.contains("checked") == true) {
 						session.getBasicRemote().sendText("{\"username\":\"" + username + "\",\"checked\":\"" + roomNum + "\"}");
-					} else if(msg.contains("unchecked") == true) {
+					} else if(msg.contains("un") == true) {
 						session.getBasicRemote().sendText("{\"username\":\"" + username + "\",\"unchecked\":\"" + roomNum + "\"}");
 					}
 					
@@ -70,10 +65,7 @@ public class WebSocketBook {
 					e.printStackTrace();
 				}
 			}
-		}
-		
-		// 예시
-		//let checked = '{"username":"' + username + '", "checked":' + $(this).val() + '}';
+		});
 		
 	}
 	

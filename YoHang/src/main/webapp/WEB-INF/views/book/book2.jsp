@@ -184,82 +184,45 @@
 
 $(document).ready(function() {
 	
-	let data = {};//전송 데이터(JSON)
+	//let data = {};//전송 데이터(JSON)
 	
-	function getId(id){
-		return document.getElementById(id);
-	}
-
 	// 세션에 저장되어있는 로그인한 사용자 아이디
 	let username = '${loginMember.m_id}';
-	console.log(username);
-	
-	let rooms = document.getElementsByClassName('form-check-input');
 	
 	ws = new WebSocket("ws://" + location.host + "/book2");
 	
 	ws.onmessage = function(msg){
 		let data = JSON.parse(msg.data);
-		
-		console.log(data);
+		//console.log(data);
 		
 		let username = '${loginMember.m_id}';
 	
-		/*
-		// 선택된 객실번호
-		if(Object.keys(data) == 'checked') {
-		
-			let roomNum = data.checked;
-			
-			$('#id'+roomNum).prop('disabled', true);
-			//$('#id'+roomNum).attr('checked', true);
-			
-			
-		// 선택 해제된 객실번호
-		} else if(Object.keys(data) == 'unchecked') {
-
-			//let roomdata = JSON.parse(rooms.data);
-			let roomNum = data.unchecked;
-			
-			$('#id'+roomNum).prop('checked', false);
-			$('#id'+roomNum).prop('disabled', false);
-		} else if(Object.keys(data) == 'disabled') {
-			let roomNum = data.disabled;
-			
-			$('#id'+roomNum).prop('disabled', true);
-		}
-		*/
-		
+		let roomNum = "";
 		if(data.hasOwnProperty('checked') == true) {
-			let roomNum = data.checked;
+			roomNum = data.checked;
 			
 			$('#id'+roomNum).prop('disabled', true);
 		} else if(data.hasOwnProperty('unchecked') == true) {
-			let roomNum = data.unchecked;
-			console.log(roomNum);
+			roomNum = data.unchecked;
+			//console.log(roomNum);
 			
 			$('#id'+roomNum).prop('disabled', false);
 		}
 		
-		
+		// 선택 초기화 버튼 : 필요한가.....
 		function bookreset() {
 			
 			$('#btnreset').on('click', function(data) {
 				
 				let roomNum = data.checked;
 				
-				//console.log(roomNum);
-				
 				if($('#id'+roomNum).prop('checked', true) && $('#id'+roomNum).prop('disabled', true)) {
 					$('#id'+roomNum).prop('disabled', false);
 					$('#id'+roomNum).prop('checked', false);
 				}
 				
-				//let unchecked = '{"unchecked":' +roomNum + '}';
-				//ws.send(unchecked);
 			})
 		}
-		
 		
 		// 내 브라우저에서는 checked 상태로 / 타 브라우저에서는 disabled 상태로 속성
 		bookreset();
@@ -269,33 +232,15 @@ $(document).ready(function() {
 		
 		let username = '${loginMember.m_id}';
 		
-	
 		// 데이터를 체크상태와 아닌 상태의 데이터를 구분하기 위해 데이터를 json형태로 만들어서 서버에 보냄
 		if($(this).is(':checked')) {
-			
-			//if(confirm('해당 객실을 선택하시겠습니까?') == true) {
-				//$(this).prop('checked', true);
-				
-				//let checked = '{"username": "' + username + '" ,"checked" : ' + $(this).val() + ' }';
-				//ws.send(checked);
-			//} 
-			
 			let checked = '{"username": "' + username + '" ,"checked" : ' + $(this).val() + ' }';
 			ws.send(checked);
-		
-			
 		} else {
-			
-			//if(confirm('선택을 취소하시겠습니까?') == true) {
-				//$(this).prop('checked', false);
-				
-				let unchecked = '{"username": "' + username + '" ,"unchecked" : ' + $(this).val() + ' }';
-				ws.send(unchecked);
-			//}
+			// unchecked에도 checked가 포함되어있으므로 unchecked라고 보내면 websocketbook.java에서 브라우저로부터 전송받은 데이터를 구분할 수 없음
+			let unchecked = '{"username": "' + username + '" ,"un" : ' + $(this).val() + ' }';
+			ws.send(unchecked);
 		}
-		
-		
-		
 	})
 	
 	
