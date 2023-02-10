@@ -29,7 +29,7 @@
         <li class="nav-item active"><a href="<%= book %>" class="nav-link">예약관리</a></li>
         <li class="nav-item active"><a href="<%= room %>" class="nav-link">객실관리</a></li>
         <li class="nav-item board">
-          <div class="dropdown">
+          <div class="dropdown nav-link">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
               게시판관리
             </button>
@@ -44,7 +44,7 @@
 		
 		<!--  <li class="nav-item"><a href="<%= logout %>" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li> -->
 		<li class="nav-item account">
-	         <div class="dropdown">
+	         <div class="dropdown nav-link">
 	           <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 	            	Admin 님
 	           </button>

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.example.model.AdminsTO;
+import com.example.model.MemberListTO;
 import com.example.model.MembersTO;
 
 @Mapper
@@ -81,8 +83,22 @@ public interface MapperInter {
 
 ////////////// 멤버 목록 가져오기
 	
-	@Select ( "select m_id, m_name, m_email, m_phone, m_join_date from members order by  m_join_date desc" )
-	ArrayList<MembersTO> list_member();
-	
+	@Select ( "select m_id, m_name, m_email, m_phone, m_join_date from members order by  m_join_date desc limit #{startRow}, #{recordPerPage} " )
+	ArrayList<MembersTO> list_member(MemberListTO listTO);
 
+////////////// 가입한 멤버의 합
+	
+	@Select ("select count(*) from members")
+	int membersCount();
+	
+	
+	
+/////////////////////// 관리자 ///////////////
+	
+	@Select ("select count(*) from admins where admin_id=#{admin_id} and admin_pw=#{admin_pw}")
+	int loginAdmin(AdminsTO to);
+	
+	
+	
+ 
 }
