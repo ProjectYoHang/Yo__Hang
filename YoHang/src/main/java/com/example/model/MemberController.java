@@ -277,7 +277,7 @@ public class MemberController {
 	}
 	
 //////// 회원관리 리스트페이지 ///////
-	@RequestMapping ( "Admin/member/list.do" )
+	@RequestMapping ( "/Admin/member/list.do" )
 	public String member_list() {
 		return "/admin/members_list";
 	}

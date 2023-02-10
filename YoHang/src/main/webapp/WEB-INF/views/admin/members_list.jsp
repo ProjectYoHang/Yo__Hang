@@ -136,7 +136,7 @@ $(document).ready(function(){
 
 const memberDelete = function( m_id ) {
 	$.ajax({
-		url  : "memberDelete.do",
+		url  : "/memberDelete.do",
 		type : "post",
 		data :  {
 			m_id : m_id.trim()
@@ -146,7 +146,7 @@ const memberDelete = function( m_id ) {
 			memberList();
 		},
 		error: function( err ) {
-			alert( '에러 ' + err.status);
+			alert( '에러 딜리' + err.status);
 		}
 	});
 }
