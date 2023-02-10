@@ -14,17 +14,4 @@ public class ChatController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/book1")
-	public ModelAndView book1() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("book/book");
-		return modelAndView;
-	}
-	
-	@RequestMapping("/book2")
-	public ModelAndView book2() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("book/book2");
-		return modelAndView;
-	}
 }

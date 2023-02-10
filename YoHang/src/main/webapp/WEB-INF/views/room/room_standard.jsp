@@ -3,8 +3,8 @@
 
 <%
 	// include한 jsp에 필요한 parameters
-	String menuName = "search";
-	String title = "검색";
+	String menuName = "객실";
+	String title = "STANDARD";
 	
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
@@ -14,7 +14,12 @@
 	String notice = "/notice/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String mypage = "/mypage/list.do";	
+%>
+
+<%
+	// STANDARD 객실 타입에 대한 페이지
+	
 	
 %>
 
@@ -44,15 +49,48 @@
 </jsp:include>
 
 <!-- content -->
-<section class="ftco-section bg-light">
+
+<section class="ftco-section">
   <div class="container">
     <div class="row">
-      
-      <div id="book">
-	<h1>WebSocket booking</h1>
-	
-		<div id="rooms">
-			
+    <!-- 우측 요소들 주석처리하니까 왼쪽에 치우쳐져있길래 그냥 col 전체 설정함 -->
+      <div class="col-lg-8">
+      <!-- <div class="col"> -->
+        <div class="row">
+          <div class="col-md-12 ftco-animate">
+            <h2 class="mb-4">Standard room</h2>
+            <div class="single-slider owl-carousel">
+              <div class="item">
+                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-1.jpg);"></div>
+              </div>
+              <div class="item">
+                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-2.jpg);"></div>
+              </div>
+              <div class="item">
+                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-3.jpg);"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
+            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <div class="d-md-flex mt-5 mb-5">
+              <ul class="list">
+                <li><span>Max:</span> 2 Persons</li>
+                <li><span>Size:</span> 45 m2</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>View:</span> Sea View</li>
+                <li><span>Bed:</span> 1</li>
+              </ul>
+            </div>
+            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+          </div>
+         </div>
+       </div>
+      <div class="col-lg-4 sidebar ftco-animate">
+        <div class="sidebar-box bg-light">
+        	<객실번호 선택>
+			<div id="rooms">
 				<div>
 		  			<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id1" value="1">
@@ -61,64 +99,56 @@
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id2" value="2">
 					  <label class="form-check-label" for="inlineCheckbox2">2</label>
-					</div>
-					<!-- 
+					</div> 
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id3" value="3" disabled>
-					  <label class="form-check-label" for="inlineCheckbox3">3 (disabled</label>
+					  <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
 					</div>
-					 -->
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id4" value="4">
-					  <label class="form-check-label" for="inlineCheckbox1">4</label>
+					  <label class="form-check-label" for="inlineCheckbox4">4</label>
 					</div>
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id5" value="5">
-					  <label class="form-check-label" for="inlineCheckbox2">5</label>
+					  <label class="form-check-label" for="inlineCheckbox5">5</label>
 					</div>
 				</div>
 				<div>
 		  			<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id6" value="6">
-					  <label class="form-check-label" for="inlineCheckbox1">6</label>
+					  <label class="form-check-label" for="inlineCheckbox6">6</label>
 					</div>
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id7" value="7">
-					  <label class="form-check-label" for="inlineCheckbox2">7</label>
+					  <label class="form-check-label" for="inlineCheckbox7">7</label>
 					</div>
-					<!-- 
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id8" value="8" disabled>
-					  <label class="form-check-label" for="inlineCheckbox3">8 (disabled</label>
+					  <label class="form-check-label" for="inlineCheckbox8">8 (disabled</label>
 					</div>
-					 -->
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id9" value="9">
-					  <label class="form-check-label" for="inlineCheckbox1">9</label>
+					  <label class="form-check-label" for="inlineCheckbox9">9</label>
 					</div>
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id10" value="10">
-					  <label class="form-check-label" for="inlineCheckbox2">10</label>
+					  <label class="form-check-label" for="inlineCheckbox10">10</label>
 					</div>
 				</div>
+				<br>
+				<!-- 
 				<div>
 					<button id="btnreset">선택초기화</button>
 				</div>
-			
-			
-		</div>
-	</div>
-	
-	<input type="button" value="예약하기" id="bookbtn">
-	<br/>
-	<div id="talk"></div>
-	
-</div>
-      
-      
+				 -->
+				<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
+			</div>
+		</div>        
     </div>
   </div>
+  </div>
 </section>
+
 
 <!--
 // instagram --------------------------------------->
@@ -175,10 +205,8 @@
 
 <!--
 // script --------------------------------------->
-<!-- <script src='./book.js'></script> -->
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
-
 
 <script type="text/javascript">
 
@@ -189,7 +217,7 @@ $(document).ready(function() {
 	// 세션에 저장되어있는 로그인한 사용자 아이디
 	let username = '${loginMember.m_id}';
 	
-	ws = new WebSocket("ws://" + location.host + "/book2");
+	ws = new WebSocket("ws://" + location.host + "/room/standard");
 	
 	ws.onmessage = function(msg){
 		let data = JSON.parse(msg.data);
@@ -209,6 +237,7 @@ $(document).ready(function() {
 			$('#id'+roomNum).prop('disabled', false);
 		}
 		
+		/*
 		// 선택 초기화 버튼 : 필요한가.....
 		function bookreset() {
 			
@@ -226,6 +255,8 @@ $(document).ready(function() {
 		
 		// 내 브라우저에서는 checked 상태로 / 타 브라우저에서는 disabled 상태로 속성
 		bookreset();
+		*/
+		
 	}
 	
 	$('.form-check-input').change(function() {
@@ -243,9 +274,7 @@ $(document).ready(function() {
 		}
 	})
 	
-	
 })
-
 
 </script>
 
