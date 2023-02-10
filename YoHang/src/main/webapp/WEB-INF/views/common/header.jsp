@@ -29,7 +29,7 @@
         <li class="nav-item"><a href="<%= aboutus %>" class="nav-link">About us</a></li>
         <li class="nav-item"><a href="<%= findus %>" class="nav-link">How to find us</a></li>
         <li class="nav-item board">
-          <div class="dropdown">
+          <div class="dropdown nav-link">
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
               Board
             </button>
@@ -51,7 +51,7 @@
 		</c:if>
 		<c:if test="${loginMember != null}">
 		<li class="nav-item account">
-			<div class="dropdown">
+			<div class="dropdown nav-link">
 			    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
 	              ${loginMember.m_id} 님
 	            </button>

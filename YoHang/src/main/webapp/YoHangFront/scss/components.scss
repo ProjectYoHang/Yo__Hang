@@ -7,29 +7,44 @@
   .nav-item {
     &.board, 
     &.account {
-      .dropdown {
+      .dropdown.nav-link  {
         .dropdown-toggle {
           color: rgba(255, 255, 255, 0.7);
           font-size: 14px;
           background-color: transparent;
-          padding-top: 1.5rem;
-          padding-bottom: 1.5rem;
-          padding-left: 20px;
+          padding: 0;
+          // padding-top: 1.5rem;
+          // padding-bottom: 1.5rem;
+          // padding-left: 20px;
 
           &:hover {
             color: rgba(255, 255, 255, 1);
           }
 
           @media (max-width: 991px) {
-            padding-left: 0;
-            padding-right: 0;
-            padding-top: 0.9rem;
-            padding-bottom: 0.9rem;
+            // padding-left: 0;
+            // padding-right: 0;
+            // padding-top: 0.9rem;
+            // padding-bottom: 0.9rem;
           }
         }
       }
     }
   }
+}
+
+.ftco-navbar-light.scrolled {
+  .nav-item {
+    &.board, 
+    &.account {
+      .dropdown.nav-link  .dropdown-toggle {
+        // padding-top: 0.9rem !important;
+        // padding-bottom: 0.9rem !important;
+        color: #000000 !important;
+      }
+    }
+  }
+  
 }
 
 //  table 
