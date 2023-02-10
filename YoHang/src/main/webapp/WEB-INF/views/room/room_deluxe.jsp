@@ -268,8 +268,7 @@ $(document).ready(function() {
 			let checked = '{"username": "' + username + '" ,"checked" : ' + $(this).val() + ' }';
 			ws.send(checked);
 		} else {
-			// unchecked에도 checked가 포함되어있으므로 unchecked라고 보내면 websocketbook.java에서 브라우저로부터 전송받은 데이터를 구분할 수 없음
-			let unchecked = '{"username": "' + username + '" ,"un" : ' + $(this).val() + ' }';
+			let unchecked = '{"username": "' + username + '" ,"unchecked" : ' + $(this).val() + ' }';
 			ws.send(unchecked);
 		}
 	})

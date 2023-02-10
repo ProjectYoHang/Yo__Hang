@@ -43,10 +43,10 @@ public class WebSocketBook {
 	public void onMessage(String msg, Session userSession) throws Exception {
 		System.out.println("클라이언트로부터 받은 메세지 : " + msg);
 		
-		String[] result = msg.split(" ", 6);
+		//String[] result = msg.split(" ", 6);
 		
-		String username = result[1].substring(1, result[1].length()-1);
-		String roomNum = result[4];
+		//String username = result[1].substring(1, result[1].length()-1);
+		//String roomNum = result[4];
 		
 		// 메세지를 보낸 클라이언트한테는 아무것도 안보냄 / 그외의 클라이언트들에게는 전송받은 데이터에 따라 구분해서 데이터 보냄
 		// forEach문의 경우 체크해제도 잘 실행되는데 반해, 향상된 for문은 체크해제의 경우가 실행 안됨
@@ -61,14 +61,14 @@ public class WebSocketBook {
 			else {
 				try {
 					// json 형태로 다시 클라이언트로 보냄
-					//session.getBasicRemote().sendText(msg);
+					session.getBasicRemote().sendText(msg);
 					
 					// 클라이언트로부터 json형태로 데이터를 체크/체크해제의 경우로 분리해서 받아오므로 구분할 필요가 없음.... => 그런 줄 알았는데 아래와 같이 if문으로 조건 분리안하면 체크해제가 안되네....
-					if(msg.contains("checked") == true) {
-						session.getBasicRemote().sendText("{\"username\":\"" + username + "\",\"checked\":\"" + roomNum + "\"}");
-					} else if(msg.contains("un") == true) {
-						session.getBasicRemote().sendText("{\"username\":\"" + username + "\",\"unchecked\":\"" + roomNum + "\"}");
-					}
+					//if(msg.contains("checked") == true) {
+						//session.getBasicRemote().sendText("{\"username\":\"" + username + "\",\"checked\":\"" + roomNum + "\"}");
+					//} else if(msg.contains("un") == true) {
+						//session.getBasicRemote().sendText("{\"username\":\"" + username + "\",\"unchecked\":\"" + roomNum + "\"}");
+					//}
 					
 				} catch (IOException e) {
 					e.printStackTrace();
