@@ -24,6 +24,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="common/head.jsp" flush="false"/>
+
 <body>
 <!-- 
 // header --------------------------------------->
@@ -47,59 +48,6 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
-
-<script type="text/javascript">
-	window.onload = function() {
-		document.getElementById( 'signupbtn' ).onclick = function() {
-			let frm = document.signupfrm;
-			if( frm.id.value.trim() == '' ) {
-				alert( '아이디를 입력하세요.' );
-				return false;
-			}else if( frm.id_ok.value != 'Y'){
-				alert( '사용할 수 없는 아이디입니다.' );
-				return false;
-			}
-			if( frm.name.value.trim() == '' ) {
-				alert( '이름을 입력하세요.' );
-				return false;
-			}
-			if( frm.password.value.trim() == '' ) {
-				alert( '비밀번호를 입력하세요.' );
-				return false;
-			} else if( frm.pw_rule_ok.value != 'Y' ) {
-				alert( '허용되지 않는 비밀번호입니다.' );
-				return false;
-			} else if( frm.password_check.value.trim() != frm.password.value.trim() ) {
-				alert( '비밀번호가 일치하지 않습니다.' );
-				return false;
-			}
-			
-			if( frm.phone.value.trim() == '' ) {
-				alert( '전화번호를 입력하세요.' );
-				return false;
-			} else if ( frm.phone_rule_ok.value != 'Y' ) {
-				alert( '전화번호의 형식을 확인해주세요');
-				return false;
-			} 
-			if( frm.mail.value.trim() == '' ) {
-				alert( '메일을 입력하세요.' );
-				return false;
-			} else if ( frm.mail_rule_ok.value != 'Y' ) {
-				alert( '메일 형식을 확인해주세요.' );
-				return false;
-			}
-			if( frm.birth.value.trim() == '') {
-				alert( '생년월일을 입력하세요')
-				return false;
-			}else if ( frm.birth.value.trim().length != 8 ) {
-				alert( '생년월일은 8자리로 입력해주세요' );
-				return false;
-			}
-			
-			document.signupfrm.submit();
-		}
-	}
-</script>
 	<title>회원가입</title>
 </head>
 <body>
@@ -175,10 +123,72 @@
   </div>
 </section>
 
+<jsp:include page="./common/footer.jsp" flush="false"/>
+<!--
+// script --------------------------------------->
+<script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
+<script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+<!-- Jquery -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.13.2/jquery-ui.min.js"></script>
+
+
 <!-- script --------------------------------------->
 
 <script type="text/javascript">
-	
+
+window.onload = function() {
+	document.getElementById( 'signupbtn' ).onclick = function() {
+		let frm = document.signupfrm;
+		if( frm.id.value.trim() == '' ) {
+			alert( '아이디를 입력하세요.' );
+			return false;
+		}else if( frm.id_ok.value != 'Y'){
+			alert( '사용할 수 없는 아이디입니다.' );
+			return false;
+		}
+		if( frm.name.value.trim() == '' ) {
+			alert( '이름을 입력하세요.' );
+			return false;
+		}
+		if( frm.password.value.trim() == '' ) {
+			alert( '비밀번호를 입력하세요.' );
+			return false;
+		} else if( frm.pw_rule_ok.value != 'Y' ) {
+			alert( '허용되지 않는 비밀번호입니다.' );
+			return false;
+		} else if( frm.password_check.value.trim() != frm.password.value.trim() ) {
+			alert( '비밀번호가 일치하지 않습니다.' );
+			return false;
+		}
+		
+		if( frm.phone.value.trim() == '' ) {
+			alert( '전화번호를 입력하세요.' );
+			return false;
+		} else if ( frm.phone_rule_ok.value != 'Y' ) {
+			alert( '전화번호의 형식을 확인해주세요');
+			return false;
+		} 
+		if( frm.mail.value.trim() == '' ) {
+			alert( '메일을 입력하세요.' );
+			return false;
+		} else if ( frm.mail_rule_ok.value != 'Y' ) {
+			alert( '메일 형식을 확인해주세요.' );
+			return false;
+		}
+		if( frm.birth.value.trim() == '') {
+			alert( '생년월일을 입력하세요')
+			return false;
+		}else if ( frm.birth.value.trim().length != 8 ) {
+			alert( '생년월일은 8자리로 입력해주세요' );
+			return false;
+		}
+		
+		document.signupfrm.submit();
+	}
+}
+////////////
+
 	$('#password').focusout(function(){
 	      let password = $("#password").val();
 	      // 최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자	
@@ -276,11 +286,6 @@
 	    }
 	});
 	</script>
-<jsp:include page="./common/footer.jsp" flush="false"/>
-<!--
-// script --------------------------------------->
-<script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
-<script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 </body>
 </html>

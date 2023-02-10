@@ -8032,21 +8032,16 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
 
-.navbar-nav .nav-item.board .dropdown .dropdown-toggle, .navbar-nav .nav-item.account .dropdown .dropdown-toggle {
+.navbar-nav .nav-item.board .dropdown.nav-link .dropdown-toggle, .navbar-nav .nav-item.account .dropdown.nav-link .dropdown-toggle {
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
   background-color: transparent;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  padding-left: 20px; }
-  .navbar-nav .nav-item.board .dropdown .dropdown-toggle:hover, .navbar-nav .nav-item.account .dropdown .dropdown-toggle:hover {
+  padding: 0; }
+  .navbar-nav .nav-item.board .dropdown.nav-link .dropdown-toggle:hover, .navbar-nav .nav-item.account .dropdown.nav-link .dropdown-toggle:hover {
     color: white; }
-  @media (max-width: 991px) {
-    .navbar-nav .nav-item.board .dropdown .dropdown-toggle, .navbar-nav .nav-item.account .dropdown .dropdown-toggle {
-      padding-left: 0;
-      padding-right: 0;
-      padding-top: 0.9rem;
-      padding-bottom: 0.9rem; } }
+
+.ftco-navbar-light.scrolled .nav-item.board .dropdown.nav-link .dropdown-toggle, .ftco-navbar-light.scrolled .nav-item.account .dropdown.nav-link .dropdown-toggle {
+  color: #000000 !important; }
 
 .table-board-list {
   text-align: center;

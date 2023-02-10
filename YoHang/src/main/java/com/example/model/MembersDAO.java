@@ -1,6 +1,8 @@
 package com.example.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,17 +158,56 @@ public class MembersDAO {
 			return flag;
 	}
 	
-	
 	////////////////////////// 회원 관리////////////////
-	
-	public ArrayList<MembersTO>list_member() {
-		ArrayList<MembersTO> memberList = mapper.list_member();
+
+	public Map<String, Object>list_member(MemberListTO listTo) {
+		listTo.setTotalRecord( mapper.membersCount());
+		int totalRecord = listTo.getTotalRecord();
 		
-		System.out.println( "memberDAO에서 확인하는 중");
-		for(MembersTO to : memberList) {
-			System.out.println("m_id : " + to.getM_id());
-		}
-		System.out.println( "memberDAO에서 확인 끝 ");
-		return memberList;
+		// 현재 페이지
+		int cpage = listTo.getCpage();
+				
+		// 한 페이지에 보여줄 데이터 갯수 = 10
+		int recordPerPage = listTo.getRecordPerPage();
+				
+		int startRow = (cpage - 1) * recordPerPage;
+		int blockPerPage = listTo.getBlockPerPage();
+		listTo.setStartRow(startRow);
+		listTo.setRecordPerPage(recordPerPage);
+		
+		int totalPage = ((totalRecord - 1) / recordPerPage) + 1;
+		
+		// 처음 보여줄 첫번째 페이지 번호
+		listTo.setStartPageNum(1);
+		int startPageNum = listTo.getStartPageNum();
+		
+		listTo.setLastPageNum(recordPerPage);
+		// 한 페이지에 보여줄 마지막 페이지번호
+		int lastPageNum = listTo.getLastPageNum();
+		
+		startPageNum = cpage - ( cpage-1 ) % blockPerPage ;
+		lastPageNum = cpage - ( cpage-1 ) % blockPerPage + blockPerPage - 1;
+		
+		ArrayList<MembersTO> memberLists = mapper.list_member(listTo);
+		
+		int lastPage = (int)(Math.ceil(totalRecord / recordPerPage));
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("memberList", memberLists);
+		resultMap.put("cpage", cpage);
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("lastPageNum", lastPageNum);
+		resultMap.put("totalRecord", totalRecord);
+		resultMap.put("recordPerPage", recordPerPage);
+		resultMap.put("totalPage", totalPage);
+		resultMap.put("blockPerPage", blockPerPage);
+		
+		return resultMap;
+	}
+	
+	public int memberCount() {
+		int result = mapper.membersCount();
+		return result;
 	}
 }

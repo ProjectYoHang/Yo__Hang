@@ -34,7 +34,7 @@ public class QnAController {
 	@RequestMapping("/qna/list.do")
 	public ModelAndView list(ModelAndView modelAndView, @RequestParam(value="cpage", required=false, defaultValue="1") int cpage) {
 		QnABoardListTO listTo = new QnABoardListTO();
-		
+	
 		listTo.setCpage(cpage);
 		
 		Map<String, Object> map = dao.qnaList(listTo);
