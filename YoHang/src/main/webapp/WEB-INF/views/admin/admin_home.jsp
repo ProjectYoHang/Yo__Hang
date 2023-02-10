@@ -27,14 +27,20 @@
 // header --------------------------------------->
 <jsp:include page="../common/header_admin.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= member %>" name="member"/>
+	<jsp:param value="<%= book %>" name="book"/>
+	<jsp:param value="<%= room %>" name="room"/>
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
-	<jsp:param value="<%= member %>" name="member"/>
 </jsp:include>
-<!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
+
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!-- content -->
 <section class="ftco-section bg-light">
@@ -101,7 +107,7 @@
 <!--
 // script --------------------------------------->
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
-<script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+<script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 </body>
 </html>

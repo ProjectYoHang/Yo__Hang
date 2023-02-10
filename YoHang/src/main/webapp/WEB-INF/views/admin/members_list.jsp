@@ -1,13 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	//jsp hero parameters
+	String menuName = "Home";
+	String title = "Home";
+	
+	// jsp header parameters
+	String home = "/Admin/home.do";
+	String member = "/Admin/member/list.do";
+	String book = "/Admin/book/list.do";
+	String room = "/Admin/room/list.do";
+	String qna = "/Admin/qna/list.do";
+	String faq = "/Admin/faq/list.do";
+	String notice = "/Admin/notice/list.do";
+	String logout = "/Admin/logout.do";
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
 <body>
 <!-- 
 // header --------------------------------------->
-<jsp:include page="../common/header.jsp" flush="false"/>
-
+<jsp:include page="../common/header_admin.jsp" flush="false">
+	<jsp:param value="<%= home %>" name="home"/>
+	<jsp:param value="<%= member %>" name="member"/>
+	<jsp:param value="<%= book %>" name="book"/>
+	<jsp:param value="<%= room %>" name="room"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= logout %>" name="logout"/>
+</jsp:include>
 <!-- hero-wrap -->
 <jsp:include page="../common/hero.jsp" flush="false"/>
 

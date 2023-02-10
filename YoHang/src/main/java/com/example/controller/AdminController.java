@@ -49,4 +49,11 @@ public class AdminController {
 		return "/admin/admin_login_ok";
 	}
 	
+	@RequestMapping("/Admin/logout.do")
+	public String admin_logout_ok(HttpSession session) {
+		session.invalidate();
+		
+		return "/admin/admin_logout_ok";
+	}
+	
 }
