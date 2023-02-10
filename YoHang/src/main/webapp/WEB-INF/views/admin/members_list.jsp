@@ -146,6 +146,10 @@ const memberList = function( pageNum ) {
 			let totalPage = resData.totalPage;
 			let blockPerPage = resData.blockPerPage;
 			
+			//let offset = $('#board').offset()
+			//$('html').animate({scrollTop : offset.top}, 400);
+			$('html').scrollTop(0);
+			//$('html').animate({scrollTop : 0}, 200)
 			let html = '<table class="table table-board-list" >';
 			html += '<thead>';
 			html += '<tr>';
@@ -157,7 +161,6 @@ const memberList = function( pageNum ) {
 			html += '<th>삭제</th>';
 			html += '</tr>';
 			html += '</thead>';
-           
 			
 			$.each( memberList, function ( index, item ) {
 				html += '<tr>';
@@ -192,7 +195,6 @@ const memberList = function( pageNum ) {
         	} else {
         		html += '<li class="page-item prev"><a class="page-link" onclick="memberList(' + (cpage - 1) +')  "><i class="xi-angle-left-min" aria-hidden="true"></i></a></li>'
         	}
-
             
             for(let i=startPageNum ; i <= lastPageNum; i++) {
                 if (i == cpage) {
@@ -218,7 +220,7 @@ const memberList = function( pageNum ) {
  				html += '	</nav>';
 				html += '</ul>';
 			$('#board').html(html);
-			$('#board').focus();
+			
 		},
 		error: function( err ) {
 			alert( '에러 ' + err.status);
@@ -230,8 +232,6 @@ const memberList = function( pageNum ) {
 		let mail = $('#btn' + idx).val();
 		$('#mail').val(mail);
 	} 
-
 </script>
-
 </body>
 </html>

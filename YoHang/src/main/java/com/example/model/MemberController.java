@@ -266,7 +266,7 @@ public class MemberController {
 ////////// 회원관리  -  리스트  불러오기 ////////
 	
 //// 페이징.....
-	@RequestMapping ( "loadList.do" )
+	@RequestMapping ( "/Admin/member/loadList.do" )
 	@ResponseBody
 	public Map<String, Object> members_loadList1(@RequestParam(value="cpage", required=false, defaultValue="1") int cpage){
 		MemberListTO listTo = new MemberListTO();
@@ -277,7 +277,7 @@ public class MemberController {
 	}
 	
 //////// 회원관리 리스트페이지 ///////
-	@RequestMapping ( "members_list.do" )
+	@RequestMapping ( "Admin/member/list.do" )
 	public String member_list() {
 		return "/admin/members_list";
 	}

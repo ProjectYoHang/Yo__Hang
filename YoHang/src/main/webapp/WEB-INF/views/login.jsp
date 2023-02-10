@@ -120,7 +120,7 @@
     </div>
   </div>
 </div>
-
+ <div ><a href="/admin/admin_login.do" >관리자 모드</a></div>
 <jsp:include page="common/footer.jsp" flush="false"/>
 
 <!-- script --------------------------------------->
