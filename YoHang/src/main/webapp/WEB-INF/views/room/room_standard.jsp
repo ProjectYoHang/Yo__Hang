@@ -1,3 +1,5 @@
+<%@page import="com.example.model.RoomTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -19,7 +21,34 @@
 
 <%
 	// STANDARD 객실 타입에 대한 페이지
+	ArrayList<RoomTO> bookedRoomNums = (ArrayList)request.getAttribute("bookedRoonNums");
+
+	StringBuilder html = new StringBuilder();
+
+	for(RoomTO to : bookedRoomNums) {
+		int bookedRoomNum = Integer.parseInt(to.getRoom_seq());
+		
+		for(int i = 1; i<=10; i++) {
+			html.append("<div>");
+			html.append("<div class='form-check form-check-inline'>");
+			
+			if(i=bookedRoomNum) {
+				html.append("<input class='form-check-input' type='checkbox' id='id"+ i + ' value=" + i + " disabled>");
+				html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			} else {
+				html.append("<input class='form-check-input' type='checkbox' id='id"+ i + ' value=" + i + ">");
+				html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			}
+			
+			//html.append("");
+			//html.append("");
+			//html.append("");
+			//html.append("");
+			//html.append("");
+			html.append("</div>");
+		}
 	
+	}
 	
 %>
 
@@ -91,6 +120,9 @@
         <div class="sidebar-box bg-light">
         	<객실번호 선택>
 			<div id="rooms">
+			
+<%= html.toString() %>			
+			
 				<div>
 		  			<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id1" value="1">
