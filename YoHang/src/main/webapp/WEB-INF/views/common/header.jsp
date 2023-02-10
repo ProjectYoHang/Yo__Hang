@@ -9,6 +9,7 @@
 	String qna = request.getParameter("qna");
 	String faq = request.getParameter("faq");
 	String notice = request.getParameter("notice");
+	String rv = request.getParameter("rv");
 	String login = request.getParameter("login");
 	String logout = request.getParameter("logout");
 	String mypage = request.getParameter("mypage");
@@ -43,6 +44,7 @@
             	</c:if>
               <a class="dropdown-item" href="<%= faq %>">FAQ</a>
               <a class="dropdown-item" href="<%= notice %>">공지사항</a>
+              <a class="dropdown-item" href="<%= rv %>">리뷰게시판</a>
             </div>
           </div>
         </li>

@@ -10,9 +10,10 @@
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
 	String findus = "/findus.do";
-	String review = "/review/list.do";
+	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
+	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
@@ -32,9 +33,10 @@
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
 	<jsp:param value="<%= findus %>" name="findus"/>
-	<jsp:param value="<%= review %>" name="review"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>
