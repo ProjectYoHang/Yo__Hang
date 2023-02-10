@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@page import="com.example.model.RvBoardTO"%>
-
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.ArrayList" %>
 
 <%	
@@ -241,7 +241,13 @@
 
 		<!-- 글쓰기 버튼 -->        
         <div class="text-center mt-5">
-			<a href="./write.do" class="btn btn-secondary btn-lg">글쓰기</a>
+            <c:if test="${loginMember == null }">
+            	<a class="btn btn-secondary btn-lg" href="<%= login %>">글쓰기</a>
+            </c:if>
+            <c:if test="${loginMember != null }">
+            	<a class="btn btn-secondary btn-lg" href="./write.do">글쓰기</a>
+            </c:if>        
+			<!-- <a href="./write.do" class="btn btn-secondary btn-lg">글쓰기</a>  -->
 		</div>
         
       </div>

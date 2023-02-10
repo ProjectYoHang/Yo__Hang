@@ -54,7 +54,7 @@
 	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
 
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_id"  placeholder="글쓴이">     
+        <input type="text" class="form-control" name="rv_id"  value="test1234" readonly>     
       </div>
       <div class="form-group">
         <input type="text" class="form-control" name="rv_subject"  placeholder="제목">     
