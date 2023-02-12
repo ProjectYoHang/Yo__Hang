@@ -1,7 +1,11 @@
-<%@page import="com.example.model.RoomTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+
+<%@page import="com.example.model.RoomTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.stream.IntStream"%>
+<%@page import="java.util.Arrays"%>
 
 <%
 	// include한 jsp에 필요한 parameters
@@ -21,35 +25,47 @@
 
 <%
 	// STANDARD 객실 타입에 대한 페이지
-	ArrayList<RoomTO> bookedRoomNums = (ArrayList)request.getAttribute("bookedRoonNums");
+	ArrayList<RoomTO> bookedRoomNums = (ArrayList)request.getAttribute("bookedRoomNums");
 
 	StringBuilder html = new StringBuilder();
-
-	for(RoomTO to : bookedRoomNums) {
-		int bookedRoomNum = Integer.parseInt(to.getRoom_seq());
-		
-		for(int i = 1; i<=10; i++) {
-			html.append("<div>");
-			html.append("<div class='form-check form-check-inline'>");
-			
-			if(i=bookedRoomNum) {
-				html.append("<input class='form-check-input' type='checkbox' id='id"+ i + ' value=" + i + " disabled>");
-				html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
-			} else {
-				html.append("<input class='form-check-input' type='checkbox' id='id"+ i + ' value=" + i + ">");
-				html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
-			}
-			
-			//html.append("");
-			//html.append("");
-			//html.append("");
-			//html.append("");
-			//html.append("");
-			html.append("</div>");
-		}
 	
+	int[] bookedRoomNum = new int[30];
+	
+	for(int i = 0; i< bookedRoomNums.size(); i++) {
+		bookedRoomNum[i] = Integer.parseInt(bookedRoomNums.get(i).getRoom_seq());
 	}
 	
+	//System.out.println(IntStream.of(bookedRoomNum).anyMatch(x -> x==1));
+	
+	for(int num : bookedRoomNum) {
+		System.out.println(num);
+	}
+%>
+
+<%! public static int i = 0; %>	
+
+<% 	
+	for(i = 1; i<=10; i++) {
+		
+		if(i==1 || i%5==1) {
+			html.append("<div>");
+		}
+		
+		html.append("<div class='form-check form-check-inline'>");
+		
+		// IntStream.of(배열명).anyMatch(x -> x == 값) : 배열 안에 특정 값이 있는지 여부를 반환
+		// 반드시 값에 해당하는 부분이 final / static 으로 선언되어있어야 하므로 위에 선언해놓음
+		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
+			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
+			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+		} else {
+			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
+			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+		}
+		html.append("</div>");
+	}
+
+
 %>
 
 <!DOCTYPE html>
@@ -119,10 +135,19 @@
       <div class="col-lg-4 sidebar ftco-animate">
         <div class="sidebar-box bg-light">
         	<객실번호 선택>
-			<div id="rooms">
+			<form action="./book_ok.do" method="post" name="rooms">
+			
+			<input type="hidden" name="m_id" value="test1234" />
+			<input type="hidden" name="checkin_date" value="2023-02-12" />
+			<input type="hidden" name="checkout_date" value="2023-02-16" />
+			<input type="hidden" name="book_rooms" value="1" />
+			<input type="hidden" name="book_head_count" value="2" />
+			<input type="hidden" name="book_cs_type" value="1/1" />
+			
 			
 <%= html.toString() %>			
-			
+				<!--  
+				
 				<div>
 		  			<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id1" value="1">
@@ -133,8 +158,8 @@
 					  <label class="form-check-label" for="inlineCheckbox2">2</label>
 					</div> 
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id3" value="3" disabled>
-					  <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+					  <input class="form-check-input" type="checkbox" id="id3" value="3">
+					  <label class="form-check-label" for="inlineCheckbox3">3</label>
 					</div>
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id4" value="4">
@@ -155,8 +180,8 @@
 					  <label class="form-check-label" for="inlineCheckbox7">7</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id8" value="8" disabled>
-					  <label class="form-check-label" for="inlineCheckbox8">8 (disabled</label>
+					  <input class="form-check-input" type="checkbox" id="id8" value="8">
+					  <label class="form-check-label" for="inlineCheckbox8">8</label>
 					</div>
 					<div class="form-check form-check-inline">
 					  <input class="form-check-input" type="checkbox" id="id9" value="9">
@@ -168,13 +193,19 @@
 					</div>
 				</div>
 				<br>
-				<!-- 
+				 <!-- 
 				<div>
 					<button id="btnreset">선택초기화</button>
 				</div>
 				 -->
-				<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
-			</div>
+				 
+				 <br><br>
+				
+				
+            	<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
+            	
+		
+			</form>
 		</div>        
     </div>
   </div>
@@ -241,9 +272,7 @@
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 <script type="text/javascript">
-
 $(document).ready(function() {
-	
 	//let data = {};//전송 데이터(JSON)
 	
 	// 세션에 저장되어있는 로그인한 사용자 아이디
@@ -253,7 +282,6 @@ $(document).ready(function() {
 	
 	ws.onmessage = function(msg){
 		let data = JSON.parse(msg.data);
-		//console.log(data);
 		
 		let username = '${loginMember.m_id}';
 	
@@ -264,30 +292,9 @@ $(document).ready(function() {
 			$('#id'+roomNum).prop('disabled', true);
 		} else if(data.hasOwnProperty('unchecked') == true) {
 			roomNum = data.unchecked;
-			//console.log(roomNum);
 			
 			$('#id'+roomNum).prop('disabled', false);
 		}
-		
-		/*
-		// 선택 초기화 버튼 : 필요한가.....
-		function bookreset() {
-			
-			$('#btnreset').on('click', function(data) {
-				
-				let roomNum = data.checked;
-				
-				if($('#id'+roomNum).prop('checked', true) && $('#id'+roomNum).prop('disabled', true)) {
-					$('#id'+roomNum).prop('disabled', false);
-					$('#id'+roomNum).prop('checked', false);
-				}
-				
-			})
-		}
-		
-		// 내 브라우저에서는 checked 상태로 / 타 브라우저에서는 disabled 상태로 속성
-		bookreset();
-		*/
 		
 	}
 	
@@ -306,7 +313,30 @@ $(document).ready(function() {
 		}
 	})
 	
+	$('#bookbtn').on('click', function() {
+		
+		let checked = $('.form-check-input:checked').length;
+		
+		if(${loginMember == null}) {
+			alert('로그인하셔야 합니다.');
+			window.location.href = '<%= login %>';
+			
+		} else if(${loginMember != null}) {
+			if(checked == 0) {
+				alert('객실을 선택해주세요.');
+				return false;
+			}
+			
+			document.rooms.submit();
+		}
+		
+	})
+	
+	
+	
+	
 })
+
 
 </script>
 
