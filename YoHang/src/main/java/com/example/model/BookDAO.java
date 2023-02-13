@@ -30,6 +30,7 @@ public class BookDAO {
 	}
 	
 	// 예약
+	
 	public int bookOk(BookTO to) {
 		
 		int flag = 1;
@@ -38,8 +39,12 @@ public class BookDAO {
 		if(result == 1) {
 			flag = 0;
 		}
-		
 		return flag;
+	}
+	
+	// 하나의 예약에 대한 종합 예약정보 : bookInfo 테이블 insert
+	public void bookInfo(BookInfoTO to) {
+		mapper.bookInfo(to);
 	}
 	
 	// 예약 삭제
@@ -54,21 +59,24 @@ public class BookDAO {
 		return flag;
 	}
 	
-	// 회원별 예약목록
-	public ArrayList<BookTO> bookedList(BookTO to) {
-		String m_id = to.getM_id();
-		
-		to.setM_id(m_id);
-		
-		ArrayList<BookTO> bookedList = mapper.bookedList(to);
-		
-		return bookedList;
+	// 예약정보 삭제 : bookInfo 테이블
+	public void bookInfoDelete(BookInfoTO to) {
+		mapper.bookInfoDelete(to);
 	}
 	
-	
+	// 회원별 예약목록
+	public ArrayList<BookInfoTO> bookInfos(BookInfoTO to) {
+		String id = to.getId();
+		
+		to.setId(id);
+		
+		ArrayList<BookInfoTO> bookInfos = mapper.bookInfos(to);
+		
+		return bookInfos;
+	}
 	
 	// 관리자페이지 예약목록
-	public Map<String, Object> bookedListAll(BookListTO listTo) {
+	public Map<String, Object> bookInfoAll(BookListTO listTo) {
 		listTo.setTotalRecord(mapper.bookAllCount());
 		int totalRecord = listTo.getTotalRecord();
 		
@@ -87,12 +95,12 @@ public class BookDAO {
 		listTo.setStartRow(startRow);
 		listTo.setRecordPerPage(recordPerPage);
 		
-		ArrayList<BookTO> bookedListAll = mapper.bookedListAll(listTo);
+		ArrayList<BookInfoTO> bookInfoAll = mapper.bookInfoAll(listTo);
 		
 		int lastPage = (int)(Math.ceil(totalRecord/recordPerPage))+1;
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("bookedListAll", bookedListAll);
+		resultMap.put("bookInfoAll", bookInfoAll);
 		resultMap.put("cpage", cpage);
 		resultMap.put("lastPage", lastPage);
 		resultMap.put("startPageNum", startPageNum);

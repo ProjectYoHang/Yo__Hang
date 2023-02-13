@@ -24,10 +24,12 @@
 %>
 
 <%
-	// STANDARD 객실 타입에 대한 페이지
 	ArrayList<RoomTO> bookedRoomNums = (ArrayList)request.getAttribute("bookedRoomNums");
 
-	StringBuilder html = new StringBuilder();
+	String checkin_date = (String)request.getAttribute("checkin_date");
+	String checkout_date = (String)request.getAttribute("checkout_date");
+
+	
 	
 	int[] bookedRoomNum = new int[30];
 	
@@ -35,16 +37,13 @@
 		bookedRoomNum[i] = Integer.parseInt(bookedRoomNums.get(i).getRoom_seq());
 	}
 	
-	//System.out.println(IntStream.of(bookedRoomNum).anyMatch(x -> x==1));
-	
-	for(int num : bookedRoomNum) {
-		System.out.println(num);
-	}
 %>
 
 <%! public static int i = 0; %>	
 
 <% 	
+	StringBuilder html = new StringBuilder();
+
 	for(i = 11; i<=20; i++) {
 		
 		if(i==11 || i%5==1) {
@@ -53,8 +52,6 @@
 		
 		html.append("<div class='form-check form-check-inline'>");
 		
-		// IntStream.of(배열명).anyMatch(x -> x == 값) : 배열 안에 특정 값이 있는지 여부를 반환
-		// 반드시 값에 해당하는 부분이 final / static 으로 선언되어있어야 하므로 위에 선언해놓음
 		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
 			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
 			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
@@ -137,74 +134,18 @@
         	<객실번호 선택>
 			<form action="./book_ok.do" method="post" name="rooms">
 			
-			<input type="hidden" name="m_id" value="test1234" />
-			<input type="hidden" name="checkin_date" value="2023-02-12" />
-			<input type="hidden" name="checkout_date" value="2023-02-16" />
-			<input type="hidden" name="book_rooms" value="1" />
-			<input type="hidden" name="book_head_count" value="2" />
-			<input type="hidden" name="book_cs_type" value="1/1" />
-			
+				<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
+				<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
+				<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
+				<input type="hidden" name="book_rooms" value="1" />
+				<input type="hidden" name="book_head_count" value="2" />
+				<input type="hidden" name="book_cs_type" value="1/1" />
 			
 <%= html.toString() %>			
-				<!--  
 				
-				<div>
-		  			<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id1" value="1">
-					  <label class="form-check-label" for="inlineCheckbox1">1</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id2" value="2">
-					  <label class="form-check-label" for="inlineCheckbox2">2</label>
-					</div> 
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id3" value="3">
-					  <label class="form-check-label" for="inlineCheckbox3">3</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id4" value="4">
-					  <label class="form-check-label" for="inlineCheckbox4">4</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id5" value="5">
-					  <label class="form-check-label" for="inlineCheckbox5">5</label>
-					</div>
-				</div>
-				<div>
-		  			<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id6" value="6">
-					  <label class="form-check-label" for="inlineCheckbox6">6</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id7" value="7">
-					  <label class="form-check-label" for="inlineCheckbox7">7</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id8" value="8">
-					  <label class="form-check-label" for="inlineCheckbox8">8</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id9" value="9">
-					  <label class="form-check-label" for="inlineCheckbox9">9</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id10" value="10">
-					  <label class="form-check-label" for="inlineCheckbox10">10</label>
-					</div>
-				</div>
-				<br>
-				 <!-- 
-				<div>
-					<button id="btnreset">선택초기화</button>
-				</div>
-				 -->
-				 
 				 <br><br>
-				
-				
             	<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
             	
-		
 			</form>
 		</div>        
     </div>
@@ -273,9 +214,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	//let data = {};//전송 데이터(JSON)
-	
-	// 세션에 저장되어있는 로그인한 사용자 아이디
 	let username = '${loginMember.m_id}';
 	
 	ws = new WebSocket("ws://" + location.host + "/room/standard");
@@ -302,12 +240,10 @@ $(document).ready(function() {
 		
 		let username = '${loginMember.m_id}';
 		
-		// 데이터를 체크상태와 아닌 상태의 데이터를 구분하기 위해 데이터를 json형태로 만들어서 서버에 보냄
 		if($(this).is(':checked')) {
 			let checked = '{"username": "' + username + '" ,"checked" : ' + $(this).val() + ' }';
 			ws.send(checked);
 		} else {
-			// unchecked에도 checked가 포함되어있으므로 unchecked라고 보내면 websocketbook.java에서 브라우저로부터 전송받은 데이터를 구분할 수 없음
 			let unchecked = '{"username": "' + username + '" ,"unchecked" : ' + $(this).val() + ' }';
 			ws.send(unchecked);
 		}

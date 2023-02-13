@@ -1,3 +1,4 @@
+<%@page import="com.example.model.BookInfoTO"%>
 <%@page import="com.example.model.BookTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -23,7 +24,7 @@
 %>
 
 <% 
-	ArrayList<BookTO> bookedListAll = (ArrayList<BookTO>)request.getAttribute("bookedListAll");	
+	ArrayList<BookInfoTO> bookInfoAll = (ArrayList<BookInfoTO>)request.getAttribute("bookInfoAll");	
 
 	int totalRecord = (Integer)request.getAttribute("totalRecord");
 
@@ -40,21 +41,21 @@
 	
 	StringBuilder html = new StringBuilder();
 
-	for(BookTO to : bookedListAll) {
-		String book_num = to.getBook_num();
-		String m_id = to.getM_id();
-		String room_seq = to.getRoom_seq();
-		String checkin_date = to.getCheckin_date();
-		String checkout_date = to.getCheckout_date();
-		String book_date = to.getBook_date();
+	for(BookInfoTO to : bookInfoAll) {
+		String seq = to.getSeq();
+		String id = to.getId();
+		String rooms_seq = to.getRooms_seq();
+		String checkin = to.getCheckin().substring(0, 10);
+		String checkout = to.getCheckout().substring(0, 10);
+		String date = to.getDate();
 		
-		html.append("<td>" + book_num + "</td>");
-		html.append("<td>" + m_id + "</td>");	
-		html.append("<td>" + room_seq + "</td>");
-		html.append("<td>" + checkin_date + "</td>");
-		html.append("<td>" + checkout_date + "</td>");
-		html.append("<td>" + book_date + "</td>");
-		html.append("<td><button type='button' onclick='location.href=\"./bookDeleteOk.do?book_num=" + book_num + "\"' class='btn btn-primary'>예약취소</button></td>");
+		html.append("<td>" + seq + "</td>");
+		html.append("<td>" + id + "</td>");	
+		html.append("<td>" + rooms_seq + "</td>");
+		html.append("<td>" + checkin + "</td>");
+		html.append("<td>" + checkout + "</td>");
+		html.append("<td>" + date + "</td>");
+		html.append("<td><button type='button' onclick='location.href=\"./bookDeleteOk.do?seq=" + seq + "&rooms_seq=" + rooms_seq + "&checkin=" + checkin + "&checkout=" + checkout + "\"' class='btn btn-primary'>예약취소</button></td>");
 		html.append("</tr>");	
 	}
 	
@@ -136,7 +137,7 @@
                 <th>예약번호</th>
                 <th class="text-center">예약자</th>
                 <th>객실번호</th>
-                <th>체크일</th>
+                <th>체크인</th>
                 <th>체크아웃</th>
                 <th>예약일</th>
                 <th>예약취소</th>

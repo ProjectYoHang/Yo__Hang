@@ -1,3 +1,4 @@
+<%@page import="com.example.model.BookInfoTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -23,27 +24,27 @@
 %>
 
 <% 
-	ArrayList<BookTO> bookedList = (ArrayList<BookTO>)request.getAttribute("bookedList");	
+	ArrayList<BookInfoTO> bookInfos = (ArrayList<BookInfoTO>)request.getAttribute("bookInfos");	
 
-	int totalRecord = bookedList.size();
+	int totalRecord = bookInfos.size();
 	
 	StringBuilder html = new StringBuilder();
 
-	for(BookTO to : bookedList) {
-		String book_num = to.getBook_num();
-		String m_id = to.getM_id();
-		String room_seq = to.getRoom_seq();
-		String checkin_date = to.getCheckin_date().substring(0, 10);
-		String checkout_date = to.getCheckout_date().substring(0, 10);
-		String book_date = to.getBook_date();
+	for(BookInfoTO to : bookInfos) {
+		String seq = to.getSeq();
+		String id = to.getId();
+		String rooms_seq = to.getRooms_seq();
+		String checkin = to.getCheckin().substring(0, 10);
+		String checkout = to.getCheckout().substring(0, 10);
+		String date = to.getDate();
 		
-		html.append("<td>" + book_num + "</td>");
-		html.append("<td>" + m_id + "</td>");	
-		html.append("<td>" + room_seq + "</td>");
-		html.append("<td>" + checkin_date + "</td>");
-		html.append("<td>" + checkout_date + "</td>");
-		html.append("<td>" + book_date + "</td>");
-		html.append("<td><button type='button' onclick='location.href=\"./bookDeleteOk.do?book_num=" + book_num + "\"' class='btn btn-primary'>예약취소</button></td>");
+		html.append("<td>" + seq + "</td>");
+		html.append("<td>" + id + "</td>");	
+		html.append("<td>" + rooms_seq + "</td>");
+		html.append("<td>" + checkin + "</td>");
+		html.append("<td>" + checkout + "</td>");
+		html.append("<td>" + date + "</td>");
+		html.append("<td><button type='button' onclick='location.href=\"./bookDeleteOk.do?seq=" + seq + "&rooms_seq=" + rooms_seq + "&checkin=" + checkin + "&checkout=" + checkout + "\"' class='btn btn-primary'>예약취소</button></td>");
 		html.append("</tr>");	
 	}
 	

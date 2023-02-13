@@ -20,7 +20,7 @@
 	String notice = "/notice/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";	
+	String mypage = "/mypage";
 %>
 
 <%
@@ -40,10 +40,6 @@
 	}
 	
 	//System.out.println(IntStream.of(bookedRoomNum).anyMatch(x -> x==1));
-	
-	//for(int num : bookedRoomNum) {
-		//System.out.println(num);
-	//}
 %>
 
 <%! public static int i = 0; %>	
@@ -143,74 +139,18 @@
         	<객실번호 선택>
 			<form action="./book_ok.do" method="post" name="rooms">
 			
-			<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
-			<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
-			<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
-			<input type="hidden" name="book_rooms" value="1" />
-			<input type="hidden" name="book_head_count" value="2" />
-			<input type="hidden" name="book_cs_type" value="1/1" />
-			
+				<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
+				<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
+				<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
+				<input type="hidden" name="book_rooms" value="1" />
+				<input type="hidden" name="book_head_count" value="2" />
+				<input type="hidden" name="book_cs_type" value="1/1" />
 			
 <%= html.toString() %>			
-				<!--  
 				
-				<div>
-		  			<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id1" value="1">
-					  <label class="form-check-label" for="inlineCheckbox1">1</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id2" value="2">
-					  <label class="form-check-label" for="inlineCheckbox2">2</label>
-					</div> 
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id3" value="3">
-					  <label class="form-check-label" for="inlineCheckbox3">3</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id4" value="4">
-					  <label class="form-check-label" for="inlineCheckbox4">4</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id5" value="5">
-					  <label class="form-check-label" for="inlineCheckbox5">5</label>
-					</div>
-				</div>
-				<div>
-		  			<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id6" value="6">
-					  <label class="form-check-label" for="inlineCheckbox6">6</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id7" value="7">
-					  <label class="form-check-label" for="inlineCheckbox7">7</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id8" value="8">
-					  <label class="form-check-label" for="inlineCheckbox8">8</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id9" value="9">
-					  <label class="form-check-label" for="inlineCheckbox9">9</label>
-					</div>
-					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="id10" value="10">
-					  <label class="form-check-label" for="inlineCheckbox10">10</label>
-					</div>
-				</div>
-				<br>
-				 <!-- 
-				<div>
-					<button id="btnreset">선택초기화</button>
-				</div>
-				 -->
-				 
 				 <br><br>
-				
-				
             	<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
-            	
-		
+           
 			</form>
 		</div>        
     </div>
@@ -332,15 +272,15 @@ $(document).ready(function() {
 				alert('객실을 선택해주세요.');
 				return false;
 			}
+			//
+			//if(checked > 1) {
+				//alert('객실을 하나만 선택해주세요.');
+				//return false;
+			//} 
 			
 			document.rooms.submit();
-		}
-		
+		}		
 	})
-	
-	
-	
-	
 })
 
 
