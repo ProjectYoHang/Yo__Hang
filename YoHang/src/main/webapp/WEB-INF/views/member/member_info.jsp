@@ -16,7 +16,7 @@
 	String rv ="/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String myinfo = "/mypage/list.do";
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -40,7 +40,7 @@
 	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
-	<jsp:param value="<%= mypage %>" name="mypage"/>
+	<jsp:param value="<%= myinfo %>" name="mypage"/>
 </jsp:include>
  
 <!-- hero-wrap -->

@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.example.demo", "com.example.controller", "com.example.model"})
+@ComponentScan(basePackages = {"com.example.demo", "com.example.controller", "com.example.model", "com.example.config"})
 @MapperScan(basePackages = {"com.example.mapper"})
 public class YoHangApplication {
 	

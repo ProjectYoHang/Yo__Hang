@@ -14,7 +14,7 @@
 	String rv ="/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String mypage = "/mypage";
 %>    
 
 <!DOCTYPE html>
@@ -72,13 +72,13 @@
    <div class="container">
      <div class="row">
        <div class="col-lg-12">
-         <form action="#" class="booking-form">
+         <form action="/room/standard" class="booking-form">
            <div class="row">
              <div class="col-md-3 d-flex">
                <div class="form-group p-4 align-self-stretch d-flex align-items-end">
                  <div class="wrap">
                    <label for="#">Check-in Date</label>
-                   <input type="text" class="form-control checkin_date" placeholder="Check-in date">
+                   <input type="text" class="form-control checkin_date" name="checkin_date" placeholder="Check-in date">
                  </div>
                </div>
              </div>
@@ -86,7 +86,7 @@
                <div class="form-group p-4 align-self-stretch d-flex align-items-end">
                  <div class="wrap">
                    <label for="#">Check-out Date</label>
-                   <input type="text" class="form-control checkout_date" placeholder="Check-out date">
+                   <input type="text" class="form-control checkout_date" name="checkout_date" placeholder="Check-out date">
                </div>
                </div>
              </div>
@@ -148,46 +148,46 @@
      <div class="row">
        <div class="col-sm col-md-6 col-lg-4 ftco-animate">
          <div class="room">
-           <a href="rooms-view.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-1.jpg);">
+           <a href="/room/standard" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-1.jpg);">
              <div class="icon d-flex justify-content-center align-items-center">
                <span class="xi-search"></span>
              </div>
            </a>
            <div class="text p-3 text-center">
-             <h3 class="mb-3"><a href="rooms-view.html">Standard Room</a></h3>
+             <h3 class="mb-3"><a href="/room/standard">Standard Room</a></h3>
              <p><span class="price mr-2">￦380,000</span> <span class="per">per night</span></p>
              <hr>
-             <p class="pt-1"><a href="rooms-view.html" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>
+             <p class="pt-1"><a href="/room/standard" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>
            </div>
          </div>
        </div>
        <div class="col-sm col-md-6 col-lg-4 ftco-animate">
          <div class="room">
-           <a href="rooms-view.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-4.jpg);">
+           <a href="/room/deluxe" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-4.jpg);">
              <div class="icon d-flex justify-content-center align-items-center">
                <span class="xi-search"></span>
              </div>
            </a>
            <div class="text p-3 text-center">
-             <h3 class="mb-3"><a href="rooms-view.html">Deluxe Room</a></h3>
+             <h3 class="mb-3"><a href="r/room/deluxe">Deluxe Room</a></h3>
              <p><span class="price mr-2">￦440,000</span> <span class="per">per night</span></p>
              <hr>
-             <p class="pt-1"><a href="rooms-view.html" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>
+             <p class="pt-1"><a href="/room/deluxe" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>
            </div>
          </div>
        </div>
        <div class="col-sm col-md-6 col-lg-4 ftco-animate">
          <div class="room">
-           <a href="rooms-view.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-3.jpg);">
+           <a href="/room/suite" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-3.jpg);">
              <div class="icon d-flex justify-content-center align-items-center">
                <span class="xi-search"></span>
              </div>
            </a>
            <div class="text p-3 text-center">
-             <h3 class="mb-3"><a href="rooms-view.html">suite Room</a></h3>
+             <h3 class="mb-3"><a href="/room/suite">suite Room</a></h3>
              <p><span class="price mr-2">￦540,000</span> <span class="per">per night</span></p>
              <hr>
-             <p class="pt-1"><a href="rooms-view.html" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>
+             <p class="pt-1"><a href="/room/suite" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>
            </div>
          </div>
        </div>
