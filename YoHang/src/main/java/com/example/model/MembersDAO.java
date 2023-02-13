@@ -210,4 +210,12 @@ public class MembersDAO {
 		int result = mapper.membersCount();
 		return result;
 	}
+	/// 해당 아이디 게시글 모두 삭제   ( 회원 탈퇴전 연결된 포린키 제거.. )
+	public int deleteLink (MembersTO to) {
+		int result = mapper.check_qnaBoard( to );
+		result += mapper.check_qnaReply( to );
+		result += mapper.check_rv(to);
+		
+		return result;
+	}
 }

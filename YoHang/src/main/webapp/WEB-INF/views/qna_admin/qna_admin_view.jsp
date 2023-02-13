@@ -70,12 +70,9 @@
 		html.append("<input type='button' id='wbtn' value='답댓글 쓰기' class='btn btn-secondary' />");
 		html.append("</div>");
 		html.append("</form>");
-		
 	}
-	
 %>
     
-
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
@@ -215,11 +212,7 @@
 			};
 		}
 	};
-	
 </script>
 
 </body>
 </html>
-
-
-

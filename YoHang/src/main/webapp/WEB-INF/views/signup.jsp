@@ -225,12 +225,9 @@ window.onload = function() {
       let mail = $("#mail").val();
       // 메일 정규식 xxx@xxx.
       let mail_rule = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      console.log($("#mail_rule_ok").val());
       if (!mail_rule.test(mail)){
           $("#mail_check_feedback").html('메일의 형식이 올바르지 않습니다.');
           $("#mail_check_feedback").css('color', 'red');
-          console.log($("#mail_rule_ok").val());
-           
       } else {
           $("#mail_check_feedback").html('');
           $("#mail_rule_ok").val('Y');

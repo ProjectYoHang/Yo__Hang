@@ -182,6 +182,11 @@ public class MemberController {
 	public String member_signout_ok( HttpServletRequest request, HttpSession session ) {
 		MembersTO to = new MembersTO();
 		to.setM_id( request.getParameter( "id" ) );
+		
+		/// 추후 예약기능이들어오면 예약내용이 있으면 삭제 불가능하게 만들어야함
+		dao.deleteLink(to);
+			
+			
 		int flag = dao.signout_ok(to);
 		
 		request.setAttribute( "flag", flag );
@@ -191,12 +196,10 @@ public class MemberController {
 /////////////////// 카카오 ///
 	@RequestMapping ("kakao_login.do")
 	public String kakao_login(HttpServletRequest request, @RequestParam String kakao_id) {
-		System.out.println( kakao_id );
 		
 		MembersTO to = new MembersTO();
 		to.setM_kakao_id( kakao_id );
 		
-		System.out.println( " to.kakao_id :" + to.getM_kakao_id());
 		// 로그인된 카카오 아이디를 가져와서 멤버테이블에 확인..
 		to = dao.checkKakaoId(to);
 		
@@ -220,8 +223,6 @@ public class MemberController {
 		MembersTO to = new MembersTO();
 		to.setM_id(m_id);
 		to.setM_kakao_id(kakao_id);
-		System.out.println(to.getM_kakao_id() );
-		System.out.println(to.getM_id() );
 		int flag = dao.insert_Kakao(to);
 		
 		if( flag != 0) {
@@ -291,6 +292,8 @@ public class MemberController {
 	public int member_delete(@RequestParam String m_id) {
 		MembersTO to = new MembersTO();
 		to.setM_id(m_id);
+		/// 추후 예약기능이들어오면 예약내용이 있으면 삭제 불가능하게 만들어야함 
+		dao.deleteLink(to);
 		
 		int flag = dao.signout_ok(to);
 		

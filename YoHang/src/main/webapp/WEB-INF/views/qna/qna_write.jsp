@@ -62,7 +62,7 @@
       </div>
       <div class="form-group">
       	<!-- 아이디는 로그인상태에서 받아서 placeholder 속성값으로 넣어줘야 함 / value 속성은 로그인상태 처리되면 필요없음 -->
-        <input type="text" class="form-control" name="qna_id" title="Title" value="test1234" readonly>
+        <input type="text" class="form-control" name="qna_id" title="Title" value="wjddnr2222" readonly>
       </div>
       <div class="form-group">
         <textarea type="text" class="form-control"  name="qna_content" title="content" placeholder="내용을 입력해주세요." rows="10"></textarea>

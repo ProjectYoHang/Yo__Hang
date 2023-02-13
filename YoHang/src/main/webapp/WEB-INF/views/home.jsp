@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%
 	// include한 jsp에 필요한 parameters
 	String menuName = "search";
@@ -15,7 +14,6 @@
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
-	
 %>    
 
 <!DOCTYPE html>
@@ -537,6 +535,5 @@
 // script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
-
 </body>
 </html>

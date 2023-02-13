@@ -65,6 +65,17 @@ public interface MapperInter {
 	@Delete ( "delete from members where m_id=#{m_id}" )
 	int signoutMember(MembersTO to);
 	
+///////////// 탈퇴 할때 해당 아디로 작성된 게시글 모두 삭제..
+	@Delete ( "delete from qna_board where qna_id=#{m_id}")
+	int check_qnaBoard(MembersTO to);
+	
+	@Delete ( "delete from  qna_reply where qrpl_id=#{m_id}")
+	int check_qnaReply(MembersTO to);
+	
+	@Delete ( "delete from  reviews where rv_id=#{m_id}")
+	int check_rv(MembersTO to);
+	
+	
 ////////////// 카카오로 로그인한 아이디가 회원 목록에 저장된 정보중에서 있는지 확인 하는..
 	
 	@Select ( "select m_id, m_name, m_email, m_phone, m_birth from members where m_kakao_id=#{m_kakao_id}" )

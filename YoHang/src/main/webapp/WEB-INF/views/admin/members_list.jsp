@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     <%
 	//jsp hero parameters
-	String menuName = "Home";
-	String title = "Home";
+	String menuName = "회원관리";
+	String title = "회원목록";
 	
 	// jsp header parameters
 	String home = "/Admin/home.do";
@@ -14,6 +14,7 @@
 	String faq = "/Admin/faq/list.do";
 	String notice = "/Admin/notice/list.do";
 	String logout = "/Admin/logout.do";
+	
 	
 %>
 <!DOCTYPE html>
@@ -33,8 +34,11 @@
 	<jsp:param value="<%= logout %>" name="logout"/>
 </jsp:include>
 <!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
-
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
@@ -135,20 +139,25 @@ $(document).ready(function(){
 });
 
 const memberDelete = function( m_id ) {
-	$.ajax({
-		url  : "/memberDelete.do",
-		type : "post",
-		data :  {
-			m_id : m_id.trim()
-		},
-		success : function( resData ) {
-			console.log( ' 회원삭제 성공' );
-			memberList();
-		},
-		error: function( err ) {
-			alert( '에러 딜리' + err.status);
-		}
-	});
+	
+	if( confirm( "해당 아이디의 모든 게시물이 삭제됩니다.\n(예약된 상품이 있다면 삭제할 수 없습니다.)" ) ){
+		$.ajax({
+			url  : "/memberDelete.do",
+			type : "post",
+			data :  {
+				m_id : m_id.trim()
+			},
+			success : function( resData ) {
+				console.log( ' 회원삭제 성공' );
+				memberList();
+			},
+			error: function( err ) {
+				alert( '에러 딜리' + err.status);
+			}
+		});
+	}else{
+		return false;
+	}
 }
 
 const memberList = function( pageNum ) {
@@ -230,13 +239,13 @@ const memberList = function( pageNum ) {
             }
             
             // 다음 페이지 
-        	if(cpage == totalPage) {
+        	if(cpage >= totalPage) {
         		html += '<li class="page-item disabled next"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>'
         	} else {
         		html +='<li class="page-item next"><a class="page-link" onclick="memberList(' + ( cpage + 1 ) + ')"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>'
         	}
         	// 다음 5페이지 넘기기
-        	if( cpage == totalPage) {
+        	if( lastPageNum == totalPage) {
         		html += '<li class="page-item disabled last"><a class="page-link"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>'
         	}else {
         		html += '<li class="page-item last"><a class="page-link" onclick="memberList('+ (blockPerPage + 1) +')"><i class="xi-angle-right-min" aria-hidden="true"></i></a></li>'

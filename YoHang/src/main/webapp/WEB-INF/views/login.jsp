@@ -74,7 +74,7 @@
           
            <!-- Button trigger modal -->
           <div class="form-group mb-0 text-center">
-			<button type="button" class="btn btn-primary w-30 py-3 px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			<button type="button" class="btn btn-primary w-30 py-3 px-5" data-bs-toggle="modal" data-bs-target="#findModal">
 				  아이디 / 비밀번호 찾기 
 			</button>
           </div>
@@ -92,7 +92,7 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="findModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -120,6 +120,7 @@
     </div>
   </div>
 </div>
+
  <div ><a href="/admin/admin_login.do" >관리자 모드</a></div>
 <jsp:include page="common/footer.jsp" flush="false"/>
 
@@ -171,7 +172,6 @@
 	
 	const findPw =  function( ) {
 		let id = $('#f_id').val();
-		
 		if( id == null || id == "" ) {
 			alert( '아이디를  입력하세요' );
 		}else {

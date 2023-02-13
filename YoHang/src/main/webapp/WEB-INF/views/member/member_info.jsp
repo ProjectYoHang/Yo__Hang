@@ -16,7 +16,6 @@
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
-	
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -26,10 +25,6 @@
 
 <meta charset="UTF-8">
 <title>내 정보</title>
-	<script>
-	
-	
-	</script>
 </head>
 <body>
  <!-- 
@@ -82,12 +77,13 @@
 				<div class="form-group">
 					<input type="submit" id="mimBtn" value="정보 변경" class="btn btn-primary" />
 				</div>
-				 
+				<div class="form-group mb-0 ">
+					<button type="button" class="btn btn-primary w-30 py-2 px-2" data-bs-toggle="modal" data-bs-target="#signoutModal">
+				  		회원 탈퇴 
+					</button>
+          		</div>
 			</form>
-			<form action="./member_signout_ok.do" method="post">
-				<input type="hidden" name="id" value="${loginMember.m_id}" />
-				<input type="submit" name="msoBtn" value="회원 탈퇴" class="btn btn-primary" />
-			</form>
+			
 	<!--  					
 		  카카오 연동시 회원 테이블에 정보 추가   / 연동 해제시 테이블에서 정보 삭제 해야
 		   	
@@ -107,12 +103,35 @@
 		        	</div>
 	            </div>
 			</c:if>
-			-->
+	-->
 		</div>
      </div>
   </div>
 </section>
-
+<!-- Modal -->
+<div class="modal fade" id="signoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">탈퇴 확인</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<fieldset>
+				<div class="modal-body" id="modalBoard" >
+					<p>회원 탈퇴시 등록한 게시물이 모두 삭제됩니다.</p>
+					<p>(예약된 내역이 있다면 탈퇴가 불가능합니다.)</p>
+				</div>
+			</fieldset>
+			<div class="modal-footer">
+				<form action="./member_signout_ok.do" method="post">
+					<input type="hidden" name="id" value="${loginMember.m_id}" />
+					<button type="submit" name="msoBtn" id="msoBtn"  value="회원 탈퇴" data-bs-dismiss="modal" class="btn btn-primary" >탈퇴</button>
+				</form>		
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 <!--
 // instagram --------------------------------------->
 <section class="instagram pt-5">
@@ -170,6 +189,7 @@
 // script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!--  kakao -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
