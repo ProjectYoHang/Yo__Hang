@@ -160,4 +160,12 @@ public class RoomController {
 		return modelAndView;
 	}
 	
+	
+	// 마이페이지 임시
+	@RequestMapping("/mypage")
+	public ModelAndView mypage(ModelAndView modelAndView, HttpServletRequest request) {
+		modelAndView.setViewName("mypage/mypage");
+		
+		return modelAndView;
+	}
 }
