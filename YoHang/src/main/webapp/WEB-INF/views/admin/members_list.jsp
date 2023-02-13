@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
+<%
 	//jsp hero parameters
 	String menuName = "회원관리";
 	String title = "회원목록";
@@ -14,8 +14,6 @@
 	String faq = "/Admin/faq/list.do";
 	String notice = "/Admin/notice/list.do";
 	String logout = "/Admin/logout.do";
-	
-	
 %>
 <!DOCTYPE html>
 <html lang="ko">
