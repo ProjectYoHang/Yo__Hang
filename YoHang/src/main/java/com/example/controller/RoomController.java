@@ -35,6 +35,8 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_standard");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
+		modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
+		modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}

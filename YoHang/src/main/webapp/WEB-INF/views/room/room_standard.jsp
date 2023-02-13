@@ -27,8 +27,12 @@
 	// STANDARD 객실 타입에 대한 페이지
 	ArrayList<RoomTO> bookedRoomNums = (ArrayList)request.getAttribute("bookedRoomNums");
 
-	StringBuilder html = new StringBuilder();
+	// home의 검색바에서 전송되어야할 데이터들
+	String checkin_date = (String)request.getAttribute("checkin_date");
+	String checkout_date = (String)request.getAttribute("checkout_date");
+
 	
+
 	int[] bookedRoomNum = new int[30];
 	
 	for(int i = 0; i< bookedRoomNums.size(); i++) {
@@ -37,14 +41,16 @@
 	
 	//System.out.println(IntStream.of(bookedRoomNum).anyMatch(x -> x==1));
 	
-	for(int num : bookedRoomNum) {
-		System.out.println(num);
-	}
+	//for(int num : bookedRoomNum) {
+		//System.out.println(num);
+	//}
 %>
 
 <%! public static int i = 0; %>	
 
 <% 	
+	StringBuilder html = new StringBuilder();
+
 	for(i = 1; i<=10; i++) {
 		
 		if(i==1 || i%5==1) {
@@ -137,9 +143,9 @@
         	<객실번호 선택>
 			<form action="./book_ok.do" method="post" name="rooms">
 			
-			<input type="hidden" name="m_id" value="test1234" />
-			<input type="hidden" name="checkin_date" value="2023-02-12" />
-			<input type="hidden" name="checkout_date" value="2023-02-16" />
+			<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
+			<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
+			<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
 			<input type="hidden" name="book_rooms" value="1" />
 			<input type="hidden" name="book_head_count" value="2" />
 			<input type="hidden" name="book_cs_type" value="1/1" />

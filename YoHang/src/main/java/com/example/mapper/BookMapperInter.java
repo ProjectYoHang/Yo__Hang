@@ -16,7 +16,12 @@ import com.example.model.RoomTO;
 public interface BookMapperInter {
 
 	// 해당 날짜에 예약되어있는 방번호를 select => 객실 상세페이지에서 이미 예약되어있는 상태의 객실번호는 disabled 처리 해야되니까
-	@Select("select rooms.room_seq from book left outer join rooms on book.room_seq=rooms.room_seq where book.checkin_date>=#{checkin_date} and book.checkout_date<=#{checkout_date}")
+	//@Select("select rooms.room_seq from book left outer join rooms on book.room_seq=rooms.room_seq where book.checkin_date>=#{checkin_date} and book.checkout_date<=#{checkout_date}")
+	@Select("select rooms.room_seq from book left outer join rooms on book.room_seq=rooms.room_seq "
+			+ "where (book.checkin_date<=#{checkin_date} and book.checkout_date>=#{checkout_date}) "
+			+ "or (book.checkin_date<=#{checkin_date} and (book.checkout_date<=#{checkout_date} and book.checkout_date>=#{checkin_date})) "
+			+ "or (book.checkin_date>=#{checkin_date} and book.checkout_date>=book.checkin_date and book.checkout_date<=#{checkout_date}) "
+			+ "or ((book.checkin_date>=#{checkin_date} and book.checkin_date<=#{checkout_date}) and book.checkout_date>=#{checkout_date})")
 	public abstract ArrayList<RoomTO> bookedRoomNum(BookTO to);
 	
 	// 선택한 객실번호로 예약이 되어야 함
