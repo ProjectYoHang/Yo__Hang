@@ -46,9 +46,16 @@
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
-    <div class="row">
+  <!-- div를 세로로 3/9로 나눠보자 -->
+    <div class="col-md-3">
       <a href="/mypage/booklist.do" >내 예약정보</a>
       <a href="/mypage/list.do" >내 프로필</a>      
+      
+      
+      
+    </div>
+    <div class="col-md-9">
+    	메뉴 3개 들어갈 공간
     </div>
   </div>
 </section>
