@@ -10,9 +10,10 @@
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
 	String findus = "/findus.do";
-	String review = "/review/list.do";
+	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
+	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
@@ -32,9 +33,10 @@
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
 	<jsp:param value="<%= findus %>" name="findus"/>
-	<jsp:param value="<%= review %>" name="review"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>
@@ -52,25 +54,25 @@
 	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
 
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_id"  placeholder="글쓴이">     
+        <input type="text" class="form-control" name="rv_id"  value="test1234" readonly>     
       </div>
       <div class="form-group">
         <input type="text" class="form-control" name="rv_subject"  placeholder="제목">     
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_content" maxlength="10" placeholder="내용 ">     
+        <textarea class="form-control" name="rv_content" rows="10" placeholder="내용"></textarea>      
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_room_seq"  placeholder="방번호">     
+        <input type="hidden" class="form-control" name="rv_room_seq"  placeholder="방번호">     
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_book_num"  placeholder="예약번호">     
+        <input type="hidden" class="form-control" name="rv_book_num"  placeholder="예약번호">     
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_stars"  placeholder="별점">     
+        <input type="hidden" class="form-control" name="rv_stars"  placeholder="별점">     
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_like"  placeholder="좋아요">     
+        <input type="hidden" class="form-control" name="rv_like"  placeholder="좋아요">     
       </div> 	
 				
 	<tr>

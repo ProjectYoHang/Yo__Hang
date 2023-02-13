@@ -2,21 +2,22 @@
 	pageEncoding="UTF-8"%>
 
 <%@page import="com.example.model.RvBoardTO"%>
-
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.ArrayList" %>
 
 <%	
 	// jsp hero parameters
 	String menuName = "Board";
-	String title = "review";
+	String title = "Review";
 
 	// jsp header parameters
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
 	String findus = "/findus.do";
-	String review = "/review/list.do";
+	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
+	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
@@ -117,9 +118,10 @@
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
 	<jsp:param value="<%= findus %>" name="findus"/>
-	<jsp:param value="<%= review %>" name="review"/>
+	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>
@@ -166,11 +168,6 @@
         <div class="table-responsive">
           <table class="table table-board-list">
             <caption class="sr-only">게시판글</caption>
-            <thead>
-              <tr>
-                <th class="text-center">review</th>
-              </tr>
-            </thead>
             <tbody>
               <tr>
 
@@ -244,7 +241,13 @@
 
 		<!-- 글쓰기 버튼 -->        
         <div class="text-center mt-5">
-			<a href="./write.do" class="btn btn-secondary btn-lg">글쓰기</a>
+            <c:if test="${loginMember == null }">
+            	<a class="btn btn-secondary btn-lg" href="<%= login %>">글쓰기</a>
+            </c:if>
+            <c:if test="${loginMember != null }">
+            	<a class="btn btn-secondary btn-lg" href="./write.do">글쓰기</a>
+            </c:if>        
+			<!-- <a href="./write.do" class="btn btn-secondary btn-lg">글쓰기</a>  -->
 		</div>
         
       </div>

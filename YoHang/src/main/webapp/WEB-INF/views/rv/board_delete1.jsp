@@ -1,36 +1,29 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page import="com.example.model.RvBoardTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="com.example.model.RvBoardTO"%>
-
-<%@ page import="java.util.ArrayList" %>
 <%
-	//jsp hero parameters
+	// jsp hero parameters
 	String menuName = "Board";
 	String title = "review";
-
+	
 	// jsp header parameters
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
 	String findus = "/findus.do";
-	String review = "/review/list.do";
+	String rv = "/rv/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
-	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
 	
-    //int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
-    
-	String cpage = (String)request.getAttribute("cpage");
+	RvBoardTO to = (RvBoardTO)request.getAttribute("to");		
+	//String cpage = (String)request.getAttribute("cpage");
+	int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
 	String rv_seq = (String)request.getAttribute("rv_seq");
-	
 	String rv_subject = to.getRv_subject();
 	String rv_id = to.getRv_id();
-	String rv_date = to.getRv_date();
-	String rv_content = to.getRv_content();
-	String rv_img_name = to.getRv_img_name();
 %>
 
 <!DOCTYPE html>
@@ -44,7 +37,7 @@
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
 	<jsp:param value="<%= findus %>" name="findus"/>
-	<jsp:param value="<%= review %>" name="review"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
 	<jsp:param value="<%= login %>" name="login"/>
@@ -63,47 +56,32 @@
 // contents --------------------------------------->
 
 <!-- content -->
-<section class="ftco-section">
+<section class="ftco-section bg-light">
   <div class="container">
-    <h3 class="board-view-title"><%= rv_subject %> </h3>
-    <ul class="board-info-group">
-      <li class="d-md-inline board-view-writer">
-        <strong>작성자</strong>
-        <span>관리자</span>
-      </li>
-      <li class="board-view-writer">
-        <strong>작성일</strong>
-        <span>2023-01-30</span>
-      </li>
-      <li class="board-view-hit">
-        <strong>조회수</strong>
-        <span>10</span>
-      </li>
-    </ul>
-
-    <div class="board-view-content">
-   		<div id="bbs_file_wrap">
-			<div>
-				<img src="../upload/reviews/<%= rv_img_name %>" width="400" onerror="" /><br />
-			</div>
-		</div> 
+    <form action="./delete_ok.do" class="bg-white p-5" name="dfrm">
+    <input type="hidden" name="rv_seq" value="<%= rv_seq %>" />
       <div class="form-group">
-        <textarea type="text" class="form-control"  name="rv_content"  rows="5"><%= rv_content %></textarea>
+        <input type="text" class="form-control" name="rv_id" title="Title" value="<%= rv_id %>" readonly>
       </div>
-    </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="qna_subject" title="Title" value="<%= rv_subject %>" readonly>
+      </div>
 
-
-    <div class="text-center mt-4 pt-5 border-top">
-      <a href="./modify.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-primary btn-lg">수정</a>
-      <a href="./delete.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
-      <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
-    </div>
-		</div>
-		<!--//게시판-->
-	</div>
-<!-- 하단 디자인 -->
-</div>
+<!-- 
+      <div class="form-group">
+        <input type="file" id="file" name="file" class="form-control">
+      </div>
+-->
+      <div class="form-group text-center mt-5">
+        <input type="button" id="dbtn" value="삭제" class="btn btn-primary py-3 px-5">
+        <a href="./view.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-secondary py-3 px-5">보기</a>
+        <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
+      </div>
+    </form>
+  </div>
 </section>
+
+
 <!--
 // instagram --------------------------------------->
 <section class="instagram pt-5">
@@ -162,6 +140,16 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
+<script type = "text/javascript">
+window.onload = function() {
+	// dbtn이 클릭되면 알림창이 뜸
+	document.getElementById('dbtn').onclick = function() {
+		// alert('click');		
+		
+		document.dfrm.submit();
+	}
+}
+</script>
 
 </body>
 </html>
