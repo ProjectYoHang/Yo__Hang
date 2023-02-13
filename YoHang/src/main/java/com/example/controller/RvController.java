@@ -26,7 +26,7 @@ public class RvController {
 	private RvBoardDAO dao;
 
 
-	@RequestMapping("/list.do")
+	@RequestMapping("/rv/list.do")
 	public ModelAndView list(ModelAndView modelAndView, @RequestParam(value="cpage", required=false, defaultValue="1") int cpage) {
 		RvBoardListTO listTo = new RvBoardListTO();
 		
@@ -34,7 +34,7 @@ public class RvController {
 		
 		Map<String, Object> map = dao.rvList(listTo);
 		
-		modelAndView.setViewName("/review/board_list1");
+		modelAndView.setViewName("/rv/board_list1");
 		
 		modelAndView.addObject("rvLists", map.get("rvLists"));
 		modelAndView.addObject("cpage", map.get("cpage"));
@@ -47,7 +47,7 @@ public class RvController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/view.do")
+	@RequestMapping("/rv/view.do")
 	public ModelAndView view(HttpServletRequest request, ModelAndView modelAndView ) {
 
 		RvBoardTO to = new RvBoardTO();
@@ -56,21 +56,21 @@ public class RvController {
 
 		to = dao.rvView(to);
 
-		modelAndView.setViewName("/review/board_view1");
+		modelAndView.setViewName("/rv/board_view1");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 
-	@RequestMapping("/write.do")
+	@RequestMapping("/rv/write.do")
 	public ModelAndView write(HttpServletRequest request, ModelAndView modelAndView) {
-		modelAndView.setViewName("/review/board_write1");
+		modelAndView.setViewName("/rv/board_write1");
 		return modelAndView;
 
 	}
 
-	@RequestMapping("/write_ok.do")
+	@RequestMapping("/rv/write_ok.do")
 	public ModelAndView write_ok(MultipartFile upload, HttpServletRequest request, ModelAndView modelAndView) {
 
 		RvBoardTO to = new RvBoardTO();
@@ -97,13 +97,13 @@ public class RvController {
 
 		int flag = dao.rvWriteOk( to );
 
-		modelAndView.setViewName("/review/board_write1_ok");
+		modelAndView.setViewName("/rv/board_write1_ok");
 		modelAndView.addObject("flag", flag);
 		return modelAndView;
 
 	}
 	
-	@RequestMapping("/delete.do")
+	@RequestMapping("/rv/delete.do")
 	public ModelAndView delete(HttpServletRequest request, ModelAndView modelAndView) {
 		RvBoardTO to = new RvBoardTO();
 		
@@ -111,14 +111,14 @@ public class RvController {
 		
 		to = dao.rvDelete(to);
 		
-		modelAndView.setViewName("/review/board_delete1");
+		modelAndView.setViewName("/rv/board_delete1");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	
-	@RequestMapping("/delete_ok.do")
+	@RequestMapping("/rv/delete_ok.do")
 	public ModelAndView delete_ok(HttpServletRequest request, ModelAndView modelAndView) {
 		RvBoardTO to = new RvBoardTO();
 		
@@ -126,12 +126,12 @@ public class RvController {
 		
 		int flag = dao.rvDeleteOk(to);
 		
-		modelAndView.setViewName("/review/board_delete1_ok");
+		modelAndView.setViewName("/rv/board_delete1_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
-	@RequestMapping("/modify.do")
+	@RequestMapping("/rv/modify.do")
 	public ModelAndView modify(HttpServletRequest request, ModelAndView modelAndView) {
 		RvBoardTO to = new RvBoardTO();
 		
@@ -139,14 +139,14 @@ public class RvController {
 		
 		to = dao.rvModify(to);
 		
-		modelAndView.setViewName("/review/board_modify1");
+		modelAndView.setViewName("/rv/board_modify1");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	
-	@RequestMapping("/modify_ok.do")
+	@RequestMapping("/rv/modify_ok.do")
 	public ModelAndView modify_ok(MultipartFile upload, HttpServletRequest request, ModelAndView modelAndView) {
 		
 		RvBoardTO to = new RvBoardTO();
@@ -173,7 +173,7 @@ public class RvController {
 		
 		int flag = dao.rvModifyOk(to);
 		
-		modelAndView.setViewName("/review/board_modify1_ok");
+		modelAndView.setViewName("/rv/board_modify1_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));

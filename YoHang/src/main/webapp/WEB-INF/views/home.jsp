@@ -11,6 +11,7 @@
 	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
+	String rv ="/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage/list.do";
@@ -28,6 +29,7 @@
 	<jsp:param value="<%= findus %>" name="findus"/>
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
