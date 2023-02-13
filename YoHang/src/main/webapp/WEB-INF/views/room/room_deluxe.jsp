@@ -100,7 +100,7 @@
       <!-- <div class="col"> -->
         <div class="row">
           <div class="col-md-12 ftco-animate">
-            <h2 class="mb-4">Standard room</h2>
+            <h2 class="mb-4">Deluxe room</h2>
             <div class="single-slider owl-carousel">
               <div class="item">
                 <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-1.jpg);"></div>

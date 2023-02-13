@@ -272,11 +272,6 @@ $(document).ready(function() {
 				alert('객실을 선택해주세요.');
 				return false;
 			}
-			//
-			//if(checked > 1) {
-				//alert('객실을 하나만 선택해주세요.');
-				//return false;
-			//} 
 			
 			document.rooms.submit();
 		}		

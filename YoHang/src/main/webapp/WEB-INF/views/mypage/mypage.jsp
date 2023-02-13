@@ -48,6 +48,7 @@
   <div class="container">
     <div class="row">
       <a href="/mypage/booklist.do" >내 예약정보</a>
+      <a href="/mypage/list.do" >내 프로필</a>      
     </div>
   </div>
 </section>
