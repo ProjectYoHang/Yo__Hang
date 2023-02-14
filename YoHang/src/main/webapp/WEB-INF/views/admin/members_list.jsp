@@ -3,7 +3,7 @@
     <%
 	//jsp hero parameters
 	String menuName = "Home";
-	String title = "Home";
+	String title = "회원관리";
 	
 	// jsp header parameters
 	String home = "/Admin/home.do";
@@ -33,7 +33,11 @@
 	<jsp:param value="<%= logout %>" name="logout"/>
 </jsp:include>
 <!-- hero-wrap -->
-<jsp:include page="../common/hero.jsp" flush="false"/>
+<jsp:include page="../common/hero.jsp" flush="false">
+	<jsp:param value="<%= menuName %>" name="menuName"/>
+	<jsp:param value="<%= title %>" name="title"/>
+	<jsp:param value="<%= home %>" name="home"/>
+</jsp:include>
 
 <!-- content -->
 <section class="ftco-section bg-light">

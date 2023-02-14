@@ -6,7 +6,7 @@
 	out.println( "<script type='text/javascript'>" );
 	if ( flag == 1 ) {
 		out.println( "alert( '환영합니다.' );" );
-		out.println( "location.href='/admin/admin_home.do';");
+		out.println( "location.href='/Admin/member/list.do';");
 	}else {
 		out.println( "alert( '아이디 또는 비밀번호가 틀렸습니다.');" );
 		out.println( "history.back();" );

@@ -17,10 +17,10 @@ public class AdminController {
 	private AdminsDAO dao;
 	
 	
-	@RequestMapping ("/admin/admin_home.do")
-	public String admin_home() {
-		return "/admin/admin_home";
-	}
+	//@RequestMapping ("/admin/admin_home.do")
+	//public String admin_home() {
+		//return "/admin/admin_home";
+	//}
 	
 
 	@RequestMapping("/admin/admin_login.do")
