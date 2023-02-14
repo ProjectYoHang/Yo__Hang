@@ -29,11 +29,10 @@
 	ArrayList<RoomTO> bookedRoomNums = (ArrayList)request.getAttribute("bookedRoomNums");
 
 	// home의 검색바에서 전송되어야할 데이터들
-	String checkin_date = (String)request.getAttribute("checkin_date");
-	String checkout_date = (String)request.getAttribute("checkout_date");
-
+	String checkin_date = request.getParameter("checkin_date");
+	String checkout_date = request.getParameter("checkout_date");
+	String head_count = (String)request.getParameter("head_count");
 	
-
 	int[] bookedRoomNum = new int[30];
 	
 	for(int i = 0; i< bookedRoomNums.size(); i++) {
@@ -144,8 +143,8 @@
 				<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
 				<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
 				<input type="hidden" name="book_rooms" value="1" />
-				<input type="hidden" name="book_head_count" value="2" />
-				<input type="hidden" name="book_cs_type" value="1/1" />
+				<input type="hidden" name="book_head_count" value="<%= head_count %>" />
+				<input type="hidden" name="book_cs_type" value="<%= head_count %>/0" />
 			
 <%= html.toString() %>			
 				

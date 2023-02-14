@@ -37,8 +37,9 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_standard");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
+		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("head_count", request.getParameter("head_count"));
 		
 		return modelAndView;
 	}
@@ -53,8 +54,8 @@ public class RoomController {
 		
 		modelAndView.setViewName("room/room_suite");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
+		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
@@ -69,8 +70,8 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_deluxe");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
+		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
@@ -241,10 +242,10 @@ public class RoomController {
 		
 		to.setId(loginMember.getM_id());
 		
-		ArrayList<BookInfoTO> bookInfos = dao.bookInfos(to);
+		ArrayList<BookInfoTO> bookInfosMin = dao.bookInfosMin(to);
 		
 		modelAndView.setViewName("mypage/mypage");
-		modelAndView.addObject("bookInfos", bookInfos);
+		modelAndView.addObject("bookInfosMin", bookInfosMin);
 		
 		return modelAndView;
 	}

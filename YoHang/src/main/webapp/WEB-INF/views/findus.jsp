@@ -75,7 +75,7 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 var mapTypeControl = new kakao.maps.MapTypeControl();
 
 // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
-map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);	
+map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);   
 
 // 마커가 표시될 위치입니다 
 var markerPosition  = new kakao.maps.LatLng(37.498882771821684, 127.02822957585111); 

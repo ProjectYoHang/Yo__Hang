@@ -24,19 +24,19 @@
 %>
 
 <%
-	ArrayList<BookInfoTO> bookInfos = (ArrayList<BookInfoTO>)request.getAttribute("bookInfos");	
+	ArrayList<BookInfoTO> bookInfosMin = (ArrayList<BookInfoTO>)request.getAttribute("bookInfosMin");	
 	
-	int totalRecord = bookInfos.size();
+	int totalRecord = bookInfosMin.size();
 	
 	StringBuilder html = new StringBuilder();
 	
-	for(BookInfoTO to : bookInfos) {
+	for(BookInfoTO to : bookInfosMin) {
 		String seq = to.getSeq();
 		String id = to.getId();
 		String rooms_seq = to.getRooms_seq();
 		String checkin = to.getCheckin().substring(0, 10);
 		String checkout = to.getCheckout().substring(0, 10);
-		String date = to.getDate();
+		String date = to.getDate().substring(0, 10);
 		
 		html.append("<tr>");
 		html.append("<td>" + seq + "</td>");
@@ -62,6 +62,7 @@
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>
