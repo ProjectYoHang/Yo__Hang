@@ -339,14 +339,33 @@
     fixedContentPos: false
   });
 
-
-  $('.checkin_date, .checkout_date').datepicker({
-	  'format': 'm/d/yyyy',
-	  'autoclose': true
+	$(".checkin_date").datepicker({
+	  	format: "yyyy-mm-dd",
+	  	autoclose : true,	
+	  	calendarWeeks : false,
+	  	clearBtn : false, 
+	  	showWeekDays : true ,
+	  	todayHighlight : true,
+	  	onSelect: function (date) {
+    		alert(date);
+    	}
+	})
+	.on("changeDate", function(e){
+	  	$(".checkout_date").datepicker(
+	  		"setStartDate", new Date($(".checkin_date").val()));
+	
 	});
-
-
-
+ 
+	$(".checkout_date").datepicker({
+	  	format: "yyyy-mm-dd",
+	  	autoclose : true,	
+	  	calendarWeeks : false,
+	  	clearBtn : false, 
+	  	showWeekDays : true ,
+	  	todayHighlight : true 			    
+		}).on("changeDate", function(){
+  	$(".checkin_date").datepicker("setEndDate", new Date($(".checkout_date").val()));
+	});
 
 })(jQuery);
 

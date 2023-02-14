@@ -63,16 +63,16 @@
         <textarea class="form-control" name="rv_content" rows="10" placeholder="내용"></textarea>      
       </div>
       <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_room_seq"  placeholder="방번호">     
+        <input type="hidden" class="form-control" name="rv_room_seq" value="1"  placeholder="방번호">     
       </div>
       <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_book_num"  placeholder="예약번호">     
+        <input type="hidden" class="form-control" name="rv_book_num" value="1"  placeholder="예약번호">     
       </div>
       <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_stars"  placeholder="별점">     
+        <input type="hidden" class="form-control" name="rv_stars" value="1" placeholder="별점">     
       </div>
       <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_like"  placeholder="좋아요">     
+        <input type="hidden" class="form-control" name="rv_like" value="1" placeholder="좋아요">     
       </div> 	
 				
 	<tr>
