@@ -232,8 +232,21 @@ public class RoomController {
 	// 마이페이지 임시
 	@RequestMapping("/mypage")
 	public ModelAndView mypage(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		// 로그인 상태에서 session에 저장된 아이디 가져옴
+		HttpSession session = request.getSession();
+		
+		MembersTO loginMember = (MembersTO)session.getAttribute("loginMember");
+		
+		to.setId(loginMember.getM_id());
+		
+		ArrayList<BookInfoTO> bookInfos = dao.bookInfos(to);
+		
 		modelAndView.setViewName("mypage/mypage");
+		modelAndView.addObject("bookInfos", bookInfos);
 		
 		return modelAndView;
 	}
+	
 }

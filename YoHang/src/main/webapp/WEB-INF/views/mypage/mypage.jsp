@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@page import="com.example.model.BookInfoTO"%>
+<%@page import="com.example.model.QnABoardTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.example.model.BookTO"%>
+
 <%
 	// include한 jsp에 필요한 parameters
 	String menuName = "mypage";
@@ -14,8 +19,33 @@
 	String notice = "/notice/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage";
+	String mypage = "/mypage";	
+%>
+
+<%
+	ArrayList<BookInfoTO> bookInfos = (ArrayList<BookInfoTO>)request.getAttribute("bookInfos");	
 	
+	int totalRecord = bookInfos.size();
+	
+	StringBuilder html = new StringBuilder();
+	
+	for(BookInfoTO to : bookInfos) {
+		String seq = to.getSeq();
+		String id = to.getId();
+		String rooms_seq = to.getRooms_seq();
+		String checkin = to.getCheckin().substring(0, 10);
+		String checkout = to.getCheckout().substring(0, 10);
+		String date = to.getDate();
+		
+		html.append("<tr>");
+		html.append("<td>" + seq + "</td>");
+		html.append("<td>" + rooms_seq + "</td>");
+		html.append("<td>" + checkin + "</td>");
+		html.append("<td>" + checkout + "</td>");
+		html.append("<td>" + date + "</td>");
+		html.append("</tr>");	
+	}
+
 %>
 
 <!DOCTYPE html>
@@ -44,19 +74,103 @@
 </jsp:include>
 
 <!-- content -->
-<section class="ftco-section bg-light">
+<section class="ftco-section">
   <div class="container">
-  <!-- div를 세로로 3/9로 나눠보자 -->
-    <div class="col-md-3">
-      <a href="/mypage/booklist.do" >내 예약정보</a>
-      <a href="/mypage/list.do" >내 프로필</a>      
-      
-      
-      
+    <div class="row">
+      <div class="col-md-2">
+        <div class="row">
+			<button type="button" class="btn btn-primary btn-lg my-3 btn-block" onclick="location.href='mypage/list.do'">내 정보</button>
+			<button type="button" class="btn btn-primary btn-lg my-3 btn-block" onclick="location.href='mypage/booklist.do'">내 예약</button>
+			<button type="button" class="btn btn-primary btn-lg my-3 btn-block" onclick="location.href='mypage/review.do'">내 리뷰</button>
+         </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-9 sidebar ftco-animate">
+        <div class="sidebar-box">
+	        <div class="border border-grey rounded">
+	      		<div class="h5 mx-4 my-4">
+	      			<b>내 정보</b>
+	      			<button type="button" class="btn btn-dark" style="float:right;" onclick="location.href='mypage/list.do'"><b>+</b></button>
+	      		</div>
+	      		<div class="mx-4 my-4">
+	      			<div class="table-reponsive">
+		      			<table class="table table-board-list">
+		      				<caption class="sr-only"></caption>
+		      				<colgroup>
+		      					<col style="width:10%;">
+				              	<col style="width:15%;"> 
+				              	<col style="width:25%;">  
+				              	<col style="width:25%;">  
+		      				</colgroup>
+		      				<thead class="thead-light">
+				              	<tr>
+					                <th>이름</th>
+					                <th class="text-center">아이디</th>
+					                <th>이메일</th>
+					                <th>전화번호</th>
+				              	</tr>
+				            </thead>
+				            <tbody>
+	              				<tr>
+				            		<td>${loginMember.m_name }</td>
+				            		<td>${loginMember.m_id}</td>
+				            		<td>${loginMember.m_email }</td>
+				            		<td>${loginMember.m_phone }</td>
+								</tr>			            
+			            	</tbody>
+		      			</table>
+	      			</div>
+	      		</div>
+	      	</div>
+	      	<br>
+	      	<div class="border border-grey rounded">
+	      		<div class="h5 mx-4 my-4">
+	      			<b>내 예약</b>
+	      			<button type="button" class="btn btn-dark" style="float:right;" onclick="location.href='mypage/booklist.do'"><b>+</b></button>
+	      		</div>
+	      		<div class="mx-4 my-4">
+	      			<div class="table-reponsive">
+		      			<table class="table table-board-list">
+		      				<caption class="sr-only">내 예약목록</caption>
+		      				<colgroup>
+		      					<col style="width:10%;">
+				              <col style="width:15%;"> 
+				              <col style="width:25%;">  
+				              <col style="width:25%;">  
+				              <col style="width:25%;">  
+		      				</colgroup>
+		      				<thead class="thead-light">
+				              <tr>
+				                <th>예약번호</th>
+				                <th class="text-center">객실번호</th>
+				                <th>체크인</th>
+				                <th>체크아웃</th>
+				                <th>예약일</th>
+				              </tr>
+				            </thead>
+				            <tbody>
+				            
+<%= html.toString() %>      
+<!--
+	              				<tr>        			 
+				            		<td>1</td>
+				            		<td>1</td>
+				            		<td>2020-02-01</td>
+				            		<td>2020-02-02</td>
+				            		<td>2020-01-26</td>
+								</tr>	
+								 -->		            
+				            </tbody>
+		      			</table>
+	      			</div>
+	      		</div>
+	      		
+	      		
+	      		
+	      	</div>
+		</div>        
     </div>
-    <div class="col-md-9">
-    	메뉴 3개 들어갈 공간
-    </div>
+  </div>
   </div>
 </section>
 
