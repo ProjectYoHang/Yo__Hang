@@ -137,7 +137,7 @@
 
 	const findId =  function() {
 		let name = $('#f_name').val();
-		let idList = '<table>';
+		let idList = '';
 		
 		if( name == null || name == "" ) {
 			alert( '이름을 입력하세요' );
@@ -154,14 +154,9 @@
 						alert( '등록되지 않은 이름입니다.' );	
 					} else {
 						$.each(resData, function(index, item) {
-							console.log( item.m_id );
-							idList += '<tr>';
-							idList += '<td>' +  item.m_id + '</td>';
-							idList += '</tr>';
+							idList += item.m_id +'\n';
 						})
-						idList += '</table>';
-						alert( idList );
-						//$('#modalBoard').html(nameList);	
+						alert( '입력하신 이름을 사용중인 아이디는 \n' + idList + '입니다.' );
 					}
 				},
 				error : function ( err ) {
@@ -169,7 +164,6 @@
 				}
 			});	
 		}
-		
 	}
 	
 	const findPw =  function( ) {

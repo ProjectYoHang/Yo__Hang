@@ -37,6 +37,7 @@
 	<jsp:param value="<%= title %>" name="title"/>
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
+
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">

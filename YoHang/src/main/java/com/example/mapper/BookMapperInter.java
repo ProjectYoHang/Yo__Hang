@@ -47,6 +47,10 @@ public interface BookMapperInter {
 	@Select("select * from bookInfo where id=#{id} order by seq desc")
 	ArrayList<BookInfoTO> bookInfos(BookInfoTO to);
 	
+	// 마이페이지 홈에 보여줄 내 최근 예약 3건의 데이터
+	@Select("select * from bookInfo where id=#{id} order by seq desc limit 0, 3")
+	ArrayList<BookInfoTO> bookInfosMin(BookInfoTO to);
+	
 	// 전체 예약정보
 	//@Select("select book_num, m_id, room_seq, date_format(checkin_date, '%Y-%m-%d') checkin_date, date_format(checkout_date, '%Y-%m-%d') checkout_date, book_date from book order by book_num desc limit #{startRow}, #{recordPerPage}")
 	@Select("select * from bookInfo order by seq desc limit #{startRow}, #{recordPerPage}")

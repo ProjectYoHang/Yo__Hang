@@ -44,6 +44,7 @@
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>

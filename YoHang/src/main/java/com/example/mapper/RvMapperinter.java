@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.example.model.room_typeTO;
 import com.example.model.RvBoardListTO;
 import com.example.model.RvBoardTO;
 
@@ -60,4 +61,8 @@ public interface RvMapperinter {
 	
 	@Update("update reviews set rv_subject=#{rv_subject}, rv_content=#{rv_content} where rv_seq=#{rv_seq}")
 	int rvModifyOk4(RvBoardTO to);
+	
+	// home에 이미지 불러오는 sql문
+	@Select("select * from room_type where room_name =#{room_name}")
+	room_typeTO roomtype1(room_typeTO to);
 }

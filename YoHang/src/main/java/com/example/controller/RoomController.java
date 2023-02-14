@@ -37,8 +37,9 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_standard");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
+		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("head_count", request.getParameter("head_count"));
 		
 		return modelAndView;
 	}
@@ -53,8 +54,8 @@ public class RoomController {
 		
 		modelAndView.setViewName("room/room_suite");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
+		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
@@ -69,8 +70,8 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_deluxe");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
+		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
+		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
@@ -232,8 +233,21 @@ public class RoomController {
 	// 마이페이지 임시
 	@RequestMapping("/mypage")
 	public ModelAndView mypage(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		// 로그인 상태에서 session에 저장된 아이디 가져옴
+		HttpSession session = request.getSession();
+		
+		MembersTO loginMember = (MembersTO)session.getAttribute("loginMember");
+		
+		to.setId(loginMember.getM_id());
+		
+		ArrayList<BookInfoTO> bookInfosMin = dao.bookInfosMin(to);
+		
 		modelAndView.setViewName("mypage/mypage");
+		modelAndView.addObject("bookInfosMin", bookInfosMin);
 		
 		return modelAndView;
 	}
+	
 }

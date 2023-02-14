@@ -186,6 +186,12 @@ public class RvBoardDAO {
 		
 		return flag;
 	}
+	public room_typeTO Search(room_typeTO to) {
+		
+	to = mapper.roomtype1(to);	
 	
+	return to;	
+	
+	}
 	
 }
