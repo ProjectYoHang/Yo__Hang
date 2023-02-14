@@ -75,7 +75,7 @@
    <div class="container">
      <div class="row">
        <div class="col-lg-12">
-         <form action="/room/standard" class="booking-form">
+         <form action="#" class="booking-form">
            <div class="row">
            
              <div class="col-md-3 d-flex">
@@ -132,7 +132,7 @@
              </div>
              <div class="col-md d-flex">
                <div class="form-group d-flex align-self-stretch">
-                 <input type="submit" id="btn" value="Check Availability" class="btn btn-primary py-3 px-4 align-self-stretch">
+                 <input type="button" id="btn" value="Check Availability" class="btn btn-primary py-3 px-4 align-self-stretch">
                </div>
              </div>
            </div>
@@ -569,7 +569,7 @@
 			//  console.log( item );
 			  html +=   '<div class="col-sm col-md-6 col-lg-4 ftco-animate fadeInUp ftco-animated">';
 			  html +=       '<div class="room" >';
-			  html +=         '<a href="' + serData.room_name + '.do?checkin_date='+ checkin_date + '&checkout_date='+ checkout_date +'&head_count=' + head_count + '" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-3.jpg);">';
+			  html +=         '<a href="room/' + serData.room_name + '?checkin_date='+ checkin_date + '&checkout_date='+ checkout_date +'&head_count=' + head_count + '" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-3.jpg);">';
 			  html +=           '<div class="icon d-flex justify-content-center align-items-center">';
 			  html +=             '<span class="xi-search"></span>';
 			  html +=           '</div>';
@@ -594,6 +594,7 @@
 			//	 html += '</tr>';
 			// });
 			// html +='</table>';
+			debugger;
 			 $('#search').html(html);
 				console.log( '성공' );
 				
