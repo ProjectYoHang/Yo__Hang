@@ -1,14 +1,18 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.AdminsDAO;
 import com.example.model.AdminsTO;
+import com.example.model.room_typeTO;
 
 @Controller
 public class AdminController {
@@ -56,4 +60,15 @@ public class AdminController {
 		return "/admin/admin_logout_ok";
 	}
 	
+	
+	// 관리자측 객실관리 메뉴 - 객실목록
+	@RequestMapping("/Admin/room/list.do")
+	public ModelAndView roomType(HttpServletRequest request, ModelAndView modelAndView) {
+		ArrayList<room_typeTO> roomType = dao.roomType();
+		
+		modelAndView.setViewName("room_admin/room_admin_list");
+		modelAndView.addObject("roomType", roomType);
+		
+		return modelAndView;
+	}
 }

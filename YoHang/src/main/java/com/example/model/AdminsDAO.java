@@ -1,5 +1,7 @@
 package com.example.model;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +17,9 @@ public class AdminsDAO {
 		return result;
 	}
 	
+	// 관리자측 객실관리 메뉴 중 겍실목록 페이지
+	public ArrayList<room_typeTO> roomType() {
+		ArrayList<room_typeTO> roomType = mapper.roomType();
+		return roomType;
+	}
 }
