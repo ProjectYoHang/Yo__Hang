@@ -71,27 +71,30 @@
  </section>
 
  <section class="ftco-booking">
+ 
    <div class="container">
      <div class="row">
        <div class="col-lg-12">
          <form action="#" class="booking-form">
            <div class="row">
+           
              <div class="col-md-3 d-flex">
                <div class="form-group p-4 align-self-stretch d-flex align-items-end">
                  <div class="wrap">
                    <label for="#">Check-in Date</label>
-                   <input type="text" class="form-control checkin_date" placeholder="Check-in date">
+                   <input type="text" id="checkin_date"  class="form-control checkin_date" placeholder="Check-in date" value="">          <!-- -------------- -->                      
                  </div>
                </div>
              </div>
+             
              <div class="col-md-3 d-flex">
                <div class="form-group p-4 align-self-stretch d-flex align-items-end">
                  <div class="wrap">
                    <label for="#">Check-out Date</label>
-                   <input type="text" class="form-control checkout_date" placeholder="Check-out date">
+                   <input type="text" id="checkout_date"  class="form-control checkout_date" placeholder="Check-out date">
                </div>
                </div>
-             </div>
+             </div>    
              <div class="col-md d-flex">
                <div class="form-group p-4 align-self-stretch d-flex align-items-end">
                  <div class="wrap">
@@ -99,13 +102,10 @@
                    <div class="form-field">
                      <div class="select-wrap">
                        <div class="icon"><span class="xi-angle-down"></span></div>
-                       <select name="" id="" class="form-control">
-                         <option value="">Suite</option>
-                         <option value="">Family Room</option>
-                         <option value="">YoHang Room</option>
-                         <option value="">Classic Room</option>
-                         <option value="">Superior Room</option>
-                         <option value="">Luxury Room</option>
+                       <select name="" id="roomname" class="form-control">
+                         <option value="standard">Standard Room</option>
+                         <option value="deluxe">deluxe Room</option>
+                         <option value="suite">suite Room</option>
                        </select>
                      </div>
                    </div>
@@ -119,13 +119,11 @@
                    <div class="form-field">
                      <div class="select-wrap">
                        <div class="icon"><span class="xi-angle-down"></span></div>
-                       <select name="" id="" class="form-control">
-                         <option value="">1 Adult</option>
-                         <option value="">2 Adult</option>
-                         <option value="">3 Adult</option>
-                         <option value="">4 Adult</option>
-                         <option value="">5 Adult</option>
-                         <option value="">6 Adult</option>
+                       <select name="" id="head_count" class="form-control">
+                         <option value="1">1명</option>
+                         <option value="2">2명</option>
+                         <option value="3">3명</option>
+                         <option value="4">4명</option>
                        </select>
                      </div>
                    </div>
@@ -134,7 +132,7 @@
              </div>
              <div class="col-md d-flex">
                <div class="form-group d-flex align-self-stretch">
-                 <input type="submit" value="Check Availability" class="btn btn-primary py-3 px-4 align-self-stretch">
+                 <input type="submit" id="btn" value="Check Availability" class="btn btn-primary py-3 px-4 align-self-stretch">
                </div>
              </div>
            </div>
@@ -147,9 +145,9 @@
   <!-- ftco-section bg-light -->
   <section class="ftco-section bg-light">
    <div class="container"> 		
-     <div class="row">
+     <div class="row" id="search" >
        <div class="col-sm col-md-6 col-lg-4 ftco-animate">
-         <div class="room">
+         <div class="room" >
            <a href="rooms-view.html" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-1.jpg);">
              <div class="icon d-flex justify-content-center align-items-center">
                <span class="xi-search"></span>
@@ -539,6 +537,87 @@
 // script --------------------------------------->
 <script type="text/javascript" src="../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
+
+<script>
+	// 위의 셀렉트박스에서 선택된 값을 ajax로 받아서 해당하는 객실타입만 검색폼 하단에 출력되게 만들기
+	let checkin_date = "";
+	let checkout_date = "";
+		
+	$('#btn').on('click', function() {
+		
+		let roomname = $('#roomname option:selected').val();
+		let head_count = $('#head_count option:selected').val();
+		//let checkin_date = $('#checkin_date option:selected').val();
+		
+		
+		
+		
+		
+		$.ajax({
+			url : "/search.do",
+			type : "post",	
+			data : {
+				roomname : roomname,
+				head_count : head_count
+			},
+			success : function( serData ) {
+				let html = '';
+				console.log( serData.room_price );	
+			// $.each( serData, function( index, item ) {
+			 
+			//  console.log( item );
+			  html +=   '<div class="col-sm col-md-6 col-lg-4 ftco-animate fadeInUp ftco-animated">';
+			  html +=       '<div class="room" >';
+			  html +=         '<a href="' + serData.room_name + '.do?checkin_date='+ checkin_date + '&checkout_date='+ checkout_date +'&head_count=' + head_count + '" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-3.jpg);">';
+			  html +=           '<div class="icon d-flex justify-content-center align-items-center">';
+			  html +=             '<span class="xi-search"></span>';
+			  html +=           '</div>';
+			  html +=         '</a>';
+			  html +=        '<div class="text p-3 text-center">';
+			  html +=           '<h3 class="mb-3"><a href="rooms-view.html">' + serData.room_name + '</a></h3>';
+			  html +=           '<p><span class="price mr-2">'+ serData.room_price +'</span> <span class="per">per night</span></p>';
+			  html +=          '<hr>';
+			  html +=          '<p class="pt-1"><a href="rooms-view.html" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>';
+			  html +=         '</div>';
+			  html +=       '</div>';
+
+			  html +=     '</div>';
+				 
+ 
+			
+			//	 html += '<tr>';
+			//	 html +=	'<td>' + item.room_name + '</td>';
+			//	 html +=	'<td>' + item.room_capacity + '</td>';
+			//	 html += '            <img src="' + item.room_image + '"' + 'class="img-thumbnail img-fluid" alt=""></a>';
+			//	 html += '            <p class="beverage_name text-center">' + item.room_name + '</p>';	
+			//	 html += '</tr>';
+			// });
+			// html +='</table>';
+			 $('#search').html(html);
+				console.log( '성공' );
+				
+			},
+			error: function( err ) {
+				alert( '에러1 ' + err.status );
+			}
+		})
+		
+		
+	});
+	
+	$('#checkin_date').change(function () {
+		console.log( $('#checkin_date').val() );
+		checkin_date = $('#checkin_date').val();
+		
+	})
+	
+	$('#checkout_date').change(function () {
+		console.log( $('#checkout_date').val() );
+		checkout_date = $('#checkout_date').val();
+	})
+	
+	
+</script>
 
 </body>
 </html>

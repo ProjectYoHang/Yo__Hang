@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.model.room_typeTO;
 import com.example.model.RvBoardDAO;
 import com.example.model.RvBoardListTO;
 import com.example.model.RvBoardTO;
@@ -181,20 +182,21 @@ public class RvController {
 		
 	}
 	
-	@GetMapping("/kakao.do")
-	public ModelAndView kakao(HttpServletRequest request, ModelAndView modelAndView) {
-		
-	modelAndView.setViewName("/review/kakao3");
-	return modelAndView;
-	}
+
 	
-	@GetMapping("/trip.do")
-	public ModelAndView tripadvisor(HttpServletRequest request, ModelAndView modelAndView) {
+	@RequestMapping("/search.do")
+	public room_typeTO serach(@RequestParam String roomname,@RequestParam String head_count) {
+		room_typeTO to = new room_typeTO();
 		
 		
+		to.setRoom_name(roomname);
 		
-	modelAndView.setViewName("/review/Tripadvisor");
-	return modelAndView;
+		to = dao.Search(to);
+		
+		System.out.println( roomname );
+		
+		return to;
+		
 	}
 	
 }
