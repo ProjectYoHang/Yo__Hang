@@ -1,43 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
-<%@page import="com.example.model.QnABoardTO"%>
+    pageEncoding="UTF-8"%>
 
 <%
-	//jsp hero parameters
-	String menuName = "Board";
-	String title = "Q&A";
+	// include한 jsp에 필요한 parameters
+	String menuName = "mypage";
+	String title = "마이페이지";
 	
-	// jsp header parameters
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
 	String findus = "/findus.do";
 	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
-	String rv ="/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage";
-
-	QnABoardTO to = (QnABoardTO)request.getAttribute("to");	
 	
-	String cpage = (String)request.getAttribute("cpage");
-
-	String qna_seq = (String)request.getAttribute("qna_seq");
-
-	String qna_subject = to.getQna_subject();
-	//String qna_id = to.getQna_id();
-	String qna_content = to.getQna_content();
-
 %>
 
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
-
 <body>
-<!--
+<!-- 
 // header --------------------------------------->
 <jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
@@ -46,7 +31,6 @@
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
-	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>
@@ -59,38 +43,13 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
-<!--
-// contents --------------------------------------->
-
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
-    <form action="./modify_ok.do" class="bg-white p-5" name="mfrm">
-    <input type="hidden" name="qna_seq" value="<%= qna_seq %>">
-    <input type="hidden" name="cpage" value="<%= cpage %>">
-      <div class="form-group">
-        <input type="text" class="form-control" name="qna_subject" title="Title" value="<%= qna_subject %>">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="qna_pw" title="Password" placeholder="글 비밀번호를 입력해주세요.">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="qna_id" title="Title" value="${loginMember.m_id}" readonly>
-      </div>
-      <div class="form-group">
-        <textarea type="text" class="form-control"  name="qna_content" title="content" rows="10"><%= qna_content %></textarea>
-      </div>
-<!-- 
-      <div class="form-group">
-        <input type="file" id="file" name="file" class="form-control">
-      </div>
--->
-      <div class="form-group text-center mt-5">
-        <input type="button" id="mbtn" value="수정" class="btn btn-primary py-3 px-5">
-        <a href="./view.do?cpage=<%= cpage %>&qna_seq=<%= qna_seq %>" class="btn btn-secondary py-3 px-5">보기</a>
-        <a href="./list.do?cpage=<%= cpage %>" class="btn btn-secondary py-3 px-5">목록</a>
-      </div>
-    </form>
+    <div class="row">
+      <a href="/mypage/booklist.do" >내 예약정보</a>
+      <a href="/mypage/list.do" >내 프로필</a>      
+    </div>
   </div>
 </section>
 
@@ -143,38 +102,13 @@
   </div>
 </section>
 
-<!--
+<!-- 
 // footer --------------------------------------->
 <jsp:include page="../common/footer.jsp" flush="false"/>
-
 <!--
 // script --------------------------------------->
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
-<script type="text/javascript">
-	window.onload = function() {
-			document.getElementById('mbtn').onclick = function() {
-				if(document.mfrm.qna_pw.value.trim() == '') {
-					alert('비밀번호를 입력해야 합니다.');
-					return false;
-				}
-				if(document.mfrm.qna_subject.value.trim() == '') {
-					alert('제목을 입력해야 합니다.');
-					return false;
-				}
-				if(document.mfrm.qna_content.value.trim() == '') {
-					alert('내용을 입력해야 합니다.');
-					return false;
-				}
-				document.mfrm.submit();
-			}
-		}
-	
-</script>
-
-
 </body>
 </html>
-
-

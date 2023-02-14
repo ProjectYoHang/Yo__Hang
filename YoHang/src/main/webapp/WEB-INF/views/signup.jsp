@@ -14,8 +14,8 @@
 	String rv ="/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
-
+	String mypage = "/mypage";
+	
 	String kakao_id = "";
 	if( request.getAttribute( "kakao_id") != null) {
 		kakao_id = (String)request.getAttribute( "kakao_id" );	
