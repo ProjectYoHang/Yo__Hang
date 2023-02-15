@@ -103,29 +103,34 @@
             <h2 class="mb-4">Deluxe room</h2>
             <div class="single-slider owl-carousel">
               <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-1.jpg);"></div>
+                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-4.jpg);"></div>
               </div>
               <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-2.jpg);"></div>
-              </div>
-              <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-3.jpg);"></div>
+                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-5.jpg);"></div>
               </div>
             </div>
           </div>
           <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <p>고급스러운 별장의 게스트룸과 같은 매력을 지닌 객실로 스탠다드룸보다 넓은 객실이며 3층에 위치하고 있으며, 11호실부터 20호실까지의 객실을 제공하고 있습니다.</p>
+            <p>스튜디오 타입 객실에 블루 패턴의 카페트와 화이트 패브릭 소파가 세련된 느낌을 자아내며, 휴식을 취할 수 있는 다이닝 테이블과 체어를 완비한 요행의 객실로 아름다운 풍경을 감상할 수 있는 객실입니다.</p>
             <div class="d-md-flex mt-5 mb-5">
               <ul class="list">
-                <li><span>Max:</span> 2 Persons</li>
-                <li><span>Size:</span> 45 m2</li>
+                <li><span>1박 가격 :</span> 440000원</li>
+                <li><span>최대 수용인원 :</span> 2명</li>
               </ul>
               <ul class="list ml-md-5">
-                <li><span>View:</span> Sea View</li>
-                <li><span>Bed:</span> 1</li>
+              	<li><span>위치 :</span> 3층</li>
+              	<li><span>객실 크기 :</span> 40 m²</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>침대 수 :</span> 1</li>
+                <li><span>침대 크기 :</span> double</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>전망 :</span> mountain view</li>
+                <li><span>룸 구성 :</span> 침실 1, 욕실 1</li>
               </ul>
             </div>
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
           </div>
          </div>
        </div>

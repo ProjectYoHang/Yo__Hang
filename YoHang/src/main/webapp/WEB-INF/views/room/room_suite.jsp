@@ -103,29 +103,34 @@
             <h2 class="mb-4">Suite room</h2>
             <div class="single-slider owl-carousel">
               <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-1.jpg);"></div>
-              </div>
-              <div class="item">
                 <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-2.jpg);"></div>
               </div>
               <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-3.jpg);"></div>
+                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-6.jpg);"></div>
               </div>
             </div>
           </div>
           <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+			<p>스위트룸은 남부 프랑스의 휴양 리조트를 연상시키는 객실로 여유있는 침실을 제공해 편안한 휴식을 만끽할 수 있습니다. 객실은 21호실부터 30호실까지 제공하고 있습니다.</p>
+            <p>스위트룸은 4층에 위치하고 있으며 푸른 바다의 전망을 즐길 수 있습니다. 침실과 욕실이 분리되어있으며 벽지, 카페트 등에 전체적으로 화이트, 제이드 그린, 블루 톤을 사용했으며, 클래식한 화장대로 스위트의 우아한 느낌을 더욱 살렸습니다.</p>            		
             <div class="d-md-flex mt-5 mb-5">
               <ul class="list">
-                <li><span>Max:</span> 2 Persons</li>
-                <li><span>Size:</span> 45 m2</li>
+                <li><span>1박 가격 :</span> 540000원</li>
+                <li><span>최대 수용인원 :</span> 4명</li>
               </ul>
               <ul class="list ml-md-5">
-                <li><span>View:</span> Sea View</li>
-                <li><span>Bed:</span> 1</li>
+              	<li><span>위치 :</span> 4층</li>
+              	<li><span>객실 크기 :</span> 50 m²</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>침대 수 :</span> 2</li>
+                <li><span>침대 크기 :</span> double</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>전망 :</span> sea view</li>
+                <li><span>룸 구성 :</span> 침실 1, 욕실 2</li>
               </ul>
             </div>
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
           </div>
          </div>
        </div>
