@@ -147,7 +147,12 @@ const memberDelete = function( m_id ) {
 				m_id : m_id.trim()
 			},
 			success : function( resData ) {
-				console.log( ' 회원삭제 성공' );
+				if ( resData  > 0) {
+					alert( '해당 사용자의 예약정보가 확인되어 탈퇴가 불가능합니다.')
+				}else {
+					console.log( ' 회원삭제 성공' );	
+				}
+				
 				memberList();
 			},
 			error: function( err ) {

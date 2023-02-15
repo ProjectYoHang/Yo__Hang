@@ -65,6 +65,10 @@ public interface MapperInter {
 
 	@Delete ( "delete from members where m_id=#{m_id}" )
 	int signoutMember(MembersTO to);
+
+///////////// 탈퇴전 예약여부 있는지 확인 	
+	@Select ( "select count(*) from bookinfo where id=#{m_id}")
+	int check_books(MembersTO to);
 	
 ///////////// 탈퇴 할때 해당 아디로 작성된 게시글 모두 삭제..
 	@Delete ( "delete from qna_board where qna_id=#{m_id}")

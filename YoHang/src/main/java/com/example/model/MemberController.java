@@ -183,14 +183,17 @@ public class MemberController {
 		MembersTO to = new MembersTO();
 		to.setM_id( request.getParameter( "id" ) );
 		
-		/// 추후 예약기능이들어오면 예약내용이 있으면 삭제 불가능하게 만들어야함
-		dao.deleteLink(to);
-			
-			
-		int flag = dao.signout_ok(to);
+		///  예약확인 후  예약내용이 있으면 삭제 불가능
+		int flag = 3;
+		int result = dao.check_books(to);
 		
+		if( result <= 0) {
+			dao.deleteLink(to);
+			flag = dao.signout_ok(to);
+			session.invalidate();
+		}
 		request.setAttribute( "flag", flag );
-		session.invalidate();
+		
 		return "./member/member_signout_ok";
 	}
 /////////////////// 카카오 ///
@@ -292,10 +295,15 @@ public class MemberController {
 	public int member_delete(@RequestParam String m_id) {
 		MembersTO to = new MembersTO();
 		to.setM_id(m_id);
-		/// 추후 예약기능이들어오면 예약내용이 있으면 삭제 불가능하게 만들어야함 
-		dao.deleteLink(to);
 		
-		int flag = dao.signout_ok(to);
+		///  예약확인 후  예약내용이 있으면 삭제 불가능
+		int flag = 3;
+		int result = dao.check_books(to);
+				
+		if( result <= 0) {
+			dao.deleteLink(to);
+			flag = dao.signout_ok(to);
+		}
 		
 		return flag;
 	}

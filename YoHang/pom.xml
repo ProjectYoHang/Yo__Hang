@@ -73,6 +73,14 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
+		
+		<!-- 외부 톰캣을 사용하기위한 설정  -->
+		<!-- <dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-tomcat</artifactId>
+	      <scope>provide</scope>
+	    </dependency> -->
+		
 		<!--  mail 관련  -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>

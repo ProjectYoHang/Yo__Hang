@@ -218,4 +218,10 @@ public class MembersDAO {
 		
 		return result;
 	}
+	/// 삭제 전 예약내역 확인
+	public int check_books( MembersTO to ) {
+		int result = mapper.check_books(to);
+		
+		return result;
+	}
 }
