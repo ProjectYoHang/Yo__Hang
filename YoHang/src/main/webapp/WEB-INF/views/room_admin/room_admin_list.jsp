@@ -8,7 +8,7 @@
 <%
 	//jsp hero parameters
 	String menuName = "객실관리";
-	String title = "객실목록";
+	String title = "객실관리";
 	
 	// jsp header parameters
 	String home = "/Admin/home.do";
@@ -79,7 +79,7 @@
 <section class="ftco-section">
   <div class="container">
   	<div class="col heading-section text-center mb-5 pb-5">
-      <h2>객실 목록</h2>
+      <h2>객실목록</h2>
     </div>
     <div class="row toolbar-board-group">
       <div class="col-md-6 d-flex align-items-center board-page-info">

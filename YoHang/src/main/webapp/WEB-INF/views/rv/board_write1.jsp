@@ -16,7 +16,7 @@
 	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String mypage = "/mypage";
 %>
 
 <!DOCTYPE html>
@@ -54,7 +54,7 @@
 	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
 
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_id"  value="test1234" readonly>     
+        <input type="text" class="form-control" name="rv_id"  value="${loginMember.m_id}" readonly>     
       </div>
       <div class="form-group">
         <input type="text" class="form-control" name="rv_subject"  placeholder="제목">     
@@ -75,13 +75,11 @@
         <input type="hidden" class="form-control" name="rv_like" value="1" placeholder="좋아요">     
       </div> 	
 				
-	<tr>
 		<th>이미지</th>
 			<td colspan="3">
 			<!-- 파일 업로드 input type=file -->
 			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
 		</td>
-	</tr>
 																						
       <div class="form-group text-center mt-5">
         <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">

@@ -16,7 +16,7 @@
 	String notice = "/notice/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String mypage = "/mypage";
 	
 	RvBoardTO to = (RvBoardTO)request.getAttribute("to");		
 	//String cpage = (String)request.getAttribute("cpage");

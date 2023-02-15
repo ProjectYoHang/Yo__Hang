@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%
 	//jsp hero parameters
-	String menuName = "Home";
+	String menuName = "회원관리";
 	String title = "회원관리";
 	
 	// jsp header parameters
@@ -42,6 +42,9 @@
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
+  	<div class="col heading-section text-center mb-5 pb-5">
+      <h2>회원목록</h2>
+    </div>
     <div class="row" id="board" >
       
     </div>

@@ -53,11 +53,11 @@
 		html.append("<div class='form-check form-check-inline'>");
 		
 		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
-			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
+			html.append("<label class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		} else {
-			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
+			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		}
 		html.append("</div>");
 	}
@@ -103,52 +103,63 @@
             <h2 class="mb-4">Suite room</h2>
             <div class="single-slider owl-carousel">
               <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-1.jpg);"></div>
-              </div>
-              <div class="item">
                 <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-2.jpg);"></div>
               </div>
               <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-3.jpg);"></div>
+                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-6.jpg);"></div>
               </div>
             </div>
           </div>
           <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+			<p>스위트룸은 남부 프랑스의 휴양 리조트를 연상시키는 객실로 여유있는 침실을 제공해 편안한 휴식을 만끽할 수 있습니다. 객실은 21호실부터 30호실까지 제공하고 있습니다.</p>
+            <p>스위트룸은 4층에 위치하고 있으며 푸른 바다의 전망을 즐길 수 있습니다. 침실과 욕실이 분리되어있으며 벽지, 카페트 등에 전체적으로 화이트, 제이드 그린, 블루 톤을 사용했으며, 클래식한 화장대로 스위트의 우아한 느낌을 더욱 살렸습니다.</p>            		
             <div class="d-md-flex mt-5 mb-5">
               <ul class="list">
-                <li><span>Max:</span> 2 Persons</li>
-                <li><span>Size:</span> 45 m2</li>
+                <li><span>1박 가격 :</span> 540000원</li>
+                <li><span>최대 수용인원 :</span> 4명</li>
               </ul>
               <ul class="list ml-md-5">
-                <li><span>View:</span> Sea View</li>
-                <li><span>Bed:</span> 1</li>
+              	<li><span>위치 :</span> 4층</li>
+              	<li><span>객실 크기 :</span> 50 m²</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>침대 수 :</span> 2</li>
+                <li><span>침대 크기 :</span> twin</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>전망 :</span> sea view</li>
+                <li><span>룸 구성 :</span> 침실 1, 욕실 2</li>
               </ul>
             </div>
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
           </div>
          </div>
        </div>
       <div class="col-lg-4 sidebar ftco-animate">
-        <div class="sidebar-box bg-light">
-        	<객실번호 선택>
-			<form action="./book_ok.do" method="post" name="rooms">
-			
-				<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
-				<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
-				<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
-				<input type="hidden" name="book_rooms" value="1" />
-				<input type="hidden" name="book_head_count" value="<%= head_count %>" />
-				<input type="hidden" name="book_cs_type" value="<%= head_count %>/0" />
-			
-<%= html.toString() %>			
+        <div class="sidebar-box">
+        	<br><br>
+        	<div style="border:1px solid white" class="">
+	       		<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#8d703b" class="bi bi-check-lg" viewBox="0 -3 16 16">
+				<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+				</svg>  <font size="5px" color="black">객실번호 선택</font><br>
 				
-				 <br><br>
-            	<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
-            
-			</form>
+				<div class="ml-4 my-3">
+					<form action="./book_ok.do" method="post" name="rooms">
+					
+						<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
+						<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
+						<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
+						<input type="hidden" name="book_rooms" value="1" />
+						<input type="hidden" name="book_head_count" value="<%= head_count %>" />
+						<input type="hidden" name="book_cs_type" value="<%= head_count %>/0" />
+					
+						<%= html.toString() %>			
+						 <br><br>
+		            	<input class="btn btn-primary" style="float:center;" type="button" value="예약하기" id="bookbtn" />
+					</form>
+				</div>
+        	</div>
 		</div>        
-    </div>
+      </div>
   </div>
   </div>
 </section>

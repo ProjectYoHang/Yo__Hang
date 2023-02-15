@@ -7,7 +7,7 @@
 <%
 	//jsp hero parameters
 	String menuName = "게시판관리";
-	String title = "Q&A";
+	String title = "Q&A관리";
 	
 	// jsp header parameters
 	String home = "/Admin/home.do";
@@ -92,13 +92,14 @@
 <section class="ftco-section">
   <div class="container">
   	<div class="col heading-section text-center mb-5 pb-5">
-      <h2>Q&A 관리</h2>
+      <h2>Q&A 목록</h2>
     </div>
     <div class="row toolbar-board-group">
       <div class="col-md-6 d-flex align-items-center board-page-info">
         <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
         <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span>
       </div>
+      <!-- 
       <div class="col-md-6 board-search-box">
         <div class="form-row">
           <div class="col-4">
@@ -107,14 +108,17 @@
               <option>내용</option>
             </select>
           </div>
+          
           <div class="col-6">
             <input type="text" class="form-control">
           </div>
           <div class="col-2">
             <input type="submit" class="btn btn-primary btn-lg" value="검색">
           </div>
+          
         </div>
       </div>
+      --!> 
     </div>
 
     <div class="row">

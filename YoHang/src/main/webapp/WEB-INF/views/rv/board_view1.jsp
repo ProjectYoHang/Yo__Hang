@@ -19,7 +19,7 @@
 	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String mypage = "/mypage";
 	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
 	
     //int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
@@ -70,16 +70,12 @@
     <h3 class="board-view-title"><%= rv_subject %> </h3>
     <ul class="board-info-group">
       <li class="d-md-inline board-view-writer">
-        <strong>제목</strong>
-        <span><%= rv_subject %></span>
+        <strong>작성자</strong>
+        <span><%= rv_id %></span>
       </li>
       <li class="board-view-writer">
         <strong>작성일</strong>
         <span><%= rv_date %></span>
-      </li>
-      <li class="board-view-hit">
-        <strong>조회수</strong>
-        <span>10</span>
       </li>
     </ul>
 

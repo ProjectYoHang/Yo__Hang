@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.room_typeTO;
+import com.example.model.BookInfoTO;
+import com.example.model.MembersTO;
 import com.example.model.RvBoardDAO;
 import com.example.model.RvBoardListTO;
 import com.example.model.RvBoardTO;
@@ -199,4 +202,36 @@ public class RvController {
 		
 	}
 	
+	@RequestMapping("/mypage/review.do")
+	public ModelAndView rvlist(ModelAndView modelAndView, HttpServletRequest request) {
+		RvBoardTO to = new RvBoardTO();
+		
+		HttpSession session = request.getSession();
+		
+		MembersTO loginMember = (MembersTO)session.getAttribute("loginMember");
+		
+		to.setRv_id(loginMember.getM_id());
+		
+		ArrayList<RvBoardTO> rvInfos = dao.rvInfo(to);
+		
+		modelAndView.setViewName("mypage/review_list");
+		modelAndView.addObject("rvInfos", rvInfos);
+		return modelAndView;
+	}
+	
+	// 회원측 리뷰 삭제
+	@RequestMapping("/mypage/rvDeleteOk.do")
+	public ModelAndView rvdeleteOk(ModelAndView modelAndView, HttpServletRequest request) {
+		RvBoardTO to = new RvBoardTO();
+		
+		to.setRv_seq(request.getParameter("rv_seq"));
+		
+		int flag = dao.reviewDelete(to);
+		
+		modelAndView.setViewName("mypage/review_delete_ok");
+		modelAndView.addObject("flag", flag);
+		
+		return modelAndView;
+	}
+
 }

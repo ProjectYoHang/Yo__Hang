@@ -1,10 +1,14 @@
+<%@page import="com.example.model.RvBoardTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+
+<%@page import="java.util.ArrayList"%>
+
 
 <%
 	//jsp hero parameters
-	String menuName = "Board";
-	String title = "Q&A";
+	String menuName = "마이페이지";
+	String title = "마이페이지";
 	
 	// jsp header parameters
 	String home = "/home.do";
@@ -19,16 +23,39 @@
 	String mypage = "/mypage";
 %>
 
+<% 
+	
+	ArrayList<RvBoardTO> rvInfos = (ArrayList<RvBoardTO>)request.getAttribute("rvInfos");
+	int totalRecord = rvInfos.size();
+	
+	StringBuilder html = new StringBuilder();
+	
+	for(RvBoardTO to : rvInfos) {
+		String rv_seq = to.getRv_seq();
+		String rv_id = to.getRv_id();
+		String rv_subject = to.getRv_subject();
+		String rv_date = to.getRv_date();
+		
+		html.append("<tr>");
+		html.append("<td>" + rv_seq + "</td>");
+		html.append("<td>" + rv_id + "</td>");	
+		html.append("<td>" + rv_subject + "</td>");
+		html.append("<td>" + rv_date + "</td>");
+		html.append("<td><button type='button' onclick='location.href=\"./rvDeleteOk.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰삭제</button></td>");
+		html.append("</tr>");	
+	}
+	
+
+	
+%>    
+
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
 
 <body>
-<!--
+<!-- 
 // header --------------------------------------->
-
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
@@ -49,28 +76,79 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
-<!--
-// contents --------------------------------------->
-
 <!-- content -->
-<section class="ftco-section bg-light">
+<section class="ftco-section">
   <div class="container">
-    <form action="./write_ok.do" class="bg-white p-5" name="wfrm">
-    <input type="hidden" name="qna_id" value="${loginMember.m_id}" />
-      <div class="form-group">
-        <input type="text" class="form-control" name="qna_subject" title="Title" placeholder="제목을 입력해주세요.">
+  	<div class="col heading-section text-center mb-5 pb-5">
+      <h2>내 리뷰</h2>
+    </div>
+    <div class="row toolbar-board-group">
+      <div class="col-md-6 d-flex align-items-center board-page-info">
+        <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
+        <%-- <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span> --%>
       </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="qna_pw" title="Password" placeholder="글 비밀번호를 입력해주세요.">
+      <div class="col-md-6 board-search-box">
+        <div class="form-row">
+        <!--
+          <div class="col-4">
+            <select class="form-control">
+              <option>제목</option>
+              <option>내용</option>
+            </select>
+          </div>
+           
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-2">
+            <input type="submit" class="btn btn-primary btn-lg" value="검색">
+          </div>
+           -->
+        </div>
       </div>
-      <div class="form-group">
-        <textarea type="text" class="form-control"  name="qna_content" title="content" placeholder="문의할 내용을 입력해주세요." rows="10"></textarea>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-board-list">
+            <caption class="sr-only">게시판글</caption>
+            <colgroup>
+              <col style="width:10%;">
+              <col style="width:15%;"> 
+              <col style="width:10%;">  
+              <col style="width:15%;">  
+              <col style="width:15%;">  
+            </colgroup>
+            <thead>
+              <tr>
+                <th>글 번호</th>
+                <th class="text-center">글쓴이</th>
+                <th>제목</th>
+                <th>날짜</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+
+<%= html.toString() %>
+             
+            </tbody>
+          </table>
+        </div>
+
+        <!-- navigation -->
+        <nav class="w-100">
+          <ul class="pagination justify-content-center">
+          
+				
+
+			</ul>
+        </nav>
+
       </div>
-      <div class="form-group text-center mt-5">
-        <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
-        <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
-      </div>
-    </form>
+    </div>
   </div>
 </section>
 
@@ -123,7 +201,7 @@
   </div>
 </section>
 
-<!--
+<!-- 
 // footer --------------------------------------->
 <jsp:include page="../common/footer.jsp" flush="false"/>
 
@@ -131,27 +209,6 @@
 // script --------------------------------------->
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
-
-<script type="text/javascript">
-	window.onload = function() {
-		document.getElementById('wbtn').onclick = function() { 
-			if(document.wfrm.qna_subject.value.trim() == '') { 
-				alert('제목을 입력하셔야 합니다.');
-				return false;
-			}
-			if(document.wfrm.qna_pw.value.trim() == '') { 
-				alert('비밀번호를 입력하셔야 합니다.');
-				return false;
-			}
-			if(document.wfrm.qna_content.value.trim() == '') { 
-				alert('내용을 입력하셔야 합니다.');
-				return false;
-			}
-			document.wfrm.submit();
-		};
-	}
-	
-</script>
 
 </body>
 </html>
