@@ -1,15 +1,4 @@
-<!-- 
-// header --------------------------------------->
-<jsp:include page="../common/header_admin.jsp" flush="false">
-	<jsp:param value="<%= home %>" name="home"/>
-	<jsp:param value="<%= member %>" name="member"/>
-	<jsp:param value="<%= book %>" name="book"/>
-	<jsp:param value="<%= room %>" name="room"/>
-	<jsp:param value="<%= qna %>" name="qna"/>
-	<jsp:param value="<%= faq %>" name="faq"/>
-	<jsp:param value="<%= notice %>" name="notice"/>
-	<jsp:param value="<%= logout %>" name="logout"/>
-</jsp:include><%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 
@@ -70,7 +59,6 @@
 </nav>
 
 <!--  
-
 <input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
  <input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
  <!DOCTYPE html>
