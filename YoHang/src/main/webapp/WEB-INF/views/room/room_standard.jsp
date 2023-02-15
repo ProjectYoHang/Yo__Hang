@@ -58,11 +58,11 @@
 		// IntStream.of(배열명).anyMatch(x -> x == 값) : 배열 안에 특정 값이 있는지 여부를 반환
 		// 반드시 값에 해당하는 부분이 final / static 으로 선언되어있어야 하므로 위에 선언해놓음
 		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
-			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
+			html.append("<label class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		} else {
-			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
+			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		}
 		html.append("</div>");
 	}
@@ -139,27 +139,33 @@
           </div>
          </div>
        </div>
-      <div class="col-lg-4 sidebar ftco-animate">
-        <div class="sidebar-box bg-light">
-        	<객실번호 선택>
-			<form action="./book_ok.do" method="post" name="rooms">
-			
-				<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
-				<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
-				<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
-				<input type="hidden" name="book_rooms" value="1" />
-				<input type="hidden" name="book_head_count" value="<%= head_count %>" />
-				<input type="hidden" name="book_cs_type" value="<%= head_count %>/0" />
-			
-<%= html.toString() %>			
+       <div class="col-lg-4 sidebar ftco-animate">
+        <div class="sidebar-box">
+        	<br><br>
+        	<div style="border:1px solid white" class="">
+	       		<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#8d703b" class="bi bi-check-lg" viewBox="0 -3 16 16">
+				<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+				</svg>  <font size="5px" color="black">객실번호 선택</font><br>
 				
-				 <br><br>
-            	<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
-           
-			</form>
+				<div class="ml-4 my-3">
+					<form action="./book_ok.do" method="post" name="rooms">
+					
+						<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
+						<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
+						<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
+						<input type="hidden" name="book_rooms" value="1" />
+						<input type="hidden" name="book_head_count" value="<%= head_count %>" />
+						<input type="hidden" name="book_cs_type" value="<%= head_count %>/0" />
+					
+						<%= html.toString() %>			
+						 <br><br>
+		            	<input class="btn btn-primary" style="float:center;" type="button" value="예약하기" id="bookbtn" />
+					</form>
+				</div>
+        	</div>
 		</div>        
-    </div>
-  </div>
+      </div>
+ 	 </div>
   </div>
 </section>
 

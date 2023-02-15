@@ -103,9 +103,9 @@
                      <div class="select-wrap">
                        <div class="icon"><span class="xi-angle-down"></span></div>
                        <select name="" id="roomname" class="form-control">
-                         <option value="standard">Standard Room</option>
-                         <option value="deluxe">deluxe Room</option>
-                         <option value="suite">suite Room</option>
+                         <option value="standard">Standard</option>
+                         <option value="deluxe">Deluxe</option>
+                         <option value="suite">Suite</option>
                        </select>
                      </div>
                    </div>
