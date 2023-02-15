@@ -5,6 +5,7 @@
 <%@page import="com.example.model.QnABoardTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.example.model.BookTO"%>
+<%@page import="com.example.model.RvBoardTO"%>
 
 <%
 	// include한 jsp에 필요한 parameters
@@ -47,7 +48,27 @@
 		html.append("</tr>");	
 	}
 
+	ArrayList<RvBoardTO> rvInfo = (ArrayList<RvBoardTO>)request.getAttribute("rvInfo");
+	
+	//int totalRecord = rvInfo.size();
+	
+	StringBuilder rvhtml = new StringBuilder();
+	
+	for(RvBoardTO rto : rvInfo) {
+		String rv_seq = rto.getRv_seq();
+		String rv_subject = rto.getRv_subject();
+		String rv_date = rto.getRv_date();
+
+		
+		rvhtml.append("<tr>");
+		rvhtml.append("<td>" + rv_seq + "</td>");
+		rvhtml.append("<td>" + rv_subject + "</td>");
+		rvhtml.append("<td>" + rv_date + "</td>");
+		rvhtml.append("</tr>");	
+	}
+	
 %>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -170,6 +191,43 @@
 	      		
 	      		
 	      	</div>
+	      	<br>
+	      <div class="border border-grey rounded">
+	      		<div class="h5 mx-4 my-4">
+	      			<b>내 리뷰</b>
+	      			<button type="button" class="btn btn-dark" style="float:right;" onclick="location.href='mypage/review.do'"><b>+</b></button>
+	      		</div>
+	      		<div class="mx-4 my-4">
+	      			<div class="table-reponsive">
+		      			<table class="table table-board-list">
+		      				<caption class="sr-only"></caption>
+		      				<colgroup>
+		      					<col style="width:25%;"> 
+				              	<col style="width:25%;">  
+				              	<col style="width:25%;">  
+		      				</colgroup>
+		      				<thead class="thead-light">
+				              	<tr>
+					                <th>글 번호</th>		                
+					                <th>글 제목</th>
+					                <th>날짜</th>
+				              	</tr>
+				            </thead>
+				            <tbody>
+<%= rvhtml.toString() %>				            
+<!-- 	              				<tr>
+				            		<td></td>
+				            		<td></td>
+				            		<td></td>
+								</tr>
+								-->			            
+			            	</tbody>				            
+		      			</table>
+	      			</div>
+	      		</div>
+	      	</div>
+	      	
+	      	
 		</div>        
     </div>
   </div>
