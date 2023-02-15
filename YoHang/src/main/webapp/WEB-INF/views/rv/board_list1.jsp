@@ -20,7 +20,7 @@
 	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String mypage = "/mypage";
 
 
 
@@ -229,11 +229,15 @@
 	}
 	
 	// 오른쪽 겹꺽쇄 클릭하면 다음 페이지 번호묶음으로 이동
-	if(startPageNum == totalPage) {
+	if(cpage == totalPage) {
 		out.println("<li class='page-item disabled last'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
-	} else {
+	} else if(cpage != totalPage&&lastPageNum == totalPage){
+		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + totalPage + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	}else {
 		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + (recordPerPage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	}
+		
+		
 %>				
 
 			</ul>

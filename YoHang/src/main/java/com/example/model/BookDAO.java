@@ -75,6 +75,17 @@ public class BookDAO {
 		return bookInfos;
 	}
 	
+	// 마이페이지에 보여줄 내 최근예약 3건의 데이터
+	public ArrayList<BookInfoTO> bookInfosMin(BookInfoTO to) {
+		String id = to.getId();
+		
+		to.setId(id);
+		
+		ArrayList<BookInfoTO> bookInfosMin = mapper.bookInfosMin(to);
+		
+		return bookInfosMin;
+	}
+	
 	// 관리자페이지 예약목록
 	public Map<String, Object> bookInfoAll(BookListTO listTo) {
 		listTo.setTotalRecord(mapper.bookAllCount());

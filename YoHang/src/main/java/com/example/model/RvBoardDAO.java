@@ -13,7 +13,7 @@ import com.example.mapper.RvMapperinter;
 @Repository
 public class RvBoardDAO {
 
-	private String uploadPath = "C:/Users/KITCOOP/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
+	private String uploadPath = "C:/Users/user/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
 	
 	@Autowired
 	private RvMapperinter mapper;
@@ -193,5 +193,34 @@ public class RvBoardDAO {
 	return to;	
 	
 	}
-	
+	// 회원 리뷰목록
+	public ArrayList<RvBoardTO> rvInfos(RvBoardTO to) {
+		String id = to.getRv_id();
+		
+		to.setRv_id(id);
+		
+		ArrayList<RvBoardTO> rvInfos = mapper.rvInfos(to);
+		
+		return rvInfos;
+	}
+	// 마이페이지에 보여줄 최근 리뷰 3개 데이터
+	public ArrayList<RvBoardTO> rvInfo(RvBoardTO to) {
+		String id = to.getRv_id();
+		
+		to.setRv_id(id);
+		
+		ArrayList<RvBoardTO> rvInfo = mapper.rvInfo(to);
+		
+		return rvInfo;
+	}	
+	public int reviewDelete(RvBoardTO to) {
+		int flag = 1;
+		
+		int result = mapper.reviewDeleteOk(to);
+		if(result == 1) {
+			flag = 0;
+		}
+		
+		return flag;
+	}
 }
