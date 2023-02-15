@@ -20,7 +20,7 @@
 	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
-	String mypage = "/mypage/list.do";
+	String mypage = "/mypage";
 
 
 
@@ -145,24 +145,7 @@
         <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
         <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span>
       </div>
-      <div class="col-md-6 board-search-box">
-        <div class="form-row">
-          <div class="col-4">
-            <select class="form-control">
-              <option>제목</option>
-              <option>내용</option>
-            </select>
-          </div>
-          <div class="col-6">
-            <input type="text" class="form-control">
-          </div>
-          <div class="col-2">
-            <input type="submit" class="btn btn-primary btn-lg" value="검색">
-          </div>
-        </div>
-      </div>
     </div>
-
     <div class="row">
       <div class="col">
         <div class="table-responsive">
@@ -229,11 +212,15 @@
 	}
 	
 	// 오른쪽 겹꺽쇄 클릭하면 다음 페이지 번호묶음으로 이동
-	if(startPageNum == totalPage) {
+	if(cpage == totalPage) {
 		out.println("<li class='page-item disabled last'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
-	} else {
+	} else if(cpage != totalPage&&lastPageNum == totalPage){
+		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + totalPage + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	}else {
 		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + (recordPerPage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
 	}
+		
+		
 %>				
 
 			</ul>

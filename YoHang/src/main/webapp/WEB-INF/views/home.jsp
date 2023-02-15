@@ -75,7 +75,7 @@
    <div class="container">
      <div class="row">
        <div class="col-lg-12">
-         <form action="#" class="booking-form">
+         <form action="#" class="booking-form" name="wfrm">
            <div class="row">
            
              <div class="col-md-3 d-flex">
@@ -540,11 +540,21 @@
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 <script>
+
 	// 위의 셀렉트박스에서 선택된 값을 ajax로 받아서 해당하는 객실타입만 검색폼 하단에 출력되게 만들기
 	let checkin_date = "";
 	let checkout_date = "";
 		
 	$('#btn').on('click', function() {
+		
+		if(document.wfrm.checkin_date.value.trim() == '') {
+			alert('체크인날짜를 선택하셔야 합니다.');
+			return false;
+		}
+		if(document.wfrm.checkout_date.value.trim() == '') {
+			alert('체크아웃날짜를 선택하셔야 합니다.');
+			return false;
+		}
 		
 		let roomname = $('#roomname option:selected').val();
 		let head_count = $('#head_count option:selected').val();
@@ -594,7 +604,7 @@
 			//	 html += '</tr>';
 			// });
 			// html +='</table>';
-			debugger;
+			
 			 $('#search').html(html);
 				console.log( '성공' );
 				

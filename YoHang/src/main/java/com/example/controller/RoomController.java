@@ -19,12 +19,17 @@ import com.example.model.BookTO;
 import com.example.model.BookInfoTO;
 import com.example.model.MembersTO;
 import com.example.model.RoomTO;
+import com.example.model.RvBoardDAO;
+import com.example.model.RvBoardTO;
 
 @RestController
 public class RoomController {
 
 	@Autowired
 	private BookDAO dao;
+	
+	@Autowired
+	private RvBoardDAO rdao;
 	
 	@RequestMapping("/room/standard")
 	// 체크인/체크아웃 데이터 디폴트값 넣어놔야 할 듯 : home에서 날짜 안 정하면 에러발생하겠지..
@@ -244,10 +249,22 @@ public class RoomController {
 		
 		ArrayList<BookInfoTO> bookInfosMin = dao.bookInfosMin(to);
 		
+
+		RvBoardTO rto = new RvBoardTO();
+		
+		rto.setRv_id(loginMember.getM_id());
+		
+		ArrayList<RvBoardTO> rvInfo = rdao.rvInfo(rto);
+		
 		modelAndView.setViewName("mypage/mypage");
 		modelAndView.addObject("bookInfosMin", bookInfosMin);
+		modelAndView.addObject("rvInfo", rvInfo);
+
 		
 		return modelAndView;
 	}
 	
+
+
 }
+

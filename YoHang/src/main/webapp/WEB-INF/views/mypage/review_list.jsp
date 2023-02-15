@@ -1,10 +1,14 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="com.example.model.RvBoardTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@page import="java.util.ArrayList"%>
+
 
 <%
 	//jsp hero parameters
-	String menuName = "Board";
-	String title = "Review";
+	String menuName = "마이페이지";
+	String title = "마이페이지";
 	
 	// jsp header parameters
 	String home = "/home.do";
@@ -13,22 +17,45 @@
 	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
-	String rv = "/rv/list.do";
+	String rv ="/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage";
 %>
+
+<% 
+	
+	ArrayList<RvBoardTO> rvInfos = (ArrayList<RvBoardTO>)request.getAttribute("rvInfos");
+	int totalRecord = rvInfos.size();
+	
+	StringBuilder html = new StringBuilder();
+	
+	for(RvBoardTO to : rvInfos) {
+		String rv_seq = to.getRv_seq();
+		String rv_id = to.getRv_id();
+		String rv_subject = to.getRv_subject();
+		String rv_date = to.getRv_date();
+		
+		html.append("<tr>");
+		html.append("<td>" + rv_seq + "</td>");
+		html.append("<td>" + rv_id + "</td>");	
+		html.append("<td>" + rv_subject + "</td>");
+		html.append("<td>" + rv_date + "</td>");
+		html.append("<td><button type='button' onclick='location.href=\"./rvDeleteOk.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰삭제</button></td>");
+		html.append("</tr>");	
+	}
+	
+
+	
+%>    
 
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
 
 <body>
-<!--
+<!-- 
 // header --------------------------------------->
-
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
@@ -49,45 +76,82 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
-<section class="ftco-section bg-light">
+<!-- content -->
+<section class="ftco-section">
   <div class="container">
-	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
+  	<div class="col heading-section text-center mb-5 pb-5">
+      <h2>내 리뷰</h2>
+    </div>
+    <div class="row toolbar-board-group">
+      <div class="col-md-6 d-flex align-items-center board-page-info">
+        <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
+        <%-- <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span> --%>
+      </div>
+      <div class="col-md-6 board-search-box">
+        <div class="form-row">
+        <!--
+          <div class="col-4">
+            <select class="form-control">
+              <option>제목</option>
+              <option>내용</option>
+            </select>
+          </div>
+           
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-2">
+            <input type="submit" class="btn btn-primary btn-lg" value="검색">
+          </div>
+           -->
+        </div>
+      </div>
+    </div>
 
-      <div class="form-group">
-        <input type="text" class="form-control" name="rv_id"  value="${loginMember.m_id}" readonly>     
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="rv_subject"  placeholder="제목">     
-      </div>
-      <div class="form-group">
-        <textarea class="form-control" name="rv_content" rows="10" placeholder="내용"></textarea>      
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_room_seq" value="1"  placeholder="방번호">     
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_book_num" value="1"  placeholder="예약번호">     
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_stars" value="1" placeholder="별점">     
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_like" value="1" placeholder="좋아요">     
-      </div> 	
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-board-list">
+            <caption class="sr-only">게시판글</caption>
+            <colgroup>
+              <col style="width:10%;">
+              <col style="width:15%;"> 
+              <col style="width:10%;">  
+              <col style="width:15%;">  
+              <col style="width:15%;">  
+            </colgroup>
+            <thead>
+              <tr>
+                <th>글 번호</th>
+                <th class="text-center">글쓴이</th>
+                <th>제목</th>
+                <th>날짜</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+
+<%= html.toString() %>
+             
+            </tbody>
+          </table>
+        </div>
+
+        <!-- navigation -->
+        <nav class="w-100">
+          <ul class="pagination justify-content-center">
+          
 				
-		<th>이미지</th>
-			<td colspan="3">
-			<!-- 파일 업로드 input type=file -->
-			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
-		</td>
-																						
-      <div class="form-group text-center mt-5">
-        <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
-        <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
-      </div>   
-	</form>
-</div>
+
+			</ul>
+        </nav>
+
+      </div>
+    </div>
+  </div>
 </section>
+
 <!--
 // instagram --------------------------------------->
 <section class="instagram pt-5">
@@ -137,7 +201,7 @@
   </div>
 </section>
 
-<!--
+<!-- 
 // footer --------------------------------------->
 <jsp:include page="../common/footer.jsp" flush="false"/>
 
@@ -146,36 +210,5 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
-
-
-<script type="text/javascript">
-	window.onload = function() {
-		document.getElementById('wbtn').onclick = function() {
-			// alert('click');
-			// 필수 입력항목 검사
-			if(document.wfrm.rv_id.value.trim() == '') {
-				alert('글쓴이를 입력하셔야 합니다.');
-				return false;
-			}
-			if(document.wfrm.rv_subject.value.trim() == '') {
-				alert('제목을 입력하셔야 합니다.');
-				return false;
-			}
-
-			if( document.wfrm.upload.value.trim() != '' ) {
-				
-				const extension = document.wfrm.upload.value.split( '.' ).pop();
-				if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF' ) {
-					alert( '이미지 파일을 입력하셔야 합니다.' );	
-					return false;
-				}
-			}
-			
-			// 위의 검사가 다 끝나면 submit해서 다음 페이지로 넘어가라는 의미
-			document.wfrm.submit();
-		};   
-	}
-	
-</script>
 </body>
 </html>
