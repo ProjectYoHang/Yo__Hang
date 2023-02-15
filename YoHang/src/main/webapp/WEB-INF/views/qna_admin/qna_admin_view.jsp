@@ -1,3 +1,4 @@
+<%@page import="com.example.model.AdminsTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -32,12 +33,12 @@
 	String qna_content = qnaData.getQna_content();
 	String qna_date = qnaData.getQna_date();
 	
+	AdminsTO loginAdmin = (AdminsTO)session.getAttribute("loginAdmin");
+	String qrpl_id = loginAdmin.getAdmin_id();
+	
 	// 혹 이미 답변이 있다면 보여줄 답댓글 데이터
 	QnAReplyTO qnaReplys = (QnAReplyTO)request.getAttribute("qnaReplys");
 
-	// 로그인상태가 아니므로 관리자 아이디값을 임시로 지정함
-	String qrpl_id = "${loginMember.admin_id}";
-	
 	StringBuilder html = new StringBuilder();
 	
 	if(qnaReplys != null) {
@@ -47,7 +48,6 @@
 		html.append("<form action='./modify_ok.do' name='mfrm' method='post'>");
 		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
 		html.append("<input type='hidden' name='cpage' value='" + cpage + "' />");
-		html.append("<div class='form-group'>");
 		html.append("<br>");
 		html.append("<textarea type='text' class='form-control'  name='qrpl_content' title='content' rows='10'>" + qrpl_content + "</textarea>");
 		html.append("<br>");
@@ -62,10 +62,8 @@
 		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
 		html.append("<input type='hidden' name='cpage' value='" + cpage + "' />");
 		html.append("<input type='hidden' name='qrpl_id' value='" + qrpl_id + "' />");
-		html.append("<div class='form-group'>");
 		html.append("<br>");
 		html.append("<textarea type='text' class='form-control'  name='qrpl_content' title='content' placeholder='답댓글 내용을 입력해주세요.' rows='10'></textarea>");
-		//html.append("<input type='text' name='qrpl_content' />");
 		html.append("<br>");
 		html.append("<input type='button' id='wbtn' value='답댓글 쓰기' class='btn btn-secondary' />");
 		html.append("</div>");
