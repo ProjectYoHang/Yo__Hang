@@ -18,6 +18,7 @@
 	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
+	String rv ="/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage";
@@ -28,11 +29,10 @@
 	ArrayList<RoomTO> bookedRoomNums = (ArrayList)request.getAttribute("bookedRoomNums");
 
 	// home의 검색바에서 전송되어야할 데이터들
-	String checkin_date = (String)request.getAttribute("checkin_date");
-	String checkout_date = (String)request.getAttribute("checkout_date");
-
+	String checkin_date = request.getParameter("checkin_date");
+	String checkout_date = request.getParameter("checkout_date");
+	String head_count = (String)request.getParameter("head_count");
 	
-
 	int[] bookedRoomNum = new int[30];
 	
 	for(int i = 0; i< bookedRoomNums.size(); i++) {
@@ -58,11 +58,11 @@
 		// IntStream.of(배열명).anyMatch(x -> x == 값) : 배열 안에 특정 값이 있는지 여부를 반환
 		// 반드시 값에 해당하는 부분이 final / static 으로 선언되어있어야 하므로 위에 선언해놓음
 		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
-			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
+			html.append("<label class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		} else {
-			html.append("<input class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'>" + i + "</label>");
+			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
+			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		}
 		html.append("</div>");
 	}
@@ -111,50 +111,61 @@
                 <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-1.jpg);"></div>
               </div>
               <div class="item">
-                <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-2.jpg);"></div>
-              </div>
-              <div class="item">
                 <div class="room-img" style="background-image: url(../../../YoHangFront/build/images/room-3.jpg);"></div>
               </div>
             </div>
           </div>
           <div class="col-md-12 room-single mt-4 mb-5 ftco-animate">
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <p>우리 호텔 요행의 고품격 서비스를 만나볼 수 있는 가장 기본 객실로 2층에 위치하고 있으며, 1호실부터 10호실까지의 객실을 제공하고 있습니다.</p>
+            <p>스튜디오 타입의 파스텔 톤 객실에 휴식을 취할 수 있는 테이블과 체어, 그리고 라탄 타입의 아늑한 체어를 완비한 요행의 가장 기본적인 룸입니다.</p>
             <div class="d-md-flex mt-5 mb-5">
               <ul class="list">
-                <li><span>Max:</span> 2 Persons</li>
-                <li><span>Size:</span> 45 m2</li>
+                <li><span>1박 가격 :</span> 380000원</li>
+                <li><span>최대 수용인원 :</span> 2명</li>
               </ul>
               <ul class="list ml-md-5">
-                <li><span>View:</span> Sea View</li>
-                <li><span>Bed:</span> 1</li>
+              	<li><span>위치 :</span> 2층</li>
+              	<li><span>객실 크기 :</span> 30 m²</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>침대 수 :</span> 1</li>
+                <li><span>침대 크기 :</span> double</li>
+              </ul>
+              <ul class="list ml-md-5">
+                <li><span>전망 :</span> city view</li>
+                <li><span>룸 구성 :</span> 침실 1, 욕실 1</li>
               </ul>
             </div>
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
           </div>
          </div>
        </div>
-      <div class="col-lg-4 sidebar ftco-animate">
-        <div class="sidebar-box bg-light">
-        	<객실번호 선택>
-			<form action="./book_ok.do" method="post" name="rooms">
-			
-				<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
-				<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
-				<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
-				<input type="hidden" name="book_rooms" value="1" />
-				<input type="hidden" name="book_head_count" value="2" />
-				<input type="hidden" name="book_cs_type" value="1/1" />
-			
-<%= html.toString() %>			
+       <div class="col-lg-4 sidebar ftco-animate">
+        <div class="sidebar-box">
+        	<br><br>
+        	<div style="border:1px solid white" class="">
+	       		<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#8d703b" class="bi bi-check-lg" viewBox="0 -3 16 16">
+				<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+				</svg>  <font size="5px" color="black">객실번호 선택</font><br>
 				
-				 <br><br>
-            	<input style="float:center;" type="button" value="예약하기" id="bookbtn" /> 
-           
-			</form>
+				<div class="ml-4 my-3">
+					<form action="./book_ok.do" method="post" name="rooms">
+					
+						<input type="hidden" name="m_id" value="${loginMember.m_id}"  />
+						<input type="hidden" name="checkin_date" value="<%= checkin_date %>" />
+						<input type="hidden" name="checkout_date" value="<%= checkout_date %>" />
+						<input type="hidden" name="book_rooms" value="1" />
+						<input type="hidden" name="book_head_count" value="<%= head_count %>" />
+						<input type="hidden" name="book_cs_type" value="<%= head_count %>/0" />
+					
+						<%= html.toString() %>			
+						 <br><br>
+		            	<input class="btn btn-primary" style="float:center;" type="button" value="예약하기" id="bookbtn" />
+					</form>
+				</div>
+        	</div>
 		</div>        
-    </div>
-  </div>
+      </div>
+ 	 </div>
   </div>
 </section>
 
@@ -272,6 +283,20 @@ $(document).ready(function() {
 				alert('객실을 선택해주세요.');
 				return false;
 			}
+			
+			//alert('alert');
+			
+		
+			if(<%= checkin_date %> == null) {
+				alert('홈에서 체크인 날짜를 선택해주세요.');
+				location.href='/home.do';
+				return false;
+			} else if(<%= checkout_date %> == null) {
+				alert('홈에서 체크아웃 날짜를 선택해주세요.');
+				location.href='/home.do';
+				return false;
+			}
+			
 			
 			document.rooms.submit();
 		}		

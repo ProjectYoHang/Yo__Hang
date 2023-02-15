@@ -44,6 +44,7 @@
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
 	<jsp:param value="<%= mypage %>" name="mypage"/>
@@ -64,9 +65,7 @@
   <div class="container">
     <form action="./delete_ok.do" class="bg-white p-5" name="dfrm">
     <input type="hidden" name="qna_seq" value="<%= qna_seq %>" />
-      <div class="form-group">
-        <input type="text" class="form-control" name="qna_id" title="Title" value="${loginMember.m_id}" readonly>
-      </div>
+    <input type="hidden" name="qna_id" value="${loginMember.m_id}" />
       <div class="form-group">
         <input type="text" class="form-control" name="qna_subject" title="Title" value="<%= qna_subject %>" readonly>
       </div>

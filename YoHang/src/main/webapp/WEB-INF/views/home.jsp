@@ -103,9 +103,9 @@
                      <div class="select-wrap">
                        <div class="icon"><span class="xi-angle-down"></span></div>
                        <select name="" id="roomname" class="form-control">
-                         <option value="standard">Standard Room</option>
-                         <option value="deluxe">deluxe Room</option>
-                         <option value="suite">suite Room</option>
+                         <option value="standard">Standard</option>
+                         <option value="deluxe">Deluxe</option>
+                         <option value="suite">Suite</option>
                        </select>
                      </div>
                    </div>
@@ -179,7 +179,7 @@
        </div>
        <div class="col-sm col-md-6 col-lg-4 ftco-animate">
          <div class="room">
-           <a href="/room/suite" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-3.jpg);">
+           <a href="/room/suite" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-2.jpg);">
              <div class="icon d-flex justify-content-center align-items-center">
                <span class="xi-search"></span>
              </div>
@@ -579,7 +579,7 @@
 			//  console.log( item );
 			  html +=   '<div class="col-sm col-md-6 col-lg-4 ftco-animate fadeInUp ftco-animated">';
 			  html +=       '<div class="room" >';
-			  html +=         '<a href="room/' + serData.room_name + '?checkin_date='+ checkin_date + '&checkout_date='+ checkout_date +'&head_count=' + head_count + '" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/room-3.jpg);">';
+			  html +=         '<a href="room/' + serData.room_name + '?checkin_date='+ checkin_date + '&checkout_date='+ checkout_date +'&head_count=' + head_count + '" class="img d-flex justify-content-center align-items-center" style="background-image: url(../../YoHangFront/build/images/' + serData.room_image + ');">';
 			  html +=           '<div class="icon d-flex justify-content-center align-items-center">';
 			  html +=             '<span class="xi-search"></span>';
 			  html +=           '</div>';

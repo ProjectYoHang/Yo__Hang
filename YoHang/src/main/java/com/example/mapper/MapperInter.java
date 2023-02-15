@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.example.model.AdminsTO;
 import com.example.model.MemberListTO;
 import com.example.model.MembersTO;
+import com.example.model.room_typeTO;
 
 @Mapper
 public interface MapperInter {
@@ -98,7 +99,9 @@ public interface MapperInter {
 	@Select ("select count(*) from admins where admin_id=#{admin_id} and admin_pw=#{admin_pw}")
 	int loginAdmin(AdminsTO to);
 	
-	
+	// 객실관리 페이지 중 객실목록 
+	@Select("select * from room_type order by room_price")
+	ArrayList<room_typeTO> roomType();
 	
  
 }

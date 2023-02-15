@@ -75,7 +75,7 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 var mapTypeControl = new kakao.maps.MapTypeControl();
 
 // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
-map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);	
+map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);   
 
 // 마커가 표시될 위치입니다 
 var markerPosition  = new kakao.maps.LatLng(37.498882771821684, 127.02822957585111); 
@@ -88,8 +88,10 @@ var marker = new kakao.maps.Marker({
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
 
+
 var iwContent = '<div style="padding:5px;">YOHANG! <br><a href="https://map.kakao.com/link/map/YOHANG!,37.498882771821684,127.02822957585111" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/YOHANG!,37.49890304108204, 127.02824371947689" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(37.498882771821684, 127.02822957585111); //인포윈도우 표시 위치입니다
+
 
 // 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({

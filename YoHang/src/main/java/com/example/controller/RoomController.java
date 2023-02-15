@@ -249,6 +249,7 @@ public class RoomController {
 		
 		ArrayList<BookInfoTO> bookInfosMin = dao.bookInfosMin(to);
 		
+
 		RvBoardTO rto = new RvBoardTO();
 		
 		rto.setRv_id(loginMember.getM_id());
@@ -258,8 +259,12 @@ public class RoomController {
 		modelAndView.setViewName("mypage/mypage");
 		modelAndView.addObject("bookInfosMin", bookInfosMin);
 		modelAndView.addObject("rvInfo", rvInfo);
+
 		
 		return modelAndView;
 	}
 	
+
+
 }
+

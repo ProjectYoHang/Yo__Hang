@@ -100,6 +100,7 @@
         <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
         <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span>
       </div>
+      <!-- 
       <div class="col-md-6 board-search-box">
         <div class="form-row">
           <div class="col-4">
@@ -116,6 +117,7 @@
           </div>
         </div>
       </div>
+       -->
     </div>
 
     <div class="row">
