@@ -56,6 +56,7 @@
 <section class="ftco-section bg-light">
   <div class="container">
     <form action="./write_ok.do" class="bg-white p-5" name="wfrm">
+    <input type="hidden" name="qna_id" value="${loginMember.m_id}" />
       <div class="form-group">
         <input type="text" class="form-control" name="qna_subject" title="Title" placeholder="제목을 입력해주세요.">
       </div>
@@ -63,18 +64,8 @@
         <input type="password" class="form-control" name="qna_pw" title="Password" placeholder="글 비밀번호를 입력해주세요.">
       </div>
       <div class="form-group">
-      	<!-- 아이디는 로그인상태에서 받아서 placeholder 속성값으로 넣어줘야 함 / value 속성은 로그인상태 처리되면 필요없음 -->
-        <!-- <input type="text" class="form-control" name="qna_id" title="Title" value="test1234" readonly> -->
-        <input type="text" class="form-control" name="qna_id" title="Title" value="${loginMember.m_id}" readonly>
+        <textarea type="text" class="form-control"  name="qna_content" title="content" placeholder="문의할 내용을 입력해주세요." rows="10"></textarea>
       </div>
-      <div class="form-group">
-        <textarea type="text" class="form-control"  name="qna_content" title="content" placeholder="내용을 입력해주세요." rows="10"></textarea>
-      </div>
-<!-- 
-      <div class="form-group">
-        <input type="file" id="file" name="file" class="form-control">
-      </div>
--->
       <div class="form-group text-center mt-5">
         <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
         <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>

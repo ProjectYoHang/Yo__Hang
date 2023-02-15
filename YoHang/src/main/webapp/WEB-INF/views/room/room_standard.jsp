@@ -286,7 +286,7 @@ $(document).ready(function() {
 			
 			//alert('alert');
 			
-			<%--
+		
 			if(<%= checkin_date %> == null) {
 				alert('홈에서 체크인 날짜를 선택해주세요.');
 				location.href='/home.do';
@@ -296,7 +296,7 @@ $(document).ready(function() {
 				location.href='/home.do';
 				return false;
 			}
-			--%>
+			
 			
 			document.rooms.submit();
 		}		

@@ -36,7 +36,7 @@
 	QnAReplyTO qnaReplys = (QnAReplyTO)request.getAttribute("qnaReplys");
 
 	// 로그인상태가 아니므로 관리자 아이디값을 임시로 지정함
-	String qrpl_id = "admin1234";
+	String qrpl_id = "${loginMember.admin_id}";
 	
 	StringBuilder html = new StringBuilder();
 	

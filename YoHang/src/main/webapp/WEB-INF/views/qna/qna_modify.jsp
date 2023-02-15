@@ -68,14 +68,12 @@
     <form action="./modify_ok.do" class="bg-white p-5" name="mfrm">
     <input type="hidden" name="qna_seq" value="<%= qna_seq %>">
     <input type="hidden" name="cpage" value="<%= cpage %>">
+    <input type="hidden" name="qna_id" value="${loginMember.m_id}" />
       <div class="form-group">
         <input type="text" class="form-control" name="qna_subject" title="Title" value="<%= qna_subject %>">
       </div>
       <div class="form-group">
         <input type="password" class="form-control" name="qna_pw" title="Password" placeholder="글 비밀번호를 입력해주세요.">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="qna_id" title="Title" value="${loginMember.m_id}" readonly>
       </div>
       <div class="form-group">
         <textarea type="text" class="form-control"  name="qna_content" title="content" rows="10"><%= qna_content %></textarea>
