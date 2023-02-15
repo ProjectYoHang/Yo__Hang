@@ -7,7 +7,7 @@
 <%
 	//jsp hero parameters
 	String menuName = "게시판관리";
-	String title = "Q&A";
+	String title = "Q&A관리";
 	
 	// jsp header parameters
 	String home = "/Admin/home.do";
@@ -92,7 +92,7 @@
 <section class="ftco-section">
   <div class="container">
   	<div class="col heading-section text-center mb-5 pb-5">
-      <h2>Q&A 관리</h2>
+      <h2>Q&A 목록</h2>
     </div>
     <div class="row toolbar-board-group">
       <div class="col-md-6 d-flex align-items-center board-page-info">

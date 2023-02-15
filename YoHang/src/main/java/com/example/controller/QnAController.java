@@ -22,13 +22,6 @@ public class QnAController {
 	@Autowired
 	private QnABoardDAO dao;
 	
-	@RequestMapping("/")
-	public ModelAndView index() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("../../index");
-		return modelAndView;
-	}
-	
 	// 다른 게시판들도 있으니까 구분을 위해 qna 경로를 추가해줌
 	// 처음 qna/list.do 요청 받았을 때 cpage 값이 없으니까 default값으로 1을 받게 설정함
 	@RequestMapping("/qna/list.do")
