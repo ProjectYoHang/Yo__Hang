@@ -124,7 +124,7 @@
               </ul>
               <ul class="list ml-md-5">
                 <li><span>침대 수 :</span> 1</li>
-                <li><span>침대 크기 :</span> double</li>
+                <li><span>침대 크기 :</span> queen</li>
               </ul>
               <ul class="list ml-md-5">
                 <li><span>전망 :</span> mountain view</li>
