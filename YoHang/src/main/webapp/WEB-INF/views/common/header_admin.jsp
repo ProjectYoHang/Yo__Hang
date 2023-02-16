@@ -40,8 +40,6 @@
             </div>
           </div>
         </li>
-        
-		
 		<!--  <li class="nav-item"><a href="<%= logout %>" class="nav-link" onclick="location.href='./logout.do'">Logout</a></li> -->
 		<li class="nav-item account">
 	         <div class="dropdown nav-link">
@@ -56,5 +54,4 @@
       </ul>
     </div>
   </div>
-</nav>
 </nav>
