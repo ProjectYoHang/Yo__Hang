@@ -24,19 +24,19 @@
 
     <div class="collapse navbar-collapse" id="ftco-nav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a href="<%= member %>" class="nav-link">Home</a></li>
-        <li class="nav-item active"><a href="<%= member %>" class="nav-link">회원관리</a></li>
-        <li class="nav-item active"><a href="<%= book %>" class="nav-link">예약관리</a></li>
-        <li class="nav-item active"><a href="<%= room %>" class="nav-link">객실관리</a></li>
+        <li class="nav-item active"><a href="<%= member %>" class="nav-link" title="관리자 홈">Home</a></li>
+        <li class="nav-item active"><a href="<%= member %>" class="nav-link" title="회원관리">MemberM</a></li>
+        <li class="nav-item active"><a href="<%= book %>" class="nav-link" title="예약관리">ReservationM</a></li>
+        <li class="nav-item active"><a href="<%= room %>" class="nav-link" title="객실관리">RoomM</a></li>
         <li class="nav-item board">
           <div class="dropdown nav-link">
-            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-              게시판관리
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false" title="게시판관리">
+              BoardM
             </button>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="<%= qna %>">Q&A</a>
               <a class="dropdown-item" href="<%= faq %>">FAQ</a>
-              <a class="dropdown-item" href="<%= notice %>">공지사항</a>
+              <a class="dropdown-item" href="<%= notice %>">Notice</a>
             </div>
           </div>
         </li>
