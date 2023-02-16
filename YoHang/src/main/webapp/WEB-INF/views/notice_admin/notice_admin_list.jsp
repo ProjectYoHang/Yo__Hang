@@ -11,7 +11,7 @@
 	String title = "Notice";
 
 	// jsp header parameters
-	//String home = "/Admin/home.do";
+	String home = "/Admin/home.do";
 	String member = "/Admin/member/list.do";
 	String book = "/Admin/book/list.do";
 	String room = "/Admin/room/list.do";
@@ -61,7 +61,7 @@
 <!-- 
 // header --------------------------------------->
 <jsp:include page="../common/header_admin.jsp" flush="false">
-	<jsp:param value="<%= member %>" name="home"/>
+	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= member %>" name="member"/>
 	<jsp:param value="<%= book %>" name="book"/>
 	<jsp:param value="<%= room %>" name="room"/>

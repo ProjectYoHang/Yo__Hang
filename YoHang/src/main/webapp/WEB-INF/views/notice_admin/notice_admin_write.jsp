@@ -7,16 +7,15 @@
 	String title = "Notice";
 	
 	// jsp header parameters
-	//String home = "/home.do";
-	String aboutus = "/aboutus.do";
-	String findus = "/findus.do";
-	String qna = "/qna/list.do";
-	String faq = "/faq/list.do";
-	String notice = "/notice/list.do";
-	String rv ="/rv/list.do";
-	String login = "/login.do";
-	String logout = "/logout.do";
-	String mypage = "/mypage";
+	String home = "/Admin/home.do";
+	String member = "/Admin/member/list.do";
+	String book = "/Admin/book/list.do";
+	String room = "/Admin/room/list.do";
+	String qna = "/Admin/qna/list.do";
+	String faq = "/Admin/faq/list.do";
+	String notice = "/Admin/notice/list.do";
+	String logout = "/Admin/logout.do";
+	
 %>
 
 <!DOCTYPE html>
@@ -26,6 +25,8 @@
 <body>
 <!-- 
 // header --------------------------------------->
+
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header_admin.jsp" flush="false">
 	<jsp:param value="<%= member %>" name="home"/>
 	<jsp:param value="<%= member %>" name="member"/>
@@ -51,7 +52,6 @@
 <section class="ftco-section bg-light">
   <div class="container">
 	<form action="./write_ok.do" method="post" name="nfrm" enctype="multipart/form-data">
-
       <div class="form-group">
         <input type="text" class="form-control" name="nt_id"  value="${loginAdmin.admin_id}" readonly>     
       </div>

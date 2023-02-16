@@ -6,32 +6,31 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 	//jsp hero parameters
-	String menuName = "Board";
+	String menuName = "게시판 관리";
 	String title = "Notice";
 
 	// jsp header parameters
-	//String home = "/home.do";
-	String aboutus = "/aboutus.do";
-	String findus = "/findus.do";
-	String qna = "/qna/list.do";
-	String faq = "/faq/list.do";
-	String notice = "/notice/list.do";
-	String rv = "/rv/list.do";
-	String login = "/login.do";
-	String logout = "/logout.do";
-	String mypage = "/mypage";
-	NoticeBoardTO to = (NoticeBoardTO)request.getAttribute("to");
+	String home = "/Admin/home.do";
+	String member = "/Admin/member/list.do";
+	String book = "/Admin/book/list.do";
+	String room = "/Admin/room/list.do";
+	String qna = "/Admin/qna/list.do";
+	String faq = "/Admin/faq/list.do";
+	String notice = "/Admin/notice/list.do";
+	String logout = "/Admin/logout.do";
 	
     //int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
     
 	String cpage = (String)request.getAttribute("cpage");
 	String nt_seq = (String)request.getAttribute("nt_seq");
 	
+	NoticeBoardTO to = (NoticeBoardTO)request.getAttribute("to");
 	String nt_subject = to.getNt_subject();
 	String nt_id = to.getNt_id();
 	String nt_date = to.getNt_date();
 	String nt_content = to.getNt_content();
-	String nt_img_name = to.getNt_file_name();
+	String nt_file_name = to.getNt_file_name();
+	int nt_hit = to.getNt_hit();
 %>
 
 <!DOCTYPE html>
@@ -42,7 +41,7 @@
 <!-- 
 // header --------------------------------------->
 <jsp:include page="../common/header_admin.jsp" flush="false">
-	<jsp:param value="<%= member %>" name="home"/>
+	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= member %>" name="member"/>
 	<jsp:param value="<%= book %>" name="book"/>
 	<jsp:param value="<%= room %>" name="room"/>
@@ -81,15 +80,19 @@
       </li>
     </ul>
 
-    <div  style="display:flex; align-item:center; justify-content: space-between;">
-   		<div id="bbs_file_wrap"  style="width:40%;">
-			<div>
-				<img src="../upload/notices/<%= nt_file_name %>" width="100%" onerror="" /><br />
-			</div>
-		</div> 
-    <div style="width:50%; display: flex; align-items: center;">
-    	<%= nt_content %>
+    <div class="board-view-content">
+   		<%= nt_content %>
     </div>
+    
+    <div class="row pt-4 board-view-file">
+      <div class="col-md-2">
+        <h4 class="h5 mb-0">첨부파일</h4>
+      </div>
+      <div class="col-md-10">
+        <ul class="p-md-0 mb-0">
+          <li><a href="#" download><i class="xi-file-text-o"></i> <%= nt_file_name %></a></li>
+        </ul>
+      </div>
     </div>
 
 

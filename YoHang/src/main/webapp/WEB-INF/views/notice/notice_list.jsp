@@ -60,7 +60,7 @@
 <body>
 <!--
 // header --------------------------------------->
-<jsp:include page="../common/header_admin.jsp" flush="false">
+<jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
 	<jsp:param value="<%= findus %>" name="findus"/>
