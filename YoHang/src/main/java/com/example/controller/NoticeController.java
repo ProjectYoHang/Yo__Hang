@@ -19,6 +19,8 @@ import com.example.model.room_typeTO;
 import com.example.model.NoticeBoardDAO;
 import com.example.model.NoticeBoardListTO;
 import com.example.model.NoticeBoardTO;
+import com.example.model.QnABoardTO;
+import com.example.model.QnAReplyTO;
 import com.example.model.RvBoardDAO;
 import com.example.model.RvBoardListTO;
 import com.example.model.RvBoardTO;
@@ -47,6 +49,20 @@ public class NoticeController {
 		modelAndView.addObject("totalRecord", map.get("totalRecord"));
 		modelAndView.addObject("recordPerPage", map.get("recordPerPage"));
 		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/notice/view.do")
+	public ModelAndView notice_view(HttpServletRequest request, ModelAndView modelAndView) {
+		NoticeBoardTO to = new NoticeBoardTO();
+		
+		to.setNt_seq(request.getParameter("nt_seq"));
+		to = dao.noticeView(to);
+				
+		modelAndView.setViewName("notice/notice_view");
+		modelAndView.addObject("to", to);
+		modelAndView.addObject("nt_seq", request.getParameter("nt_seq"));
+		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
 	
