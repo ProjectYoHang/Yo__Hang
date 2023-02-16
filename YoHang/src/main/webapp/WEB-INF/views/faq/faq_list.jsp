@@ -53,7 +53,7 @@
 <!-- content -->
 <section class="ftco-section">
   <div class="container">
-	<div class="accordion" id="accordionFaq">
+	<div class="accordion-faq" id="accordionFaq">
 	  <div class="card">
 	    <div class="card-header" id="headingOne">
 	      <h2 class="mb-0">
@@ -64,10 +64,10 @@
 	    </div>
 	    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionFaq">
 	      <div class="card-body">
-	        객실예약은 대표 전화와 홈페이지, 모바일, 앱, 이메일을 통하여 가능합니다.
+	        객실예약은 대표 전화와 홈페이지, 모바일, 앱, 이메일을 통하여 가능합니다.<br>
 
-			대표전화 032 743 9000
-			E-mail : reservation@yohang.co.kr
+			대표전화 032 743 9000<br>
+			E-mail : reservation@yohang.co.kr<br>
 			http://www.yohang.#
 	      </div>
 	    </div>
@@ -76,7 +76,7 @@
 	  <div class="card">
 	    <div class="card-header" id="headingOne-1">
 	      <h2 class="mb-0">
-	        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne-1" aria-expanded="true" aria-controls="collapseOne-1">
+	        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne-1" aria-expanded="false" aria-controls="collapseOne-1">
 	          [예약] 지인에게 객실 1박을 선물하고 싶습니다. 결제는 어떻게 이루어지나요?
 	        </button>
 	      </h2>

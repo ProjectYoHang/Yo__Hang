@@ -8032,6 +8032,35 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
 
+.accordion-faq .btn-link[aria-expanded="true"] {
+  font-weight: bold; }
+  .accordion-faq .btn-link[aria-expanded="true"]::before {
+    background-color: #232323; }
+
+.accordion-faq .btn-link {
+  color: inherit;
+  padding: 0;
+  text-decoration: none; }
+  .accordion-faq .btn-link::before {
+    display: inline-block;
+    content: 'Q';
+    color: #ffffff;
+    padding: 2px 8px;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin-right: 5px; }
+
+.accordion-faq .card-body {
+  padding-left: 1.25rem; }
+  .accordion-faq .card-body::before {
+    display: inline-block;
+    content: 'A';
+    color: #ffffff;
+    padding: 2px 8px;
+    background-color: #8d703b;
+    border-radius: 5px;
+    margin-right: 5px; }
+
 .navbar-nav .nav-item.board .dropdown.nav-link .dropdown-toggle, .navbar-nav .nav-item.account .dropdown.nav-link .dropdown-toggle {
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
