@@ -54,7 +54,7 @@
 		
 		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
 			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
+			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		} else {
 			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
 			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
