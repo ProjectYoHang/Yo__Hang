@@ -110,8 +110,8 @@
 		</fieldset>
 		<hr>
 		<fieldset>
-				<label for="f_id"  >Id</label>
-				<input type="text" id="f_id"  class="text ui-widget-content ui-corner-all">
+				<label for="f_id"  >&nbsp;&nbsp;Id</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="f_id"  class="text ui-widget-content ui-corner-all">
 				<button type="button" class="btn btn-info" data-bs-dismiss="modal" onclick="findPw()" >비밀번호 찾기</button>
 		</fieldset>
 	  </form>

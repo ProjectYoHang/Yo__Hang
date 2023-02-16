@@ -57,30 +57,3 @@
     </div>
   </div>
 </nav>
-
-<!--  
-
-<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
- <input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
- <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Home</title>
-	</head>
-	<body>
-		<c:if test="${loginMember == null}">
-			<input type="button" name="lbtn" value="로그인" onclick="location.href='./login.do'" />
-		</c:if>
-		<c:if test="${loginMember != null}">
-			<input type="button" name="lobtn" value="로그아웃" onclick="location.href='./logout.do'"  />
-			<table border='1' width='100'>
-				<tr>
-					
-				</tr>
-			</table>
-		</c:if>
-	
-	</body>
-</html> 
--->
