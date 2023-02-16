@@ -9,6 +9,7 @@
 	String room = request.getParameter("room");
 	String qna = request.getParameter("qna");
 	String faq = request.getParameter("faq");
+	String rv = request.getParameter("rv");
 	String notice = request.getParameter("notice");
 	String logout = request.getParameter("logout");
 	
@@ -37,6 +38,7 @@
               <a class="dropdown-item" href="<%= qna %>">Q&A</a>
               <a class="dropdown-item" href="<%= faq %>">FAQ</a>
               <a class="dropdown-item" href="<%= notice %>">공지사항</a>
+              <a class="dropdown-item" href="<%= rv %>">리뷰게시판</a>
             </div>
           </div>
         </li>

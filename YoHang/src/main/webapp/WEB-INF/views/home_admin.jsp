@@ -12,6 +12,7 @@
 	String book = "/Admin/book/list.do";
 	String room = "/Admin/room/list.do";
 	String qna = "/Admin/qna/list.do";
+	String qna = "/Admin/qna/list.do";
 	String faq = "/Admin/faq/list.do";
 	String notice = "/Admin/notice/list.do";
 	String logout = "/Admin/logout.do";
@@ -30,6 +31,7 @@
 	<jsp:param value="<%= book %>" name="book"/>
 	<jsp:param value="<%= room %>" name="room"/>
 	<jsp:param value="<%= qna %>" name="qna"/>
+	<jsp:param value="<%= rv %>" name="rv"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
