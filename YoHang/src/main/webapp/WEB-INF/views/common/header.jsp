@@ -43,8 +43,8 @@
             		<a class="dropdown-item" href="<%= qna %>">Q&A</a>
             	</c:if>
               <a class="dropdown-item" href="<%= faq %>">FAQ</a>
-              <a class="dropdown-item" href="<%= notice %>">공지사항</a>
-              <a class="dropdown-item" href="<%= rv %>">리뷰게시판</a>
+              <a class="dropdown-item" href="<%= notice %>">Notice</a>
+              <a class="dropdown-item" href="<%= rv %>">Review</a>
             </div>
           </div>
         </li>
@@ -58,8 +58,8 @@
 	              ${loginMember.m_id} 님
 	            </button>
 	            <div class="dropdown-menu">
-	              <a class="dropdown-item" href="<%= mypage %>">마이페이지</a>
-	              <a class="dropdown-item" href="<%= logout %>">로그아웃</a>
+	              <a class="dropdown-item" href="<%= mypage %>">Mypage</a>
+	              <a class="dropdown-item" href="<%= logout %>">logout</a>
 	            </div>
             </div>
 		</li>
