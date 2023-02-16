@@ -274,6 +274,16 @@ $(document).ready(function() {
 				return false;
 			}
 			
+			if(<%= checkin_date %> == null) {
+				alert('홈에서 체크인 날짜를 선택해주세요.');
+				location.href='/home.do';
+				return false;
+			} else if(<%= checkout_date %> == null) {
+				alert('홈에서 체크아웃 날짜를 선택해주세요.');
+				location.href='/home.do';
+				return false;
+			}
+			
 			document.rooms.submit();
 		}
 	})
