@@ -43,18 +43,36 @@
 	
 	if(qnaReplys != null) {
 		
-		String qrpl_content = qnaReplys.getQrpl_content();
+		qrpl_id = "관리자";
+		String qrpl_content = qnaReplys.getQrpl_content().replaceAll("\n", "<br>");
+		String qrpl_date = qnaReplys.getQrpl_date();
 		
+		html.append("<div>");
 		html.append("<form action='./modify_ok.do' name='mfrm' method='post'>");
 		html.append("<input type='hidden' name='qna_seq' value='" + qna_seq + "' />");
 		html.append("<input type='hidden' name='cpage' value='" + cpage + "' />");
-		html.append("<br>");
-		html.append("<textarea type='text' class='form-control'  name='qrpl_content' title='content' rows='10'>" + qrpl_content + "</textarea>");
-		html.append("<br>");
-		html.append("<input type='button' id='mbtn' value='수정' class='btn btn-secondary' />&nbsp;");
-		html.append("<input type='button' class='btn btn-secondary' value='삭제' onclick='location.href=\"./delete_ok.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "\"' />");
+		
+		html.append("<div class='my-5'>");
+		html.append("<table width='100%'>");
+		html.append("	<tr>");
+		html.append("		<td><svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='currentColor' class='bi bi-chat-left-text' viewBox='0 -2 16 16'><path d='M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z'/><path d='M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z'/></svg><font size='4px'>&nbsp;&nbsp;<b>답변</b></font></td>");
+		html.append("	</tr>");
+		html.append("	<tr>");
+		html.append("		<td align='right'>" + qrpl_id + " / " + qrpl_date + "</td>");
+		html.append("	</tr>");
+		html.append("	<tr>");
+		html.append("		<td>" + qrpl_content + "</td>");
+		html.append("	</tr>");
+		html.append("</table>");
 		html.append("</div>");
+		html.append("<input type='button' class='btn btn-secondary' value='삭제' onclick='location.href=\"./delete_ok.do?cpage=" + cpage + "&qna_seq=" + qna_seq + "\"' />");
+		
+		
+		//html.append("<textarea type='text' class='form-control'  name='qrpl_content' title='content' rows='10'>" + qrpl_content + "</textarea>");
+		//html.append("<input type='button' id='mbtn' value='수정' class='btn btn-secondary' />&nbsp;");
+		
 		html.append("</form>");
+		html.append("</div>");
 		
 	} else {
 		
