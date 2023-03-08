@@ -2,28 +2,20 @@ package com.example.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.model.room_typeTO;
 import com.example.model.NoticeBoardDAO;
 import com.example.model.NoticeBoardListTO;
 import com.example.model.NoticeBoardTO;
-import com.example.model.QnABoardTO;
-import com.example.model.QnAReplyTO;
-import com.example.model.RvBoardDAO;
-import com.example.model.RvBoardListTO;
-import com.example.model.RvBoardTO;
 
 @RestController
 public class NoticeController {

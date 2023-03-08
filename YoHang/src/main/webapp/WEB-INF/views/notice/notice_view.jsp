@@ -100,8 +100,8 @@
 
 
     <div class="text-center mt-4 pt-5 border-top">
-      <a href="./modify.do?cpage=<%= cpage %>&nt_seq=<%= nt_seq %>" class="btn btn-primary btn-lg">수정</a>
-      <a href="./delete.do?cpage=<%= cpage %>&nt_seq=<%= nt_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
+      <%-- <a href="./modify.do?cpage=<%= cpage %>&nt_seq=<%= nt_seq %>" class="btn btn-primary btn-lg">수정</a>
+      <a href="./delete.do?cpage=<%= cpage %>&nt_seq=<%= nt_seq %>" class="btn btn-outline-primary btn-lg">삭제</a> --%>
       <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
     </div>
 		</div>

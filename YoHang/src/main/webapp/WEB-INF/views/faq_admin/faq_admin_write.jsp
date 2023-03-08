@@ -4,7 +4,7 @@
 <%
 	//jsp hero parameters
 	String menuName = "게시판 관리";
-	String title = "Notice";
+	String title = "FAQ";
 	
 	// jsp header parameters
 	String home = "/Admin/home.do";
@@ -51,40 +51,16 @@
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
-	<form action="./write_ok.do" method="post" name="nfrm" enctype="multipart/form-data">
+	<form action="./write_ok.do" method="post" name="faqfrm">
       <div class="form-group">
-        <input type="text" class="form-control" name="nt_id" value="${loginAdmin.admin_id}" readonly>     
+        <input type="text" class="form-control" name="faq_subject"  placeholder="제목">     
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="nt_subject"  placeholder="제목">     
+        <textarea class="form-control" name="faq_content" rows="10" placeholder="내용"></textarea>      
       </div>
-      <div class="form-group">
-        <textarea class="form-control" name="nt_content" rows="10" placeholder="내용"></textarea>      
-      </div>		
-      		
-	<tr>
-		<th>파일</th>
-			<td colspan="3">
-			<!-- 파일 업로드 input type=file -->
-			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
-		</td>
-	</tr>
-	
-	<!-- 
-	https://getbootstrap.com/docs/4.6/components/input-group/#custom-file-input
-	
-	<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-	  </div>
-	  <div class="custom-file">
-	    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-	    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-	  </div>
-	</div> -->
 																						
       <div class="form-group text-center mt-5">
-        <input type="button" id="nbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
+        <input type="button" id="faqbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
         <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
       </div>   
 	</form>
@@ -151,27 +127,18 @@
 
 <script type="text/javascript">
 	window.onload = function() {
-		document.getElementById('nbtn').onclick = function() { 
-			if(document.nfrm.nt_subject.value.trim() == '') { 
+		document.getElementById('faqbtn').onclick = function() { 
+			if(document.faqfrm.faq_subject.value.trim() == '') { 
 				alert('제목을 입력하셔야 합니다.');
 				return false;
 			}
-			if(document.nfrm.nt_content.value.trim() == '') { 
+			if(document.faqfrm.faq_content.value.trim() == '') { 
 				alert('내용을 입력하셔야 합니다.');
 				return false;
 			}
 			
-			if( document.nfrm.upload.value.trim() == '' ) {
-				alert( '파일이름을 입력하셔야 합니다.' );
-				return false;
-			}else {
-				// .으로 분리해서 ext의 첫번쨰 
-				const ext = document.nfrm.upload.value.trim().split('.');
-				alert(ext[1]); // 파일 확장자 확인 가능
-			}
-			
 			// 위의 검사가 다 끝나면 submit해서 다음 페이지로 넘어가라는 의미
-			document.nfrm.submit();
+			document.faqfrm.submit();
 		};
 	}
 	
