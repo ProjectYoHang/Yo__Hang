@@ -75,6 +75,11 @@ public class BookDAO {
 		return bookInfos;
 	}
 	
+	// 예약 => 결제완료
+	public void updateStatus(BookInfoTO to) {
+		mapper.updateStatus(to);
+	}
+	
 	// 마이페이지에 보여줄 내 최근예약 3건의 데이터
 	public ArrayList<BookInfoTO> bookInfosMin(BookInfoTO to) {
 		String id = to.getId();

@@ -11,4 +11,5 @@ public class BookInfoTO {
 	private String head_count;
 	private String checkin;
 	private String checkout;
+	private int status;
 }

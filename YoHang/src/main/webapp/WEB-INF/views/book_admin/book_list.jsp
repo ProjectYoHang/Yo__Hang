@@ -48,6 +48,7 @@
 		String checkin = to.getCheckin().substring(0, 10);
 		String checkout = to.getCheckout().substring(0, 10);
 		String date = to.getDate();
+		int status = to.getStatus();
 		
 		html.append("<td>" + seq + "</td>");
 		html.append("<td>" + id + "</td>");	
@@ -56,6 +57,13 @@
 		html.append("<td>" + checkout + "</td>");
 		html.append("<td>" + date + "</td>");
 		html.append("<td><button type='button' onclick='location.href=\"./bookDeleteOk.do?seq=" + seq + "&rooms_seq=" + rooms_seq + "&checkin=" + checkin + "&checkout=" + checkout + "\"' class='btn btn-primary'>예약취소</button></td>");
+		
+		if(status == 1) {
+			html.append("<td><font color='#CC0000'>미결제</font></td>");
+		} else if(status == 2) {
+			html.append("<td>결제완료</td>");
+		}
+		
 		html.append("</tr>");	
 	}
 	
@@ -124,13 +132,14 @@
           <table class="table table-board-list">
             <caption class="sr-only">게시판글</caption>
             <colgroup>
-              <col style="width:10%;">
-              <col style="width:15%;"> 
-              <col style="width:10%;">  
+              <col style="width:5%;">
+              <col style="width:10%;"> 
+              <col style="width:5%;">  
               <col style="width:15%;">  
               <col style="width:15%;">  
               <col style="width:20%;">  
-              <col style="width:25%;">  
+              <col style="width:15%;">  
+              <col style="width:15%;">  
             </colgroup>
             <thead>
               <tr>
@@ -141,6 +150,7 @@
                 <th>체크아웃</th>
                 <th>예약일</th>
                 <th>예약취소</th>
+                <th>예약상태</th>
               </tr>
             </thead>
             <tbody>

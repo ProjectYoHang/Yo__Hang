@@ -22,7 +22,7 @@ public class WebSocketBook {
 	// ArrayList는 Vector와 달리 자체적으로 동기화를 지원하지 않기 때문에 여러 스레드에서 같이 여러번 들어오면 서로가 알고 있는 정보가 일치하지 않게 됨
 	// 따라서, Arraylist에 동기화 기능을 지원하기 위해서 synchronizedList 메서드를 사용해서 모든 클라이언트들이 같은 정보를 받을 수 있게 함
 	// 그래야, a->b, b->a 로 같은 형태의 데이터를 받을 수 있어 한 쪽이 체크했을 때 다른 한쪽도 체크되는 양방향이 가능함
-	// Arraylist 동기화 지원 방법 : List list = Collections.sunchronizedList(new Arraylist());
+	// Arraylist 동기화 지원 방법 : List list = Collections.synchronizedList(new Arraylist());
 	private static List<Session> clients = Collections.synchronizedList(new ArrayList<>());
 	
 	// 웹소켓으로 브라우저가 접속하면 실행되는 메서드

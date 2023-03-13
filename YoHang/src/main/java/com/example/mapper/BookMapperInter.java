@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.model.BookListTO;
 import com.example.model.BookTO;
@@ -29,7 +30,7 @@ public interface BookMapperInter {
 	int bookOk(BookTO to);
 	
 	// 객실이 한개씩 book 테이블에 데이터가 들어가면 하나의 예약의 경우에는 객실번호가 하나로 묶여야하므로 임시테이블 bookInfo 하나 만듬
-	@Insert("insert into bookInfo values (0, #{id}, now(), #{rooms_seq}, #{head_count}, #{checkin}, #{checkout})")
+	@Insert("insert into bookInfo values (0, #{id}, now(), #{rooms_seq}, #{head_count}, #{checkin}, #{checkout}, 1)")
 	int bookInfo(BookInfoTO to);
 	
 	@Select("select book_num from book where m_id=#{m_id} and checkin_date=#{checkin_date} and checkout_date=#{checkout_date} and book_date=#{book_date}")
@@ -46,6 +47,10 @@ public interface BookMapperInter {
 	// 회원별 예약정보
 	@Select("select * from bookInfo where id=#{id} order by seq desc")
 	ArrayList<BookInfoTO> bookInfos(BookInfoTO to);
+	
+	// 결제완료 시 status=2 로 변경
+	@Update("update bookInfo set status=2 where seq=#{seq}")
+	void updateStatus(BookInfoTO to);
 	
 	// 마이페이지 홈에 보여줄 내 최근 예약 3건의 데이터
 	@Select("select * from bookInfo where id=#{id} order by seq desc limit 0, 3")

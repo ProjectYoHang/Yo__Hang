@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -134,6 +136,7 @@ public class RoomController {
 	}
 	
 	// 회원별 예약목록
+	/*
 	@RequestMapping("/mypage/booklist.do")
 	public ModelAndView bookedList(ModelAndView modelAndView, HttpServletRequest request) {
 		BookInfoTO to = new BookInfoTO();
@@ -149,6 +152,49 @@ public class RoomController {
 		
 		modelAndView.setViewName("mypage/book_list");
 		modelAndView.addObject("bookInfos", bookInfos);
+		
+		return modelAndView;
+	}
+	*/
+	
+	////////////
+	@RequestMapping("/mypage/loadBookList.do")
+	public Map<String, Object> bookedList(HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		// 로그인 상태에서 session에 저장된 아이디 가져옴
+		HttpSession session = request.getSession();
+		
+		MembersTO loginMember = (MembersTO)session.getAttribute("loginMember");
+		
+		to.setId(loginMember.getM_id());
+		
+		ArrayList<BookInfoTO> bookInfos = dao.bookInfos(to);
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("bookInfos", bookInfos);
+		
+		return result;
+	}
+	
+	@RequestMapping("/mypage/booklist.do")
+	public ModelAndView bookedList() {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		modelAndView.setViewName("mypage/book_list");
+		return modelAndView;
+	}
+	
+	// 예약 => 결제완료
+	@RequestMapping("/mypage/updateStatus.do")
+	public ModelAndView updateStatus(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		to.setSeq(request.getParameter("seq"));
+		
+		dao.updateStatus(to);
+		
+		modelAndView.setViewName("mypage/book_list");
 		
 		return modelAndView;
 	}
