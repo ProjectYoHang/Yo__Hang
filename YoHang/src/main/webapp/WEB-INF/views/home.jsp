@@ -342,8 +342,8 @@
                      </span>
                    </div>
                    <div class="text text-center">
-                     <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                     <p class="name">Nathan Smith</p>
+                     <p class="mb-4">8시30분경 조식을 먹으러 내려갔는데 테이블은 있고 의자가 없어서 딸과 9시경 다시 오려고 돌아서는데 직원분이 테이블이 있으니 의자를 갖다드릴테니 식사 하시라고 말씀해주시고 의자를 바로 주셔서 편안하게 식사를 마치고 나왔네요!! 직원분께 감사 드립니다.</p>
+                     <p class="name">최향단</p>
                      <span class="position">Guests</span>
                    </div>
                  </div>
@@ -356,8 +356,8 @@
                      </span>
                    </div>
                    <div class="text text-center">
-                     <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                     <p class="name">Nathan Smith</p>
+                     <p class="mb-4">너무너무 좋았어요 가격이 싸서 솔직히 기대 안 했는데 침대에 전기장판, 화장실 비데 까지 생각지도 못한 옵션들이 이가격에 있어서 너무 놀랐어요 사장님도 너무 친절하시구 위치가 조금 먼 거만 빼면 제주도에 오면 다시 묵을 숙소 같아요! 강추드립니다!!</p>
+                     <p class="name">성춘향</p>
                      <span class="position">Guests</span>
                    </div>
                  </div>
@@ -370,8 +370,8 @@
                      </span>
                    </div>
                    <div class="text text-center">
-                     <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                     <p class="name">Nathan Smith</p>
+                     <p class="mb-4">위치도 역 부근이고 마트 바로 건너편에 큰 길가에 있어서 아주 좋았어요. 그리고 직원분이 친절하셨고 체크인도 빠르게 잘 도와주셨어요.</p>
+                     <p class="name">박문수</p>
                      <span class="position">Guests</span>
                    </div>
                  </div>
@@ -384,8 +384,8 @@
                      </span>
                    </div>
                    <div class="text text-center">
-                     <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                     <p class="name">Nathan Smith</p>
+                     <p class="mb-4">공항과 가까운 위치, 가성비숙소, 무난한 룸 컨디션, 청결한편, 조식도 나쁘지 않았습니다. 침대 편안한 편</p>
+                     <p class="name">임꺽정</p>
                      <span class="position">Guests</span>
                    </div>
                  </div>
@@ -398,8 +398,8 @@
                      </span>
                    </div>
                    <div class="text text-center">
-                     <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                     <p class="name">Nathan Smith</p>
+                     <p class="mb-4">조식을 먹으러 내려갔는데 테이블은 있고 의자가 없어서 딸과 9시경 다시 오려고 돌아서는데 직원분이 테이블이 있으니 의자를 갖다드릴테니 식사 하시라고 말씀해주시고 의자를 바로 주셔서 편안하게 식사를 마치고 나왔네요!! 직원분께 감사 드립니다.</p>
+                     <p class="name">이몽룡</p>
                      <span class="position">Guests</span>
                    </div>
                  </div>
@@ -426,7 +426,7 @@
            <a href="blog-single.html" class="block-20" style="background-image: url('../../YoHangFront/build/images/image_1.jpg');">
            </a>
            <div class="text mt-3 d-block">
-             <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+             <h3 class="heading mt-3"><a href="#">사랑하는 가족과 함께 케이크 또는 쿠키를 장식하며 달콤한 추억을 만들어보세요.</a></h3>
              <div class="meta mb-3">
                <div><a href="#">Dec 6, 2018</a></div>
                <div><a href="#">Admin</a></div>
@@ -440,7 +440,7 @@
            <a href="blog-single.html" class="block-20" style="background-image: url('../../YoHangFront/build/images/image_2.jpg');">
            </a>
            <div class="text mt-3">
-             <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+             <h3 class="heading mt-3"><a href="#">수백여 권의 도서와 자연 소재의 원목 장난감으로 가득 채워진 공간에서 보내는 자유로운 놀이 시간</a></h3>
              <div class="meta mb-3">
                <div><a href="#">Dec 6, 2018</a></div>
                <div><a href="#">Admin</a></div>
@@ -454,7 +454,7 @@
            <a href="blog-single.html" class="block-20" style="background-image: url('../../YoHangFront/build/images/image_3.jpg');">
            </a>
            <div class="text mt-3">
-             <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+             <h3 class="heading mt-3"><a href="#">유리돔을 통해 보이는 남산의 전경을 만끽하며 즐기는 수영과 휴식. 길이 25m, 너비 6m의 풀과 함께 건식 사우나와 실내 및 야외 자쿠지를 갖추고 있습니다.</a></h3>
              <div class="meta mb-3">
                <div><a href="#">Dec 6, 2018</a></div>
                <div><a href="#">Admin</a></div>
@@ -468,7 +468,7 @@
            <a href="blog-single.html" class="block-20" style="background-image: url('../../YoHangFront/build/images/image_4.jpg');">
            </a>
            <div class="text mt-3">
-             <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+             <h3 class="heading mt-3"><a href="#">남산과 도심 전경이 그림처럼 펼쳐지는 공간에서 하루 3번 제공되는 다이닝 서비스와 함께하는 특별한 경험.</a></h3>
              <div class="meta mb-3">
                <div><a href="#">Dec 6, 2018</a></div>
                <div><a href="#">Admin</a></div>

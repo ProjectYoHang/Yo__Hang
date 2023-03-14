@@ -33,6 +33,14 @@
 			<version>2.3.0</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		
 		<!-- websocket 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -74,20 +82,18 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		
-		<!-- 외부 톰캣을 사용하기위한 설정  -->
-		<!-- <dependency>
-	      <groupId>org.springframework.boot</groupId>
-	      <artifactId>spring-boot-starter-tomcat</artifactId>
-	      <scope>provided</scope>
-	    </dependency> -->
-		
 		<!--  mail 관련  -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-mail</artifactId>
 		    <version>1.4.3.RELEASE</version>
 		</dependency>
-		
+		<!-- 외부 톰캣을 사용하기위한 설정  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

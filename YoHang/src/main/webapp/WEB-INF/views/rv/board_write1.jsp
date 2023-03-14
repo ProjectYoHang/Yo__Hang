@@ -165,7 +165,7 @@
 			if( document.wfrm.upload.value.trim() != '' ) {
 				
 				const extension = document.wfrm.upload.value.split( '.' ).pop();
-				if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF' ) {
+				if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF'  && extension != 'jpeg' && extension != 'JPEG') {
 					alert( '이미지 파일을 입력하셔야 합니다.' );	
 					return false;
 				}

@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.model.MemberListTO;
+import com.example.model.MembersDAO;
+import com.example.model.MembersTO;
 
 @Controller
 public class MemberController {
@@ -69,6 +73,7 @@ public class MemberController {
 		
 		if ( loginMember != null) { // 가져온 정보가 있다면 세션에 등록?
 			session.setAttribute( "loginMember", loginMember );
+			session.setMaxInactiveInterval(-1);
 			flag = 0;
 		}else {	// 가져온 정보가 없다면..
 			session.setAttribute( "loginMember", null );

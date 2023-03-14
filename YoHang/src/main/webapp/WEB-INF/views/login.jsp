@@ -216,7 +216,7 @@ console.log(Kakao.isInitialized()); // sdk초기화여부판단
 //카카오로그인
 
 function kakaoLogin() {
-    Kakao.Auth.login({
+    Kakao.Auth.loginForm({
       success: function (response) {
         Kakao.API.request({
           url: '/v2/user/me',
@@ -244,7 +244,6 @@ function kakaoLogin() {
       },
     })
   }
-
 </script>
 </body>
 </html>

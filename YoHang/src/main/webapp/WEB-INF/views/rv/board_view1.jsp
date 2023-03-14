@@ -4,6 +4,7 @@
 <%@page import="com.example.model.RvBoardTO"%>
 
 <%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%
 	//jsp hero parameters
 	String menuName = "Board";
@@ -31,7 +32,8 @@
 	String rv_id = to.getRv_id();
 	String rv_date = to.getRv_date();
 	String rv_content = to.getRv_content();
-	String rv_img_name = to.getRv_img_name();
+	//String rv_img_name = to.getRv_img_name();
+	String rv_img_name = to.getRv_img_name()== null ? "../../upload/reviews/noimage.jpeg" : "../../upload/reviews/" + to.getRv_img_name();
 %>
 
 <!DOCTYPE html>
@@ -82,7 +84,7 @@
     <div  style="display:flex; align-item:center; justify-content: space-between;">
    		<div id="bbs_file_wrap"  style="width:40%;">
 			<div>
-				<img src="../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
+				<img src="../../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
 			</div>
 		</div> 
     <div  style="width:50%;" display: flex; align-items: center;>

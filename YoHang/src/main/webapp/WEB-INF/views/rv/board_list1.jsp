@@ -49,7 +49,10 @@
 		String rv_content = rvList.getRv_content();
 		String rv_id = rvList.getRv_id();
 		String rv_date = rvList.getRv_date();
-		String rv_img_name = rvList.getRv_img_name();
+		String rv_img_name = rvList.getRv_img_name()== null ? "../../upload/reviews/noimage.jpeg" : "../../upload/reviews/" + rvList.getRv_img_name();
+		
+		
+		
 		int wgap = rvList.getWgap();
 		
 		if(i % 3 ==0) {
