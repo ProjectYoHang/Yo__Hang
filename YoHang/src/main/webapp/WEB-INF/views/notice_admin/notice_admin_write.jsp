@@ -62,13 +62,17 @@
         <textarea class="form-control" name="nt_content" rows="10" placeholder="내용"></textarea>      
       </div>		
       		
-	<tr>
+<!-- 	<tr>
 		<th>파일</th>
 			<td colspan="3">
-			<!-- 파일 업로드 input type=file -->
+			파일 업로드 input type=file
 			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
 		</td>
-	</tr>
+	</tr> -->
+	
+	  <div class="form-group">
+		<input type="file" name="upload" id="nt_file" value="" class="board_view_input">
+	  </div>
 	
 	<!-- 
 	https://getbootstrap.com/docs/4.6/components/input-group/#custom-file-input

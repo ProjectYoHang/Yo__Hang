@@ -88,7 +88,7 @@
 	  
 	  <!-- navigation -->
         <nav class="w-100">
-          <ul class="pagination justify-content-center">
+          <ul class="pagination justify-content-center pt-5">
           
 <%
 	startPageNum = cpage - (cpage - 1) % recordPerPage;

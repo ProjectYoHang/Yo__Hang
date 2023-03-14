@@ -163,6 +163,7 @@ public class NoticeController {
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
 	}
+	
 	@RequestMapping("/Admin/notice/modify.do")
 	public ModelAndView modify(HttpServletRequest request, ModelAndView modelAndView) {
 		NoticeBoardTO to = new NoticeBoardTO();
@@ -188,26 +189,36 @@ public class NoticeController {
 		
 		//to.setNt_file_name(request.getParameter("nt_file_name"));
 		//to.setNt_file_size(Integer.parseInt(request.getParameter("nt_file_size")));
-		
+		System.out.println( "11" );
 		try {
+			System.out.println( "12" );
 			if( !upload.isEmpty() ) {
+				System.out.println( "13" );
 				to.setNt_file_name( upload.getOriginalFilename() );	
 				to.setNt_file_size( upload.getSize() );
 
 				upload.transferTo( new File( upload.getOriginalFilename() ) );
 			}
 		} catch (IllegalStateException e) {
+			System.out.println( "14" );
 			e.printStackTrace();
+			System.out.println( "15" );
 		} catch( IOException e ) {
+			System.out.println( "16" );
 			e.printStackTrace();			
+			System.out.println( "17" );
 		}
 		
 		int flag = dao.noticeModifyOk(to);
+		
+		System.out.println( "18" );
 		
 		modelAndView.setViewName("notice_admin/notice_admin_modify_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("nt_seq", request.getParameter("nt_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
+		
+		System.out.println( "19" );
 		return modelAndView;
 		
 	}
