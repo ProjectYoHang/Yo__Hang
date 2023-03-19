@@ -52,6 +52,14 @@ public interface BookMapperInter {
 	@Update("update bookInfo set status=2 where seq=#{seq}")
 	void updateStatus(BookInfoTO to);
 	
+	// 환불신청 버튼 클릭시 status=3로 변경
+	@Update("update bookInfo set status=3 where seq=#{seq}")
+	void refundReq(BookInfoTO to);
+	
+	// 관리자측에서 환불완료 시 status=4로 변경
+	@Update("update bookInfo set status=4 where seq=#{seq}")
+	void refundOk(BookInfoTO to);
+	
 	// 마이페이지 홈에 보여줄 내 최근 예약 3건의 데이터
 	@Select("select * from bookInfo where id=#{id} order by seq desc limit 0, 3")
 	ArrayList<BookInfoTO> bookInfosMin(BookInfoTO to);

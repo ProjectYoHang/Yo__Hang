@@ -199,6 +199,52 @@ public class RoomController {
 		return modelAndView;
 	}
 	
+	// 환불 신청
+	@RequestMapping("/mypage/refundReq.do")
+	public ModelAndView refundReq(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		to.setSeq(request.getParameter("seq"));
+		
+		dao.refundReq(to);
+		
+		modelAndView.setViewName("mypage/book_list");
+		
+		return modelAndView;	
+	}
+	
+	// 관리자가 환불신청 확인 후 환불완료
+	// bookInfo 테이블 status 컬럼값을 4로 변경 & book 테이블에서 예약된 객실 데이터 삭제
+	@RequestMapping("/Admin/book/refundOk.do")
+	public ModelAndView refundOk(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		to.setSeq(request.getParameter("seq"));
+		
+		dao.refundOk(to);
+		
+		String rooms_seq = request.getParameter("rooms_seq");
+		
+		String[] room_seq = rooms_seq.split(",");
+		
+		int flag = 1;
+		
+		for(int i = 0; i<room_seq.length; i++) {
+			BookTO bto = new BookTO();
+			
+			bto.setCheckin_date(request.getParameter("checkin"));
+			bto.setCheckout_date(request.getParameter("checkout"));
+			bto.setRoom_seq(room_seq[i]);
+			
+			flag = dao.bookDeleteOk(bto);
+		}
+		
+		modelAndView.setViewName("book_admin/refundOk");
+		modelAndView.addObject("flag", flag);
+		
+		return modelAndView;
+	}
+	
 	// 회원측의 예약취소
 	@RequestMapping("/mypage/bookDeleteOk.do")
 	public ModelAndView bookDeleteOk1(ModelAndView modelAndView, HttpServletRequest request) {
@@ -251,7 +297,7 @@ public class RoomController {
 		return modelAndView;
 	}
 	
-	// 예약 취소
+	// 관리자측 예약 취소
 	@RequestMapping("/Admin/book/bookDeleteOk.do")
 	public ModelAndView bookDeleteOk2(ModelAndView modelAndView, HttpServletRequest request) {
 		String rooms_seq = request.getParameter("rooms_seq");

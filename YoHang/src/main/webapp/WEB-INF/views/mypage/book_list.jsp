@@ -262,12 +262,22 @@ const bookList = function() {
 				html += '<td>' + checkout + '</td>';
 				html += '<td>' + item.date + '</td>';
 				html += '<td id="amount">' + amount + '</td>';
-				html += '<td><button type="button" onclick="location.href=\'./bookDeleteOk.do?seq=' + item.seq + '&rooms_seq=' + item.rooms_seq + '&checkin=' + checkin + '&checkout=' + checkout + '\'" class="btn btn-secondary">예약취소</button></td>';
-			
+				
+				
+				if(item.status == 1) {
+					html += '<td><button type="button" onclick="location.href=\'./bookDeleteOk.do?seq=' + item.seq + '&rooms_seq=' + item.rooms_seq + '&checkin=' + checkin + '&checkout=' + checkout + '\'" class="btn btn-secondary">예약취소</button></td>';
+				} else {
+					html += "<td></td>";
+				}
+				
 				if(item.status == 1) {
 					html += '<td><button type="button" class="btn btn-primary" id="pay' + item.seq + '" onclick="requestPay(' + item.seq + ')">결제하기</button></td>';
 				} else if(item.status == 2) {
-					html += '<td><font size="3">결제완료</font></td>';
+					html += '<td><button type="button" class="btn btn-warning" id="refund' + item.seq + '" onclick="refundReq(' + item.seq + ')">환불신청</button></td>';
+				} else if(item.status == 3) {
+					html += '<td><font size="3">환불신청 중</font></td>';
+				} else if(item.status == 4) {
+					html += '<td><font size="3">환불완료</font></td>';
 				}
 			
 				html += '</tr>';
@@ -280,6 +290,27 @@ const bookList = function() {
 			alert('에러 : ' + err.status);
 		}
 	})
+}
+
+function refundReq(seq) {
+	
+	let bookSeq = $('#refund' + seq).parent().siblings('#bookSeq').text();
+	
+	 $.ajax({
+     	url : "/mypage/refundReq.do",
+     	method : "post",
+     	data : {
+     		seq : bookSeq
+     	},
+     	success : function(data) {
+     		alert('환불신청 성공');
+     		
+     		bookList();
+     	},
+     	error : function(err) {
+     		console.log('에러 : ' + err.status);
+     	}
+     })
 }
 
 
@@ -296,7 +327,6 @@ function requestPay(seq) {
 	let bookSeq = $('#pay' + seq).parent().siblings('#bookSeq').text();
 	
     IMP.request_pay({
-        //pg : 'kakaopay.TC0ONETIME',
         pg : 'html5_inicis.INIpayTest',
         pay_method : 'card',
         merchant_uid: room_type + rooms_seq + new Date().getTime(),
@@ -305,8 +335,6 @@ function requestPay(seq) {
         buyer_email : '${loginMember.m_email}',
         buyer_name : '${loginMember.m_name}',
         buyer_tel : '${loginMember.m_phone}',
-        //buyer_addr : '서울특별시 강남구 삼성동',
-        //buyer_postcode : '123-456'
     }, function (rsp) { // callback
         if (rsp.success) {
             console.log(rsp);

@@ -56,12 +56,22 @@
 		html.append("<td>" + checkin + "</td>");
 		html.append("<td>" + checkout + "</td>");
 		html.append("<td>" + date + "</td>");
-		html.append("<td><button type='button' onclick='location.href=\"./bookDeleteOk.do?seq=" + seq + "&rooms_seq=" + rooms_seq + "&checkin=" + checkin + "&checkout=" + checkout + "\"' class='btn btn-primary'>예약취소</button></td>");
+		
+		if(status==1) {
+			html.append("<td><button type='button' onclick='location.href=\"./bookDeleteOk.do?seq=" + seq + "&rooms_seq=" + rooms_seq + "&checkin=" + checkin + "&checkout=" + checkout + "\"' class='btn btn-primary'>예약취소</button></td>");
+		} else {
+			html.append("<td></td>");
+		}
+		
 		
 		if(status == 1) {
 			html.append("<td><font color='#CC0000'>미결제</font></td>");
 		} else if(status == 2) {
 			html.append("<td>결제완료</td>");
+		} else if(status == 3) {
+			html.append("<td><button type='button' class='btn btn-warning' onclick='location.href=\"./refundOk.do?seq=" + seq + "&rooms_seq=" + rooms_seq + "&checkin=" + checkin + "&checkout=" + checkout + "\"'>환불완료</button></td>");
+		} else if(status == 4) {
+			html.append("<td>환불완료</td>");
 		}
 		
 		html.append("</tr>");	

@@ -80,6 +80,16 @@ public class BookDAO {
 		mapper.updateStatus(to);
 	}
 	
+	// 사용자가 환불 신청 시
+	public void refundReq(BookInfoTO to) {
+		mapper.refundReq(to);
+	}
+	
+	// 관리자가 환불신청을 확인해서 환불완료 시
+	public void refundOk(BookInfoTO to) {
+		mapper.refundOk(to);
+	}
+	
 	// 마이페이지에 보여줄 내 최근예약 3건의 데이터
 	public ArrayList<BookInfoTO> bookInfosMin(BookInfoTO to) {
 		String id = to.getId();
