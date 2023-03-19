@@ -34,7 +34,6 @@ public class RoomController {
 	private RvBoardDAO rdao;
 	
 	@RequestMapping("/room/standard")
-	// 체크인/체크아웃 데이터 디폴트값 넣어놔야 할 듯 : home에서 날짜 안 정하면 에러발생하겠지..
 	public ModelAndView book1(HttpServletRequest request, ModelAndView modelAndView) {
 		BookTO to = new BookTO();
 		to.setCheckin_date(request.getParameter("checkin_date"));
@@ -44,9 +43,6 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_standard");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
-		//modelAndView.addObject("head_count", request.getParameter("head_count"));
 		
 		return modelAndView;
 	}
@@ -61,8 +57,6 @@ public class RoomController {
 		
 		modelAndView.setViewName("room/room_suite");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
@@ -77,8 +71,6 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_deluxe");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
