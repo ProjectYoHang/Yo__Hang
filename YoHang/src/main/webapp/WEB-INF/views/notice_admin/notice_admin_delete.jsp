@@ -1,37 +1,30 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="com.example.model.RvBoardTO"%>
+<%@page import="com.example.model.NoticeBoardTO"%>
 
-<%@ page import="java.util.ArrayList" %>
 <%
-	//jsp hero parameters
-	String menuName = "Board";
-	String title = "Review";
-
+	// jsp hero parameters
+	String menuName = "게시판 관리";
+	String title = "Notice";
+	
 	// jsp header parameters
-	String home = "/home.do";
-	String aboutus = "/aboutus.do";
-	String findus = "/findus.do";
-	String qna = "/qna/list.do";
-	String faq = "/faq/list.do";
-	String notice = "/notice/list.do";
-	String rv = "/rv/list.do";
-	String login = "/login.do";
-	String logout = "/logout.do";
-	String mypage = "/mypage";
-	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
-	
-    //int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
-    
-	String cpage = (String)request.getAttribute("cpage");
-	String rv_seq = (String)request.getAttribute("rv_seq");
-	
-	String rv_subject = to.getRv_subject();
-	String rv_id = to.getRv_id();
-	String rv_date = to.getRv_date();
-	String rv_content = to.getRv_content();
-	String rv_img_name = to.getRv_img_name();
+	String home = "/Admin/home.do";
+	String member = "/Admin/member/list.do";
+	String book = "/Admin/book/list.do";
+	String room = "/Admin/room/list.do";
+	String qna = "/Admin/qna/list.do";
+	String faq = "/Admin/faq/list.do";
+	String notice = "/Admin/notice/list.do";
+	String logout = "/Admin/logout.do";
+
+	NoticeBoardTO to = (NoticeBoardTO)request.getAttribute("to");
+
+	/* String cpage = (String)request.getAttribute("cpage"); */
+	int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
+	String nt_seq = (String)request.getAttribute("nt_seq");
+	String nt_subject = to.getNt_subject();
+	String nt_id = to.getNt_id();
 %>
 
 <!DOCTYPE html>
@@ -39,19 +32,17 @@
 <jsp:include page="../common/head.jsp" flush="false"/>
 
 <body>
-<!--
+<!-- 
 // header --------------------------------------->
-<jsp:include page="../common/header.jsp" flush="false">
+<jsp:include page="../common/header_admin.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
-	<jsp:param value="<%= aboutus %>" name="aboutus"/>
-	<jsp:param value="<%= findus %>" name="findus"/>
+	<jsp:param value="<%= member %>" name="member"/>
+	<jsp:param value="<%= book %>" name="book"/>
+	<jsp:param value="<%= room %>" name="room"/>
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
-	<jsp:param value="<%= rv %>" name="rv"/>
-	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
-	<jsp:param value="<%= mypage %>" name="mypage"/>
 </jsp:include>
 
 <!-- hero-wrap -->
@@ -65,43 +56,25 @@
 // contents --------------------------------------->
 
 <!-- content -->
-<section class="ftco-section">
+<section class="ftco-section bg-light">
   <div class="container">
-    <h3 class="board-view-title"><%= rv_subject %> </h3>
-    <ul class="board-info-group">
-      <li class="d-md-inline board-view-writer">
-        <strong>작성자</strong>
-        <span><%= rv_id %></span>
-      </li>
-      <li class="board-view-writer">
-        <strong>작성일</strong>
-        <span><%= rv_date %></span>
-      </li>
-    </ul>
-
-    <div  style="display:flex; align-item:center; justify-content: space-between;">
-   		<div id="bbs_file_wrap"  style="width:40%;">
-			<div>
-				<img src="../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
-			</div>
-		</div> 
-    <div  style="width:50%;" display: flex; align-items: center;>
-      <%= rv_content %>
-    </div>
-    </div>
-
-
-    <div class="text-center mt-4 pt-5 border-top">
-      <a href="./modify.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-primary btn-lg">수정</a>
-      <a href="./delete.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
-      <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
-    </div>
-		</div>
-		<!--//게시판-->
-	</div>
-<!-- 하단 디자인 -->
-</div>
+    <form action="./delete_ok.do" class="bg-white p-5" name="dfrm">
+    	<input type="hidden" name="nt_seq" value="<%= nt_seq %>" />
+    	<div class="form-group">
+        	<input type="text" class="form-control" name="nt_id" title="Title" value="<%= nt_id %>" readonly>
+    	</div>
+    	<div class="form-group">
+        	<input type="text" class="form-control" name="nt_subject" title="Title" value="<%= nt_subject %>" readonly>
+      	</div>
+      	<div class="form-group text-center mt-5">
+       		<input type="button" id="ndbtn" value="삭제" class="btn btn-primary py-3 px-5">
+       		<a href="./view.do?cpage=<%= cpage %>&nt_seq=<%= nt_seq %>" class="btn btn-secondary py-3 px-5">보기</a>
+        	<a href="./list.do?cpage=<%= cpage %>" class="btn btn-secondary py-3 px-5">목록</a>
+      	</div>
+	</form>
+  </div>
 </section>
+
 <!--
 // instagram --------------------------------------->
 <section class="instagram pt-5">
@@ -160,6 +133,14 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
+<script type = "text/javascript">
+	window.onload = function() {
+		document.getElementById('ndbtn').onclick = function() {
+			alert('공지사항이 삭제되었습니다.');
+			document.dfrm.submit();
+		}
+	}
+</script>
 
 </body>
 </html>

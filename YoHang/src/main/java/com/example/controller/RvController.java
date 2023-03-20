@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ public class RvController {
 		
 		Map<String, Object> map = dao.rvList(listTo);
 		
-		modelAndView.setViewName("/rv/board_list1");
+		modelAndView.setViewName("/rv/rv_list");
 		
 		modelAndView.addObject("rvLists", map.get("rvLists"));
 		modelAndView.addObject("cpage", map.get("cpage"));
@@ -60,7 +61,7 @@ public class RvController {
 
 		to = dao.rvView(to);
 
-		modelAndView.setViewName("/rv/board_view1");
+		modelAndView.setViewName("/rv/rv_view");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
@@ -69,29 +70,38 @@ public class RvController {
 
 	@RequestMapping("/rv/write.do")
 	public ModelAndView write(HttpServletRequest request, ModelAndView modelAndView) {
-		modelAndView.setViewName("/rv/board_write1");
+		modelAndView.setViewName("/rv/rv_write");
 		return modelAndView;
 
 	}
 
 	@RequestMapping("/rv/write_ok.do")
 	public ModelAndView write_ok(MultipartFile upload, HttpServletRequest request, ModelAndView modelAndView) {
-
+		
+		
 		RvBoardTO to = new RvBoardTO();
 		to.setRv_id(request.getParameter("rv_id"));
 		to.setRv_subject(request.getParameter("rv_subject"));
 		to.setRv_content(request.getParameter("rv_content"));
-		to.setRv_room_seq( Integer.parseInt(request.getParameter("rv_room_seq")));
-		to.setRv_book_num(Integer.parseInt(request.getParameter("rv_book_num")));
+		//to.setRv_room_seq( Integer.parseInt(request.getParameter("rv_room_seq")));
+		//to.setRv_book_num(Integer.parseInt(request.getParameter("rv_book_num")));
 		to.setRv_stars(Integer.parseInt(request.getParameter("rv_stars")));
 		to.setRv_like(Integer.parseInt(request.getParameter("rv_like")));
 
+		UUID uuid = UUID.randomUUID();
+
 		try {
 			if( !upload.isEmpty() ) {
-				to.setRv_img_name( upload.getOriginalFilename() );	
+				String extention = upload.getOriginalFilename().substring(upload.getOriginalFilename().indexOf("."));		
+				//String filename = upload.getOriginalFilename().replace("PNG", "");
+				String filename = upload.getOriginalFilename().substring(0, upload.getOriginalFilename().indexOf("."));
+				//to.setRv_img_name( upload.getOriginalFilename() + uuid.toString() + extention);
+				to.setRv_img_name( filename + uuid.toString() + extention);
+				
 				to.setRv_img_size( upload.getSize() );
-
-				upload.transferTo( new File( upload.getOriginalFilename() ) );
+				//upload.transferTo( new File( upload.getOriginalFilename() ) );
+				upload.transferTo( new File( to.getRv_img_name()) );
+				
 			}
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -101,7 +111,7 @@ public class RvController {
 
 		int flag = dao.rvWriteOk( to );
 
-		modelAndView.setViewName("/rv/board_write1_ok");
+		modelAndView.setViewName("/rv/rv_write_ok");
 		modelAndView.addObject("flag", flag);
 		return modelAndView;
 
@@ -115,7 +125,7 @@ public class RvController {
 		
 		to = dao.rvDelete(to);
 		
-		modelAndView.setViewName("/rv/board_delete1");
+		modelAndView.setViewName("/rv/rv_delete");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
@@ -130,7 +140,7 @@ public class RvController {
 		
 		int flag = dao.rvDeleteOk(to);
 		
-		modelAndView.setViewName("/rv/board_delete1_ok");
+		modelAndView.setViewName("/rv/rv_delete_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
 		return modelAndView;
@@ -143,7 +153,7 @@ public class RvController {
 		
 		to = dao.rvModify(to);
 		
-		modelAndView.setViewName("/rv/board_modify1");
+		modelAndView.setViewName("/rv/rv_modify");
 		modelAndView.addObject("to", to);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
@@ -162,12 +172,20 @@ public class RvController {
 		//to.setRv_img_name(request.getParameter("rv_img_name"));
 		//to.setRv_img_size(Integer.parseInt(request.getParameter("rv_img_size")));
 		
+		UUID uuid = UUID.randomUUID();
+		
 		try {
 			if( !upload.isEmpty() ) {
-				to.setRv_img_name( upload.getOriginalFilename() );	
+				String extention = upload.getOriginalFilename().substring(upload.getOriginalFilename().indexOf("."));		
+				//String filename = upload.getOriginalFilename().replace("PNG", "");
+				String filename = upload.getOriginalFilename().substring(0, upload.getOriginalFilename().indexOf("."));
+				//to.setRv_img_name( upload.getOriginalFilename() + uuid.toString() + extention);
+				to.setRv_img_name( filename + uuid.toString() + extention);
+				
 				to.setRv_img_size( upload.getSize() );
-
-				upload.transferTo( new File( upload.getOriginalFilename() ) );
+				//upload.transferTo( new File( upload.getOriginalFilename() ) );
+				upload.transferTo( new File( to.getRv_img_name()) );
+				
 			}
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -177,7 +195,7 @@ public class RvController {
 		
 		int flag = dao.rvModifyOk(to);
 		
-		modelAndView.setViewName("/rv/board_modify1_ok");
+		modelAndView.setViewName("/rv/rv_modify_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("rv_seq", request.getParameter("rv_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));

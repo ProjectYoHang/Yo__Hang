@@ -1,15 +1,15 @@
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@page import="com.example.model.RvBoardTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 
-<%@page import="java.util.ArrayList"%>
-
+<%@ page import="java.util.ArrayList" %>
 
 <%
 	//jsp hero parameters
-	String menuName = "마이페이지";
-	String title = "마이페이지";
-	
+	String menuName = "Board";
+	String title = "Review";
+
 	// jsp header parameters
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
@@ -17,45 +17,33 @@
 	String qna = "/qna/list.do";
 	String faq = "/faq/list.do";
 	String notice = "/notice/list.do";
-	String rv ="/rv/list.do";
+	String rv = "/rv/list.do";
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage";
+	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
+	
+    //int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
+    
+	String cpage = (String)request.getAttribute("cpage");
+	String rv_seq = (String)request.getAttribute("rv_seq");
+	
+	String rv_subject = to.getRv_subject();
+	String rv_id = to.getRv_id();
+	String rv_date = to.getRv_date();
+	String rv_content = to.getRv_content();
+	//String rv_img_name = to.getRv_img_name();
+	String rv_img_name = to.getRv_img_name()== null ? "../../upload/reviews/noimage.jpeg" : "../../upload/reviews/" + to.getRv_img_name();
+	
+
 %>
-
-<% 
-	
-	ArrayList<RvBoardTO> rvInfos = (ArrayList<RvBoardTO>)request.getAttribute("rvInfos");
-	int totalRecord = rvInfos.size();
-	
-	StringBuilder html = new StringBuilder();
-	
-	for(RvBoardTO to : rvInfos) {
-		String rv_seq = to.getRv_seq();
-		String rv_id = to.getRv_id();
-		String rv_subject = to.getRv_subject();
-		String rv_date = to.getRv_date();
-		
-		html.append("<tr>");
-		html.append("<td>" + rv_seq + "</td>");
-		html.append("<td>" + rv_id + "</td>");	
-		html.append("<td>" + rv_subject + "</td>");
-		html.append("<td>" + rv_date + "</td>");
-		html.append("<td><button type='button' onclick='location.href=\"/rv/view.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰확인</button></td>");
-		html.append("<td><button type='button' onclick='location.href=\"./rvDeleteOk.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰삭제</button></td>");
-		html.append("</tr>");	
-	}
-	
-
-	
-%>    
 
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
 
 <body>
-<!-- 
+<!--
 // header --------------------------------------->
 <jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
@@ -77,66 +65,64 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
+<!--
+// contents --------------------------------------->
+
 <!-- content -->
 <section class="ftco-section">
   <div class="container">
-  	<div class="col heading-section text-center mb-5 pb-5">
-      <h2>내 리뷰</h2>
+    <h3 class="board-view-title"><%= rv_subject %> </h3>
+    <ul class="board-info-group">
+      <li class="d-md-inline board-view-writer">
+        <strong>작성자</strong>
+        <span><%= rv_id %></span>
+      </li>
+      <li class="board-view-writer">
+        <strong>작성일</strong>
+        <span><%= rv_date %></span>
+      </li>
+    </ul>
+
+    <div  style="display:flex; align-item:center; justify-content: space-between;">
+   		<div id="bbs_file_wrap"  style="width:40%;">
+				<div>
+					<c:if test="${rv_img_name != NULL }">
+            			<img src="../../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
+            		</c:if>
+            		<c:if test="${rv_img_name == NULL }">
+            			<img src="" width="100%" onerror="" /><br />
+            		</c:if>	
+				</div>
+	<!--
+				<c:if test="${rv_img_name != null }">
+            		<img src="../../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
+            	</c:if>
+            	<c:if test="${rv_img_name == null }">
+            	</c:if>	
+	
+	<img src="../upload/reviews/<%= rv_img_name %>" width="150%"  onerror="" /><br />
+	-->
+		
+		</div> 
+    <div  style="width:25%;" display: flex; align-items: center;>
+		</div> 
+    <div  style="width:50%;" display: flex; align-items: center;>
+      <%= rv_content %>
     </div>
-    <div class="row toolbar-board-group">
-      <div class="col-md-6 d-flex align-items-center board-page-info">
-        <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
-      </div>
-      <div class="col-md-6 board-search-box">
-        <div class="form-row">
-        </div>
-      </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <div class="table-responsive">
-          <table class="table table-board-list">
-            <caption class="sr-only">게시판글</caption>
-            <colgroup>
-              <col style="width:25%;"> 
-              <col style="width:25%;">  
-              <col style="width:25%;">  
-              <col style="width:25%;">  
-            </colgroup>
-            <thead>
-              <tr>
-                <th>글 번호</th>
-                <th class="text-center">글쓴이</th>
-                <th>제목</th>
-                <th>날짜</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
 
-<%= html.toString() %>
-             
-            </tbody>
-          </table>
-        </div>
-
-        <!-- navigation -->
-        <nav class="w-100">
-          <ul class="pagination justify-content-center">
-          
-				
-
-			</ul>
-        </nav>
-
-      </div>
+    <div class="text-center mt-4 pt-5 border-top">
+      <a href="./modify.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-primary btn-lg">수정</a>
+      <a href="./delete.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
+      <a href="./list.do?cpage="1" class="btn btn-primary btn-lg">목록</a>
     </div>
-  </div>
+		</div>
+		<!--//게시판-->
+	</div>
+<!-- 하단 디자인 -->
+</div>
 </section>
-
 <!--
 // instagram --------------------------------------->
 <section class="instagram pt-5">
@@ -186,7 +172,7 @@
   </div>
 </section>
 
-<!-- 
+<!--
 // footer --------------------------------------->
 <jsp:include page="../common/footer.jsp" flush="false"/>
 
@@ -195,5 +181,8 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
+
 </body>
 </html>
+
+

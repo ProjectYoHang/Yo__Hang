@@ -1,6 +1,9 @@
 package com.example.model;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +16,7 @@ import com.example.mapper.RvMapperinter;
 @Repository
 public class RvBoardDAO {
 
-	private String uploadPath = "C:/Users/user/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
+	private String uploadPath = "C:/Users/USER/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
 	
 	@Autowired
 	private RvMapperinter mapper;
@@ -24,7 +27,23 @@ public class RvBoardDAO {
 
 		int flag = 1;
 
+		
+		
+		/////
+		
+		
+		BookTO bto = new BookTO();
+		bto.setM_id(to.getRv_id());
+		System.out.println(bto.getM_id());
+		bto = mapper.bookInfo(bto);
+		
+		
+		/////
+		to.setRv_book_num( Integer.parseInt(bto.getBook_num()));
+		to.setRv_room_seq( Integer.parseInt(bto.getRoom_seq()));
+		
 		int result = mapper.rvWriteOk(to);
+		
 		if(result == 1 ) {
 			flag = 0;
 		}
@@ -89,6 +108,8 @@ public class RvBoardDAO {
 		
 		String oldFilename = mapper.rvImgName(to);
 		
+		System.out.println(oldFilename);
+		
 		int flag = 2;
 		
 		int result = mapper.rvDeleteOk(to);
@@ -98,8 +119,14 @@ public class RvBoardDAO {
 		} else if(result == 1) {
 			flag = 0;
 			
-			File file = new File(uploadPath, oldFilename);
-			file.delete();
+			try {
+				Path file = Paths.get(uploadPath + "/" + oldFilename);
+				
+				Files.deleteIfExists(file);
+			} catch(Exception e) {
+				System.out.println("[에러] : " + e.getMessage());
+			}
+			
 		}
 		
 		return flag;
@@ -214,11 +241,19 @@ public class RvBoardDAO {
 		return rvInfo;
 	}	
 	public int reviewDelete(RvBoardTO to) {
+		
+		String oldFilename = mapper.rvImgName(to);
+		
 		int flag = 1;
 		
 		int result = mapper.reviewDeleteOk(to);
 		if(result == 1) {
 			flag = 0;
+			
+			if(oldFilename != "") {
+				File file = new File(uploadPath, oldFilename);
+				file.delete();
+			}
 		}
 		
 		return flag;

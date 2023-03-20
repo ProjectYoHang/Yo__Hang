@@ -54,7 +54,7 @@
 		
 		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
 			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
+			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		} else {
 			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
 			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
@@ -271,6 +271,16 @@ $(document).ready(function() {
 		} else if(${loginMember != null}) {
 			if(checked == 0) {
 				alert('객실을 선택해주세요.');
+				return false;
+			}
+			
+			if(<%= checkin_date %> == null) {
+				alert('홈에서 체크인 날짜를 선택해주세요.');
+				location.href='/home.do';
+				return false;
+			} else if(<%= checkout_date %> == null) {
+				alert('홈에서 체크아웃 날짜를 선택해주세요.');
+				location.href='/home.do';
 				return false;
 			}
 			

@@ -59,7 +59,7 @@
 		// 반드시 값에 해당하는 부분이 final / static 으로 선언되어있어야 하므로 위에 선언해놓음
 		if(IntStream.of(bookedRoomNum).anyMatch(x -> x == i)) {
 			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + " disabled>");
-			html.append("<label class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
+			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
 		} else {
 			html.append("<input style='width:17px;height:17px;' class='form-check-input' type='checkbox' name='room_seq' id='id"+ i + "' value=" + i + ">");
 			html.append("<label style='width:20px' class='form-check-label' for='inlineCheckbox1'><font size='3'>" + i + "</font></label>");
@@ -284,9 +284,6 @@ $(document).ready(function() {
 				return false;
 			}
 			
-			//alert('alert');
-			
-		
 			if(<%= checkin_date %> == null) {
 				alert('홈에서 체크인 날짜를 선택해주세요.');
 				location.href='/home.do';

@@ -1,15 +1,15 @@
-<%@page import="com.example.model.RvBoardTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@page import="java.util.ArrayList"%>
+<%@page import="com.example.model.NoticeBoardTO"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.ArrayList" %>
 
-
-<%
+<%	
 	//jsp hero parameters
-	String menuName = "마이페이지";
-	String title = "마이페이지";
-	
+	String menuName = "Board";
+	String title = "Notice";
+
 	// jsp header parameters
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
@@ -21,41 +21,44 @@
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage";
-%>
 
-<% 
+	ArrayList<NoticeBoardTO> noticeLists = (ArrayList<NoticeBoardTO>)request.getAttribute("noticeLists");
 	
-	ArrayList<RvBoardTO> rvInfos = (ArrayList<RvBoardTO>)request.getAttribute("rvInfos");
-	int totalRecord = rvInfos.size();
+	int totalRecord = (Integer)request.getAttribute("totalRecord");
+	int cpage = (Integer)request.getAttribute("cpage");
+	int lastPage = (Integer)request.getAttribute("lastPage");
+	int startPageNum = (Integer)request.getAttribute("startPageNum");
+	int lastPageNum = (Integer)request.getAttribute("lastPageNum");
+	int recordPerPage = (Integer)request.getAttribute("recordPerPage");
+	int totalPage = ((totalRecord - 1) / recordPerPage) + 1;
 	
-	StringBuilder html = new StringBuilder();
+	StringBuilder sbHtml = new StringBuilder();
 	
-	for(RvBoardTO to : rvInfos) {
-		String rv_seq = to.getRv_seq();
-		String rv_id = to.getRv_id();
-		String rv_subject = to.getRv_subject();
-		String rv_date = to.getRv_date();
+	for(NoticeBoardTO to : noticeLists) {
+		String nt_seq = to.getNt_seq();
+		String nt_subject = to.getNt_subject();
+		String nt_id = to.getNt_id();
+		String nt_content = to.getNt_content();
+		String nt_date = to.getNt_date();
+		int nt_hit = to.getNt_hit();
+		String nt_file_name = to.getNt_file_name();
+		int nt_wgap = to.getNt_wgap();
 		
-		html.append("<tr>");
-		html.append("<td>" + rv_seq + "</td>");
-		html.append("<td>" + rv_id + "</td>");	
-		html.append("<td>" + rv_subject + "</td>");
-		html.append("<td>" + rv_date + "</td>");
-		html.append("<td><button type='button' onclick='location.href=\"/rv/view.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰확인</button></td>");
-		html.append("<td><button type='button' onclick='location.href=\"./rvDeleteOk.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰삭제</button></td>");
-		html.append("</tr>");	
+		sbHtml.append("<tr>");	
+		sbHtml.append("<td>" + nt_seq + "</td>"); 
+		sbHtml.append("<td class='board-list-title'><a href='./view.do?cpage=" + cpage + "&nt_seq=" + nt_seq + "'>" + nt_subject + "</a></td>");	
+		sbHtml.append("<td>" + nt_date + "</td>");	
+		sbHtml.append("<td>" + nt_id + "</td>");	
+		sbHtml.append("<td>" + nt_hit + "</td>");
+		sbHtml.append("</tr>");	
 	}
-	
-
-	
-%>    
+%>
 
 <!DOCTYPE html>
 <html lang="ko">
 <jsp:include page="../common/head.jsp" flush="false"/>
-
 <body>
-<!-- 
+<!--
 // header --------------------------------------->
 <jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
@@ -77,18 +80,29 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
-<!-- content -->
+<!--
+// contents --------------------------------------->
 <section class="ftco-section">
   <div class="container">
-  	<div class="col heading-section text-center mb-5 pb-5">
-      <h2>내 리뷰</h2>
-    </div>
     <div class="row toolbar-board-group">
       <div class="col-md-6 d-flex align-items-center board-page-info">
         <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
+        <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span>
       </div>
       <div class="col-md-6 board-search-box">
         <div class="form-row">
+          <div class="col-4">
+            <select class="form-control">
+              <option>제목</option>
+              <option>내용</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <input type="text" class="form-control">
+          </div>
+          <div class="col-2">
+            <input type="submit" class="btn btn-primary btn-lg" value="검색">
+          </div>
         </div>
       </div>
     </div>
@@ -99,25 +113,24 @@
           <table class="table table-board-list">
             <caption class="sr-only">게시판글</caption>
             <colgroup>
-              <col style="width:25%;"> 
-              <col style="width:25%;">  
-              <col style="width:25%;">  
-              <col style="width:25%;">  
+              <col style="width:5%;">
+              <col style="width:55%;"> 
+              <col style="width:15%;">  
+              <col style="width:15%;">  
+              <col style="width:10%;">  
             </colgroup>
             <thead>
               <tr>
-                <th>글 번호</th>
-                <th class="text-center">글쓴이</th>
-                <th>제목</th>
-                <th>날짜</th>
-                <th></th>
-                <th></th>
+                <th>번호</th>
+                <th class="text-center">제목</th>
+                <th>작성일</th>
+                <th>작성자</th>
+                <th>조회수</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
 
-<%= html.toString() %>
+<%= sbHtml.toString() %>
              
             </tbody>
           </table>
@@ -127,11 +140,62 @@
         <nav class="w-100">
           <ul class="pagination justify-content-center">
           
-				
+<%
+	startPageNum = cpage - (cpage - 1) % recordPerPage;
+	lastPageNum = cpage - (cpage - 1) % recordPerPage + recordPerPage - 1;
+	if(lastPageNum >= totalPage) {
+		lastPageNum = totalPage;
+	}
+
+	// 왼쪽 겹꺽쇄
+	if(startPageNum == 1) {
+		out.println("<li class='page-item disabled first'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item first'><a class='page-link' href='./list.do?cpage=" + (startPageNum - recordPerPage ) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	}
+	
+	// 하단의 왼쪽 꺽쇄 클릭하면 이전 페이지로 이동하는 코드 / 1페이지에서는 이동x
+	if(cpage == 1) {
+		out.println("<li class='page-item disabled prev'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item prev'><a class='page-link' href='./list.do?cpage=" + (cpage -1) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	}
+
+	//
+	for(int i = startPageNum ; i <= lastPageNum; i++) {
+		
+		// 현재페이지 번호만 각괄호로 표현
+		if( i == cpage) {
+			out.println("<li class='page-item active'><a class='page-link'>" + i + "</a></li>");
+		} else {
+			out.println("<li class='page-item'><a class='page-link' href='./list.do?cpage=" + i + "'>" + i + "</a></li>");
+		}
+	}
+	
+	// 하단의 오른쪽 꺽쇄 클릭하면 다음 페이지로 이동 / 마지막 페이지에서는 이동x
+	if(cpage == totalPage) {
+		out.println("<li class='page-item disabled next'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item next'><a class='page-link' href='./list.do?cpage=" + (cpage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	}
+	
+	// 오른쪽 겹꺽쇄 클릭하면 다음 페이지 번호묶음으로 이동
+	if(startPageNum == totalPage) {
+		out.println("<li class='page-item disabled last'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + (recordPerPage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	}
+
+%>				
 
 			</ul>
         </nav>
 
+		<!-- 글쓰기 버튼         
+        <div class="text-center mt-5">
+			<a href="./write.do" class="btn btn-secondary btn-lg">글쓰기</a>
+		</div>-->
+        
       </div>
     </div>
   </div>
@@ -186,7 +250,7 @@
   </div>
 </section>
 
-<!-- 
+<!--
 // footer --------------------------------------->
 <jsp:include page="../common/footer.jsp" flush="false"/>
 
