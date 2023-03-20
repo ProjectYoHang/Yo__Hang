@@ -319,7 +319,7 @@ public class RoomController {
 	}
 	
 	
-	// 마이페이지 임시
+	// 마이페이지
 	@RequestMapping("/mypage")
 	public ModelAndView mypage(ModelAndView modelAndView, HttpServletRequest request) {
 		BookInfoTO to = new BookInfoTO();
