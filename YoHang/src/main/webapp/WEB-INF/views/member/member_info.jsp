@@ -86,26 +86,7 @@
           		</div>
 			</form>
 			
-	<!--  					
-		  카카오 연동시 회원 테이블에 정보 추가   / 연동 해제시 테이블에서 정보 삭제 해야
-		   	
-			<c:if test="${loginMember.m_kakao_id == null}">
-				<div class="form-group mb-0 text-center" onclick="kakaoLogin();" >
-			    	<a href="javascript:void(0)" class="btn w-30 py-3 px-5" style="border: 1px solid #8d703b; background: transparent; color: #8d703b;" >
-			          <span>카카오 연동</span>
-			      	</a>
-	          </div>
-			</c:if>
-			<c:if test="${loginMember.m_kakao_id != null}">
-				<div class="dropdown">
-				    <div class="form-group mb-0 text-center" onclick="kakaoLogout();" >
-				    	<a  href="javascript:void(0)">
-				        <span>카카오 연동해제</span>
-				    	</a>
-		        	</div>
-	            </div>
-			</c:if>
-	-->
+
 		</div>
      </div>
   </div>

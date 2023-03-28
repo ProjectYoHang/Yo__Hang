@@ -26,9 +26,9 @@ public class MemberController {
 	@Autowired
 	private MembersDAO dao;
 	
-	@RequestMapping ( "test.do" )
+	@RequestMapping ( "/" )
 	public String test() {
-		return "test";
+		return "home";
 	}
 	
 	@RequestMapping ( "layout.do")
@@ -36,7 +36,7 @@ public class MemberController {
 		return "layout";
 	}
 	
-	@RequestMapping ( "home.do")
+	@RequestMapping ( "/home.do")
 	public String home() {
 		return "home";
 	}
@@ -71,7 +71,7 @@ public class MemberController {
 		
 		HttpSession session = request.getSession();
 		
-		if ( loginMember != null) { // 가져온 정보가 있다면 세션에 등록?
+		if ( loginMember != null) { // 가져온 정보가 있다면 세션에 등록
 			session.setAttribute( "loginMember", loginMember );
 			session.setMaxInactiveInterval(-1);
 			flag = 0;

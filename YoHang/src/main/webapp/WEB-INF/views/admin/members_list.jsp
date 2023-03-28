@@ -153,7 +153,7 @@ const memberDelete = function( m_id ) {
 				if ( resData  > 0) {
 					alert( '해당 사용자의 예약정보가 확인되어 탈퇴가 불가능합니다.')
 				}else {
-					console.log( ' 회원삭제 성공' );	
+					console.log( '회원삭제 성공' );	
 				}
 				
 				memberList();
@@ -186,10 +186,8 @@ const memberList = function( pageNum ) {
 			let totalPage = resData.totalPage;
 			let blockPerPage = resData.blockPerPage;
 			
-			//let offset = $('#board').offset()
-			//$('html').animate({scrollTop : offset.top}, 400);
 			$('html').scrollTop(0);
-			//$('html').animate({scrollTop : 0}, 200)
+			
 			let html = '<table class="table table-board-list" >';
 			html += '<thead>';
 			html += '<tr>';
