@@ -26,10 +26,6 @@ public class MemberController {
 	@Autowired
 	private MembersDAO dao;
 	
-	@RequestMapping ( "/" )
-	public String test() {
-		return "home";
-	}
 	
 	@RequestMapping ( "layout.do")
 	public String layout() {
@@ -40,6 +36,12 @@ public class MemberController {
 	public String home() {
 		return "home";
 	}
+	
+	@RequestMapping ( "home.do" )
+	public String main() {
+		return "home";
+	}
+	
 	@RequestMapping ( "aboutus.do")
 	public String aboutus() {
 		return "aboutus";
