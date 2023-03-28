@@ -34,6 +34,11 @@ public interface RvMapperinter {
 	@Insert("insert into reviews values (0, #{rv_subject}, #{rv_id}, now(), #{rv_content}, #{rv_img_name}, #{rv_img_size}, #{rv_room_seq}, #{rv_book_num}, #{rv_stars}, #{rv_like} )")
 	int rvWriteOk(RvBoardTO to);
 	
+	// 글 작성시 foreign key 걸린 예약번호와 방번호를 bookto에서 가져옴
+	@Select ( "select room_seq, book_num from book where m_id = #{m_id} order by book_date desc limit 0,1 ")
+	BookTO bookInfo(BookTO to);
+	
+	
 	// delete
 	@Select("select rv_subject, rv_id from reviews where rv_seq=#{rv_seq}")
 	RvBoardTO rvDelete(RvBoardTO to);

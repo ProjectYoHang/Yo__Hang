@@ -1,14 +1,11 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="com.example.model.RvBoardTO"%>
-
-<%@ page import="java.util.ArrayList" %>
 <%
 	//jsp hero parameters
 	String menuName = "Board";
 	String title = "Review";
-
+	
 	// jsp header parameters
 	String home = "/home.do";
 	String aboutus = "/aboutus.do";
@@ -20,18 +17,6 @@
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage";
-	RvBoardTO to = (RvBoardTO)request.getAttribute("to");
-	
-    //int cpage = Integer.parseInt((String)request.getAttribute("cpage"));
-    
-	String cpage = (String)request.getAttribute("cpage");
-	String rv_seq = (String)request.getAttribute("rv_seq");
-	
-	String rv_subject = to.getRv_subject();
-	String rv_id = to.getRv_id();
-	String rv_date = to.getRv_date();
-	String rv_content = to.getRv_content();
-	String rv_img_name = to.getRv_img_name();
 %>
 
 <!DOCTYPE html>
@@ -41,6 +26,9 @@
 <body>
 <!--
 // header --------------------------------------->
+
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>
@@ -61,45 +49,43 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
-<!--
-// contents --------------------------------------->
-
-<!-- content -->
-<section class="ftco-section">
+<section class="ftco-section bg-light">
   <div class="container">
-    <h3 class="board-view-title"><%= rv_subject %> </h3>
-    <ul class="board-info-group">
-      <li class="d-md-inline board-view-writer">
-        <strong>작성자</strong>
-        <span><%= rv_id %></span>
-      </li>
-      <li class="board-view-writer">
-        <strong>작성일</strong>
-        <span><%= rv_date %></span>
-      </li>
-    </ul>
+	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
 
-    <div  style="display:flex; align-item:center; justify-content: space-between;">
-   		<div id="bbs_file_wrap"  style="width:40%;">
-			<div>
-				<img src="../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
-			</div>
-		</div> 
-    <div  style="width:50%;" display: flex; align-items: center;>
-      <%= rv_content %>
-    </div>
-    </div>
-
-
-    <div class="text-center mt-4 pt-5 border-top">
-      <a href="./modify.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-primary btn-lg">수정</a>
-      <a href="./delete.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-outline-primary btn-lg">삭제</a>
-      <a href="./list.do?cpage=<%= cpage %>" class="btn btn-primary btn-lg">목록</a>
-    </div>
-		</div>
-		<!--//게시판-->
-	</div>
-<!-- 하단 디자인 -->
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_id"  value="${loginMember.m_id}" readonly>     
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="rv_subject"  placeholder="제목">     
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" name="rv_content" rows="10" placeholder="내용"></textarea>      
+      </div>
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="rv_room_seq" value=""  placeholder="방번호">     
+      </div>
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="rv_book_num" value=""  placeholder="예약번호">     
+      </div>
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="rv_stars" value="1" placeholder="별점">     
+      </div>
+      <div class="form-group">
+        <input type="hidden" class="form-control" name="rv_like" value="1" placeholder="좋아요">     
+      </div> 	
+				
+		<th>이미지</th>
+			<td colspan="3">
+			<!-- 파일 업로드 input type=file -->
+			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
+		</td>
+																						
+      <div class="form-group text-center mt-5">
+        <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
+        <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
+      </div>   
+	</form>
 </div>
 </section>
 <!--
@@ -161,6 +147,35 @@
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
 
+
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById('wbtn').onclick = function() {
+			// alert('click');
+			// 필수 입력항목 검사
+			if(document.wfrm.rv_id.value.trim() == '') {
+				alert('글쓴이를 입력하셔야 합니다.');
+				return false;
+			}
+			if(document.wfrm.rv_subject.value.trim() == '') {
+				alert('제목을 입력하셔야 합니다.');
+				return false;
+			}
+
+			if( document.wfrm.upload.value.trim() != '' ) {
+				
+				const extension = document.wfrm.upload.value.split( '.' ).pop();
+				if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF' && extension != 'peng' && extension != 'PENG' ) {
+					alert( '이미지 파일을 입력하셔야 합니다.' );	
+					return false;
+				}
+			}
+			
+			// 위의 검사가 다 끝나면 submit해서 다음 페이지로 넘어가라는 의미
+			document.wfrm.submit();
+		};   
+	}
+	
+</script>
 </body>
 </html>
-
