@@ -27,6 +27,9 @@
 	String nt_subject = to.getNt_subject();
 	String nt_id = to.getNt_id();
 	String nt_content = to.getNt_content();
+	
+	String nt_file_name = to.getNt_file_name();
+	long nt_file_size = to.getNt_file_size();
 %>
 
 <!DOCTYPE html>
@@ -61,7 +64,7 @@
 <!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
-    <form action="./modify_ok.do" class="bg-white p-5" name="nmfrm">
+    <form action="./modify_ok.do" class="bg-white p-5" name="nmfrm" method="post" enctype="multipart/form-data">
     <input type="hidden" name="nt_seq" value="<%= nt_seq %>">
     <input type="hidden" name="cpage" value="<%= cpage %>">
       <div class="form-group">
@@ -73,11 +76,17 @@
       <div class="form-group">
         <textarea type="text" class="form-control"  name="nt_content" title="content" rows="10"><%= nt_content %></textarea>
       </div>
-<!-- 
+      
       <div class="form-group">
-        <input type="file" id="file" name="file" class="form-control">
-      </div>
--->
+		<label for="nt_file">기존 이미지 파일명(파일크기)</label>
+	    <input type="text" readonly class="form-control" id="nt_file" value="<%= nt_file_name %>(<%= nt_file_size %>)">
+	  </div>
+	  
+	  <div class="form-group">
+		<label for="nt_file_select">이미지 선택</label>
+	    <input type="file" name="upload" id="nt_file_select" value="" class="form-control-file">
+	  </div>
+
       <div class="form-group text-center mt-5">
         <input type="button" id="nmbtn" value="수정" class="btn btn-primary py-3 px-5">
         <a href="./view.do?cpage=<%= cpage %>&nt_seq=<%= nt_seq %>" class="btn btn-secondary py-3 px-5">보기</a>

@@ -538,7 +538,7 @@
 <script type="text/javascript" src="../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 <script>
 
-	// 위의 셀렉트박스에서 선택된 값을 ajax로 받아서 해당하는 객실타입만 검색폼 하단에 출력되게 만들기
+	//  선택된 값을 ajax로 받아서 해당하는 객실타입만 검색폼 하단에 출력되게 만들기
 	let checkin_date = "";
 	let checkout_date = "";
 		
@@ -587,16 +587,6 @@
 
 			  html +=     '</div>';
 				 
- 
-			
-			//	 html += '<tr>';
-			//	 html +=	'<td>' + item.room_name + '</td>';
-			//	 html +=	'<td>' + item.room_capacity + '</td>';
-			//	 html += '            <img src="' + item.room_image + '"' + 'class="img-thumbnail img-fluid" alt=""></a>';
-			//	 html += '            <p class="beverage_name text-center">' + item.room_name + '</p>';	
-			//	 html += '</tr>';
-			// });
-			// html +='</table>';
 			
 			 $('#search').html(html);
 				console.log( '성공' );

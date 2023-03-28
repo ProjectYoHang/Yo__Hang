@@ -3,20 +3,19 @@
 
 <%
 	//jsp hero parameters
-	String menuName = "Board";
-	String title = "Review";
+	String menuName = "게시판 관리";
+	String title = "FAQ";
 	
 	// jsp header parameters
-	String home = "/home.do";
-	String aboutus = "/aboutus.do";
-	String findus = "/findus.do";
-	String qna = "/qna/list.do";
-	String faq = "/faq/list.do";
-	String notice = "/notice/list.do";
-	String rv = "/rv/list.do";
-	String login = "/login.do";
-	String logout = "/logout.do";
-	String mypage = "/mypage";
+	String home = "/Admin/home.do";
+	String member = "/Admin/member/list.do";
+	String book = "/Admin/book/list.do";
+	String room = "/Admin/room/list.do";
+	String qna = "/Admin/qna/list.do";
+	String faq = "/Admin/faq/list.do";
+	String notice = "/Admin/notice/list.do";
+	String logout = "/Admin/logout.do";
+	
 %>
 
 <!DOCTYPE html>
@@ -24,22 +23,19 @@
 <jsp:include page="../common/head.jsp" flush="false"/>
 
 <body>
-<!--
+<!-- 
 // header --------------------------------------->
 
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<jsp:include page="../common/header.jsp" flush="false">
-	<jsp:param value="<%= home %>" name="home"/>
-	<jsp:param value="<%= aboutus %>" name="aboutus"/>
-	<jsp:param value="<%= findus %>" name="findus"/>
+<jsp:include page="../common/header_admin.jsp" flush="false">
+	<jsp:param value="<%= member %>" name="home"/>
+	<jsp:param value="<%= member %>" name="member"/>
+	<jsp:param value="<%= book %>" name="book"/>
+	<jsp:param value="<%= room %>" name="room"/>
 	<jsp:param value="<%= qna %>" name="qna"/>
 	<jsp:param value="<%= faq %>" name="faq"/>
 	<jsp:param value="<%= notice %>" name="notice"/>
-	<jsp:param value="<%= rv %>" name="rv"/>
-	<jsp:param value="<%= login %>" name="login"/>
 	<jsp:param value="<%= logout %>" name="logout"/>
-	<jsp:param value="<%= mypage %>" name="mypage"/>
 </jsp:include>
 
 <!-- hero-wrap -->
@@ -49,45 +45,28 @@
 	<jsp:param value="<%= home %>" name="home"/>
 </jsp:include>
 
+<!--
+// contents --------------------------------------->
+
+<!-- content -->
 <section class="ftco-section bg-light">
   <div class="container">
-	<form action="./write_ok.do" method="post" name="wfrm" enctype="multipart/form-data">
-
+	<form action="./write_ok.do" method="post" name="faqfrm">
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_id"  value="${loginMember.m_id}" readonly>     
+        <input type="text" class="form-control" name="faq_subject"  placeholder="제목">     
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" name="rv_subject"  placeholder="제목">     
+        <textarea class="form-control" name="faq_content" rows="10" placeholder="내용"></textarea>      
       </div>
-      <div class="form-group">
-        <textarea class="form-control" name="rv_content" rows="10" placeholder="내용"></textarea>      
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_room_seq" value="2"  placeholder="방번호">     
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_book_num" value="2"  placeholder="예약번호">     
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_stars" value="2" placeholder="별점">     
-      </div>
-      <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_like" value="2" placeholder="좋아요">     
-      </div> 	
-				
-		<th>이미지</th>
-			<td colspan="3">
-			<!-- 파일 업로드 input type=file -->
-			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
-		</td>
 																						
       <div class="form-group text-center mt-5">
-        <input type="button" id="wbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
+        <input type="button" id="faqbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
         <a href="./list.do" class="btn btn-secondary py-3 px-5">목록</a>
       </div>   
 	</form>
 </div>
 </section>
+
 <!--
 // instagram --------------------------------------->
 <section class="instagram pt-5">
@@ -146,36 +125,24 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
-
-
 <script type="text/javascript">
 	window.onload = function() {
-		document.getElementById('wbtn').onclick = function() {
-			// alert('click');
-			// 필수 입력항목 검사
-			if(document.wfrm.rv_id.value.trim() == '') {
-				alert('글쓴이를 입력하셔야 합니다.');
-				return false;
-			}
-			if(document.wfrm.rv_subject.value.trim() == '') {
+		document.getElementById('faqbtn').onclick = function() { 
+			if(document.faqfrm.faq_subject.value.trim() == '') { 
 				alert('제목을 입력하셔야 합니다.');
 				return false;
 			}
-
-			if( document.wfrm.upload.value.trim() != '' ) {
-				
-				const extension = document.wfrm.upload.value.split( '.' ).pop();
-				if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF'  && extension != 'jpeg' && extension != 'JPEG') {
-					alert( '이미지 파일을 입력하셔야 합니다.' );	
-					return false;
-				}
+			if(document.faqfrm.faq_content.value.trim() == '') { 
+				alert('내용을 입력하셔야 합니다.');
+				return false;
 			}
 			
 			// 위의 검사가 다 끝나면 submit해서 다음 페이지로 넘어가라는 의미
-			document.wfrm.submit();
-		};   
+			document.faqfrm.submit();
+		};
 	}
 	
 </script>
+
 </body>
 </html>

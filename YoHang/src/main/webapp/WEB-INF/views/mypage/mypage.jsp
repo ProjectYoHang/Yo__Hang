@@ -174,15 +174,7 @@
 				            <tbody>
 				            
 <%= html.toString() %>      
-<!--
-	              				<tr>        			 
-				            		<td>1</td>
-				            		<td>1</td>
-				            		<td>2020-02-01</td>
-				            		<td>2020-02-02</td>
-				            		<td>2020-01-26</td>
-								</tr>	
-								 -->		            
+		            
 				            </tbody>
 		      			</table>
 	      			</div>

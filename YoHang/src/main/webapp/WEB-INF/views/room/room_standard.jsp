@@ -230,9 +230,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-	//let data = {};//전송 데이터(JSON)
-	
-	// 세션에 저장되어있는 로그인한 사용자 아이디
+
 	let username = '${loginMember.m_id}';
 	
 	ws = new WebSocket("ws://" + location.host + "/room/standard");

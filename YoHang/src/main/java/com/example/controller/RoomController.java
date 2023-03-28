@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,7 +34,6 @@ public class RoomController {
 	private RvBoardDAO rdao;
 	
 	@RequestMapping("/room/standard")
-	// 체크인/체크아웃 데이터 디폴트값 넣어놔야 할 듯 : home에서 날짜 안 정하면 에러발생하겠지..
 	public ModelAndView book1(HttpServletRequest request, ModelAndView modelAndView) {
 		BookTO to = new BookTO();
 		to.setCheckin_date(request.getParameter("checkin_date"));
@@ -42,9 +43,6 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_standard");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
-		//modelAndView.addObject("head_count", request.getParameter("head_count"));
 		
 		return modelAndView;
 	}
@@ -59,8 +57,6 @@ public class RoomController {
 		
 		modelAndView.setViewName("room/room_suite");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
@@ -75,8 +71,6 @@ public class RoomController {
 				
 		modelAndView.setViewName("room/room_deluxe");
 		modelAndView.addObject("bookedRoomNums", bookedRoomNums);
-		//modelAndView.addObject("checkin_date", request.getParameter("checkin_date"));
-		//modelAndView.addObject("checkout_date", request.getParameter("checkout_date"));
 		
 		return modelAndView;
 	}
@@ -134,6 +128,7 @@ public class RoomController {
 	}
 	
 	// 회원별 예약목록
+	/*
 	@RequestMapping("/mypage/booklist.do")
 	public ModelAndView bookedList(ModelAndView modelAndView, HttpServletRequest request) {
 		BookInfoTO to = new BookInfoTO();
@@ -149,6 +144,95 @@ public class RoomController {
 		
 		modelAndView.setViewName("mypage/book_list");
 		modelAndView.addObject("bookInfos", bookInfos);
+		
+		return modelAndView;
+	}
+	*/
+	
+	////////////
+	@RequestMapping("/mypage/loadBookList.do")
+	public Map<String, Object> bookedList(HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		// 로그인 상태에서 session에 저장된 아이디 가져옴
+		HttpSession session = request.getSession();
+		
+		MembersTO loginMember = (MembersTO)session.getAttribute("loginMember");
+		
+		to.setId(loginMember.getM_id());
+		
+		ArrayList<BookInfoTO> bookInfos = dao.bookInfos(to);
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("bookInfos", bookInfos);
+		
+		return result;
+	}
+	
+	@RequestMapping("/mypage/booklist.do")
+	public ModelAndView bookedList() {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		modelAndView.setViewName("mypage/book_list");
+		return modelAndView;
+	}
+	
+	// 예약 => 결제완료
+	@RequestMapping("/mypage/updateStatus.do")
+	public ModelAndView updateStatus(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		to.setSeq(request.getParameter("seq"));
+		
+		dao.updateStatus(to);
+		
+		modelAndView.setViewName("mypage/book_list");
+		
+		return modelAndView;
+	}
+	
+	// 환불 신청
+	@RequestMapping("/mypage/refundReq.do")
+	public ModelAndView refundReq(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		to.setSeq(request.getParameter("seq"));
+		
+		dao.refundReq(to);
+		
+		modelAndView.setViewName("mypage/book_list");
+		
+		return modelAndView;	
+	}
+	
+	// 관리자가 환불신청 확인 후 환불완료
+	// bookInfo 테이블 status 컬럼값을 4로 변경 & book 테이블에서 예약된 객실 데이터 삭제
+	@RequestMapping("/Admin/book/refundOk.do")
+	public ModelAndView refundOk(ModelAndView modelAndView, HttpServletRequest request) {
+		BookInfoTO to = new BookInfoTO();
+		
+		to.setSeq(request.getParameter("seq"));
+		
+		dao.refundOk(to);
+		
+		String rooms_seq = request.getParameter("rooms_seq");
+		
+		String[] room_seq = rooms_seq.split(",");
+		
+		int flag = 1;
+		
+		for(int i = 0; i<room_seq.length; i++) {
+			BookTO bto = new BookTO();
+			
+			bto.setCheckin_date(request.getParameter("checkin"));
+			bto.setCheckout_date(request.getParameter("checkout"));
+			bto.setRoom_seq(room_seq[i]);
+			
+			flag = dao.bookDeleteOk(bto);
+		}
+		
+		modelAndView.setViewName("book_admin/refundOk");
+		modelAndView.addObject("flag", flag);
 		
 		return modelAndView;
 	}
@@ -205,7 +289,7 @@ public class RoomController {
 		return modelAndView;
 	}
 	
-	// 예약 취소
+	// 관리자측 예약 취소
 	@RequestMapping("/Admin/book/bookDeleteOk.do")
 	public ModelAndView bookDeleteOk2(ModelAndView modelAndView, HttpServletRequest request) {
 		String rooms_seq = request.getParameter("rooms_seq");
@@ -235,7 +319,7 @@ public class RoomController {
 	}
 	
 	
-	// 마이페이지 임시
+	// 마이페이지
 	@RequestMapping("/mypage")
 	public ModelAndView mypage(ModelAndView modelAndView, HttpServletRequest request) {
 		BookInfoTO to = new BookInfoTO();

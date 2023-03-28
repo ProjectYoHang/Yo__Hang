@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 
-<%@page import="java.util.ArrayList"%>
+<%@page import="com.example.model.FaqBoardTO"%>
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.ArrayList" %>
 
 <%
 	// jsp hero parameters
@@ -19,6 +21,40 @@
 	String login = "/login.do";
 	String logout = "/logout.do";
 	String mypage = "/mypage";
+	
+	ArrayList<FaqBoardTO> faqLists = (ArrayList<FaqBoardTO>)request.getAttribute("faqLists");
+	
+	int totalRecord = (Integer)request.getAttribute("totalRecord");
+	int cpage = (Integer)request.getAttribute("cpage");
+	int lastPage = (Integer)request.getAttribute("lastPage");
+	int startPageNum = (Integer)request.getAttribute("startPageNum");
+	int lastPageNum = (Integer)request.getAttribute("lastPageNum");
+	int recordPerPage = (Integer)request.getAttribute("recordPerPage");
+	int totalPage = ((totalRecord - 1) / recordPerPage) + 1;
+	
+	StringBuilder sbHtml = new StringBuilder();
+	int index = 0;
+	
+	for(FaqBoardTO to : faqLists) {
+		String faq_seq = to.getFaq_seq();
+		String faq_subject = to.getFaq_subject();
+		String faq_content = to.getFaq_content();
+		index++;
+		
+		/* sbHtml.append("<tr>");	
+		sbHtml.append("<td>" + nt_seq + "</td>"); 
+		sbHtml.append("<td class='board-list-title'><a href='./view.do?cpage=" + cpage + "&nt_seq=" + nt_seq + "'>" + nt_subject + "</a></td>");	
+		sbHtml.append("</tr>");	 */
+		
+		sbHtml.append("<div class='card'>");
+		sbHtml.append("<div class='card-header'><h2 class='mb-0'>");
+		sbHtml.append("<button class='btn btn-link btn-block text-left' type='button' data-toggle='collapse' data-target='#collapse-" + index + "' aria-expanded='false'>" + faq_subject + "</button>");
+		sbHtml.append("</h2></div>");
+		sbHtml.append("<div id='collapse-" + index + "' class='collapse' data-parent='#accordionFaq'>");
+		sbHtml.append("<div class='card-body'>" + faq_content + "</div>");
+		sbHtml.append("</div>");
+		sbHtml.append("</div>");
+	}
 %>
 
 <!DOCTYPE html>
@@ -54,7 +90,7 @@
 <section class="ftco-section">
   <div class="container">
 	<div class="accordion-faq" id="accordionFaq">
-	  <div class="card">
+	 <!--  <div class="card">
 	    <div class="card-header" id="headingOne">
 	      <h2 class="mb-0">
 	        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -71,9 +107,9 @@
 			http://www.yohang.#
 	      </div>
 	    </div>
-	  </div>
+	  </div> -->
 	  
-	  <div class="card">
+	  <!-- <div class="card">
 	    <div class="card-header" id="headingOne-1">
 	      <h2 class="mb-0">
 	        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne-1" aria-expanded="false" aria-controls="collapseOne-1">
@@ -175,7 +211,65 @@
 	        연회행사 시 게스트 분들이 쉽게 행사장을 찾아오실 수 있도록 로비 입구층, 연회장 동선에 행사 사이니지를 각각 설치하여 안내해드리고 있습니다.
 	      </div>
 	    </div>
-	  </div>
+	  </div> -->
+	  
+	  <%= sbHtml.toString() %>
+	  
+	  <!-- navigation -->
+        <nav class="w-100">
+          <ul class="pagination justify-content-center">
+          
+<%
+	startPageNum = cpage - (cpage - 1) % recordPerPage;
+	lastPageNum = cpage - (cpage - 1) % recordPerPage + recordPerPage - 1;
+	if(lastPageNum >= totalPage) {
+		lastPageNum = totalPage;
+	}
+
+	// 왼쪽 겹꺽쇄
+	if(startPageNum == 1) {
+		out.println("<li class='page-item disabled first'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item first'><a class='page-link' href='./list.do?cpage=" + (startPageNum - recordPerPage ) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	}
+	
+	// 하단의 왼쪽 꺽쇄 클릭하면 이전 페이지로 이동하는 코드 / 1페이지에서는 이동x
+	if(cpage == 1) {
+		out.println("<li class='page-item disabled prev'><a class='page-link'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item prev'><a class='page-link' href='./list.do?cpage=" + (cpage -1) + "'><i class='xi-angle-left-min' aria-hidden='true'></i></a></li>");
+	}
+
+	//
+	for(int i = startPageNum ; i <= lastPageNum; i++) {
+		
+		// 현재페이지 번호만 각괄호로 표현
+		if( i == cpage) {
+			out.println("<li class='page-item active'><a class='page-link'>" + i + "</a></li>");
+		} else {
+			out.println("<li class='page-item'><a class='page-link' href='./list.do?cpage=" + i + "'>" + i + "</a></li>");
+		}
+	}
+	
+	// 하단의 오른쪽 꺽쇄 클릭하면 다음 페이지로 이동 / 마지막 페이지에서는 이동x
+	if(cpage == totalPage) {
+		out.println("<li class='page-item disabled next'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item next'><a class='page-link' href='./list.do?cpage=" + (cpage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	}
+	
+	// 오른쪽 겹꺽쇄 클릭하면 다음 페이지 번호묶음으로 이동
+	if(startPageNum == totalPage) {
+		out.println("<li class='page-item disabled last'><a class='page-link'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	} else {
+		out.println("<li class='page-item last'><a class='page-link' href='./list.do?cpage=" + (recordPerPage + 1) + "'><i class='xi-angle-right-min' aria-hidden='true'></i></a></li>");
+	}
+
+%>				
+
+			</ul>
+        </nav>
+	  
 	</div>
   </div>
 </section>

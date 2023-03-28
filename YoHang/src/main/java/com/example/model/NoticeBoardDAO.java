@@ -14,7 +14,7 @@ import com.example.mapper.RvMapperinter;
 @Repository
 public class NoticeBoardDAO {
 
-	private String uploadPath = "C:/work/Yo__Hang/YoHang/src/main/webapp/upload/notices";
+	private String uploadPath = "/Users/hyobinjin/git/Yo__Hang/YoHang/src/main/webapp/upload/notices";
 	
 	@Autowired
 	private NoticeMapperinter mapper;
@@ -110,6 +110,7 @@ public class NoticeBoardDAO {
 	public int noticeModifyOk(NoticeBoardTO to) {
 		String oldFilename = mapper.noticeFileName(to);
 		int flag = 2;
+		System.out.println( "0" + flag );
 		
 		// 기존 파일이 있는 경우
 		if(oldFilename != null) {
@@ -117,6 +118,7 @@ public class NoticeBoardDAO {
 			if(to.getNt_file_name() != null) {
 				int result = mapper.noticeModifyOk1(to);
 				
+				System.out.println( "1" + flag );
 				if(result == 1) {
 					flag = 0;
 					
