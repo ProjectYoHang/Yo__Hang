@@ -16,8 +16,8 @@ import com.example.mapper.RvMapperinter;
 @Repository
 public class RvBoardDAO {
 
-	private String uploadPath = "C:/Users/USER/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
-	
+	//private String uploadPath = "C:/Users/USER/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
+	private String uploadPath = "/wjddnr0709/tomcat/webapps/ROOT/upload/reviews";
 	@Autowired
 	private RvMapperinter mapper;
 

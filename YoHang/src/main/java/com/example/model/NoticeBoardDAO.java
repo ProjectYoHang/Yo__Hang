@@ -14,8 +14,8 @@ import com.example.mapper.RvMapperinter;
 @Repository
 public class NoticeBoardDAO {
 
-	private String uploadPath = "/Users/hyobinjin/git/Yo__Hang/YoHang/src/main/webapp/upload/notices";
-	
+	//private String uploadPath = "/Users/hyobinjin/git/Yo__Hang/YoHang/src/main/webapp/upload/notices";
+	private String uploadPath = "/wjddnr0709/tomcat/webapps/ROOT/upload/reviews";
 	@Autowired
 	private NoticeMapperinter mapper;
 

@@ -27,7 +27,7 @@ public class MemberController {
 	private MembersDAO dao;
 	
 	
-	@RequestMapping ( "layout.do")
+	@RequestMapping ( "/layout.do")
 	public String layout() {
 		return "layout";
 	}
@@ -37,16 +37,16 @@ public class MemberController {
 		return "home";
 	}
 	
-	@RequestMapping ( "home.do" )
+	@RequestMapping ( "/home.do" )
 	public String main() {
 		return "home";
 	}
 	
-	@RequestMapping ( "aboutus.do")
+	@RequestMapping ( "/aboutus.do")
 	public String aboutus() {
 		return "aboutus";
 	}
-	@RequestMapping ( "findus.do")
+	@RequestMapping ( "/findus.do")
 	public String findus() {
 		return "findus";
 	}
@@ -57,11 +57,11 @@ public class MemberController {
 	//}
 	
 ////////////////// 로그인 /////////////////////////	
-	@RequestMapping ( "login.do" )
+	@RequestMapping ( "/login.do" )
 	public String login() {
 		return "login";
 	}
-	@RequestMapping ("login_ok.do" )
+	@RequestMapping ("/login_ok.do" )
 	public String login_ok(HttpServletRequest request) {
 		MembersTO loginMember = new MembersTO(); 
 		loginMember.setM_id( request.getParameter( "id" ) );
@@ -87,7 +87,7 @@ public class MemberController {
 	}
 ////////////////로그아웃 /////////////////////////
 	
-	@RequestMapping ("logout.do")
+	@RequestMapping ("/logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		System.out.println( "session연결 종료");
@@ -95,12 +95,12 @@ public class MemberController {
 	}
 	
 ////////////////회원가입 /////////////////////////	
-	@RequestMapping ("signup.do")
+	@RequestMapping ("/signup.do")
 	public String signup(HttpServletRequest request) {
 		return "signup";
 	}
 	
-	@RequestMapping( "signup_ok.do" )
+	@RequestMapping( "/signup_ok.do" )
 	public String signup_ok(HttpServletRequest request) {
 		String kakao_id = request.getParameter("kakao_id");
 		System.out.println("kakaoid : " + kakao_id);
@@ -138,7 +138,7 @@ public class MemberController {
 		return "signup_ok";
 	}
 	
-	@RequestMapping ("check_id.do")
+	@RequestMapping ("/check_id.do")
 	@ResponseBody // 결과 값을 리턴할 때 사용?
 	public int check_id(@RequestParam("id") String id) {
 		MembersTO to = new MembersTO();
@@ -152,7 +152,7 @@ public class MemberController {
 	}
 
 //////////////// 회원정보 /////////////////////////
-	@RequestMapping( "mypage/list.do")
+	@RequestMapping( "/mypage/list.do")
 	public String member_info(HttpServletRequest request) {
 		MembersTO to = new MembersTO();
 		to = dao.memberInfo(to);
@@ -185,7 +185,7 @@ public class MemberController {
 		return "./member/member_info_modify_ok";
 	}
 //////////////// 탈퇴 /////////////////////////
-	@RequestMapping( "mypage/member_signout_ok.do")
+	@RequestMapping( "/mypage/member_signout_ok.do")
 	public String member_signout_ok( HttpServletRequest request, HttpSession session ) {
 		MembersTO to = new MembersTO();
 		to.setM_id( request.getParameter( "id" ) );
@@ -204,7 +204,7 @@ public class MemberController {
 		return "./member/member_signout_ok";
 	}
 /////////////////// 카카오 ///
-	@RequestMapping ("kakao_login.do")
+	@RequestMapping ("/kakao_login.do")
 	public String kakao_login(HttpServletRequest request, @RequestParam String kakao_id) {
 		
 		MembersTO to = new MembersTO();
@@ -228,7 +228,7 @@ public class MemberController {
 	}
 	
 ///// 마이페이지 - 카카오 연동 버튼 클릭
-	@RequestMapping( "mypage/kakao_connect.do" )
+	@RequestMapping( "/mypage/kakao_connect.do" )
 	public String kakao_connect(@RequestParam String kakao_id,@RequestParam String m_id) {
 		MembersTO to = new MembersTO();
 		to.setM_id(m_id);
@@ -245,7 +245,7 @@ public class MemberController {
 	/// 아이디 / 비밀번호 찾기 ///
 ////////// 아이디로 메일  가져오기
 	@ResponseBody
-	@RequestMapping ( "find_pw.do" ) // 찾으려는 아이디에 해당하는 메일은 하나
+	@RequestMapping ( "/find_pw.do" ) // 찾으려는 아이디에 해당하는 메일은 하나
 	public MembersTO pull_mail(@RequestParam String id) {
 		MembersTO to = new MembersTO();
 		to.setM_id(id);
@@ -264,7 +264,7 @@ public class MemberController {
 	
 //////// 이름으로 id 가져오기 
 	@ResponseBody
-	@RequestMapping ( "find_id.do" ) //같은 이름으로 되어있는 아이디가 여럿일 수 있다.
+	@RequestMapping ( "/find_id.do" ) //같은 이름으로 되어있는 아이디가 여럿일 수 있다.
 	public ArrayList<MembersTO> pull_id(@RequestParam String name) {
 		MembersTO to = new MembersTO();
 		to.setM_name(name);
@@ -297,7 +297,7 @@ public class MemberController {
 	
 /////// 회원관리 회원삭제 //////
 	
-	@RequestMapping ( "memberDelete.do" )
+	@RequestMapping ( "/memberDelete.do" )
 	@ResponseBody
 	public int member_delete(@RequestParam String m_id) {
 		MembersTO to = new MembersTO();

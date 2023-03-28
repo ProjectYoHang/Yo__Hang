@@ -39,7 +39,7 @@ public class MailController {
 	}
 	////////// 비밀번호 찾기 메일 
 	@ResponseBody
-	@RequestMapping( "sendPw.do" )
+	@RequestMapping( "/sendPw.do" )
 	public void sendPw(@RequestParam String mail, String tempPassword) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		
@@ -51,7 +51,7 @@ public class MailController {
 	}
 	
 	////////회원 리스트에서 메일 보내기 
-	@RequestMapping( "writeMail.do" )
+	@RequestMapping( "/writeMail.do" )
 	public String writeMail() {
 			
 		return "admin/mail_write";

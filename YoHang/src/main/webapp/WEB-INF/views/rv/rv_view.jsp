@@ -4,11 +4,6 @@
 <%@page import="com.example.model.RvBoardTO"%>
 
 <%@ page import="java.util.ArrayList" %>
-<<<<<<< HEAD:YoHang/src/main/webapp/WEB-INF/views/rv/board_view1.jsp
-<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-=======
-
->>>>>>> master:YoHang/src/main/webapp/WEB-INF/views/rv/rv_view.jsp
 <%
 	//jsp hero parameters
 	String menuName = "Board";

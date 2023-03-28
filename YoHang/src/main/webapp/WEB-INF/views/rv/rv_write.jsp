@@ -28,7 +28,6 @@
 // header --------------------------------------->
 
 <%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <jsp:include page="../common/header.jsp" flush="false">
 	<jsp:param value="<%= home %>" name="home"/>
 	<jsp:param value="<%= aboutus %>" name="aboutus"/>

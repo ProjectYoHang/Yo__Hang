@@ -86,11 +86,9 @@
       <a href="./delete.do?cpage=<%= cpage %>&faq_seq=<%= faq_seq %>" class="btn btn-outline-secondary btn-lg">삭제</a>
       <a href="./list.do?cpage=<%= cpage %>" class="btn btn-secondary btn-lg">목록</a>
     </div>
-		</div>
-		<!--//게시판-->
-	</div>
-<!-- 하단 디자인 -->
 </div>
+		<!--//게시판-->
+<!-- 하단 디자인 -->
 </section>
 <!--
 // instagram --------------------------------------->
