@@ -41,6 +41,7 @@
 		html.append("<td>" + rv_id + "</td>");	
 		html.append("<td>" + rv_subject + "</td>");
 		html.append("<td>" + rv_date + "</td>");
+		html.append("<td><button type='button' onclick='location.href=\"/rv/view.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰확인</button></td>");
 		html.append("<td><button type='button' onclick='location.href=\"./rvDeleteOk.do?rv_seq=" + rv_seq + "\"' class='btn btn-primary'>리뷰삭제</button></td>");
 		html.append("</tr>");	
 	}
@@ -85,25 +86,9 @@
     <div class="row toolbar-board-group">
       <div class="col-md-6 d-flex align-items-center board-page-info">
         <span class="total-page">전체 <b><%= totalRecord %>건</b> </span> 
-        <%-- <span class="current-page">현재 페이지 <b><%= cpage %></b>/<b><%= totalPage %></b></span> --%>
       </div>
       <div class="col-md-6 board-search-box">
         <div class="form-row">
-        <!--
-          <div class="col-4">
-            <select class="form-control">
-              <option>제목</option>
-              <option>내용</option>
-            </select>
-          </div>
-           
-          <div class="col-6">
-            <input type="text" class="form-control">
-          </div>
-          <div class="col-2">
-            <input type="submit" class="btn btn-primary btn-lg" value="검색">
-          </div>
-           -->
         </div>
       </div>
     </div>
@@ -114,11 +99,10 @@
           <table class="table table-board-list">
             <caption class="sr-only">게시판글</caption>
             <colgroup>
-              <col style="width:10%;">
-              <col style="width:15%;"> 
-              <col style="width:10%;">  
-              <col style="width:15%;">  
-              <col style="width:15%;">  
+              <col style="width:25%;"> 
+              <col style="width:25%;">  
+              <col style="width:25%;">  
+              <col style="width:25%;">  
             </colgroup>
             <thead>
               <tr>
@@ -126,6 +110,7 @@
                 <th class="text-center">글쓴이</th>
                 <th>제목</th>
                 <th>날짜</th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>

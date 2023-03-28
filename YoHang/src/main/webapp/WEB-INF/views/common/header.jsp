@@ -44,7 +44,12 @@
             	</c:if>
               <a class="dropdown-item" href="<%= faq %>">FAQ</a>
               <a class="dropdown-item" href="<%= notice %>">Notice</a>
-              <a class="dropdown-item" href="<%= rv %>">Review</a>
+            	<c:if test="${loginMember == null }">
+            		<a class="dropdown-item" href="<%= login %>">Review</a>
+            	</c:if>
+            	<c:if test="${loginMember != null }">
+            		<a class="dropdown-item" href="<%= rv %>">Review</a>
+            	</c:if>              
             </div>
           </div>
         </li>

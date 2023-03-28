@@ -16,7 +16,7 @@ import com.example.mapper.RvMapperinter;
 @Repository
 public class RvBoardDAO {
 
-	private String uploadPath = "C:/Users/KITCOOP/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
+	private String uploadPath = "C:/Users/USER/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews";
 	
 	@Autowired
 	private RvMapperinter mapper;
@@ -27,7 +27,23 @@ public class RvBoardDAO {
 
 		int flag = 1;
 
+		
+		
+		/////
+		
+		
+		BookTO bto = new BookTO();
+		bto.setM_id(to.getRv_id());
+		System.out.println(bto.getM_id());
+		bto = mapper.bookInfo(bto);
+		
+		
+		/////
+		to.setRv_book_num( Integer.parseInt(bto.getBook_num()));
+		to.setRv_room_seq( Integer.parseInt(bto.getRoom_seq()));
+		
 		int result = mapper.rvWriteOk(to);
+		
 		if(result == 1 ) {
 			flag = 0;
 		}

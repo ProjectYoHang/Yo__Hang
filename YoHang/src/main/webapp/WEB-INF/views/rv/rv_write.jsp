@@ -63,10 +63,10 @@
         <textarea class="form-control" name="rv_content" rows="10" placeholder="내용"></textarea>      
       </div>
       <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_room_seq" value="1"  placeholder="방번호">     
+        <input type="hidden" class="form-control" name="rv_room_seq" value=""  placeholder="방번호">     
       </div>
       <div class="form-group">
-        <input type="hidden" class="form-control" name="rv_book_num" value="1"  placeholder="예약번호">     
+        <input type="hidden" class="form-control" name="rv_book_num" value=""  placeholder="예약번호">     
       </div>
       <div class="form-group">
         <input type="hidden" class="form-control" name="rv_stars" value="1" placeholder="별점">     
@@ -165,7 +165,7 @@
 			if( document.wfrm.upload.value.trim() != '' ) {
 				
 				const extension = document.wfrm.upload.value.split( '.' ).pop();
-				if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF' ) {
+				if( extension != 'png' && extension != 'jpg' && extension != 'gif' && extension != 'PNG' && extension != 'JPG' && extension != 'GIF' && extension != 'peng' && extension != 'PENG' ) {
 					alert( '이미지 파일을 입력하셔야 합니다.' );	
 					return false;
 				}

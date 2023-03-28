@@ -49,7 +49,8 @@
 		String rv_content = rvList.getRv_content();
 		String rv_id = rvList.getRv_id();
 		String rv_date = rvList.getRv_date();
-		String rv_img_name = rvList.getRv_img_name();
+		//String rv_img_name = rvList.getRv_img_name();
+		String rv_img_name = rvList.getRv_img_name()== null ? "../../upload/reviews/noimage.jpeg" : "../../upload/reviews/" + rvList.getRv_img_name();
 		int wgap = rvList.getWgap();
 		
 		if(i % 3 ==0) {
@@ -64,7 +65,8 @@
 		if( rv_seq.equals( "" ) ) {
 			sbHtml.append( "						<img src='../../images/noimage.jpg' border='0' width='200' />" );
 		} else {
-			sbHtml.append( "						<a href='./view.do?cpage=" + cpage + "&rv_seq=" + rv_seq + "'><img src='../upload/reviews/" + rv_img_name + "' border='0' width='200' /></a>" );
+			//sbHtml.append( "						<a href='./view.do?cpage=" + cpage + "&rv_seq=" + rv_seq + "'><img src='../upload/reviews/" + rv_img_name + "' border='0' width='200' /></a>" );
+			sbHtml.append( "						<a href='./view.do?cpage=" + cpage + "&rv_seq=" + rv_seq + "'><img src='../upload/reviews/" + rv_img_name + "' border='0' width='200' height='200' /></a>" );
 		}
 		sbHtml.append( "					</div>" );
 		sbHtml.append( "				</td>" );
