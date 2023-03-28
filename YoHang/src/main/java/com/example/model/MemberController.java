@@ -32,7 +32,8 @@ public class MemberController {
 		return "layout";
 	}
 	
-	@RequestMapping ( "home.do")
+	//@RequestMapping ( "home.do")
+	@RequestMapping ( "/")
 	public String home() {
 		return "home";
 	}
