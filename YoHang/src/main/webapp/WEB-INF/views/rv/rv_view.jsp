@@ -32,7 +32,7 @@
 	String rv_date = to.getRv_date();
 	String rv_content = to.getRv_content();
 	//String rv_img_name = to.getRv_img_name();
-	String rv_img_name = to.getRv_img_name()== null ? "../../upload/reviews/noimage.jpeg" : "../../upload/reviews/" + to.getRv_img_name();
+	String rv_img_name = to.getRv_img_name()== null ? "../../upload/reviews/noimage.jpg" : "../../upload/reviews/" + to.getRv_img_name();
 %>
 
 <!DOCTYPE html>
@@ -82,38 +82,21 @@
 
     <div  style="display:flex; align-item:center; justify-content: space-between;">
    		<div id="bbs_file_wrap"  style="width:40%;">
-<<<<<<< HEAD:YoHang/src/main/webapp/WEB-INF/views/rv/board_view1.jsp
 			<div>
-				<img src="../../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
+				<c:if test="${rv_img_name != NULL }">
+           			<img src="../../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
+           		</c:if>
+           		<c:if test="${rv_img_name == NULL }">
+           			<img src="" width="100%" onerror="" /><br />
+           		</c:if>	
 			</div>
-=======
-				<div>
-					<c:if test="${rv_img_name != NULL }">
-            			<img src="../../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
-            		</c:if>
-            		<c:if test="${rv_img_name == NULL }">
-            			<img src="" width="100%" onerror="" /><br />
-            		</c:if>	
-				</div>
-	<!--
-				<c:if test="${rv_img_name != null }">
-            		<img src="../../upload/reviews/<%= rv_img_name %>" width="100%" onerror="" /><br />
-            	</c:if>
-            	<c:if test="${rv_img_name == null }">
-            	</c:if>	
-	
-	<img src="../upload/reviews/<%= rv_img_name %>" width="150%"  onerror="" /><br />
-	-->
-		
 		</div> 
     <div  style="width:25%;" display: flex; align-items: center;>
->>>>>>> master:YoHang/src/main/webapp/WEB-INF/views/rv/rv_view.jsp
 		</div> 
     <div  style="width:50%;" display: flex; align-items: center;>
       <%= rv_content %>
     </div>
     </div>
-
 
     <div class="text-center mt-4 pt-5 border-top">
       <a href="./modify.do?cpage=<%= cpage %>&rv_seq=<%= rv_seq %>" class="btn btn-primary btn-lg">수정</a>

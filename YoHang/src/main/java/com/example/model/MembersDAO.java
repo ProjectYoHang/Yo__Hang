@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.mapper.MapperInter;
 
 @Repository
-@MapperScan ("com.example.mapper")
 public class MembersDAO {	
 	
 	@Autowired
