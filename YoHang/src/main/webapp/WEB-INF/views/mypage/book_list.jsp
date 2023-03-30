@@ -213,11 +213,18 @@ const bookList = function() {
 				let checkin = item.checkin.substring(0, 10);
 				let checkout = item.checkout.substring(0, 10);
 				
-				// 숙박하는 일 수
-				let cin = checkin.replaceAll('-', '');
-				let cout = checkout.replaceAll('-', '');
+				// 숙박하는 일 수 : 날짜 연산!
+				let cin = new Date(checkin);
+				let cout = new Date(checkout);
 				
-				let checkedDates = cout - cin;
+				let diffDate = cout.getTime() - cin.getTime();
+				
+				let checkedDates = Math.abs(diffDate / (1000 * 60 * 60 * 24));
+				
+				//let cin = checkin.replaceAll('-', '');
+				//let cout = checkout.replaceAll('-', '');
+				
+				//let checkedDates = cout - cin;
 				
 				let room_type = '';
 				

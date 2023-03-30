@@ -226,7 +226,7 @@
 $(document).ready(function() {
 	let username = '${loginMember.m_id}';
 	
-	ws = new WebSocket("ws://" + location.host + "/room/standard");
+	ws = new WebSocket("ws://" + location.host + "/room/deluxe");
 	
 	ws.onmessage = function(msg){
 		let data = JSON.parse(msg.data);
