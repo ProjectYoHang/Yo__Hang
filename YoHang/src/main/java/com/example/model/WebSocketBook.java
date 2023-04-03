@@ -6,13 +6,17 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Service
 // serverEndpoint 어노테이션으로 웹소켓 요청을 받는 endpoint로 만듬
@@ -83,5 +87,9 @@ public class WebSocketBook {
 		clients.remove(userSession);
 	}
 	
-	
+	@OnError
+	public void onError(Throwable t) {
+		t.printStackTrace();
+	}
 }
+

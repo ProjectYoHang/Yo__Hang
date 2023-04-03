@@ -168,7 +168,7 @@
              </div>
            </a>
            <div class="text p-3 text-center">
-             <h3 class="mb-3"><a href="r/room/deluxe">Deluxe Room</a></h3>
+             <h3 class="mb-3"><a href="/room/deluxe">Deluxe Room</a></h3>
              <p><span class="price mr-2">￦440,000</span> <span class="per">per night</span></p>
              <hr>
              <p class="pt-1"><a href="/room/deluxe" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>
@@ -578,10 +578,10 @@
 			  html +=           '</div>';
 			  html +=         '</a>';
 			  html +=        '<div class="text p-3 text-center">';
-			  html +=           '<h3 class="mb-3"><a href="rooms-view.html">' + serData.room_name + '</a></h3>';
+			  html +=           '<h3 class="mb-3"><a href="room/' + serData.room_name + '">' + serData.room_name + '</a></h3>';
 			  html +=           '<p><span class="price mr-2">'+ serData.room_price +'</span> <span class="per">per night</span></p>';
 			  html +=          '<hr>';
-			  html +=          '<p class="pt-1"><a href="rooms-view.html" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>';
+			  html +=          '<p class="pt-1"><a href="room/' + serData.room_name + '" class="btn-custom">View Room Details <span class="xi-long-arrow-right"></span></a></p>';
 			  html +=         '</div>';
 			  html +=       '</div>';
 
