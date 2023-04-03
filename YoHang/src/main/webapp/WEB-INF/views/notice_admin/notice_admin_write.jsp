@@ -60,32 +60,11 @@
       </div>
       <div class="form-group">
         <textarea class="form-control" name="nt_content" rows="10" placeholder="내용"></textarea>      
-      </div>		
-      		
-<!-- 	<tr>
-		<th>파일</th>
-			<td colspan="3">
-			파일 업로드 input type=file
-			<input type="file" name="upload" value="" class="board_view_input" /><br /><br />
-		</td>
-	</tr> -->
+      </div>
 	
 	  <div class="form-group">
-		<input type="file" name="upload" id="nt_file" value="" class="board_view_input">
+		<input type="file" name="upload" id="nt_file" value="" class="board_view_input" oninput="checkFileSizeOne(event)">
 	  </div>
-	
-	<!-- 
-	https://getbootstrap.com/docs/4.6/components/input-group/#custom-file-input
-	
-	<div class="input-group mb-3">
-	  <div class="input-group-prepend">
-	    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-	  </div>
-	  <div class="custom-file">
-	    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-	    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-	  </div>
-	</div> -->
 																						
       <div class="form-group text-center mt-5">
         <input type="button" id="nbtn" value="글쓰기" class="btn btn-primary py-3 px-5">
@@ -153,8 +132,8 @@
 <script type="text/javascript" src="../../../YoHangFront/build/js/yohang-bundle.js"></script>
 <script type="text/javascript" src="../../../YoHangFront/build/vendors/yohang-vendors-bundle.js"></script>
 
-<script type="text/javascript">
-	window.onload = function() {
+<script type="text/javascript">	
+	window.onload = function() {		
 		document.getElementById('nbtn').onclick = function() { 
 			if(document.nfrm.nt_subject.value.trim() == '') { 
 				alert('제목을 입력하셔야 합니다.');
@@ -165,20 +144,60 @@
 				return false;
 			}
 			
-			if( document.nfrm.upload.value.trim() == '' ) {
+			if(document.nfrm.upload.value.trim() == '' ) {
 				alert( '파일이름을 입력하셔야 합니다.' );
 				return false;
-			}else {
+			}
+			/* else {
 				// .으로 분리해서 ext의 첫번쨰 
 				const ext = document.nfrm.upload.value.trim().split('.');
 				alert(ext[1]); // 파일 확장자 확인 가능
-			}
+			} */
 			
 			// 위의 검사가 다 끝나면 submit해서 다음 페이지로 넘어가라는 의미
 			document.nfrm.submit();
 		};
 	}
 	
+	function checkFileSizeOne(e) {
+		var checkSize = 1024 * 1024 * 10;
+		
+	    if (document.getElementById('nt_file').value != "") {
+	        var checkSize = 1024 * 1024 * 10;
+	        
+	        if (!checkFileSize($('#nt_file'), checkSize)) {
+	        	document.getElementById('nt_file').value = "";
+	            return;	            
+	        }
+	    }else {
+	    	alert(222);
+	    }
+	};
+	
+	// 파일 용량 체크
+	function checkFileSize(obj, size) {
+   		var check = false;
+	    var sizeinbytes = obj[0].files[0].size;
+	    var fSExt = new Array('Bytes', 'KB', 'MB', 'GB');
+	    var i = 0;
+	    var checkSize = size;
+	    
+	    while (checkSize > 900) {
+	        checkSize /= 1024;
+	        i++;	        
+	    }
+	    
+	    checkSize = (Math.round(checkSize * 100) / 100) + ' ' + fSExt[i];
+	    var fSize = sizeinbytes;
+	    
+	    if (fSize > size) {
+	        alert("첨부파일은 " + checkSize + " 이하로 첨부 바랍니다.");
+	        check = false;     
+	    } else {
+	        check = true;      
+	    }    
+	    return check;	    
+	}
 </script>
 
 </body>

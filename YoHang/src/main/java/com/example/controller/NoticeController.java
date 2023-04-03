@@ -1,12 +1,19 @@
 package com.example.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -98,13 +105,23 @@ public class NoticeController {
 		to.setNt_id(request.getParameter("nt_id"));
 		to.setNt_subject(request.getParameter("nt_subject"));
 		to.setNt_content(request.getParameter("nt_content"));
+		
+		UUID uuid = UUID.randomUUID();
 
 		try {
+//			if( !upload.isEmpty() ) {
+//				to.setNt_file_name( upload.getOriginalFilename() );	
+//				to.setNt_file_size( upload.getSize() );
+//
+//				upload.transferTo( new File( upload.getOriginalFilename() ) );
+//			}
 			if( !upload.isEmpty() ) {
-				to.setNt_file_name( upload.getOriginalFilename() );	
+				String extention = upload.getOriginalFilename().substring(upload.getOriginalFilename().indexOf("."));		
+				String filename = upload.getOriginalFilename().substring(0, upload.getOriginalFilename().indexOf("."));
+				to.setNt_file_name( filename + uuid.toString() + extention);
+				
 				to.setNt_file_size( upload.getSize() );
-
-				upload.transferTo( new File( upload.getOriginalFilename() ) );
+				upload.transferTo( new File( to.getNt_file_name()) );
 			}
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -187,40 +204,59 @@ public class NoticeController {
 		to.setNt_subject(request.getParameter("nt_subject"));
 		to.setNt_content(request.getParameter("nt_content"));
 		
-		//to.setNt_file_name(request.getParameter("nt_file_name"));
-		//to.setNt_file_size(Integer.parseInt(request.getParameter("nt_file_size")));
-		System.out.println( "11" );
+		UUID uuid = UUID.randomUUID();
+		
 		try {
-			System.out.println( "12" );
+//			if( !upload.isEmpty() ) {
+//				to.setNt_file_name( upload.getOriginalFilename() );	
+//				to.setNt_file_size( upload.getSize() );
+//
+//				upload.transferTo( new File( upload.getOriginalFilename() ) );
+//			}
 			if( !upload.isEmpty() ) {
-				System.out.println( "13" );
-				to.setNt_file_name( upload.getOriginalFilename() );	
+				String extention = upload.getOriginalFilename().substring(upload.getOriginalFilename().indexOf("."));		
+				String filename = upload.getOriginalFilename().substring(0, upload.getOriginalFilename().indexOf("."));
+				to.setNt_file_name( filename + uuid.toString() + extention);
+				
 				to.setNt_file_size( upload.getSize() );
-
-				upload.transferTo( new File( upload.getOriginalFilename() ) );
+				upload.transferTo( new File( to.getNt_file_name()) );
 			}
 		} catch (IllegalStateException e) {
-			System.out.println( "14" );
 			e.printStackTrace();
-			System.out.println( "15" );
 		} catch( IOException e ) {
-			System.out.println( "16" );
-			e.printStackTrace();			
-			System.out.println( "17" );
+			e.printStackTrace();
 		}
 		
 		int flag = dao.noticeModifyOk(to);
-		
-		System.out.println( "18" );
 		
 		modelAndView.setViewName("notice_admin/notice_admin_modify_ok");
 		modelAndView.addObject("flag", flag);
 		modelAndView.addObject("nt_seq", request.getParameter("nt_seq"));
 		modelAndView.addObject("cpage", request.getParameter("cpage"));
-		
-		System.out.println( "19" );
+
 		return modelAndView;
 		
-	}
+	}	
 	
+	
+	
+// ------------- 파일 다운로드
+    // 파일 다운로드 처리
+    @RequestMapping("/fileDownload/{file}")
+    public void fileDownload(@PathVariable String file, HttpServletResponse response) throws IOException {
+        File f = new File("/Users/hyobinjin/git/Yo__Hang/YoHang/src/main/webapp/upload/reviews/", file);
+        // file 다운로드 설정
+        response.setContentType("application/download");
+        response.setContentLength((int)f.length());
+        response.setHeader("Content-disposition", "attachment;filename=\"" + file + "\"");
+        // response 객체를 통해서 서버로부터 파일 다운로드
+        OutputStream os = response.getOutputStream();
+        // 파일 입력 객체 생성
+        FileInputStream fis = new FileInputStream(f);
+        FileCopyUtils.copy(fis, os);
+        fis.close();
+        os.close();
+    }
+    
+    
 }

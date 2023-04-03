@@ -4,6 +4,7 @@
 <%@page import="com.example.model.NoticeBoardTO"%>
 
 <%@ page import="java.util.ArrayList" %>
+
 <%
 	//jsp hero parameters
 	String menuName = "게시판 관리";
@@ -31,6 +32,13 @@
 	String nt_content = to.getNt_content();
 	String nt_file_name = to.getNt_file_name();
 	int nt_hit = to.getNt_hit();
+	
+	// 첨부파일명 UUD 뻬고 보여주기 
+	int file_name_dot = nt_file_name.lastIndexOf(".");
+	System.out.println("file_name_dot : " + file_name_dot);
+	
+	String file_name = nt_file_name.substring(0, file_name_dot - 36) + nt_file_name.substring(file_name_dot, nt_file_name.length());
+	System.out.println("file_name : " + file_name);
 %>
 
 <!DOCTYPE html>
@@ -90,7 +98,7 @@
       </div>
       <div class="col-md-10">
         <ul class="p-md-0 mb-0">
-          <li><a href="#" download><i class="xi-file-text-o"></i> <%= nt_file_name %></a></li>
+          <li><a href="/fileDownload/<%= nt_file_name %>"> <%= file_name %></a></li>
         </ul>
       </div>
     </div>
